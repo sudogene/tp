@@ -84,7 +84,7 @@ public class ParserUtil {
      * Parses a {@code String academicYear} into an {@code AcademicYear}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code academicYear} is invalid.
      */
     public static AcademicYear parseAcademicYear(String academicYear) throws ParseException {
         requireNonNull(academicYear);
