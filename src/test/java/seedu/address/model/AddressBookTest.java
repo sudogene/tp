@@ -43,15 +43,9 @@ public class AddressBookTest {
     }
 
     @Test
-<<<<<<< HEAD
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
-=======
     public void resetData_withDuplicateStudents_throwsDuplicateStudentException() {
         // Two students with the same identity fields
         Student editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2
                 .build();
         List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newStudents);
@@ -76,15 +70,9 @@ public class AddressBookTest {
     }
 
     @Test
-<<<<<<< HEAD
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
-=======
     public void hasStudent_studentWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addStudent(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2
                 .build();
         assertTrue(addressBook.hasStudent(editedAlice));
     }

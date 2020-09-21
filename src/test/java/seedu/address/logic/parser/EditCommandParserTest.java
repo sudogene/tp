@@ -30,17 +30,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
-<<<<<<< HEAD
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-=======
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
@@ -111,11 +104,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
-<<<<<<< HEAD
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-=======
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -153,11 +142,7 @@ public class EditCommandParserTest {
 
         // email
         userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-<<<<<<< HEAD
-        descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-=======
         descriptor = new EditStudentDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -170,20 +155,12 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-<<<<<<< HEAD
-        Index targetIndex = INDEX_FIRST_PERSON;
-=======
         Index targetIndex = INDEX_FIRST_STUDENT;
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2
         String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + TAG_DESC_FRIEND + PHONE_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
 
-<<<<<<< HEAD
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-=======
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withPhone(VALID_PHONE_BOB)
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2
                 .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -203,11 +180,7 @@ public class EditCommandParserTest {
         // other valid values specified
         userInput = targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_PHONE_DESC
                 + PHONE_DESC_BOB;
-<<<<<<< HEAD
-        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-=======
         descriptor = new EditStudentDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2
                 .build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);

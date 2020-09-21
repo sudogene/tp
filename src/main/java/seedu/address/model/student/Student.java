@@ -25,11 +25,7 @@ public class Student {
     /**
      * Every field must be present and not null.
      */
-<<<<<<< HEAD:src/main/java/seedu/address/model/person/Person.java
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
-=======
     public Student(Name name, Phone phone, Email email, Set<Tag> tags) {
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2:src/main/java/seedu/address/model/student/Student.java
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
@@ -85,19 +81,11 @@ public class Student {
             return false;
         }
 
-<<<<<<< HEAD:src/main/java/seedu/address/model/person/Person.java
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getTags().equals(getTags());
-=======
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getTags().equals(getTags());
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2:src/main/java/seedu/address/model/student/Student.java
     }
 
     @Override

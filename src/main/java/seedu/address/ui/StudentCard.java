@@ -46,17 +46,10 @@ public class StudentCard extends UiPart<Region> {
         super(FXML);
         this.student = student;
         id.setText(displayedIndex + ". ");
-<<<<<<< HEAD:src/main/java/seedu/address/ui/PersonCard.java
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-=======
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);
         email.setText(student.getEmail().value);
         student.getTags().stream()
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2:src/main/java/seedu/address/ui/StudentCard.java
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

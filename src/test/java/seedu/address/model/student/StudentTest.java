@@ -39,31 +39,18 @@ public class StudentTest {
         assertFalse(ALICE.isSameStudent(editedAlice));
 
         // same name, same phone, different attributes -> returns true
-<<<<<<< HEAD:src/test/java/seedu/address/model/person/PersonTest.java
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
-=======
         editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2:src/test/java/seedu/address/model/student/StudentTest.java
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
         // same name, same email, different attributes -> returns true
-<<<<<<< HEAD:src/test/java/seedu/address/model/person/PersonTest.java
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB)
-=======
         editedAlice = new StudentBuilder(ALICE).withPhone(VALID_PHONE_BOB)
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2:src/test/java/seedu/address/model/student/StudentTest.java
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
-<<<<<<< HEAD:src/test/java/seedu/address/model/person/PersonTest.java
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
-=======
         editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2:src/test/java/seedu/address/model/student/StudentTest.java
     }
 
     @Test
@@ -93,11 +80,7 @@ public class StudentTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different email -> returns false
-<<<<<<< HEAD:src/test/java/seedu/address/model/person/PersonTest.java
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-=======
         editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2:src/test/java/seedu/address/model/student/StudentTest.java
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false

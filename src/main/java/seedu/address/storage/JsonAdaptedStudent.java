@@ -10,17 +10,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-<<<<<<< HEAD:src/main/java/seedu/address/storage/JsonAdaptedPerson.java
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-=======
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2:src/main/java/seedu/address/storage/JsonAdaptedStudent.java
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,15 +32,9 @@ class JsonAdaptedStudent {
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
-<<<<<<< HEAD:src/main/java/seedu/address/storage/JsonAdaptedPerson.java
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
-=======
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2:src/main/java/seedu/address/storage/JsonAdaptedStudent.java
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -103,14 +90,8 @@ class JsonAdaptedStudent {
         }
         final Email modelEmail = new Email(email);
 
-<<<<<<< HEAD:src/main/java/seedu/address/storage/JsonAdaptedPerson.java
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelTags);
-=======
-
         final Set<Tag> modelTags = new HashSet<>(studentTags);
         return new Student(modelName, modelPhone, modelEmail, modelTags);
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2:src/main/java/seedu/address/storage/JsonAdaptedStudent.java
     }
 
 }

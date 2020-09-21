@@ -79,11 +79,7 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
-<<<<<<< HEAD
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-=======
         Student expectedStudent = new StudentBuilder(AMY).withTags().build();
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2
         ModelManager expectedModel = new ModelManager();
         expectedModel.addStudent(expectedStudent);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

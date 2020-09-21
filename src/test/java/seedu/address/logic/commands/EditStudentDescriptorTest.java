@@ -43,11 +43,7 @@ public class EditStudentDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different email -> returns false
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/EditPersonDescriptorTest.java
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
-=======
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2:src/test/java/seedu/address/logic/commands/EditStudentDescriptorTest.java
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false

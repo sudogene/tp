@@ -29,17 +29,10 @@ public class StudentUtil {
      */
     public static String getStudentDetails(Student student) {
         StringBuilder sb = new StringBuilder();
-<<<<<<< HEAD:src/test/java/seedu/address/testutil/PersonUtil.java
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        person.getTags().stream().forEach(
-=======
         sb.append(PREFIX_NAME + student.getName().fullName + " ");
         sb.append(PREFIX_PHONE + student.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + student.getEmail().value + " ");
         student.getTags().stream().forEach(
->>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2:src/test/java/seedu/address/testutil/StudentUtil.java
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
