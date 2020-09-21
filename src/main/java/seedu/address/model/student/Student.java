@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -10,10 +10,10 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Student in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Student {
 
     // Identity fields
     private final Name name;
@@ -25,7 +25,11 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
+<<<<<<< HEAD:src/main/java/seedu/address/model/person/Person.java
     public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+=======
+    public Student(Name name, Phone phone, Email email, Set<Tag> tags) {
+>>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2:src/main/java/seedu/address/model/student/Student.java
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
@@ -54,22 +58,22 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both students of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two students.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameStudent(Student otherStudent) {
+        if (otherStudent == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+        return otherStudent != null
+                && otherStudent.getName().equals(getName())
+                && (otherStudent.getPhone().equals(getPhone()) || otherStudent.getEmail().equals(getEmail()));
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both students have the same identity and data fields.
+     * This defines a stronger notion of equality between two students.
      */
     @Override
     public boolean equals(Object other) {
@@ -77,15 +81,23 @@ public class Person {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Student)) {
             return false;
         }
 
+<<<<<<< HEAD:src/main/java/seedu/address/model/person/Person.java
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getTags().equals(getTags());
+=======
+        Student otherStudent = (Student) other;
+        return otherStudent.getName().equals(getName())
+                && otherStudent.getPhone().equals(getPhone())
+                && otherStudent.getEmail().equals(getEmail())
+                && otherStudent.getTags().equals(getTags());
+>>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2:src/main/java/seedu/address/model/student/Student.java
     }
 
     @Override

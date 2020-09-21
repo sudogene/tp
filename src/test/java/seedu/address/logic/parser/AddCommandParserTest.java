@@ -22,28 +22,36 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalStudents.AMY;
+import static seedu.address.testutil.TypicalStudents.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+<<<<<<< HEAD
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+=======
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
+>>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Student expectedStudent = new StudentBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+<<<<<<< HEAD
                 + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple names - last name accepted
@@ -61,20 +69,45 @@ public class AddCommandParserTest {
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+=======
+                + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+
+        // multiple names - last name accepted
+        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+
+        // multiple phones - last phone accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+
+        // multiple emails - last email accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
+                + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+>>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Student expectedStudentMultipleTags = new StudentBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+<<<<<<< HEAD
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
+=======
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedStudentMultipleTags));
+>>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
+<<<<<<< HEAD
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY,
                 new AddCommand(expectedPerson));
+=======
+        Student expectedStudent = new StudentBuilder(AMY).withTags().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY,
+                new AddCommand(expectedStudent));
+>>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2
     }
 
     @Test
@@ -90,7 +123,11 @@ public class AddCommandParserTest {
                 expectedMessage);
 
         // missing email prefix
+<<<<<<< HEAD
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB ,
+=======
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB,
+>>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2
                 expectedMessage);
 
         // all prefixes missing
@@ -112,6 +149,10 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
@@ -122,7 +163,11 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+<<<<<<< HEAD
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+=======
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+>>>>>>> 4b5a4f09efcf02a9230b83b6a099aa3ab7eb04e2
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
