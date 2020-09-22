@@ -160,4 +160,5 @@ class PredicateListTest {
         predicateList = new PredicateList(Arrays.asList(namePredicate, phonePredicate));
         assertFalse(predicateList.test(new StudentBuilder().withName("Boo").withPhone("123").build()));
     }
+
 }

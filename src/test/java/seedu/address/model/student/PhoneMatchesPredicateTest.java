@@ -49,4 +49,5 @@ class PhoneMatchesPredicateTest {
         assertFalse(predicate.test(new StudentBuilder().withName("987654321").build()));
 
     }
+
 }
