@@ -1,7 +1,6 @@
 # CanoE-COACH
 
-CanoE-COACH is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 
-can get your contact management tasks done faster than traditional GUI apps.
+CanoE-COACH is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -23,7 +22,7 @@ can get your contact management tasks done faster than traditional GUI apps.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
    
-   * **`filter`**`n/alex n/david` returns `Alex Yeoh`, `David Li`
+   * **`filter`**`n/alex n/david` : Returns `Alex Yeoh`, `David Li`.
 
    * **`clear`** : Deletes all contacts.
 
@@ -118,8 +117,7 @@ Format: `exit`
 
 ### Saving the data
 
-canoE-COACH data is saved in the hard disk automatically after any command that changes the data. 
-There is no need to save manually.
+canoE-COACH data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
 --------------------------------------------------------------------------------------------------------------------
