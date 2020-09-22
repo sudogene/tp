@@ -6,6 +6,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Student's dismissal time.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDismissalTime(String)}
+ */
 public class Day {
 
     public enum DayOfWeek {
@@ -14,18 +18,22 @@ public class Day {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Dismissal Times should only contain numbers, and it should be in HHmm format";
-    public static final String VALIDATION_REGEX = "\\d{4}";
+
+    /*
+     * Time must be in HHmm format.
+     */
+    public static final String VALIDATION_REGEX = "^(0[0-9]|1[0-9]|2[0-3])[0-5][0-9]$";
 
     public final LocalTime dismissalTime;
 
     /**
-     * Sets the dismissal time of the {@code Day}.
+     * Constructs a {@code Day}.
      *
      * @param dismissalTime A valid dismissal time.
      */
     public Day(String dismissalTime) {
         requireNonNull(dismissalTime);
-        checkArgument(isValidDismissalTime(dismissalTime), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDismissalTime(dismissalTime), Day.MESSAGE_CONSTRAINTS);
         this.dismissalTime = formatTime(dismissalTime);
     }
 

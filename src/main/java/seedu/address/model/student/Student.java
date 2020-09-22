@@ -8,11 +8,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.student.time.Day;
-import seedu.address.model.student.time.Friday;
-import seedu.address.model.student.time.Monday;
-import seedu.address.model.student.time.Thursday;
-import seedu.address.model.student.time.Tuesday;
-import seedu.address.model.student.time.Wednesday;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -126,13 +121,19 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
+                && otherStudent.getMondayDismissal().equals(getMondayDismissal())
+                && otherStudent.getTuesdayDismissal().equals(getTuesdayDismissal())
+                && otherStudent.getWednesdayDismissal().equals(getWednesdayDismissal())
+                && otherStudent.getThursdayDismissal().equals(getThursdayDismissal())
+                && otherStudent.getFridayDismissal().equals(getFridayDismissal())
                 && otherStudent.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, tags);
+        return Objects.hash(name, phone, email,mondayDismissal, tuesdayDismissal, wednesdayDismissal,
+                thursdayDismissal, fridayDismissal, tags);
     }
 
     @Override
@@ -143,6 +144,17 @@ public class Student {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
+                .append(" Dismissal Times: ")
+                .append(getMondayDismissal())
+                .append(" ")
+                .append(getTuesdayDismissal())
+                .append(" ")
+                .append(getWednesdayDismissal())
+                .append(" ")
+                .append(getThursdayDismissal())
+                .append(" ")
+                .append(getFridayDismissal())
+                .append(" ")
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

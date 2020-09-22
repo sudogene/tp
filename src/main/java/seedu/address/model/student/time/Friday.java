@@ -1,13 +1,14 @@
 package seedu.address.model.student.time;
 
-import java.time.LocalTime;
-
+/**
+ * Represents Friday in a week.
+ */
 public class Friday extends Day {
 
     public static String DEFAULT_FRIDAY_DISMISSAL = "1500";
 
     /**
-     * Sets the dismissal time of the {@code Day}.
+     * Sets the dismissal time of the {@code Friday}.
      *
      * @param dismissalTime A valid dismissal time.
      */
@@ -17,6 +18,6 @@ public class Friday extends Day {
 
     @Override
     public String toString() {
-        return "Friday: " + super.toString();
+        return super.toString();
     }
 }

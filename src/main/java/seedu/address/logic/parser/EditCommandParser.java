@@ -72,7 +72,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         if (argMultimap.getValue(PREFIX_WEDNESDAY_DISMISSAL).isPresent()) {
             editStudentDescriptor.setWednesdayDismissal(ParserUtil.parseDismissal(Day.DayOfWeek.WEDNESDAY,
-                    argMultimap.getValue(PREFIX_MONDAY_DISMISSAL).get()));
+                    argMultimap.getValue(PREFIX_WEDNESDAY_DISMISSAL).get()));
         }
 
         if (argMultimap.getValue(PREFIX_THURSDAY_DISMISSAL).isPresent()) {

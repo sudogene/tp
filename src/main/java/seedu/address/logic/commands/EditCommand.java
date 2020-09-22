@@ -2,9 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIDAY_DISMISSAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONDAY_DISMISSAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_THURSDAY_DISMISSAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUESDAY_DISMISSAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDNESDAY_DISMISSAL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.Collections;
@@ -39,10 +44,18 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_MONDAY_DISMISSAL + "MONDAY DISMISSAL TIME " + PREFIX_TUESDAY_DISMISSAL +
+            " TUESDAY DISMISSAL TIME " + PREFIX_WEDNESDAY_DISMISSAL + " WEDNESDAY DISMISSAL TIME " +
+            PREFIX_THURSDAY_DISMISSAL + " THURSDAY DISMISSAL TIME " + PREFIX_FRIDAY_DISMISSAL +
+            " FRIDAY DISMISSAL TIME]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com"
+            + "[" + PREFIX_MONDAY_DISMISSAL + "1600" + PREFIX_TUESDAY_DISMISSAL +
+            " 1500 " + PREFIX_WEDNESDAY_DISMISSAL + " 1400 " +
+            PREFIX_THURSDAY_DISMISSAL + " 1700 " + PREFIX_FRIDAY_DISMISSAL +
+            " 1800]";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -103,7 +116,8 @@ public class EditCommand extends Command {
         Day fridayDismissal = editStudentDescriptor.getFridayDismissal().orElse(studentToEdit.getFridayDismissal());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedTags, mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedTags, mondayDismissal, tuesdayDismissal,
+                wednesdayDismissal, thursdayDismissal, fridayDismissal);
     }
 
     @Override
@@ -164,7 +178,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, mondayDismissal, tuesdayDismissal,
+                    wednesdayDismissal, thursdayDismissal, fridayDismissal, tags);
         }
 
         public void setName(Name name) {
@@ -194,6 +209,7 @@ public class EditCommand extends Command {
         public void setMondayDismissal(Day mondayDismissal) {
             this.mondayDismissal = mondayDismissal;
         }
+
         public Optional<Day> getMondayDismissal() {
             return Optional.ofNullable(mondayDismissal);
         }

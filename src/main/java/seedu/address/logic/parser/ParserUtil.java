@@ -87,16 +87,16 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String dismissalTime} into a {@code Day} based on the {@code dayOfWeek}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code dismissalTime} or {@code dayOfWeek} is invalid.
      */
     public static Day parseDismissal(Day.DayOfWeek dayOfWeek, String dismissalTime) throws ParseException {
         requireNonNull(dayOfWeek, dismissalTime);
         String trimmedDismissalTime = dismissalTime.trim();
         if (!Day.isValidDismissalTime(trimmedDismissalTime)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Day.MESSAGE_CONSTRAINTS);
         }
         switch(dayOfWeek) {
         case MONDAY:
@@ -110,7 +110,7 @@ public class ParserUtil {
         case FRIDAY:
             return new Friday(trimmedDismissalTime);
         default:
-            throw new IllegalStateException("Unexpected value: " + dayOfWeek);
+            throw new ParseException("Unexpected value: " + dayOfWeek);
         }
     }
 

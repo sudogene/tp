@@ -64,11 +64,11 @@ public class StudentCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         email.setText(student.getEmail().value);
         dismissalTime.setText("Dismissal Times");
-        mondayDismissal.setText(student.getMondayDismissal().toString());
-        tuesdayDismissal.setText(student.getTuesdayDismissal().toString());
-        wednesdayDismissal.setText(student.getWednesdayDismissal().toString());
-        thursdayDismissal.setText(student.getThursdayDismissal().toString());
-        fridayDismissal.setText(student.getFridayDismissal().toString());
+        mondayDismissal.setText("Monday: " + student.getMondayDismissal().toString());
+        tuesdayDismissal.setText("Tuesday: " + student.getTuesdayDismissal().toString());
+        wednesdayDismissal.setText("Wednesday: " + student.getWednesdayDismissal().toString());
+        thursdayDismissal.setText("Thursday: " + student.getThursdayDismissal().toString());
+        fridayDismissal.setText("Friday: " + student.getFridayDismissal().toString());
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
