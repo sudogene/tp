@@ -22,6 +22,7 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.time.Day;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -93,9 +94,16 @@ public class EditCommand extends Command {
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
+        Day mondayDismissal = editStudentDescriptor.getMondayDismissal().orElse(studentToEdit.getMondayDismissal());
+        Day tuesdayDismissal = editStudentDescriptor.getTuesdayDismissal().orElse(studentToEdit.getTuesdayDismissal());
+        Day wednesdayDismissal =
+                editStudentDescriptor.getWednesdayDismissal().orElse(studentToEdit.getWednesdayDismissal());
+        Day thursdayDismissal =
+                editStudentDescriptor.getThursdayDismissal().orElse(studentToEdit.getThursdayDismissal());
+        Day fridayDismissal = editStudentDescriptor.getFridayDismissal().orElse(studentToEdit.getFridayDismissal());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedTags);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedTags, mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal);
     }
 
     @Override
@@ -124,6 +132,14 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+
+        //Dismissal Times
+        private Day mondayDismissal;
+        private Day tuesdayDismissal;
+        private Day wednesdayDismissal;
+        private Day thursdayDismissal;
+        private Day fridayDismissal;
+
         private Set<Tag> tags;
 
         public EditStudentDescriptor() {}
@@ -136,6 +152,11 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setMondayDismissal(toCopy.mondayDismissal);
+            setTuesdayDismissal(toCopy.tuesdayDismissal);
+            setWednesdayDismissal(toCopy.wednesdayDismissal);
+            setThursdayDismissal(toCopy.thursdayDismissal);
+            setFridayDismissal(toCopy.fridayDismissal);
             setTags(toCopy.tags);
         }
 
@@ -168,6 +189,45 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setMondayDismissal(Day mondayDismissal) {
+            this.mondayDismissal = mondayDismissal;
+        }
+        public Optional<Day> getMondayDismissal() {
+            return Optional.ofNullable(mondayDismissal);
+        }
+
+        public void setTuesdayDismissal(Day tuesdayDismissal) {
+            this.tuesdayDismissal = tuesdayDismissal;
+        }
+
+        public Optional<Day> getTuesdayDismissal() {
+            return Optional.ofNullable(tuesdayDismissal);
+        }
+
+        public void setWednesdayDismissal(Day wednesdayDismissal) {
+            this.wednesdayDismissal = wednesdayDismissal;
+        }
+
+        public Optional<Day> getWednesdayDismissal() {
+            return Optional.ofNullable(wednesdayDismissal);
+        }
+
+        public void setThursdayDismissal(Day thursdayDismissal) {
+            this.thursdayDismissal = thursdayDismissal;
+        }
+
+        public Optional<Day> getThursdayDismissal() {
+            return Optional.ofNullable(thursdayDismissal);
+        }
+
+        public void setFridayDismissal(Day fridayDismissal) {
+            this.fridayDismissal = fridayDismissal;
+        }
+
+        public Optional<Day> getFridayDismissal() {
+            return Optional.ofNullable(fridayDismissal);
         }
 
         /**
@@ -205,6 +265,11 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
+                    && getMondayDismissal().equals(e.getMondayDismissal())
+                    && getTuesdayDismissal().equals(e.getTuesdayDismissal())
+                    && getWednesdayDismissal().equals(e.getWednesdayDismissal())
+                    && getThursdayDismissal().equals(e.getThursdayDismissal())
+                    && getFridayDismissal().equals(e.getFridayDismissal())
                     && getTags().equals(e.getTags());
         }
     }

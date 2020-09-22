@@ -14,6 +14,12 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.time.Day;
+import seedu.address.model.student.time.Friday;
+import seedu.address.model.student.time.Monday;
+import seedu.address.model.student.time.Thursday;
+import seedu.address.model.student.time.Tuesday;
+import seedu.address.model.student.time.Wednesday;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,6 +32,11 @@ class JsonAdaptedStudent {
     private final String name;
     private final String phone;
     private final String email;
+    private final String mondayDismissal;
+    private final String tuesdayDismissal;
+    private final String wednesdayDismissal;
+    private final String thursdayDismissal;
+    private final String fridayDismissal;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -34,10 +45,20 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email,
+                              @JsonProperty("monday") String mondayDismissal,
+                              @JsonProperty("tuesday") String tuesdayDismissal,
+                              @JsonProperty("wednesday") String wednesdayDismissal,
+                              @JsonProperty("thursday") String thursdayDismissal,
+                              @JsonProperty("friday") String fridayDismissal,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.mondayDismissal = mondayDismissal;
+        this.tuesdayDismissal = tuesdayDismissal;
+        this.wednesdayDismissal = wednesdayDismissal;
+        this.thursdayDismissal = thursdayDismissal;
+        this.fridayDismissal = fridayDismissal;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -50,6 +71,11 @@ class JsonAdaptedStudent {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        mondayDismissal = source.getMondayDismissal().toString();
+        tuesdayDismissal = source.getTuesdayDismissal().toString();
+        wednesdayDismissal = source.getWednesdayDismissal().toString();
+        thursdayDismissal = source.getThursdayDismissal().toString();
+        fridayDismissal = source.getFridayDismissal().toString();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -90,9 +116,48 @@ class JsonAdaptedStudent {
         }
         final Email modelEmail = new Email(email);
 
+        if (mondayDismissal == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Day.class.getSimpleName()));
+        }
+        if (!Day.isValidDismissalTime(mondayDismissal)) {
+            throw new IllegalValueException(Day.MESSAGE_CONSTRAINTS);
+        }
+        final Day monday = new Monday(mondayDismissal);
+
+        if (tuesdayDismissal == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Day.class.getSimpleName()));
+        }
+        if (!Day.isValidDismissalTime(tuesdayDismissal)) {
+            throw new IllegalValueException(Day.MESSAGE_CONSTRAINTS);
+        }
+        final Day tuesday = new Tuesday(tuesdayDismissal);
+
+        if (wednesdayDismissal == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Day.class.getSimpleName()));
+        }
+        if (!Day.isValidDismissalTime(wednesdayDismissal)) {
+            throw new IllegalValueException(Day.MESSAGE_CONSTRAINTS);
+        }
+        final Day wednesday = new Wednesday(wednesdayDismissal);
+
+        if (thursdayDismissal == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Day.class.getSimpleName()));
+        }
+        if (!Day.isValidDismissalTime(thursdayDismissal)) {
+            throw new IllegalValueException(Day.MESSAGE_CONSTRAINTS);
+        }
+        final Day thursday = new Thursday(thursdayDismissal);
+
+        if (fridayDismissal == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Day.class.getSimpleName()));
+        }
+        if (!Day.isValidDismissalTime(fridayDismissal)) {
+            throw new IllegalValueException(Day.MESSAGE_CONSTRAINTS);
+        }
+        final Day friday = new Friday(fridayDismissal);
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelPhone, modelEmail, modelTags);
+        return new Student(modelName, modelPhone, modelEmail, modelTags, monday, tuesday, wednesday, thursday, friday);
     }
 
 }

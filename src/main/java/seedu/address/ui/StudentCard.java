@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import seedu.address.model.student.Student;
 
 /**
@@ -37,6 +39,18 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label dismissalTime;
+    @FXML
+    private Label mondayDismissal;
+    @FXML
+    private Label tuesdayDismissal;
+    @FXML
+    private Label wednesdayDismissal;
+    @FXML
+    private Label thursdayDismissal;
+    @FXML
+    private Label fridayDismissal;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -49,6 +63,12 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);
         email.setText(student.getEmail().value);
+        dismissalTime.setText("Dismissal Times");
+        mondayDismissal.setText(student.getMondayDismissal().toString());
+        tuesdayDismissal.setText(student.getTuesdayDismissal().toString());
+        wednesdayDismissal.setText(student.getWednesdayDismissal().toString());
+        thursdayDismissal.setText(student.getThursdayDismissal().toString());
+        fridayDismissal.setText(student.getFridayDismissal().toString());
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

@@ -7,6 +7,12 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.student.time.Day;
+import seedu.address.model.student.time.Friday;
+import seedu.address.model.student.time.Monday;
+import seedu.address.model.student.time.Thursday;
+import seedu.address.model.student.time.Tuesday;
+import seedu.address.model.student.time.Wednesday;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,16 +26,31 @@ public class Student {
     private final Phone phone;
     private final Email email;
 
+    //Dismissal Times
+    private final Day mondayDismissal;
+    private final Day tuesdayDismissal;
+    private final Day wednesdayDismissal;
+    private final Day thursdayDismissal;
+    private final Day fridayDismissal;
+
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, tags);
+    public Student(Name name, Phone phone, Email email, Set<Tag> tags, Day mondayDismissal,
+                   Day tuesdayDismissal, Day wednesdayDismissal, Day thursdayDismissal,
+                   Day fridayDismissal) {
+        requireAllNonNull(name, phone, email, tags, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
+                thursdayDismissal, fridayDismissal);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.mondayDismissal = mondayDismissal;
+        this.tuesdayDismissal = tuesdayDismissal;
+        this.wednesdayDismissal = wednesdayDismissal;
+        this.thursdayDismissal = thursdayDismissal;
+        this.fridayDismissal = fridayDismissal;
         this.tags.addAll(tags);
     }
 
@@ -43,6 +64,26 @@ public class Student {
 
     public Email getEmail() {
         return email;
+    }
+
+    public Day getMondayDismissal() {
+        return mondayDismissal;
+    }
+
+    public Day getTuesdayDismissal() {
+        return tuesdayDismissal;
+    }
+
+    public Day getWednesdayDismissal() {
+        return wednesdayDismissal;
+    }
+
+    public Day getThursdayDismissal() {
+        return thursdayDismissal;
+    }
+
+    public Day getFridayDismissal() {
+        return fridayDismissal;
     }
 
     /**

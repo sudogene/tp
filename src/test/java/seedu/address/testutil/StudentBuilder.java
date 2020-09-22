@@ -77,7 +77,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, email, tags);
+        return new Student(name, phone, email, tags, mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal);
     }
 
 }

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.student.time.Day.DayOfWeek.MONDAY;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -12,6 +13,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.time.Day;
+import seedu.address.model.student.time.Friday;
+import seedu.address.model.student.time.Monday;
+import seedu.address.model.student.time.Thursday;
+import seedu.address.model.student.time.Tuesday;
+import seedu.address.model.student.time.Wednesday;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -77,6 +84,34 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Day parseDismissal(Day.DayOfWeek dayOfWeek, String dismissalTime) throws ParseException {
+        requireNonNull(dayOfWeek, dismissalTime);
+        String trimmedDismissalTime = dismissalTime.trim();
+        if (!Day.isValidDismissalTime(trimmedDismissalTime)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
+        switch(dayOfWeek) {
+        case MONDAY:
+            return new Monday(trimmedDismissalTime);
+        case TUESDAY:
+            return new Tuesday(trimmedDismissalTime);
+        case WEDNESDAY:
+            return new Wednesday(trimmedDismissalTime);
+        case THURSDAY:
+            return new Thursday(trimmedDismissalTime);
+        case FRIDAY:
+            return new Friday(trimmedDismissalTime);
+        default:
+            throw new IllegalStateException("Unexpected value: " + dayOfWeek);
+        }
     }
 
     /**
