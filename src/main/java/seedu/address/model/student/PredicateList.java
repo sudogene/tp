@@ -19,12 +19,11 @@ public class PredicateList implements Predicate<Student> {
                 .allMatch(p -> p.test(student));
     }
 
-    /*
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof NameContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((NameContainsKeywordsPredicate) other).keywords)); // state check
-    }*/
+                || (other instanceof PredicateList // instanceof handles nulls
+                && predicates.equals(((PredicateList) other).predicates)); // state check
+    }
 
 }

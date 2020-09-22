@@ -18,12 +18,11 @@ public class PhoneMatchesPredicate implements Predicate<Student> {
         return student.getPhone().value.equals(phoneValue);
     }
 
-    /* TODO
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof NameContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((NameContainsKeywordsPredicate) other).keywords)); // state check
-    }*/
+                || (other instanceof PhoneMatchesPredicate // instanceof handles nulls
+                && phoneValue.equals(((PhoneMatchesPredicate) other).phoneValue)); // state check
+    }
 
 }

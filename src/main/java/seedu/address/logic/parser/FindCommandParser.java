@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,9 +26,10 @@ public class FindCommandParser implements Parser<FindCommand> {
      * and returns a FindCommand object for execution.
      */
     public FindCommand parse(String args) {
-        requireNonNull(args);
+        String trimmedArgs = " " + args.trim();
+        requireNonNull(trimmedArgs);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE);
+                ArgumentTokenizer.tokenize(trimmedArgs, PREFIX_NAME, PREFIX_PHONE);
 
         List<Predicate<Student>> predicates = new ArrayList<>();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
