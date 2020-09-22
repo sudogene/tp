@@ -28,7 +28,7 @@ class PhoneMatchesPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different student -> returns false
+        // different phone number -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
