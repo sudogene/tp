@@ -19,17 +19,18 @@ public class Student {
     private final Name name;
     private final Phone phone;
     private final Email email;
-
+    private final AcademicYear academicYear;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Set<Tag> tags) {
+    public Student(Name name, Phone phone, Email email, AcademicYear academicYear, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.academicYear = academicYear;
         this.tags.addAll(tags);
     }
 
@@ -43,6 +44,10 @@ public class Student {
 
     public Email getEmail() {
         return email;
+    }
+
+    public AcademicYear getAcademicYear() {
+        return academicYear;
     }
 
     /**
@@ -85,13 +90,14 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
+                && otherStudent.getAcademicYear().equals(getAcademicYear())
                 && otherStudent.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, tags);
+        return Objects.hash(name, phone, email, academicYear, tags);
     }
 
     @Override
@@ -102,6 +108,8 @@ public class Student {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
+                .append(" Academic  Year: ")
+                .append(getAcademicYear())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
