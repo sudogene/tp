@@ -1,7 +1,4 @@
----
-layout: page
-title: About Us
----
+# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
@@ -9,53 +6,46 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Andy Wu
+### Faqih
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Faqih.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/abdurrahmanfaqihiskandar)][[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Team Lead
 
 ### Ye Jia Dong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/JD.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/yejiadong)][[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Testing, Documentation
 
 ### Lee Wei Heng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Wei Heng.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/Whleee)][[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Testing, Documentation
 
 ### Kerk Pei Yong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Kerk.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-
-
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/kerkpy)][[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Testing, Documentation
 
-### Faqih
+### Andy Wu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Andy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/sudogene)][[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing, Documentation
