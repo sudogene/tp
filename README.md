@@ -1,14 +1,18 @@
 # CanoE-COACH
 
-CanoE-COACH is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+CanoE-COACH (CEC) is a **desktop app for managing student contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CEC can get your student contact management tasks done faster than traditional nominal roll.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+CanoE-COACH aims to help secondary school canoe coaches with managing student contacts and scheduling training sessions.
 
-1. Ensure you have Java `11` or above installed in your Computer.
+Some of the features include:
+- Adding student records to the student contact list
+- Finding specific students to access their records
+- Filtering students by their dismissal times to find a suitable timing to schedule a training session
+- Ability to tag students to include any extra information such as their level of competency and so on
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+For more in-depth information on the CanoE-COACH visit [our website](https://ay2021s1-cs2103-f10-1.github.io/tp/).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -137,3 +141,5 @@ Action | Format, Examples
 **Filter** | `filter n/KEYWORD [MORE_KEYWORDS]` <br> e.g., `filter n/alex n/david`
 **Clear** | `clear`
 **Help** | `help`
+=======
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
