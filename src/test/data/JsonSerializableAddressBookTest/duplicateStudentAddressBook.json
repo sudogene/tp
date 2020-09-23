@@ -3,10 +3,20 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "tagged": [ "friends" ]
+    "tagged": [ "friends" ],
+    "mondayDismissal" : "1500",
+    "tuesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1500",
+    "thursdayDismissal" : "1500",
+    "fridayDismissal" : "1500"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "email": "pauline@example.com"
+    "email": "pauline@example.com",
+    "mondayDismissal" : "1500",
+    "tuesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1500",
+    "thursdayDismissal" : "1500",
+    "fridayDismissal" : "1500"
   } ]
 }

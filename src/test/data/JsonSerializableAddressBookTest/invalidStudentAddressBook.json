@@ -2,6 +2,11 @@
   "students": [ {
     "name": "Hans Muster",
     "phone": "9482424",
-    "email": "invalid@email!3e"
+    "email": "invalid@email!3e",
+    "mondayDismissal" : "1500",
+    "tuesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1500",
+    "thursdayDismissal" : "1500",
+    "fridayDismissal" : "1500"
   } ]
 }

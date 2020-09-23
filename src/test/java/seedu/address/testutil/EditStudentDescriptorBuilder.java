@@ -9,6 +9,11 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.time.Friday;
+import seedu.address.model.student.time.Monday;
+import seedu.address.model.student.time.Thursday;
+import seedu.address.model.student.time.Tuesday;
+import seedu.address.model.student.time.Wednesday;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,6 +40,11 @@ public class EditStudentDescriptorBuilder {
         descriptor.setPhone(student.getPhone());
         descriptor.setEmail(student.getEmail());
         descriptor.setTags(student.getTags());
+        descriptor.setMondayDismissal(student.getMondayDismissal());
+        descriptor.setTuesdayDismissal(student.getTuesdayDismissal());
+        descriptor.setWednesdayDismissal(student.getWednesdayDismissal());
+        descriptor.setThursdayDismissal(student.getThursdayDismissal());
+        descriptor.setFridayDismissal(student.getFridayDismissal());
     }
 
     /**
@@ -68,6 +78,46 @@ public class EditStudentDescriptorBuilder {
     public EditStudentDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Monday} of the {@code EditStudentDescriptor} that we are building.
+     */
+    public EditStudentDescriptorBuilder withMonday(String monday) {
+        descriptor.setMondayDismissal(new Monday(monday));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Tuesday} of the {@code EditStudentDescriptor} that we are building.
+     */
+    public EditStudentDescriptorBuilder withTuesday(String tuesday) {
+        descriptor.setTuesdayDismissal(new Tuesday(tuesday));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Wednesday} of the {@code EditStudentDescriptor} that we are building.
+     */
+    public EditStudentDescriptorBuilder withWednesday(String wednesday) {
+        descriptor.setWednesdayDismissal(new Wednesday(wednesday));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Thursday} of the {@code EditStudentDescriptor} that we are building.
+     */
+    public EditStudentDescriptorBuilder withThursday(String thursday) {
+        descriptor.setThursdayDismissal(new Thursday(thursday));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Friday} of the {@code EditStudentDescriptor} that we are building.
+     */
+    public EditStudentDescriptorBuilder withFriday(String friday) {
+        descriptor.setFridayDismissal(new Friday(friday));
         return this;
     }
 

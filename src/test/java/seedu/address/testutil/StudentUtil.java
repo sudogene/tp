@@ -1,9 +1,14 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIDAY_DISMISSAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONDAY_DISMISSAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_THURSDAY_DISMISSAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUESDAY_DISMISSAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDNESDAY_DISMISSAL;
 
 import java.util.Set;
 
@@ -32,6 +37,11 @@ public class StudentUtil {
         sb.append(PREFIX_NAME + student.getName().fullName + " ");
         sb.append(PREFIX_PHONE + student.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + student.getEmail().value + " ");
+        sb.append(PREFIX_MONDAY_DISMISSAL + student.getMondayDismissal().toString() + " ");
+        sb.append(PREFIX_TUESDAY_DISMISSAL + student.getTuesdayDismissal().toString() + " ");
+        sb.append(PREFIX_WEDNESDAY_DISMISSAL + student.getWednesdayDismissal().toString() + " ");
+        sb.append(PREFIX_THURSDAY_DISMISSAL + student.getThursdayDismissal().toString() + " ");
+        sb.append(PREFIX_FRIDAY_DISMISSAL + student.getFridayDismissal().toString() + " ");
         student.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -46,6 +56,16 @@ public class StudentUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
+        descriptor.getMondayDismissal().ifPresent(monday -> sb.append(PREFIX_MONDAY_DISMISSAL)
+            .append(monday.toString()).append(" "));
+        descriptor.getTuesdayDismissal().ifPresent(tuesday -> sb.append(PREFIX_TUESDAY_DISMISSAL)
+            .append(tuesday.toString()).append(" "));
+        descriptor.getWednesdayDismissal().ifPresent(wednesday -> sb.append(PREFIX_WEDNESDAY_DISMISSAL)
+            .append(wednesday.toString()).append(" "));
+        descriptor.getThursdayDismissal().ifPresent(thursday -> sb.append(PREFIX_THURSDAY_DISMISSAL)
+            .append(thursday.toString()).append(" "));
+        descriptor.getFridayDismissal().ifPresent(friday -> sb.append(PREFIX_FRIDAY_DISMISSAL)
+            .append(friday.toString()).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
