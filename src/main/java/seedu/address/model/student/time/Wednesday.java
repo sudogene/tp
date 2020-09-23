@@ -5,7 +5,7 @@ package seedu.address.model.student.time;
  */
 public class Wednesday extends Day {
 
-    public static String DEFAULT_WEDNESDAY_DISMISSAL = "1500";
+    public static final String DEFAULT_WEDNESDAY_DISMISSAL = "1500";
 
     /**
      * Sets the dismissal time of the {@code Wednesday}.

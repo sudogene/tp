@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 public class Day {
 
     public enum DayOfWeek {
-        MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY;
+        MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY;
     }
 
     public static final String MESSAGE_CONSTRAINTS =
