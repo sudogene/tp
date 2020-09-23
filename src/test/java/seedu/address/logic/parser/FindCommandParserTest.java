@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;

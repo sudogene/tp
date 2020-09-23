@@ -1,22 +1,26 @@
 package seedu.address.model.student;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.StudentBuilder;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.StudentBuilder;
 
 class PredicateListTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstNamePredicate = new NameContainsKeywordsPredicate(Collections.singletonList("first"));
+        NameContainsKeywordsPredicate firstNamePredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
         PhoneMatchesPredicate firstPhonePredicate = new PhoneMatchesPredicate("123");
-        NameContainsKeywordsPredicate secondNamePredicate = new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        NameContainsKeywordsPredicate secondNamePredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
         PhoneMatchesPredicate secondPhonePredicate = new PhoneMatchesPredicate("321");
         List<Predicate<Student>> firstPredicateList = Arrays.asList(firstNamePredicate, firstPhonePredicate);
         List<Predicate<Student>> secondPredicateList = Arrays.asList(secondNamePredicate, secondPhonePredicate);
