@@ -22,14 +22,16 @@ class PredicateListTest {
         NameContainsKeywordsPredicate secondNamePredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
         PhoneMatchesPredicate secondPhonePredicate = new PhoneMatchesPredicate("321");
-        List<Predicate<Student>> firstPredicateList = Arrays.asList(firstNamePredicate, firstPhonePredicate);
-        List<Predicate<Student>> secondPredicateList = Arrays.asList(secondNamePredicate, secondPhonePredicate);
+        List<Predicate<Student>> firstListOfPredicates = Arrays.asList(firstNamePredicate, firstPhonePredicate);
+        List<Predicate<Student>> secondListOfPredicates = Arrays.asList(secondNamePredicate, secondPhonePredicate);
+        PredicateList firstPredicateList = new PredicateList(firstListOfPredicates);
+        PredicateList secondPredicateList = new PredicateList(secondListOfPredicates);
 
         // same object -> returns true
         assertTrue(firstPredicateList.equals(firstPredicateList));
 
         // same values -> returns true
-        PredicateList firstPredicateListCopy = new PredicateList(firstPredicateList);
+        PredicateList firstPredicateListCopy = new PredicateList(firstListOfPredicates);
         assertTrue(firstPredicateList.equals(firstPredicateListCopy));
 
         // different types -> returns false
