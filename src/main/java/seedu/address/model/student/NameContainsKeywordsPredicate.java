@@ -15,11 +15,13 @@ public class NameContainsKeywordsPredicate implements Predicate<Student> {
         this.keywords = keywords;
     }
 
+
     @Override
     public boolean test(Student student) {
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(student.getName().fullName, keyword));
     }
+
 
     @Override
     public boolean equals(Object other) {

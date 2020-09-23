@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.student.AcademicYear;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -18,10 +19,12 @@ public class StudentBuilder {
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
+    public static final String DEFAULT_ACADEMICYEAR = "1";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private AcademicYear academicYear;
     private Set<Tag> tags;
 
     /**
@@ -31,6 +34,7 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        academicYear = new AcademicYear(DEFAULT_ACADEMICYEAR);
         tags = new HashSet<>();
     }
 
@@ -41,6 +45,7 @@ public class StudentBuilder {
         name = studentToCopy.getName();
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
+        academicYear = studentToCopy.getAcademicYear();
         tags = new HashSet<>(studentToCopy.getTags());
     }
 
@@ -76,8 +81,16 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code AcademicYear} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withAcademicYear(String academicYear) {
+        this.academicYear = new AcademicYear(academicYear);
+        return this;
+    }
+
     public Student build() {
-        return new Student(name, phone, email, tags);
+        return new Student(name, phone, email, academicYear, tags);
     }
 
 }
