@@ -82,6 +82,7 @@ public class Student {
 
     public Day getFridayDismissal() {
         return fridayDismissal;
+    }
 
     public AcademicYear getAcademicYear() {
         return academicYear;

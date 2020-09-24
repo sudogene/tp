@@ -53,31 +53,31 @@ public class AddCommandParserTest {
     public void parse_allFieldsPresent_success() throws ParseException {
         Student expectedStudent = new StudentBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ACADEMICYEAR_DESC_BOB
-                + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+            + ACADEMICYEAR_DESC_BOB + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
             + THURSDAY_DESC_BOB + FRIDAY_DESC_BOB, new AddCommand(expectedStudent));
 
         // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ACADEMICYEAR_DESC_BOB
-                + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+            + ACADEMICYEAR_DESC_BOB + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
             + THURSDAY_DESC_BOB + FRIDAY_DESC_BOB, new AddCommand(expectedStudent));
 
         // multiple phones - last phone accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB + ACADEMICYEAR_DESC_BOB
-                + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
+            + ACADEMICYEAR_DESC_BOB + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
             + THURSDAY_DESC_BOB + FRIDAY_DESC_BOB, new AddCommand(expectedStudent));
 
         // multiple emails - last email accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB + ACADEMICYEAR_DESC_BOB
-                + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
+            + ACADEMICYEAR_DESC_BOB + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
             + THURSDAY_DESC_BOB + FRIDAY_DESC_BOB, new AddCommand(expectedStudent));
 
         // multiple tags - all accepted
         Student expectedStudentMultipleTags = new StudentBuilder(BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ACADEMICYEAR_DESC_BOB 
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ACADEMICYEAR_DESC_BOB
+            + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
             + THURSDAY_DESC_BOB + FRIDAY_DESC_BOB, new AddCommand(expectedStudentMultipleTags));
     }
 

@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.student.time.Day.DayOfWeek.MONDAY;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -99,7 +98,7 @@ public class ParserUtil {
         if (!Day.isValidDismissalTime(trimmedDismissalTime)) {
             throw new ParseException(Day.MESSAGE_CONSTRAINTS);
         }
-        switch(dayOfWeek) {
+        switch (dayOfWeek) {
         case MONDAY:
             return new Monday(trimmedDismissalTime);
         case TUESDAY:
@@ -113,7 +112,8 @@ public class ParserUtil {
         default:
             throw new ParseException("Unexpected value: " + dayOfWeek);
         }
-      
+    }
+
     /**
      * Parses a {@code String academicYear} into an {@code AcademicYear}.
      * Leading and trailing whitespaces will be trimmed.

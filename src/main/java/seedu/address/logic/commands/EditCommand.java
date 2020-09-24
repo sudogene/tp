@@ -58,7 +58,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_MONDAY_DISMISSAL + "1600" + PREFIX_TUESDAY_DISMISSAL
             + " 1500 " + PREFIX_WEDNESDAY_DISMISSAL + " 1400 "
             + PREFIX_THURSDAY_DISMISSAL + " 1700 " + PREFIX_FRIDAY_DISMISSAL
-            + " 1800]";
+            + " 1800]"
             + PREFIX_ACADEMIC_YEAR + "1";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
@@ -122,8 +122,8 @@ public class EditCommand extends Command {
         Day fridayDismissal = editStudentDescriptor.getFridayDismissal().orElse(studentToEdit.getFridayDismissal());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAcademicYear, updatedTags, mondayDismissal, tuesdayDismissal,
-                wednesdayDismissal, thursdayDismissal, fridayDismissal);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAcademicYear, updatedTags,
+            mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal);
     }
 
     @Override
@@ -252,8 +252,9 @@ public class EditCommand extends Command {
 
         public Optional<Day> getFridayDismissal() {
             return Optional.ofNullable(fridayDismissal);
+        }
 
-        public void setAcademicYear(AcademicYear academicYear) {
+        public void setAcademicYear (AcademicYear academicYear) {
             this.academicYear = academicYear;
         }
 

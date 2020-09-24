@@ -106,8 +106,8 @@ public class StudentBuilder {
         this.email = new Email(email);
         return this;
     }
-  
-    /** 
+
+    /**
      * Sets the {@code AcademicYear} of the {@code Student} that we are building.
      */
     public StudentBuilder withAcademicYear(String academicYear) {

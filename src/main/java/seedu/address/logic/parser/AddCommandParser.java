@@ -42,9 +42,9 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ACADEMIC_YEAR, PREFIX_MONDAY_DISMISSAL,
-                        PREFIX_TUESDAY_DISMISSAL, PREFIX_WEDNESDAY_DISMISSAL, PREFIX_THURSDAY_DISMISSAL,
-                        PREFIX_FRIDAY_DISMISSAL, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ACADEMIC_YEAR,
+                    PREFIX_MONDAY_DISMISSAL, PREFIX_TUESDAY_DISMISSAL,
+                    PREFIX_WEDNESDAY_DISMISSAL, PREFIX_THURSDAY_DISMISSAL, PREFIX_FRIDAY_DISMISSAL, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ACADEMIC_YEAR)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -55,7 +55,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         AcademicYear academicYear = ParserUtil
-                .parseAcademicYear(argMultimap.getValue(PREFIX_ACADEMIC_YEAR).get())
+                .parseAcademicYear(argMultimap.getValue(PREFIX_ACADEMIC_YEAR).get());
         Day mondayDismissal =
                 ParserUtil.parseDismissal(Day.DayOfWeek.MONDAY,
                         argMultimap.getValue(PREFIX_MONDAY_DISMISSAL).orElse(DEFAULT_MONDAY_DISMISSAL));

@@ -48,12 +48,12 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email,
                               @JsonProperty("academicYear") String academicYear,
+                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                               @JsonProperty("monday") String mondayDismissal,
                               @JsonProperty("tuesday") String tuesdayDismissal,
                               @JsonProperty("wednesday") String wednesdayDismissal,
                               @JsonProperty("thursday") String thursdayDismissal,
-                              @JsonProperty("friday") String fridayDismissal,
-                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                              @JsonProperty("friday") String fridayDismissal) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -123,7 +123,7 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
         final Email modelEmail = new Email(email);
-      
+
         if (academicYear == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     AcademicYear.class.getSimpleName()));
@@ -174,7 +174,8 @@ class JsonAdaptedStudent {
         final Day friday = new Friday(fridayDismissal);
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelPhone, modelEmail, modelAcademicYear, modelTags, monday, tuesday, wednesday, thursday, friday);
+        return new Student(modelName, modelPhone, modelEmail, modelAcademicYear,
+            modelTags, monday, tuesday, wednesday, thursday, friday);
 
     }
 
