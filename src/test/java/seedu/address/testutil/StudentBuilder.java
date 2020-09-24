@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.student.AcademicYear;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -28,11 +29,12 @@ public class StudentBuilder {
     public static final String DEFAULT_WEDNESDAY = "1500";
     public static final String DEFAULT_THURSDAY = "1500";
     public static final String DEFAULT_FRIDAY = "1500";
-
+    public static final String DEFAULT_ACADEMICYEAR = "1";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private AcademicYear academicYear;
     private Set<Tag> tags;
     private Monday mondayDismissal;
     private Tuesday tuesdayDismissal;
@@ -48,6 +50,7 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        academicYear = new AcademicYear(DEFAULT_ACADEMICYEAR);
         tags = new HashSet<>();
         mondayDismissal = new Monday(DEFAULT_MONDAY);
         tuesdayDismissal = new Tuesday(DEFAULT_TUESDAY);
@@ -63,6 +66,7 @@ public class StudentBuilder {
         name = studentToCopy.getName();
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
+        academicYear = studentToCopy.getAcademicYear();
         tags = new HashSet<>(studentToCopy.getTags());
         mondayDismissal = (Monday) studentToCopy.getMondayDismissal();
         tuesdayDismissal = (Tuesday) studentToCopy.getTuesdayDismissal();
@@ -100,6 +104,14 @@ public class StudentBuilder {
      */
     public StudentBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+  
+    /** 
+     * Sets the {@code AcademicYear} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withAcademicYear(String academicYear) {
+        this.academicYear = new AcademicYear(academicYear);
         return this;
     }
 
@@ -149,8 +161,7 @@ public class StudentBuilder {
      * @return Student
      */
     public Student build() {
-        return new Student(name, phone, email, tags,
+        return new Student(name, phone, email, academicYear, tags,
             mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal);
     }
-
 }

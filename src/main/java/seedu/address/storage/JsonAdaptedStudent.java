@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.student.AcademicYear;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -32,6 +33,7 @@ class JsonAdaptedStudent {
     private final String name;
     private final String phone;
     private final String email;
+    private final String academicYear;
     private final String mondayDismissal;
     private final String tuesdayDismissal;
     private final String wednesdayDismissal;
@@ -45,6 +47,7 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email,
+                              @JsonProperty("academicYear") String academicYear,
                               @JsonProperty("monday") String mondayDismissal,
                               @JsonProperty("tuesday") String tuesdayDismissal,
                               @JsonProperty("wednesday") String wednesdayDismissal,
@@ -54,6 +57,7 @@ class JsonAdaptedStudent {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.academicYear = academicYear;
         this.mondayDismissal = mondayDismissal;
         this.tuesdayDismissal = tuesdayDismissal;
         this.wednesdayDismissal = wednesdayDismissal;
@@ -71,11 +75,13 @@ class JsonAdaptedStudent {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        academicYear = source.getAcademicYear().value;
         mondayDismissal = source.getMondayDismissal().toString();
         tuesdayDismissal = source.getTuesdayDismissal().toString();
         wednesdayDismissal = source.getWednesdayDismissal().toString();
         thursdayDismissal = source.getThursdayDismissal().toString();
         fridayDismissal = source.getFridayDismissal().toString();
+
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -101,7 +107,8 @@ class JsonAdaptedStudent {
         final Name modelName = new Name(name);
 
         if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Phone.class.getSimpleName()));
         }
         if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
@@ -109,12 +116,22 @@ class JsonAdaptedStudent {
         final Phone modelPhone = new Phone(phone);
 
         if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Email.class.getSimpleName()));
         }
         if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
         final Email modelEmail = new Email(email);
+      
+        if (academicYear == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    AcademicYear.class.getSimpleName()));
+        }
+        if (!AcademicYear.isValidAcademicYear(academicYear)) {
+            throw new IllegalValueException(AcademicYear.MESSAGE_CONSTRAINTS);
+        }
+        final AcademicYear modelAcademicYear = new AcademicYear(academicYear);
 
         if (mondayDismissal == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Day.class.getSimpleName()));
@@ -157,7 +174,8 @@ class JsonAdaptedStudent {
         final Day friday = new Friday(fridayDismissal);
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelPhone, modelEmail, modelTags, monday, tuesday, wednesday, thursday, friday);
+        return new Student(modelName, modelPhone, modelEmail, modelAcademicYear, modelTags, monday, tuesday, wednesday, thursday, friday);
+
     }
 
 }

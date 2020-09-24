@@ -3,6 +3,7 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
+    "academicYear": "3",
     "tagged": [ "friends" ],
     "mondayDismissal" : "1500",
     "tuesdayDismissal" : "1500",
@@ -13,6 +14,7 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
+    "academicYear": "3"
     "mondayDismissal" : "1500",
     "tuesdayDismissal" : "1500",
     "wednesdayDismissal" : "1500",

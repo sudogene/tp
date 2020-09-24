@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIDAY_DISMISSAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONDAY_DISMISSAL;
@@ -31,6 +32,7 @@ public class AddCommand extends Command {
             + " TUESDAY DISMISSAL TIME " + PREFIX_WEDNESDAY_DISMISSAL + " WEDNESDAY DISMISSAL TIME "
             + PREFIX_THURSDAY_DISMISSAL + " THURSDAY DISMISSAL TIME " + PREFIX_FRIDAY_DISMISSAL
             + " FRIDAY DISMISSAL TIME]"
+            + PREFIX_ACADEMIC_YEAR + "ACADEMIC YEAR"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -40,6 +42,7 @@ public class AddCommand extends Command {
             + " 1500 " + PREFIX_WEDNESDAY_DISMISSAL + " 1400 "
             + PREFIX_THURSDAY_DISMISSAL + " 1700 " + PREFIX_FRIDAY_DISMISSAL
             + " 1800]"
+            + PREFIX_ACADEMIC_YEAR + "2"
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
@@ -54,6 +57,10 @@ public class AddCommand extends Command {
     public AddCommand(Student student) {
         requireNonNull(student);
         toAdd = student;
+    }
+
+    public Student getStudent() {
+        return this.toAdd;
     }
 
     @Override

@@ -37,6 +37,8 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label academicYear;
+    @FXML
     private Label dismissalTime;
     @FXML
     private Label mondayDismissal;
@@ -61,12 +63,14 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);
         email.setText(student.getEmail().value);
+        academicYear.setText(student.getAcademicYear().value);
         dismissalTime.setText("Dismissal Times");
         mondayDismissal.setText("Monday: " + student.getMondayDismissal().toString());
         tuesdayDismissal.setText("Tuesday: " + student.getTuesdayDismissal().toString());
         wednesdayDismissal.setText("Wednesday: " + student.getWednesdayDismissal().toString());
         thursdayDismissal.setText("Thursday: " + student.getThursdayDismissal().toString());
         fridayDismissal.setText("Friday: " + student.getFridayDismissal().toString());
+
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

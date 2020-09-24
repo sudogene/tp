@@ -2,10 +2,12 @@
   "students": [ {
     "name": "Valid Student",
     "phone": "9482424",
-    "email": "hans@example.com"
+    "email": "hans@example.com",
+    "academicYear": "1"
   }, {
     "name": "Student With Invalid Phone Field",
     "phone": "948asdf2424",
-    "email": "hans@example.com"
+    "email": "hans@example.com",
+    "academicYear": "1"
   } ]
 }

@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.AcademicYear;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -112,6 +113,20 @@ public class ParserUtil {
         default:
             throw new ParseException("Unexpected value: " + dayOfWeek);
         }
+      
+    /**
+     * Parses a {@code String academicYear} into an {@code AcademicYear}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code academicYear} is invalid.
+     */
+    public static AcademicYear parseAcademicYear(String academicYear) throws ParseException {
+        requireNonNull(academicYear);
+        String trimmedAcademicYear = academicYear.trim();
+        if (!AcademicYear.isValidAcademicYear(trimmedAcademicYear)) {
+            throw new ParseException(AcademicYear.MESSAGE_CONSTRAINTS);
+        }
+        return new AcademicYear(trimmedAcademicYear);
     }
 
     /**

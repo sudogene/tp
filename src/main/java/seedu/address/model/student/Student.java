@@ -20,6 +20,8 @@ public class Student {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final AcademicYear academicYear;
+
 
     //Dismissal Times
     private final Day mondayDismissal;
@@ -33,14 +35,15 @@ public class Student {
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Set<Tag> tags, Day mondayDismissal,
+    public Student(Name name, Phone phone, Email email, AcademicYear academicYear, Set<Tag> tags, Day mondayDismissal,
                    Day tuesdayDismissal, Day wednesdayDismissal, Day thursdayDismissal,
                    Day fridayDismissal) {
-        requireAllNonNull(name, phone, email, tags, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
+        requireAllNonNull(name, phone, email, tags, academicYear, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
                 thursdayDismissal, fridayDismissal);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.academicYear = academicYear;
         this.mondayDismissal = mondayDismissal;
         this.tuesdayDismissal = tuesdayDismissal;
         this.wednesdayDismissal = wednesdayDismissal;
@@ -79,6 +82,10 @@ public class Student {
 
     public Day getFridayDismissal() {
         return fridayDismissal;
+
+    public AcademicYear getAcademicYear() {
+        return academicYear;
+
     }
 
     /**
@@ -126,13 +133,14 @@ public class Student {
                 && otherStudent.getWednesdayDismissal().equals(getWednesdayDismissal())
                 && otherStudent.getThursdayDismissal().equals(getThursdayDismissal())
                 && otherStudent.getFridayDismissal().equals(getFridayDismissal())
+                && otherStudent.getAcademicYear().equals(getAcademicYear())
                 && otherStudent.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
+        return Objects.hash(name, phone, email, academicYear, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
                 thursdayDismissal, fridayDismissal, tags);
     }
 
@@ -155,9 +163,10 @@ public class Student {
                 .append(" ")
                 .append(getFridayDismissal())
                 .append(" ")
+                .append(" Academic  Year: ")
+                .append(getAcademicYear())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
 }

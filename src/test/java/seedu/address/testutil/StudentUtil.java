@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIDAY_DISMISSAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONDAY_DISMISSAL;
@@ -37,6 +38,7 @@ public class StudentUtil {
         sb.append(PREFIX_NAME + student.getName().fullName + " ");
         sb.append(PREFIX_PHONE + student.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + student.getEmail().value + " ");
+        sb.append(PREFIX_ACADEMIC_YEAR + student.getAcademicYear().value + " ");
         sb.append(PREFIX_MONDAY_DISMISSAL + student.getMondayDismissal().toString() + " ");
         sb.append(PREFIX_TUESDAY_DISMISSAL + student.getTuesdayDismissal().toString() + " ");
         sb.append(PREFIX_WEDNESDAY_DISMISSAL + student.getWednesdayDismissal().toString() + " ");
@@ -56,6 +58,8 @@ public class StudentUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
+        descriptor.getAcademicYear().ifPresent(academicYear -> sb.append(PREFIX_ACADEMIC_YEAR)
+                .append(academicYear.value).append(" "));
         descriptor.getMondayDismissal().ifPresent(monday -> sb.append(PREFIX_MONDAY_DISMISSAL)
             .append(monday.toString()).append(" "));
         descriptor.getTuesdayDismissal().ifPresent(tuesday -> sb.append(PREFIX_TUESDAY_DISMISSAL)
@@ -66,6 +70,7 @@ public class StudentUtil {
             .append(thursday.toString()).append(" "));
         descriptor.getFridayDismissal().ifPresent(friday -> sb.append(PREFIX_FRIDAY_DISMISSAL)
             .append(friday.toString()).append(" "));
+
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

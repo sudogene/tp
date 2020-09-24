@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIDAY_DISMISSAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONDAY_DISMISSAL;
@@ -23,6 +24,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.student.AcademicYear;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -48,6 +50,7 @@ public class EditCommand extends Command {
             + " TUESDAY DISMISSAL TIME " + PREFIX_WEDNESDAY_DISMISSAL + " WEDNESDAY DISMISSAL TIME "
             + PREFIX_THURSDAY_DISMISSAL + " THURSDAY DISMISSAL TIME " + PREFIX_FRIDAY_DISMISSAL
             + " FRIDAY DISMISSAL TIME]"
+            + "[" + PREFIX_ACADEMIC_YEAR + "ACADEMIC YEAR] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -56,6 +59,7 @@ public class EditCommand extends Command {
             + " 1500 " + PREFIX_WEDNESDAY_DISMISSAL + " 1400 "
             + PREFIX_THURSDAY_DISMISSAL + " 1700 " + PREFIX_FRIDAY_DISMISSAL
             + " 1800]";
+            + PREFIX_ACADEMIC_YEAR + "1";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -107,6 +111,8 @@ public class EditCommand extends Command {
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
+        AcademicYear updatedAcademicYear = editStudentDescriptor.getAcademicYear()
+                .orElse(studentToEdit.getAcademicYear());
         Day mondayDismissal = editStudentDescriptor.getMondayDismissal().orElse(studentToEdit.getMondayDismissal());
         Day tuesdayDismissal = editStudentDescriptor.getTuesdayDismissal().orElse(studentToEdit.getTuesdayDismissal());
         Day wednesdayDismissal =
@@ -116,7 +122,7 @@ public class EditCommand extends Command {
         Day fridayDismissal = editStudentDescriptor.getFridayDismissal().orElse(studentToEdit.getFridayDismissal());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedTags, mondayDismissal, tuesdayDismissal,
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAcademicYear, updatedTags, mondayDismissal, tuesdayDismissal,
                 wednesdayDismissal, thursdayDismissal, fridayDismissal);
     }
 
@@ -146,6 +152,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private AcademicYear academicYear;
 
         //Dismissal Times
         private Day mondayDismissal;
@@ -171,6 +178,7 @@ public class EditCommand extends Command {
             setWednesdayDismissal(toCopy.wednesdayDismissal);
             setThursdayDismissal(toCopy.thursdayDismissal);
             setFridayDismissal(toCopy.fridayDismissal);
+            setAcademicYear(toCopy.academicYear);
             setTags(toCopy.tags);
         }
 
@@ -244,6 +252,14 @@ public class EditCommand extends Command {
 
         public Optional<Day> getFridayDismissal() {
             return Optional.ofNullable(fridayDismissal);
+
+        public void setAcademicYear(AcademicYear academicYear) {
+            this.academicYear = academicYear;
+        }
+
+        public Optional<AcademicYear> getAcademicYear() {
+            return Optional.ofNullable(academicYear);
+
         }
 
         /**
@@ -286,6 +302,7 @@ public class EditCommand extends Command {
                     && getWednesdayDismissal().equals(e.getWednesdayDismissal())
                     && getThursdayDismissal().equals(e.getThursdayDismissal())
                     && getFridayDismissal().equals(e.getFridayDismissal())
+                    && getAcademicYear().equals(e.getAcademicYear())
                     && getTags().equals(e.getTags());
         }
     }
