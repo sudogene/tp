@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIDAY_DISMISSAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONDAY_DISMISSAL;
@@ -39,7 +40,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_MONDAY_DISMISSAL,
                         PREFIX_TUESDAY_DISMISSAL, PREFIX_WEDNESDAY_DISMISSAL, PREFIX_THURSDAY_DISMISSAL,
-                        PREFIX_FRIDAY_DISMISSAL, PREFIX_TAG);
+                        PREFIX_FRIDAY_DISMISSAL, PREFIX_TAG, PREFIX_ACADEMIC_YEAR);
 
         Index index;
 
@@ -58,6 +59,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editStudentDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_ACADEMIC_YEAR).isPresent()) {
+            editStudentDescriptor.setAcademicYear(ParserUtil.parseAcademicYear(
+                argMultimap.getValue(PREFIX_ACADEMIC_YEAR).get()));
         }
 
         if (argMultimap.getValue(PREFIX_MONDAY_DISMISSAL).isPresent()) {
