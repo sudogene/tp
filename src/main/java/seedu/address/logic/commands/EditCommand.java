@@ -46,20 +46,20 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_MONDAY_DISMISSAL + "MONDAY DISMISSAL TIME " + PREFIX_TUESDAY_DISMISSAL
-            + " TUESDAY DISMISSAL TIME " + PREFIX_WEDNESDAY_DISMISSAL + " WEDNESDAY DISMISSAL TIME "
-            + PREFIX_THURSDAY_DISMISSAL + " THURSDAY DISMISSAL TIME " + PREFIX_FRIDAY_DISMISSAL
-            + " FRIDAY DISMISSAL TIME]"
             + "[" + PREFIX_ACADEMIC_YEAR + "ACADEMIC YEAR] "
+            + "[" + PREFIX_MONDAY_DISMISSAL + "MONDAY DISMISSAL TIME " + PREFIX_TUESDAY_DISMISSAL
+            + "TUESDAY DISMISSAL TIME " + PREFIX_WEDNESDAY_DISMISSAL + "WEDNESDAY DISMISSAL TIME "
+            + PREFIX_THURSDAY_DISMISSAL + "THURSDAY DISMISSAL TIME " + PREFIX_FRIDAY_DISMISSAL
+            + "FRIDAY DISMISSAL TIME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com"
-            + "[" + PREFIX_MONDAY_DISMISSAL + "1600" + PREFIX_TUESDAY_DISMISSAL
-            + " 1500 " + PREFIX_WEDNESDAY_DISMISSAL + " 1400 "
-            + PREFIX_THURSDAY_DISMISSAL + " 1700 " + PREFIX_FRIDAY_DISMISSAL
-            + " 1800]"
-            + PREFIX_ACADEMIC_YEAR + "1";
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_ACADEMIC_YEAR + "1 "
+            + PREFIX_MONDAY_DISMISSAL + "1600 " + PREFIX_TUESDAY_DISMISSAL
+            + "1500 " + PREFIX_WEDNESDAY_DISMISSAL + "1400 "
+            + PREFIX_THURSDAY_DISMISSAL + "1700 " + PREFIX_FRIDAY_DISMISSAL
+            + "1800";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
