@@ -3,6 +3,12 @@
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
-    "academicYear": "3"
+    "academicYear": "3",
+    "tagged" : [ ],
+    "mondayDismissal" : "1500",
+    "tuesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1500",
+    "thursdayDismissal" : "1500",
+    "fridayDismissal" : "1500"
   } ]
 }
