@@ -8,7 +8,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Faqih
 
-<img src="images/Faqih.png" width="200px">
+<img src="images/abdurrahmanfaqihiskandar.png" width="200px">
 
 [[github](https://github.com/abdurrahmanfaqihiskandar)][[portfolio](team/johndoe.md)]
 
@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ye Jia Dong
 
-<img src="images/JD.png" width="200px">
+<img src="images/yejiadong.png" width="200px">
 
 [[github](https://github.com/yejiadong)][[portfolio](team/johndoe.md)]
 
@@ -25,7 +25,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lee Wei Heng
 
-<img src="images/Wei Heng.png" width="200px">
+<img src="images/Whleee.png" width="200px">
 
 [[github](https://github.com/Whleee)][[portfolio](team/johndoe.md)]
 
@@ -34,7 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Kerk Pei Yong
 
-<img src="images/Kerk.png" width="200px">
+<img src="images/kerkpy.png" width="200px">
 
 [[github](https://github.com/kerkpy)][[portfolio](team/johndoe.md)]
 
@@ -43,7 +43,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Andy Wu
 
-<img src="images/Andy.png" width="200px">
+<img src="images/sudogene.png" width="200px">
 
 [[github](https://github.com/sudogene)][[portfolio](team/johndoe.md)]
 
