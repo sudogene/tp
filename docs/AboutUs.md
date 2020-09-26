@@ -1,59 +1,51 @@
----
-layout: page
-title: About Us
----
+# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e0406790@comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Faqih
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/abdurrahmanfaqihiskandar.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/abdurrahmanfaqihiskandar)]
 
 * Role: Team Lead
-* Responsibilities: UI
 
-### Johnny Doe
+### Ye Jia Dong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yejiadong.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/yejiadong)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Testing, Documentation
 
-### James Doe
+### Lee Wei Heng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Whleee.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Whleee)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing, Documentation
+
+### Kerk Pei Yong
+
+<img src="images/kerkpy.png" width="200px">
+
+[[github](https://github.com/kerkpy)]
+
+* Role: Developer
+* Responsibilities: Testing, Documentation
+
+### Andy Wu
+
+<img src="images/sudogene.png" width="200px">
+
+[[github](https://github.com/sudogene)]
+
+* Role: Developer
+* Responsibilities: Testing, Documentation
