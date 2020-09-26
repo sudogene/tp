@@ -1,5 +1,6 @@
 package seedu.address.model.student;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -17,6 +18,11 @@ public class PredicateList implements Predicate<Student> {
 
     public PredicateList() {
         predicates = new LinkedList<>();
+    }
+
+    @SafeVarargs
+    public static PredicateList of(Predicate<Student>... predicates) {
+        return new PredicateList(Arrays.asList(predicates));
     }
 
     public boolean add(Predicate<Student> predicate) {
