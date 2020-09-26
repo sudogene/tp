@@ -5,11 +5,13 @@ import static seedu.address.logic.commands.CommandTestUtil.ACADEMICYEAR_DESC_AMY
 import static seedu.address.logic.commands.CommandTestUtil.ACADEMICYEAR_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.FRIDAY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ACADEMICYEAR_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.MONDAY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -18,12 +20,15 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.THURSDAY_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TUESDAY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ACADEMICYEAR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.WEDNESDAY_DESC_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalStudents.AMY;
@@ -48,32 +53,32 @@ public class AddCommandParserTest {
     public void parse_allFieldsPresent_success() throws ParseException {
         Student expectedStudent = new StudentBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE
-                + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ACADEMICYEAR_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+            + ACADEMICYEAR_DESC_BOB + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
+            + THURSDAY_DESC_BOB + FRIDAY_DESC_BOB, new AddCommand(expectedStudent));
 
         // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_AMY
-                + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ACADEMICYEAR_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+            + ACADEMICYEAR_DESC_BOB + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
+            + THURSDAY_DESC_BOB + FRIDAY_DESC_BOB, new AddCommand(expectedStudent));
 
         // multiple phones - last phone accepted
-        assertParseSuccess(parser, NAME_DESC_BOB
-                + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ACADEMICYEAR_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
+            + ACADEMICYEAR_DESC_BOB + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
+            + THURSDAY_DESC_BOB + FRIDAY_DESC_BOB, new AddCommand(expectedStudent));
 
         // multiple emails - last email accepted
-        assertParseSuccess(parser, NAME_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ACADEMICYEAR_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
+            + ACADEMICYEAR_DESC_BOB + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
+            + THURSDAY_DESC_BOB + FRIDAY_DESC_BOB, new AddCommand(expectedStudent));
 
         // multiple tags - all accepted
         Student expectedStudentMultipleTags = new StudentBuilder(BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ACADEMICYEAR_DESC_BOB + TAG_DESC_HUSBAND
-                + TAG_DESC_FRIEND, new AddCommand(expectedStudentMultipleTags));
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ACADEMICYEAR_DESC_BOB
+            + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
+            + THURSDAY_DESC_BOB + FRIDAY_DESC_BOB, new AddCommand(expectedStudentMultipleTags));
     }
 
     @Test

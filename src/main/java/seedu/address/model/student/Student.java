@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.student.time.Day;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,17 +21,34 @@ public class Student {
     private final Phone phone;
     private final Email email;
     private final AcademicYear academicYear;
+
+
+    //Dismissal Times
+    private final Day mondayDismissal;
+    private final Day tuesdayDismissal;
+    private final Day wednesdayDismissal;
+    private final Day thursdayDismissal;
+    private final Day fridayDismissal;
+
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, AcademicYear academicYear, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, tags);
+    public Student(Name name, Phone phone, Email email, AcademicYear academicYear, Set<Tag> tags, Day mondayDismissal,
+                   Day tuesdayDismissal, Day wednesdayDismissal, Day thursdayDismissal,
+                   Day fridayDismissal) {
+        requireAllNonNull(name, phone, email, tags, academicYear, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
+                thursdayDismissal, fridayDismissal);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.academicYear = academicYear;
+        this.mondayDismissal = mondayDismissal;
+        this.tuesdayDismissal = tuesdayDismissal;
+        this.wednesdayDismissal = wednesdayDismissal;
+        this.thursdayDismissal = thursdayDismissal;
+        this.fridayDismissal = fridayDismissal;
         this.tags.addAll(tags);
     }
 
@@ -46,8 +64,29 @@ public class Student {
         return email;
     }
 
+    public Day getMondayDismissal() {
+        return mondayDismissal;
+    }
+
+    public Day getTuesdayDismissal() {
+        return tuesdayDismissal;
+    }
+
+    public Day getWednesdayDismissal() {
+        return wednesdayDismissal;
+    }
+
+    public Day getThursdayDismissal() {
+        return thursdayDismissal;
+    }
+
+    public Day getFridayDismissal() {
+        return fridayDismissal;
+    }
+
     public AcademicYear getAcademicYear() {
         return academicYear;
+
     }
 
     /**
@@ -90,6 +129,11 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
+                && otherStudent.getMondayDismissal().equals(getMondayDismissal())
+                && otherStudent.getTuesdayDismissal().equals(getTuesdayDismissal())
+                && otherStudent.getWednesdayDismissal().equals(getWednesdayDismissal())
+                && otherStudent.getThursdayDismissal().equals(getThursdayDismissal())
+                && otherStudent.getFridayDismissal().equals(getFridayDismissal())
                 && otherStudent.getAcademicYear().equals(getAcademicYear())
                 && otherStudent.getTags().equals(getTags());
     }
@@ -97,7 +141,8 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, academicYear, tags);
+        return Objects.hash(name, phone, email, academicYear, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
+                thursdayDismissal, fridayDismissal, tags);
     }
 
     @Override
@@ -108,6 +153,17 @@ public class Student {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
+                .append(" Dismissal Times: ")
+                .append(getMondayDismissal())
+                .append(" ")
+                .append(getTuesdayDismissal())
+                .append(" ")
+                .append(getWednesdayDismissal())
+                .append(" ")
+                .append(getThursdayDismissal())
+                .append(" ")
+                .append(getFridayDismissal())
+                .append(" ")
                 .append(" Academic  Year: ")
                 .append(getAcademicYear())
                 .append(" Tags: ");

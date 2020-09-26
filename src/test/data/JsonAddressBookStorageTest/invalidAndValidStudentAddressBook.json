@@ -3,11 +3,23 @@
     "name": "Valid Student",
     "phone": "9482424",
     "email": "hans@example.com",
-    "academicYear": "1"
+    "academicYear": "3",
+    "tagged": [ "friends" ],
+    "mondayDismissal" : "1500",
+    "tuesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1500",
+    "thursdayDismissal" : "1500",
+    "fridayDismissal" : "1500"
   }, {
     "name": "Student With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
-    "academicYear": "1"
+    "academicYear": "3",
+    "tagged": [ "friends" ],
+    "mondayDismissal" : "1500",
+    "tuesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1500",
+    "thursdayDismissal" : "1500",
+    "fridayDismissal" : "1500"
   } ]
 }

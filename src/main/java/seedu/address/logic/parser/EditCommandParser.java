@@ -2,10 +2,16 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIDAY_DISMISSAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONDAY_DISMISSAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_THURSDAY_DISMISSAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUESDAY_DISMISSAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDNESDAY_DISMISSAL;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -16,6 +22,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.time.Day;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,7 +38,9 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_MONDAY_DISMISSAL,
+                        PREFIX_TUESDAY_DISMISSAL, PREFIX_WEDNESDAY_DISMISSAL, PREFIX_THURSDAY_DISMISSAL,
+                        PREFIX_FRIDAY_DISMISSAL, PREFIX_TAG, PREFIX_ACADEMIC_YEAR);
 
         Index index;
 
@@ -51,6 +60,37 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editStudentDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
+
+        if (argMultimap.getValue(PREFIX_ACADEMIC_YEAR).isPresent()) {
+            editStudentDescriptor.setAcademicYear(ParserUtil.parseAcademicYear(
+                argMultimap.getValue(PREFIX_ACADEMIC_YEAR).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_MONDAY_DISMISSAL).isPresent()) {
+            editStudentDescriptor.setMondayDismissal(ParserUtil.parseDismissal(Day.DayOfWeek.MONDAY,
+                    argMultimap.getValue(PREFIX_MONDAY_DISMISSAL).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_TUESDAY_DISMISSAL).isPresent()) {
+            editStudentDescriptor.setTuesdayDismissal(ParserUtil.parseDismissal(Day.DayOfWeek.TUESDAY,
+                    argMultimap.getValue(PREFIX_TUESDAY_DISMISSAL).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_WEDNESDAY_DISMISSAL).isPresent()) {
+            editStudentDescriptor.setWednesdayDismissal(ParserUtil.parseDismissal(Day.DayOfWeek.WEDNESDAY,
+                    argMultimap.getValue(PREFIX_WEDNESDAY_DISMISSAL).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_THURSDAY_DISMISSAL).isPresent()) {
+            editStudentDescriptor.setThursdayDismissal(ParserUtil.parseDismissal(Day.DayOfWeek.THURSDAY,
+                    argMultimap.getValue(PREFIX_THURSDAY_DISMISSAL).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_FRIDAY_DISMISSAL).isPresent()) {
+            editStudentDescriptor.setFridayDismissal(ParserUtil.parseDismissal(Day.DayOfWeek.FRIDAY,
+                    argMultimap.getValue(PREFIX_FRIDAY_DISMISSAL).get()));
+        }
+
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editStudentDescriptor::setTags);
 
         if (!editStudentDescriptor.isAnyFieldEdited()) {

@@ -3,6 +3,12 @@
     "name": "Student with invalid name field: Ha!ns Mu@ster",
     "phone": "9482424",
     "email": "hans@example.com",
-    "academicYear": "1"
+    "academicYear": "3",
+    "tagged": [ "friends" ],
+    "mondayDismissal" : "1500",
+    "tuesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1500",
+    "thursdayDismissal" : "1500",
+    "fridayDismissal" : "1500"
   } ]
 }

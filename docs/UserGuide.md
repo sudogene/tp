@@ -14,7 +14,7 @@ CanoE-COACH is a desktop app for managing training schedules for secondary schoo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `CanoE-COACH.jar` from [here](https://github.com/se-edu/book-level3/releases).
+1. Download the latest `CanoE-COACH.jar` from [here](https://github.com/AY2021S1-CS2103-F10-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your CanoE-COACH.
 
@@ -24,17 +24,18 @@ CanoE-COACH is a desktop app for managing training schedules for secondary schoo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all students.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com ay/2` : Adds a student named
+    `John Doe` to the student list.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd student shown in the student list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all students.
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#Features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -64,7 +65,7 @@ Shows a summarised list of available commands.
 Format: `help`
 
 ### Adding a student: `add`
-Adds a student to the nominal roll.
+Adds a student to the student list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL ay/ACADEMIC_YEAR [d1/HHMM d2/HHMM d3/HHMM d4/HHMM d5/HHMM]`
 
@@ -90,9 +91,9 @@ Examples:
 
 ### Editing a student : `edit`
 
-Edits an existing student in the address book.
+Edits an existing student in the student list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHMM d2/HHMM d3/HHMM d4/HHMM d5/HHMM] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [ay/ACADEMIC_YEAR] [d1/HHMM d2/HHMM d3/HHMM d4/HHMM d5/HHMM] [t/TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -110,12 +111,12 @@ Examples:
 Deletes the specified student from the nominal roll.
 
 Format: `delete INDEX`
-- Deletes the person at the specified `INDEX`.
+- Deletes the student at the specified `INDEX`.
 - The index refers to the index number shown in the displayed student list.
 - The index must be an unsigned integer 1, 2, 3, …
 
 Examples:
-- `delete 2` deletes the 2nd person in the nominal roll.
+- `delete 2` deletes the 2nd student in the student list.
 
 ### Find : `find`
 Find students based on specified fields.
@@ -142,7 +143,7 @@ Format: `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL]`
 
 - Searching by more than one field
     - Find command will return student(s) that matches exactly with all the fields provided. e.g. `n/Alex p/123` will return `Alex Yeoh` only if his phone number matches `123`
-    - Order in which fields are being written does not matter. e.g. `find n/alex e/meow.com` is the same as `find e/meow.com n/alex`
+    - Order in which fields are written does not matter. e.g. `find n/alex e/meow.com` is the same as `find e/meow.com n/alex`
 
 Examples:
 - `find n/alex david` returns `Alex Yeoh`, `David Li`
@@ -161,8 +162,6 @@ Exits the program.
 Format: `exit`
 
 
-
-
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -174,7 +173,7 @@ Format: `exit`
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER ay/ACADEMIC_YEAR e/EMAIL [t/TAG]… [d1/MONDAY] [d2/TUESDAY] [d3/WEDNESDAY] [d4/THURSDAY] [d5/FRIDAY]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com ay/1 t/friend`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL ay/ACADEMIC_YEAR [t/TAG]… [d1/MONDAY] [d2/TUESDAY] [d3/WEDNESDAY] [d4/THURSDAY] [d5/FRIDAY]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com ay/1 t/friend`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]… [d1/MONDAY] [d2/TUESDAY] [d3/WEDNESDAY] [d4/THURSDAY] [d5/FRIDAY] ​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
