@@ -17,7 +17,8 @@ public class ThursdayDismissalPredicate implements Predicate<Student> {
 
     @Override
     public boolean test(Student student) {
-        return student.getThursdayDismissal().dismissalTime.isBefore(queryTime);
+        LocalTime studentTime = student.getThursdayDismissal().dismissalTime;
+        return studentTime.equals(queryTime) || studentTime.isBefore(queryTime);
     }
 
     @Override
