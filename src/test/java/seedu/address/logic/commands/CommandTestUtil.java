@@ -4,9 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIDAY_DISMISSAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONDAY_DISMISSAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_THURSDAY_DISMISSAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUESDAY_DISMISSAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDNESDAY_DISMISSAL;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -36,6 +41,16 @@ public class CommandTestUtil {
     public static final String VALID_ACADEMICYEAR_BOB = "2";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_MONDAY_AMY = "1500";
+    public static final String VALID_TUESDAY_AMY = "1500";
+    public static final String VALID_WEDNESDAY_AMY = "1500";
+    public static final String VALID_THURSDAY_AMY = "1500";
+    public static final String VALID_FRIDAY_AMY = "1500";
+    public static final String VALID_MONDAY_BOB = "1500";
+    public static final String VALID_TUESDAY_BOB = "1500";
+    public static final String VALID_WEDNESDAY_BOB = "1500";
+    public static final String VALID_THURSDAY_BOB = "1500";
+    public static final String VALID_FRIDAY_BOB = "1500";
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -50,6 +65,16 @@ public class CommandTestUtil {
             + PREFIX_ACADEMIC_YEAR + VALID_ACADEMICYEAR_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String MONDAY_DESC_AMY = " " + PREFIX_MONDAY_DISMISSAL + VALID_MONDAY_AMY;
+    public static final String TUESDAY_DESC_AMY = " " + PREFIX_TUESDAY_DISMISSAL + VALID_TUESDAY_AMY;
+    public static final String WEDNESDAY_DESC_AMY = " " + PREFIX_WEDNESDAY_DISMISSAL + VALID_WEDNESDAY_AMY;
+    public static final String THURSDAY_DESC_AMY = " " + PREFIX_THURSDAY_DISMISSAL + VALID_THURSDAY_AMY;
+    public static final String FRIDAY_DESC_AMY = " " + PREFIX_FRIDAY_DISMISSAL + VALID_FRIDAY_AMY;
+    public static final String MONDAY_DESC_BOB = " " + PREFIX_MONDAY_DISMISSAL + VALID_MONDAY_BOB;
+    public static final String TUESDAY_DESC_BOB = " " + PREFIX_TUESDAY_DISMISSAL + VALID_TUESDAY_BOB;
+    public static final String WEDNESDAY_DESC_BOB = " " + PREFIX_WEDNESDAY_DISMISSAL + VALID_WEDNESDAY_BOB;
+    public static final String THURSDAY_DESC_BOB = " " + PREFIX_THURSDAY_DISMISSAL + VALID_THURSDAY_BOB;
+    public static final String FRIDAY_DESC_BOB = " " + PREFIX_FRIDAY_DISMISSAL + VALID_FRIDAY_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

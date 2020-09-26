@@ -22,7 +22,7 @@ public class FindCommandParserTest {
                 new FindCommand(new PredicateList(Arrays.asList(
                         new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")),
                         new PhoneMatchesPredicate("123456"))));
-        assertParseSuccess(parser, "n/Alice Bob p/123456", firstExpectedFindCommand);
+        assertParseSuccess(parser, " n/Alice Bob p/123456", firstExpectedFindCommand);
 
         // multiple whitespaces between keywords
         FindCommand secondExpectedFindCommand =

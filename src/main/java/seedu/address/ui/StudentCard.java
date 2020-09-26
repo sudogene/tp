@@ -39,6 +39,18 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label academicYear;
     @FXML
+    private Label dismissalTime;
+    @FXML
+    private Label mondayDismissal;
+    @FXML
+    private Label tuesdayDismissal;
+    @FXML
+    private Label wednesdayDismissal;
+    @FXML
+    private Label thursdayDismissal;
+    @FXML
+    private Label fridayDismissal;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -52,6 +64,13 @@ public class StudentCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         email.setText(student.getEmail().value);
         academicYear.setText(student.getAcademicYear().value);
+        dismissalTime.setText("Dismissal Times");
+        mondayDismissal.setText("Monday: " + student.getMondayDismissal().toString());
+        tuesdayDismissal.setText("Tuesday: " + student.getTuesdayDismissal().toString());
+        wednesdayDismissal.setText("Wednesday: " + student.getWednesdayDismissal().toString());
+        thursdayDismissal.setText("Thursday: " + student.getThursdayDismissal().toString());
+        fridayDismissal.setText("Friday: " + student.getFridayDismissal().toString());
+
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
