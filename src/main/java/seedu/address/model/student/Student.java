@@ -86,7 +86,6 @@ public class Student {
 
     public AcademicYear getAcademicYear() {
         return academicYear;
-
     }
 
     /**
