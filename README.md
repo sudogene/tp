@@ -16,7 +16,7 @@ Some of the features include:
 
 For more in-depth information on the CanoE-COACH visit [our website](https://ay2021s1-cs2103-f10-1.github.io/tp/).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your CanoE-COACH.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
