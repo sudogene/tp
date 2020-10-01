@@ -1,10 +1,11 @@
-
 ---
 layout: page
 title: User Guide
 ---
 
-CanoE-COACH is a desktop app for managing training schedules for secondary school canoe teams, optimized for use via a Command Line Interface (CLI) while still having the benefits of a feed  d Interface (GUI). If you can type fast, CanoE-COACH can get your training scheduling done faster than traditional GUI apps.
+CanoE-COACH is a **desktop app for managing training schedules for secondary school canoe teams, optimized for use via
+ a Command Line Interface** (CLI) while still having the benefits of a Graphical Interface (GUI). If you can type fast
+, CanoE-COACH can get your training scheduling done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -36,7 +37,7 @@ CanoE-COACH is a desktop app for managing training schedules for secondary schoo
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#Features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
