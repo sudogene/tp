@@ -28,7 +28,7 @@ You can reach us at the email `e0406790@comp.nus.edu.sg`
 
 ### Lee Wei Heng
 
-<img src="images/Whleee.png" width="200px">
+<img src="images/whleee.png" width="200px">
 
 [[github](https://github.com/Whleee)]
 
