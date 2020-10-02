@@ -1,4 +1,9 @@
+[![CI Status](https://github.com/AY2021S1-CS2103-F10-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2021S1
+-CS2103-F10-1/tp/actions)
+
 # CanoE-COACH
+
+![Ui](docs/images/Ui.png)
 
 CanoE-COACH is a **desktop app for managing training schedules for secondary school canoe teams, optimized for use via
  a Command Line Interface** (CLI) while still having the benefits of a Graphical Interface (GUI). If you can type fast
