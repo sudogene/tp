@@ -236,7 +236,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* Canoeing Coach for Secondary School Students 
+* Canoeing Coach for Secondary School Students
 * Has a need to manage a significant number of students
 * Prefer desktop apps over other types
 * Can type fast
@@ -258,7 +258,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | see everyone’s available schedules       |  find a common available time to have classes.                                                                             |      
+| `* * *`  | user                                       | see everyone’s available schedules       |  find a common available time to have classes.                                                                             |
 | `* * *`  | user                                       | delete students that have quit and automatically remove them from my schedule                | keep track of only current active students                |
 | `* * *`    | user                                       | add the available schedules of a particular student   | know when that student is available to have classes              |
 | `* * *`      | user | easily create new student record entries          | store information/data of students in a structured way    |
@@ -276,25 +276,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `CanoE-COACH` and the **Actor** is the `user`, unless specified otherwise)
 
-**UC01: Add a student**  
-  
-**MSS**  
-  
-1. User requests to add a student to the student list  
-2. CanoE-COACH adds the student  
+**UC01: Add a student**
+
+**MSS**
+
+1. User requests to add a student to the student list
+2. CanoE-COACH adds the student
     Use case ends.
     
 **Extensions**
 
 -   1a. Name, phone number, email, or academic year is missing.
-    
+
     -   1a1. CanoE-COACH displays an error message.
         Use case resumes at step 1.
-        
+
 -   1b. Student with the same name already exists.
     -   1b1. CanoE-COACH displays an error message.
         Use case ends.
-    
+
 **UC02: Delete a student**
 
 **MSS**
@@ -314,10 +314,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. CanoE-COACH shows an error message.
       Use case resumes at step 2.
 
-**UC03: Edit a Student**  
-  
-**MSS**  
-  
+**UC03: Edit a Student**
+
+**MSS**
+
 1.  User requests to list students
 2.  CanoE-COACH shows a list of students
 3.  User requests to edit a specific student in the list
@@ -333,10 +333,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. CanoE-COACH shows an error message.
       Use case resumes at step 2.
 
-**UC04: Find a Student**  
-  
-**MSS**  
-  
+**UC04: Find a Student**
+
+**MSS**
+
 1.  User requests to find students
 2.  CanoE-COACH shows a list of students who match the criteria
     Use case ends.
@@ -347,10 +347,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. CanoE-COACH shows an error message.
       Use case resumes at step 1.
 
-**UC05: Clear all Students**  
-  
-**MSS**  
-  
+**UC05: Clear all Students**
+
+**MSS**
+
 1.  User requests to clear all students
 2.  CanoE-COACH deletes all existing students in the student list
     Use case ends.
