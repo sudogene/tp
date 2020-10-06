@@ -1,4 +1,4 @@
----
+﻿---
 layout: page
 title: Developer Guide
 ---
@@ -236,14 +236,20 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Canoeing Coach for Secondary School Students 
+* Has a need to manage a significant number of students
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**
 
+* Manage students and canoeing training schedules faster than a typical mouse/GUI driven app
+* Manage large student numbers efficiently
+	* Automatically sound warnings if certain students do not attend consecutive trainings
+* Fast scheduling of canoeing trainings compared to manual modes
+* Data Visualisation
 
 ### User stories
 
@@ -252,40 +258,102 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new student               |                                                                        |
-| `* * *`  | user                                       | delete a student                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a student by name          | locate details of students without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many students in the address book | sort students by name           | locate a student easily                                                 |
+| `* * *`  | user                                       | see everyone’s available schedules       |  find a common available time to have classes.                                                                             |      
+| `* * *`  | user                                       | delete students that have quit and automatically remove them from my schedule                | keep track of only current active students                |
+| `* * *`    | user                                       | add the available schedules of a particular student   | know when that student is available to have classes              |
+| `* * *`      | user | easily create new student record entries          | store information/data of students in a structured way    |
+| `* * *`      | user | easily modify the personal details of my students          | see the most accurate information    |
+| `* * *`  | user                                       | filter students by their name          | easily retrieve the details of a particular student without having to go through the entire list |
+| `* *`  | user                                       | filter students by their Academic Year          | easily retrieve all students of a particular academic level |
+| `* *`  | user                                       | filter students by their Phone Numbers          | easily find students by their contact details |
+| `* *`  | user                                       | filter students by their dismissal time / schedules          | schedule training sessions |
+| `* *`  | user                                       | tag students by their Academic Year     | schedule trainings catered for students in a particular academic year |
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `CanoE-COACH` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a student**
+**UC01: Add a student**  
+  
+**MSS**  
+  
+1. User requests to add a student to the student list  
+2. CanoE-COACH adds the student  
+    Use case ends.
+    
+**Extensions**
+
+-   1a. Name, phone number, email, or academic year is missing.
+    
+    -   1a1. CanoE-COACH displays an error message.
+        Use case resumes at step 1.
+        
+-   1b. Student with the same name already exists.
+    -   1b1. CanoE-COACH displays an error message.
+        Use case ends.
+    
+**UC02: Delete a student**
 
 **MSS**
 
 1.  User requests to list students
-2.  AddressBook shows a list of students
+2.  CanoE-COACH shows a list of students
 3.  User requests to delete a specific student in the list
-4.  AddressBook deletes the student
-
+4.  CanoE-COACH deletes the student
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-
   Use case ends.
 
 * 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
+    * 3a1. CanoE-COACH shows an error message.
       Use case resumes at step 2.
+
+**UC03: Edit a Student**  
+  
+**MSS**  
+  
+1.  User requests to list students
+2.  CanoE-COACH shows a list of students
+3.  User requests to edit a specific student in the list
+4.  CanoE-COACH edits the student's particulars
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. CanoE-COACH shows an error message.
+      Use case resumes at step 2.
+
+**UC04: Find a Student**  
+  
+**MSS**  
+  
+1.  User requests to find students
+2.  CanoE-COACH shows a list of students who match the criteria
+    Use case ends.
+
+**Extensions**
+
+* 1a. There are no parameters specified in the find command.
+  * 1a1. CanoE-COACH shows an error message.
+      Use case resumes at step 1.
+
+**UC05: Clear all Students**  
+  
+**MSS**  
+  
+1.  User requests to clear all students
+2.  CanoE-COACH deletes all existing students in the student list
+    Use case ends.
 
 *{More to be added}*
 
@@ -294,13 +362,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. CanoE-COACH is optimised for a single-user, rather than multiple users.
+5. Any data must be stored locally in a human editable text-file, rather than in a database.
+6. The system should respond to commands within 1 second.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -337,7 +407,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First student is deleted from the list. Details of the deleted student is shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
