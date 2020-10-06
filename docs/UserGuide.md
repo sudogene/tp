@@ -1,9 +1,11 @@
-
 ---
-# User Guide
+layout: page
+title: User Guide
 ---
 
-CanoE-COACH is a desktop app for managing training schedules for secondary school canoe teams, optimized for use via a Command Line Interface (CLI) while still having the benefits of a feed  d Interface (GUI). If you can type fast, CanoE-COACH can get your training scheduling done faster than traditional GUI apps.
+CanoE-COACH is a **desktop app for managing training schedules for secondary school canoe teams, optimized for use via
+ a Command Line Interface** (CLI) while still having the benefits of a Graphical Interface (GUI). If you can type fast
+, CanoE-COACH can get your training scheduling done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -35,7 +37,7 @@ CanoE-COACH is a desktop app for managing training schedules for secondary schoo
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#Features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -67,7 +69,7 @@ Format: `help`
 ### Adding a student: `add`
 Adds a student to the student list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL ay/ACADEMIC_YEAR [d1/HHMM d2/HHMM d3/HHMM d4/HHMM d5/HHMM]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL ay/ACADEMIC_YEAR [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm]`
 
 <center>
 
@@ -93,7 +95,7 @@ Examples:
 
 Edits an existing student in the student list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [ay/ACADEMIC_YEAR] [d1/HHMM d2/HHMM d3/HHMM d4/HHMM d5/HHMM] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [ay/ACADEMIC_YEAR] [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [t/TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -121,7 +123,7 @@ Examples:
 ### Find : `find`
 Find students based on specified fields.
 
-Format: `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL]`
+Format: `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm]`
 
 - At least one field needs to be filled
 - Name
@@ -140,6 +142,11 @@ Format: `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL]`
 
 - Academic Year
     - Value will match exactly. e.g. `2` will match `2` but not `1`
+    
+- Dismissal Time (d1 to d5)
+    - Students with dismissal times equal OR before the query time will be matched
+      
+      e.g. `d1/1500` will match `1500` and `1200`, but not `1530` on Monday
 
 - Searching by more than one field
     - Find command will return student(s) that matches exactly with all the fields provided. e.g. `n/Alex p/123` will return `Alex Yeoh` only if his phone number matches `123`
@@ -149,6 +156,7 @@ Examples:
 - `find n/alex david` returns `Alex Yeoh`, `David Li`
 - `find n/alex david p/123` returns `Alex Yeoh`
 - `find e/alexyeoh@example.com p/123` returns `Alex Yeoh`
+- `find n/Alex d2/1600` returns `Alex Yeoh`, provided his dismissal time on Tuesday falls before `1600`
 - `find e/alexyeoh@example.com p/456` returns an empty list
 
 ### Clearing all entries: `clear`
@@ -177,6 +185,6 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]… [d1/MONDAY] [d2/TUESDAY] [d3/WEDNESDAY] [d4/THURSDAY] [d5/FRIDAY] ​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL]`<br> e.g., `find n/James Jake ay/2`
+**Find** | `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm]`<br> e.g., `find n/James Jake ay/2`
 **List** | `list`
 **Help** | `help`
