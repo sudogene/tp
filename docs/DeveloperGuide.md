@@ -283,7 +283,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to add a student to the student list
 2. CanoE-COACH adds the student
     Use case ends.
-    
+
 **Extensions**
 
 -   1a. Name, phone number, email, or academic year is missing.

@@ -46,7 +46,6 @@
         </StackPane>
             <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
               <items>
-      
                                             <VBox fx:id="studentList" prefWidth="340.0" styleClass="pane-with-border">
                 <padding>
                   <Insets bottom="10" left="10" right="10" top="10" />
