@@ -31,7 +31,7 @@ For more in-depth information on the CanoE-COACH visit [our website](https://ay2
     `John Doe` to the student list.
 
    * **`delete`**`3` : Deletes the 3rd student shown in the current student list.
-   
+
    * **`filter`**`n/alex n/david` : Returns `Alex Yeoh`, `David Li`.
 
    * **`clear`** : Deletes all students.
@@ -73,19 +73,19 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL ay/ACADEMIC_YEAR [d1/HHmm d2/HHmm d3/
 
 <center>
 
-| Prefix   |      Representation      |  
+| Prefix   |      Representation      |
 |:----------:|:-------------:|
-| `d1/` |  **Monday's** Dismissal Time| 
-| `d2/` |    **Tuesday's** Dismissal Time   |  
-| `d3/` | **Wednesday's** Dismissal Time |   
-| `d4/` | **Thursday's** Dismissal Time | 
-| `d5/` | **Friday's** Dismissal Time | 
+| `d1/` |  **Monday's** Dismissal Time|
+| `d2/` |    **Tuesday's** Dismissal Time   |
+| `d3/` | **Wednesday's** Dismissal Time |
+| `d4/` | **Thursday's** Dismissal Time |
+| `d5/` | **Friday's** Dismissal Time |
 
 </center>
 
 * Academic year ranges from `1` to `5`.
 * `d1/ d2/ d3/ d4/ d5/` corresponds to the dismissal times on different days. They are optional fields.
-* The default dismissal time is 1500. If the user inputs `d1/1700 d5/1200`, then the record will be equivalent to `d1/1700 d2/1500 d3/1500 d4/1500 d5/1200` 
+* The default dismissal time is 1500. If the user inputs `d1/1700 d5/1200`, then the record will be equivalent to `d1/1700 d2/1500 d3/1500 d4/1500 d5/1200`
 
 Examples:
 - `add n/Benjamin p/12345678 e/littleicemaiden@rocket.com ay/3 d1/1330 d2/1730 d3/1600 d4/1200 d5/1100`
@@ -142,10 +142,10 @@ Format: `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm
 
 - Academic Year
     - Value will match exactly. e.g. `2` will match `2` but not `1`
-    
+
 - Dismissal Time (d1 to d5)
     - Students with dismissal times equal OR before the query time will be matched
-      
+
       e.g. `d1/1500` will match `1500` and `1200`, but not `1530` on Monday
 
 - Searching by more than one field
