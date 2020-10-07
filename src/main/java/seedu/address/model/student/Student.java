@@ -2,10 +2,12 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.model.student.time.Day;
 import seedu.address.model.tag.Tag;
@@ -32,6 +34,9 @@ public class Student {
 
     private final Set<Tag> tags = new HashSet<>();
 
+    //Collection of scheduled training dates tagged to the particular student
+    private final TreeSet<LocalDateTime> trainingSchedules = new TreeSet<>();
+
     /**
      * Every field must be present and not null.
      */
@@ -50,6 +55,46 @@ public class Student {
         this.thursdayDismissal = thursdayDismissal;
         this.fridayDismissal = fridayDismissal;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Adds a training session to the student's schedule.
+     * Training sessions are automatically sorted by their respective date and times.
+     *
+     * @param trainingDateTime LocalDateTime corresponding to the training's date and start time.
+     * Duplicates are not allowed and will not be added.
+     */
+    public void addTraining(LocalDateTime trainingDateTime) {
+        trainingSchedules.add(trainingDateTime);
+    }
+
+    /**
+     * Checks if student has a training scheduled at the specified date and start time.
+     *
+     * @param trainingDateTime LocalDateTime corresponding to the training's date and start time.
+     * Specified training must exist in the student's training schedule.
+     * @return true If a training has been scheduled at the specified date and time.
+     */
+    public boolean containsTraining(LocalDateTime trainingDateTime) {
+        return trainingSchedules.contains(trainingDateTime);
+    }
+
+    /**
+     * Removes a scheduled training from the student's training schedule.
+     *
+     * @param trainingDateTime LocalDateTime corresponding to the training's date and start time.
+     */
+    public void removeTraining(LocalDateTime trainingDateTime) {
+        if (containsTraining(trainingDateTime)) {
+            trainingSchedules.remove(trainingDateTime);
+        }
+    }
+
+    /**
+     * Clears all trainings scheduled for the student.
+     */
+    public void clearAllTraining() {
+        trainingSchedules.clear();
     }
 
     public Name getName() {
