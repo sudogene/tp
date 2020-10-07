@@ -91,9 +91,9 @@ public class Student {
     }
 
     /**
-     * Clears all trainings scheduled for the student.
+     * Removes all trainings scheduled for the student.
      */
-    public void clearAllTraining() {
+    public void removeAllTraining() {
         trainingSchedules.clear();
     }
 
