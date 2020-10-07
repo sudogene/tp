@@ -19,6 +19,7 @@ import seedu.address.model.tag.Tag;
 public class Student {
 
     // Identity fields
+    private final Id id;
     private final Name name;
     private final Phone phone;
     private final Email email;
