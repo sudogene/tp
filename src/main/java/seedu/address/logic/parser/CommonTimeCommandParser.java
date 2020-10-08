@@ -1,21 +1,27 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.address.logic.commands.CommonTimeCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.AcademicYearMatchesPredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.PredicateList;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-
+/**
+ * Parses input arguments and creates a CommonTimeCommand object
+ */
 public class CommonTimeCommandParser implements Parser<CommonTimeCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the CommonTimeCommand
+     * and returns a CommonTimeCommand object for execution.
+     */
     public CommonTimeCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
