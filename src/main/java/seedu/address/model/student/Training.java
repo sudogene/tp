@@ -1,10 +1,11 @@
 package seedu.address.model.student;
 
-import seedu.address.model.student.exceptions.DuplicateStudentException;
-
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+
+import seedu.address.model.student.exceptions.DuplicateStudentException;
+
 
 public class Training {
 

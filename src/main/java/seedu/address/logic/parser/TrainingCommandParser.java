@@ -1,11 +1,15 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.TrainingCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.LocalDateTime;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import seedu.address.logic.commands.TrainingCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+
+
+
 
 public class TrainingCommandParser implements Parser<TrainingCommand> {
 
