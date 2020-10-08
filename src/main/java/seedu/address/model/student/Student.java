@@ -19,7 +19,7 @@ import seedu.address.model.tag.Tag;
 public class Student {
 
     static class Id {
-        private static final String ID_FORMAT = "%1$3s";
+        private static final String PADDING_FORMAT = "%1$3s";
         public static int lastUsedId = 0;
 
         public String value;
@@ -38,7 +38,7 @@ public class Student {
 
         @Override
         public String toString() {
-            return String.format(ID_FORMAT, value)
+            return String.format(PADDING_FORMAT, value)
                     .replace(' ', '0');
         }
     }
