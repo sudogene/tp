@@ -8,10 +8,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Training;
 
-
-
-
-
 public class TrainingCommand extends Command {
     public static final String COMMAND_WORD = "training";
 
@@ -22,8 +18,8 @@ public class TrainingCommand extends Command {
             + "12-12-2000 1800";
 
     public static final String MESSAGE_SUCCESS = "New Training Session created at: %1$s";
-    public static final String MESSAGE_DUPLICATE_TRAINING = "There " +
-            "already exists a Training Session at this Date and Time";
+    public static final String MESSAGE_DUPLICATE_TRAINING = "There "
+            + "already exists a Training Session at this Date and Time";
 
     private final Training toAdd;
 
