@@ -31,38 +31,38 @@ public class TypicalStudents {
             .withAcademicYear("1")
             .withTags("friends").build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
-            .withId("1")
+            .withId("2")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withAcademicYear("2")
             .withTags("owesMoney", "friends").build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withId("1")
+            .withId("3")
             .withAcademicYear("3")
             .withEmail("heinz@example.com").build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withId("44")
+            .withId("4")
             .withAcademicYear("4")
             .withEmail("cornelia@example.com").withTags("friends").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withId("1")
+            .withId("5")
             .withAcademicYear("5")
             .withEmail("werner@example.com").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withId("1")
+            .withId("6")
             .withAcademicYear("1")
             .withEmail("lydia@example.com").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
-            .withId("1")
+            .withId("7")
             .withAcademicYear("2")
             .withEmail("anna@example.com").build();
 
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withId("1")
+            .withId("8")
             .withAcademicYear("1")
             .withEmail("stefan@example.com").build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withId("1")
+            .withId("9")
             .withAcademicYear("2")
             .withEmail("hans@example.com").build();
 

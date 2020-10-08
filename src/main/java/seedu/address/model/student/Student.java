@@ -181,6 +181,7 @@ public class Student {
 
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
+                && otherStudent.getId().equals(getId())
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getMondayDismissal().equals(getMondayDismissal())
@@ -196,13 +197,15 @@ public class Student {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, academicYear, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
-                thursdayDismissal, fridayDismissal, tags);
+                thursdayDismissal, fridayDismissal, tags, id);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" Id: ")
+                .append(getId())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
