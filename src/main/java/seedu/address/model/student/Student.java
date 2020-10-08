@@ -18,30 +18,8 @@ import seedu.address.model.tag.Tag;
  */
 public class Student {
 
-    static class Id {
-        private static final String PADDING_FORMAT = "%1$3s";
-        public static int lastUsedId = 0;
-
-        public String value;
-
-        public Id() {
-            lastUsedId++;
-            value = String.valueOf(lastUsedId);
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            return other == this // short circuit if same object
-                    || (other instanceof Id // instanceof handles nulls
-                    && value.equals(((Id) other).value)); // state check
-        }
-
-        @Override
-        public String toString() {
-            return String.format(PADDING_FORMAT, value)
-                    .replace(' ', '0');
-        }
-    }
+    // Tracks total students and used for assigning unique Id
+    private static int totalNumberOfStudents = 0;
 
     // Identity fields
     private final Id id;
@@ -51,7 +29,7 @@ public class Student {
     private final AcademicYear academicYear;
 
 
-    //Dismissal Times
+    // Dismissal Times
     private final Day mondayDismissal;
     private final Day tuesdayDismissal;
     private final Day wednesdayDismissal;
@@ -64,14 +42,14 @@ public class Student {
     private final TreeSet<LocalDateTime> trainingSchedules = new TreeSet<>();
 
     /**
+     * Constructs the {@code Student} with a given id.
      * Every field must be present and not null.
      */
     public Student(Name name, Phone phone, Email email, AcademicYear academicYear, Set<Tag> tags, Day mondayDismissal,
                    Day tuesdayDismissal, Day wednesdayDismissal, Day thursdayDismissal,
-                   Day fridayDismissal) {
+                   Day fridayDismissal, Id id) {
         requireAllNonNull(name, phone, email, tags, academicYear, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
-                thursdayDismissal, fridayDismissal);
-        this.id = new Id();
+                thursdayDismissal, fridayDismissal, id);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -82,6 +60,7 @@ public class Student {
         this.thursdayDismissal = thursdayDismissal;
         this.fridayDismissal = fridayDismissal;
         this.tags.addAll(tags);
+        this.id = id;
     }
 
     /**
@@ -202,7 +181,6 @@ public class Student {
 
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
-                && otherStudent.getId().equals(getId())
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getMondayDismissal().equals(getMondayDismissal())
@@ -225,8 +203,6 @@ public class Student {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Id: ")
-                .append(getId())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")

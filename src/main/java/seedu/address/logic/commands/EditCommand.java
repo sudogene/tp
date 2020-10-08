@@ -26,6 +26,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.AcademicYear;
 import seedu.address.model.student.Email;
+import seedu.address.model.student.Id;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
@@ -121,9 +122,10 @@ public class EditCommand extends Command {
                 editStudentDescriptor.getThursdayDismissal().orElse(studentToEdit.getThursdayDismissal());
         Day fridayDismissal = editStudentDescriptor.getFridayDismissal().orElse(studentToEdit.getFridayDismissal());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+        Id id = studentToEdit.getId();
 
         return new Student(updatedName, updatedPhone, updatedEmail, updatedAcademicYear, updatedTags,
-            mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal);
+            mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal, id);
     }
 
     @Override
@@ -153,6 +155,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private AcademicYear academicYear;
+        private Id id;
 
         //Dismissal Times
         private Day mondayDismissal;
@@ -180,6 +183,7 @@ public class EditCommand extends Command {
             setFridayDismissal(toCopy.fridayDismissal);
             setAcademicYear(toCopy.academicYear);
             setTags(toCopy.tags);
+            setId(toCopy.id);
         }
 
         /**
@@ -261,6 +265,14 @@ public class EditCommand extends Command {
         public Optional<AcademicYear> getAcademicYear() {
             return Optional.ofNullable(academicYear);
 
+        }
+
+        public Optional<Id> getId() {
+            return Optional.ofNullable(id);
+        }
+
+        public void setId(Id id) {
+            this.id = id;
         }
 
         /**

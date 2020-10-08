@@ -3,7 +3,7 @@ package seedu.address.model.student;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Student}'s {@code Id value matches the value given.
+ * Tests that a {@code Student}'s {@code Id} value matches the value given.
  */
 public class IdMatchesPredicate implements Predicate<Student> {
     private final String idValue;
