@@ -77,8 +77,9 @@ public class CommandTestUtil {
     public static final String WEDNESDAY_DESC_BOB = " " + PREFIX_WEDNESDAY_DISMISSAL + VALID_WEDNESDAY_BOB;
     public static final String THURSDAY_DESC_BOB = " " + PREFIX_THURSDAY_DISMISSAL + VALID_THURSDAY_BOB;
     public static final String FRIDAY_DESC_BOB = " " + PREFIX_FRIDAY_DISMISSAL + VALID_FRIDAY_BOB;
-    public static final String ID_DESC_AMY = " " + PREFIX_ID + VALID_ID;
+    public static final String ID_DESC = " " + PREFIX_ID + VALID_ID;
 
+    public static final String INVALID_ID_DESC = " " + PREFIX_ID + "234r"; // 'r' not allowed in id
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol

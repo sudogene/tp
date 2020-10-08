@@ -4,7 +4,14 @@ package seedu.address.model.student;
  * Represents a Student's id.
  */
 public class Id {
+    public static final String MESSAGE_CONSTRAINTS = "Id must be numeric.";
+
+    /** pads the Id value with leading spaces to be converted to zeroes */
     public static final String PADDING_FORMAT = "%1$3s";
+
+    /** validates if the string is numeric */
+    public static final String VALIDATION_REGEX = "-?\\d+(\\.\\d+)?";
+
     public final String value;
 
     /**
@@ -12,6 +19,13 @@ public class Id {
      */
     public Id(String value) {
         this.value = value;
+    }
+
+    /**
+     * Returns true if a given string is a valid id.
+     */
+    public static boolean isValidId(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
