@@ -18,14 +18,18 @@ import seedu.address.model.tag.Tag;
  */
 public class Student {
 
+    // Tracks total students and used for assigning unique Id
+    private static int totalNumberOfStudents = 0;
+
     // Identity fields
+    private final Id id;
     private final Name name;
     private final Phone phone;
     private final Email email;
     private final AcademicYear academicYear;
 
 
-    //Dismissal Times
+    // Dismissal Times
     private final Day mondayDismissal;
     private final Day tuesdayDismissal;
     private final Day wednesdayDismissal;
@@ -38,13 +42,14 @@ public class Student {
     private final TreeSet<LocalDateTime> trainingSchedules = new TreeSet<>();
 
     /**
+     * Constructs the {@code Student} with a given id.
      * Every field must be present and not null.
      */
     public Student(Name name, Phone phone, Email email, AcademicYear academicYear, Set<Tag> tags, Day mondayDismissal,
                    Day tuesdayDismissal, Day wednesdayDismissal, Day thursdayDismissal,
-                   Day fridayDismissal) {
+                   Day fridayDismissal, Id id) {
         requireAllNonNull(name, phone, email, tags, academicYear, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
-                thursdayDismissal, fridayDismissal);
+                thursdayDismissal, fridayDismissal, id);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -55,6 +60,7 @@ public class Student {
         this.thursdayDismissal = thursdayDismissal;
         this.fridayDismissal = fridayDismissal;
         this.tags.addAll(tags);
+        this.id = id;
     }
 
     /**
@@ -95,6 +101,10 @@ public class Student {
      */
     public void removeAllTraining() {
         trainingSchedules.clear();
+    }
+
+    public Id getId() {
+        return id;
     }
 
     public Name getName() {
@@ -171,6 +181,7 @@ public class Student {
 
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
+                && otherStudent.getId().equals(getId())
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getMondayDismissal().equals(getMondayDismissal())
@@ -186,13 +197,15 @@ public class Student {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, academicYear, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
-                thursdayDismissal, fridayDismissal, tags);
+                thursdayDismissal, fridayDismissal, tags, id);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" Id: ")
+                .append(getId())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
