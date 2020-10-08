@@ -41,6 +41,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
     }
 
+    public Set<Training> getTrainings() {
+        return this.trainings;
+    }
+
     //// list overwrite operations
 
     /**
