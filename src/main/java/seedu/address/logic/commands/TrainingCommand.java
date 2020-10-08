@@ -13,10 +13,13 @@ public class TrainingCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a Training Session"
             + "Parameters: Date and Time (dddd-MM-dd HHmm)"
-            + "Example: " + COMMAND_WORD + "12-12-2000 1800";
+            + "Example: "
+            + COMMAND_WORD
+            + "12-12-2000 1800";
 
     public static final String MESSAGE_SUCCESS = "New Training Session created at: %1$s";
-    public static final String MESSAGE_DUPLICATE_TRAINING = "There already exists a Training Session at this Date and Time";
+    public static final String MESSAGE_DUPLICATE_TRAINING = "There " +
+            "already exists a Training Session at this Date and Time";
 
     private final Training toAdd;
 

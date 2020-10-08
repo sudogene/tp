@@ -106,7 +106,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         trainings.add(training);
     }
 
-    public void removeTraining(Training training) { trainings.remove(training); }
+    public void removeTraining(Training training) {
+        trainings.remove(training);
+    }
 
     //// util methods
 

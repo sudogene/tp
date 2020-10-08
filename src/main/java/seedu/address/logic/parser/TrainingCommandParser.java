@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.TrainingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
