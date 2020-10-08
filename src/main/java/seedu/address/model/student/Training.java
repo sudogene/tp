@@ -58,6 +58,6 @@ public class Training {
 
     @Override
     public String toString() {
-        return dateTime.toString().substring(0,10) + " " + dateTime.toString().substring(11);
+        return dateTime.toString().substring(0, 10) + " " + dateTime.toString().substring(11);
     }
 }
