@@ -27,20 +27,30 @@ public class TypicalStudents {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withAcademicYear("1")
-            .withTags("friends").build();
+            .withTags("friends")
+            .withMondayDismissal("1300")
+            .withThursdayDismissal("1700").build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withAcademicYear("2")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends")
+            .withTuesdayDismissal("1000")
+            .withWednesdayDismissal("1800").build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
             .withAcademicYear("3")
-            .withEmail("heinz@example.com").build();
+            .withEmail("heinz@example.com")
+            .withTuesdayDismissal("1400").build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
             .withAcademicYear("4")
-            .withEmail("cornelia@example.com").withTags("friends").build();
+            .withEmail("cornelia@example.com")
+            .withTags("friends")
+            .withMondayDismissal("1621")
+            .withWednesdayDismissal("1745").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
             .withAcademicYear("5")
-            .withEmail("werner@example.com").build();
+            .withEmail("werner@example.com")
+            .withWednesdayDismissal("1230")
+            .withFridayDismissal("1542").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withAcademicYear("1")
             .withEmail("lydia@example.com").build();
