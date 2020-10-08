@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIDAY_DISMISSAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONDAY_DISMISSAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -19,6 +20,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.AcademicYearMatchesPredicate;
 import seedu.address.model.student.EmailContainsKeywordPredicate;
+import seedu.address.model.student.IdMatchesPredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.PhoneMatchesPredicate;
 import seedu.address.model.student.PredicateList;
@@ -43,7 +45,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ACADEMIC_YEAR,
                         PREFIX_MONDAY_DISMISSAL, PREFIX_TUESDAY_DISMISSAL, PREFIX_WEDNESDAY_DISMISSAL,
-                        PREFIX_THURSDAY_DISMISSAL, PREFIX_FRIDAY_DISMISSAL);
+                        PREFIX_THURSDAY_DISMISSAL, PREFIX_FRIDAY_DISMISSAL, PREFIX_ID);
 
         PredicateList predicates = new PredicateList();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -89,6 +91,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_FRIDAY_DISMISSAL).isPresent()) {
             String timeString = argMultimap.getValue(PREFIX_FRIDAY_DISMISSAL).get();
             predicates.add(new FridayDismissalPredicate(getTimeFromString(timeString)));
+        }
+
+        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
+            String idValue = argMultimap.getValue(PREFIX_ID).get();
+            predicates.add(new IdMatchesPredicate(idValue));
         }
 
         if (predicates.isEmpty()) {

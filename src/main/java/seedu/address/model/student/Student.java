@@ -18,6 +18,31 @@ import seedu.address.model.tag.Tag;
  */
 public class Student {
 
+    static class Id {
+        private static final String ID_FORMAT = "%1$3s";
+        public static int lastUsedId = 0;
+
+        public String value;
+
+        public Id() {
+            lastUsedId++;
+            value = String.valueOf(lastUsedId);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other == this // short circuit if same object
+                    || (other instanceof Id // instanceof handles nulls
+                    && value.equals(((Id) other).value)); // state check
+        }
+
+        @Override
+        public String toString() {
+            return String.format(ID_FORMAT, value)
+                    .replace(' ', '0');
+        }
+    }
+
     // Identity fields
     private final Id id;
     private final Name name;
@@ -46,6 +71,7 @@ public class Student {
                    Day fridayDismissal) {
         requireAllNonNull(name, phone, email, tags, academicYear, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
                 thursdayDismissal, fridayDismissal);
+        this.id = new Id();
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -96,6 +122,10 @@ public class Student {
      */
     public void removeAllTraining() {
         trainingSchedules.clear();
+    }
+
+    public Id getId() {
+        return id;
     }
 
     public Name getName() {
@@ -172,6 +202,7 @@ public class Student {
 
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
+                && otherStudent.getId().equals(getId())
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getMondayDismissal().equals(getMondayDismissal())
@@ -194,6 +225,8 @@ public class Student {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" Id: ")
+                .append(getId())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")

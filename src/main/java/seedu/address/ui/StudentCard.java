@@ -33,6 +33,8 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label studentId;
+    @FXML
     private Label phone;
     @FXML
     private Label email;
@@ -60,10 +62,11 @@ public class StudentCard extends UiPart<Region> {
         super(FXML);
         this.student = student;
         id.setText(displayedIndex + ". ");
+        studentId.setText("ID: " + student.getId());
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);
         email.setText(student.getEmail().value);
-        academicYear.setText(student.getAcademicYear().value);
+        academicYear.setText("Academic Year: " + student.getAcademicYear().value);
         dismissalTime.setText("Dismissal Times");
         mondayDismissal.setText("Monday: " + student.getMondayDismissal().toString());
         tuesdayDismissal.setText("Tuesday: " + student.getTuesdayDismissal().toString());
