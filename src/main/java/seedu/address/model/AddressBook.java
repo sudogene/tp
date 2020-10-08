@@ -2,10 +2,13 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.Training;
 import seedu.address.model.student.UniqueStudentList;
 
 /**
@@ -15,6 +18,7 @@ import seedu.address.model.student.UniqueStudentList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
+    private final Set<Training> trainings = new HashSet<Training>();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -93,6 +97,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removeStudent(Student key) {
         students.remove(key);
     }
+
+    public void addTraining(Training training) {
+        trainings.add(training);
+    }
+
+    public void removeTraining(Training training) { trainings.remove(training); }
 
     //// util methods
 

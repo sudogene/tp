@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.Training;
 
 /**
  * The API of the Model component.
@@ -76,6 +77,18 @@ public interface Model {
      * existing student in the address book.
      */
     void setStudent(Student target, Student editedStudent);
+
+    /**
+     * Adds the given Training Session.
+     * @param training
+     */
+    void addTraining(Training training);
+
+    /**
+     * Returns true if the Training Session already exists in the address book.
+     * @param training
+     */
+    boolean hasTraining(Training training);
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();

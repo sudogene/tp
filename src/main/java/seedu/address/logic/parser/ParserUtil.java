@@ -2,6 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.awt.dnd.DropTargetEvent;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +18,7 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Id;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.Training;
 import seedu.address.model.student.time.Day;
 import seedu.address.model.student.time.Friday;
 import seedu.address.model.student.time.Monday;
@@ -143,6 +148,25 @@ public class ParserUtil {
             throw new ParseException(Id.MESSAGE_CONSTRAINTS);
         }
         return new Id(trimmedId);
+    }
+
+    /**
+     * Parses a {@code String id} into an {@code Id}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code id} is invalid.
+     */
+    public static Training parseTraining(String training) throws ParseException {
+        requireNonNull(training);
+        String trimmedTraining = training.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dddd-MM-yy HHmm");
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(training, formatter);
+            return new Training(dateTime);
+        } catch (DateTimeException e) {
+            System.out.println(e);
+            throw new ParseException(Training.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**
