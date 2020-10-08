@@ -158,13 +158,12 @@ public class ParserUtil {
     public static Training parseTraining(String training) throws ParseException {
         requireNonNull(training);
         String trimmedTraining = training.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dddd-MM-yy HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         try {
-            LocalDateTime dateTime = LocalDateTime.parse(training, formatter);
+            LocalDateTime dateTime = LocalDateTime.parse(trimmedTraining, formatter);
             return new Training(dateTime);
         } catch (DateTimeException e) {
-            System.out.println(e);
-            throw new ParseException(Training.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Training.MESSAGE_CONSTRAINTS + "DateTime has to be valid as well.");
         }
     }
 

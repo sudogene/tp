@@ -55,4 +55,9 @@ public class Training {
     public void clearStudents() {
         this.students.clear();
     }
+
+    @Override
+    public String toString() {
+        return dateTime.toString().substring(0,10) + " " + dateTime.toString().substring(11);
+    }
 }

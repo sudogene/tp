@@ -9,6 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Training;
 
 public class TrainingCommand extends Command {
+
     public static final String COMMAND_WORD = "training";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a Training Session"
