@@ -150,10 +150,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String id} into an {@code Id}.
+     * Parses a {@code String training} into a {@code Training}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code id} is invalid.
+     * @throws ParseException if the given {@code training} is invalid.
      */
     public static Training parseTraining(String training) throws ParseException {
         requireNonNull(training);

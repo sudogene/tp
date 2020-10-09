@@ -18,7 +18,7 @@ public class TrainingCommand extends Command {
             + COMMAND_WORD
             + "12-12-2000 1800";
 
-    public static final String MESSAGE_SUCCESS = "New Training Session created at: %1$s";
+    public static final String MESSAGE_SUCCESS_TRAINING = "New Training Session created at: %1$s";
     public static final String MESSAGE_DUPLICATE_TRAINING = "There "
             + "already exists a Training Session at this Date and Time";
 
@@ -45,7 +45,7 @@ public class TrainingCommand extends Command {
         }
 
         model.addTraining(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS_TRAINING, toAdd));
     }
 
     @Override

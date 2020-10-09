@@ -18,7 +18,7 @@ import seedu.address.model.student.UniqueStudentList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
-    private final Set<Training> trainings = new HashSet<Training>();
+    private final Set<Training> trainings = new HashSet<>();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -41,6 +41,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
     }
 
+    @Override
     public Set<Training> getTrainings() {
         return this.trainings;
     }
@@ -102,10 +103,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.remove(key);
     }
 
+    /**
+     * Adds a Training Session to the Address Book.
+     * @param training
+     */
     public void addTraining(Training training) {
+        System.out.println(trainings.size());
         trainings.add(training);
     }
 
+    /**
+     * Removes the specified Training from the Address Book.
+     * @param training
+     */
     public void removeTraining(Training training) {
         trainings.remove(training);
     }

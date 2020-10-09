@@ -114,12 +114,17 @@ public class ModelManager implements Model {
 
     @Override
     public void addTraining(Training training) {
-        addressBook.getTrainings().add(training);
+        addressBook.addTraining(training);
     }
 
     @Override
     public boolean hasTraining(Training training) {
         return addressBook.getTrainings().contains(training);
+    }
+
+    @Override
+    public void deleteTraining(Training training) {
+        addressBook.removeTraining(training);
     }
 
     //=========== Filtered Student List Accessors =============================================================

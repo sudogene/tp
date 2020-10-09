@@ -17,6 +17,11 @@ public class Training {
         this.dateTime = dateTime;
     }
 
+    public Training(LocalDateTime dateTime, Set<Student> students) {
+        this.dateTime = dateTime;
+        this.students.addAll(students);
+    }
+
     public LocalDateTime getDateTime() {
         return this.dateTime;
     }
@@ -54,6 +59,30 @@ public class Training {
      */
     public void clearStudents() {
         this.students.clear();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Training)) {
+            return false;
+        }
+
+        Training otherTraining = (Training) other;
+        return otherTraining.getDateTime().equals(getDateTime())
+                && otherTraining.getStudents().equals(getStudents());
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + dateTime.hashCode();
+        result = prime * result + students.hashCode();
+        return result;
     }
 
     @Override
