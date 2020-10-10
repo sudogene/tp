@@ -25,44 +25,43 @@ import seedu.address.model.student.Student;
 public class TypicalStudents {
 
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
-            .withId("1")
+            .withId(VALID_ID)
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withAcademicYear("1")
             .withTags("friends").build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
-            .withId("2")
+            .withId(VALID_ID)
             .withEmail("johnd@example.com").withPhone("98765432")
             .withAcademicYear("2")
             .withTags("owesMoney", "friends").build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withId("3")
+            .withId(VALID_ID)
             .withAcademicYear("3")
             .withEmail("heinz@example.com").build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withId("4")
+            .withId(VALID_ID)
             .withAcademicYear("4")
             .withEmail("cornelia@example.com").withTags("friends").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withId("5")
+            .withId(VALID_ID)
             .withAcademicYear("5")
             .withEmail("werner@example.com").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withId("6")
+            .withId(VALID_ID)
             .withAcademicYear("1")
             .withEmail("lydia@example.com").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
-            .withId("7")
             .withAcademicYear("2")
             .withEmail("anna@example.com").build();
 
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withId("8")
+            .withId(VALID_ID)
             .withAcademicYear("1")
             .withEmail("stefan@example.com").build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withId("9")
+            .withId(VALID_ID)
             .withAcademicYear("2")
             .withEmail("hans@example.com").build();
 

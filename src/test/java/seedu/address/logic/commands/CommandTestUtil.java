@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIDAY_DISMISSAL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONDAY_DISMISSAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -77,9 +76,7 @@ public class CommandTestUtil {
     public static final String WEDNESDAY_DESC_BOB = " " + PREFIX_WEDNESDAY_DISMISSAL + VALID_WEDNESDAY_BOB;
     public static final String THURSDAY_DESC_BOB = " " + PREFIX_THURSDAY_DISMISSAL + VALID_THURSDAY_BOB;
     public static final String FRIDAY_DESC_BOB = " " + PREFIX_FRIDAY_DISMISSAL + VALID_FRIDAY_BOB;
-    public static final String ID_DESC = " " + PREFIX_ID + VALID_ID;
 
-    public static final String INVALID_ID_DESC = " " + PREFIX_ID + "234r"; // 'r' not allowed in id
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol

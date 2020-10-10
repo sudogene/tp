@@ -33,6 +33,7 @@ public class StudentBuilder {
     public static final String DEFAULT_ACADEMICYEAR = "1";
     public static final String DEFAULT_ID = "1";
 
+
     private Id id;
     private Name name;
     private Phone phone;
@@ -50,7 +51,6 @@ public class StudentBuilder {
      * Creates a {@code StudentBuilder} with the default details.
      */
     public StudentBuilder() {
-        id = new Id(DEFAULT_ID);
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -61,6 +61,7 @@ public class StudentBuilder {
         wednesdayDismissal = new Wednesday(DEFAULT_WEDNESDAY);
         thursdayDismissal = new Thursday(DEFAULT_THURSDAY);
         fridayDismissal = new Friday(DEFAULT_FRIDAY);
+        id = new Id(DEFAULT_ID);
     }
 
     /**
