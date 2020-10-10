@@ -13,10 +13,20 @@ public class Training {
     private final LocalDateTime dateTime;
     private final Set<Student> students = new HashSet<Student>();
 
+    /**
+     * Constructor with only LocalDateTime.
+     * @param dateTime
+     */
     public Training(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 
+    /**
+     * Constructor with both LocalDateTime and a Set of Students.
+     * Initialises Training with the specified set of students.
+     * @param dateTime
+     * @param students
+     */
     public Training(LocalDateTime dateTime, Set<Student> students) {
         this.dateTime = dateTime;
         this.students.addAll(students);
