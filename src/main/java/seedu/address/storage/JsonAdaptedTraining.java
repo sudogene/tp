@@ -1,0 +1,71 @@
+package seedu.address.storage;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.Training;
+
+
+/**
+ * Jackson-friendly version of {@link Training}.
+ */
+class JsonAdaptedTraining {
+
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Training's %s field is missing!";
+
+    private final LocalDateTime dateTime;
+    private final List<JsonAdaptedStudent> students = new ArrayList<>();
+
+    /**
+     * Constructs a {@code JsonAdaptedTraining} with the given training details.
+     */
+    @JsonCreator
+    public JsonAdaptedTraining(@JsonProperty("dateTime") String dateTime,
+                              @JsonProperty("students") List<JsonAdaptedStudent> students) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
+        this.dateTime = LocalDateTime.parse(dateTime, formatter);
+        if (students != null) {
+            this.students.addAll(students);
+        }
+    }
+
+    /**
+     * Converts a given {@code Training} into this class for Jackson use.
+     */
+    public JsonAdaptedTraining(Training source) {
+        dateTime = source.getDateTime();
+
+        students.addAll(source.getStudents().stream()
+                .map(JsonAdaptedStudent::new)
+                .collect(Collectors.toList()));
+    }
+
+    /**
+     * Converts this Jackson-friendly adapted training object into the model's {@code Training} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted training.
+     */
+    public Training toModelType() throws IllegalValueException {
+        final List<Student> studentList = new ArrayList<>();
+        for (JsonAdaptedStudent student : students) {
+            studentList.add(student.toModelType());
+        }
+
+        if (dateTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName()));
+        }
+        final LocalDateTime modelDateTime = dateTime;
+
+        return new Training(modelDateTime);
+    }
+
+}

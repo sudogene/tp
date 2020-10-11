@@ -34,8 +34,6 @@ public class TrainingCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label dateTime;
-    @FXML
     private FlowPane students;
 
     /**
