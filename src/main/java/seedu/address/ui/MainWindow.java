@@ -118,7 +118,7 @@ public class MainWindow extends UiPart<Stage> {
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
         //This is a placeholder.
-        trainingListPanel = new TrainingListPanel(null);
+        trainingListPanel = new TrainingListPanel(logic.getFilteredTrainingList());
         trainingListPanelPlaceholder.getChildren().add(trainingListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

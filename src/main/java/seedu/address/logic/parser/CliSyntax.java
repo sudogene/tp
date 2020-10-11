@@ -17,5 +17,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_ACADEMIC_YEAR = new Prefix("ay/");
     public static final Prefix PREFIX_ID = new Prefix("id/");
+    public static final Prefix PREFIX_TRAINING = new Prefix("training");
+    public static final Prefix PREFIX_DELETE_TRAINING = new Prefix("delete-training");
 
 }

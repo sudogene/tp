@@ -21,6 +21,10 @@ public class Id {
         this.value = value;
     }
 
+    public String getValue() {
+        return this.value;
+    }
+
     /**
      * Returns true if a given string is a valid id.
      */
