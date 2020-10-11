@@ -71,6 +71,10 @@ public class Training {
         this.students.clear();
     }
 
+    public boolean isSameTraining(Training training) {
+        return dateTime.equals(training.getDateTime());
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

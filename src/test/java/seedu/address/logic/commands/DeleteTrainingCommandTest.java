@@ -24,8 +24,8 @@ public class DeleteTrainingCommandTest {
 
     @Test
     public void execute_validDeletionSuccessTest() throws Exception {
-        model.getAddressBook().getTrainings().add(new Training(dateTime));
-        expectedModel.getAddressBook().getTrainings().add(new Training(dateTime));
+        model.addTraining(new Training(dateTime));
+        expectedModel.addTraining(new Training(dateTime));
         CommandResult expectedDeleteTrainingCommand = new DeleteTrainingCommand(dateTime)
                 .execute(expectedModel);
         assertCommandSuccess(new DeleteTrainingCommand(dateTime),

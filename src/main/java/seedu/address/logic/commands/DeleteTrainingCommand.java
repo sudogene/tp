@@ -41,7 +41,6 @@ public class DeleteTrainingCommand extends Command {
         if (model.hasTraining(toDelete)) {
             model.deleteTraining(toDelete);
         } else {
-            System.out.println(model.getAddressBook().getTrainings().size());
             throw new CommandException("The specified Training Session does not exist");
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toDelete));

@@ -93,6 +93,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
 
+    /** Returns an unmodifiable view of the filtered training list */
+    ObservableList<Training> getFilteredTrainingList();
+
     /**
      * Deletes the specified Training Session.
      * @param training

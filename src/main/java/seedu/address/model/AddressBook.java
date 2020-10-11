@@ -2,14 +2,13 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.Training;
 import seedu.address.model.student.UniqueStudentList;
+import seedu.address.model.student.UniqueTrainingList;
 
 /**
  * Wraps all data at the address-book level
@@ -18,7 +17,7 @@ import seedu.address.model.student.UniqueStudentList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
-    private final Set<Training> trainings = new HashSet<>();
+    private final UniqueTrainingList trainings;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -29,6 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         students = new UniqueStudentList();
+        trainings = new UniqueTrainingList();
     }
 
     public AddressBook() {}
@@ -39,11 +39,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
-    }
-
-    @Override
-    public Set<Training> getTrainings() {
-        return this.trainings;
     }
 
     //// list overwrite operations
@@ -57,15 +52,36 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the training list with {@code trainings}.
+     * {@code trainings} must not contain duplicate trainings.
+     */
+    public void setTrainings(List<Training> trainings) {
+        this.trainings.setTrainings(trainings);
+    }
+
+    /**
+     * Replaces the given training {@code target} in the list with {@code editedTraining}.
+     * {@code target} must exist in the address book.
+     * The training identity of {@code editedTraining} must not be the same as another existing
+     * training in the address book.
+     */
+    public void setTrainings(Training target, Training editedTraining) {
+        requireNonNull(editedTraining);
+
+        trainings.setTraining(target, editedTraining);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
+        setTrainings(newData.getTrainingList());
     }
 
-    //// student-level operations
+    //// student-level operations and training-level operations
 
     /**
      * Returns true if a student with the same identity as {@code student} exists in the address book.
@@ -76,11 +92,27 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a training with the same identity as {@code training} exists in the address book.
+     */
+    public boolean hasTraining(Training training) {
+        requireNonNull(training);
+        return trainings.contains(training);
+    }
+
+    /**
      * Adds a student to the address book.
      * The student must not already exist in the address book.
      */
     public void addStudent(Student p) {
         students.add(p);
+    }
+
+    /**
+     * Adds a training to the address book.
+     * The training must not already exist in the address book.
+     */
+    public void addTraining(Training p) {
+        trainings.add(p);
     }
 
     /**
@@ -104,15 +136,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a Training Session to the Address Book.
-     * @param training
-     */
-    public void addTraining(Training training) {
-        System.out.println(trainings.size());
-        trainings.add(training);
-    }
-
-    /**
      * Removes the specified Training from the Address Book.
      * @param training
      */
@@ -132,6 +155,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
     }
+
+    @Override
+    public ObservableList<Training> getTrainingList() {
+        return trainings.asUnmodifiableObservableList();
+    }
+
 
     @Override
     public boolean equals(Object other) {

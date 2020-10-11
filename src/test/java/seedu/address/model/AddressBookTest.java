@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -89,6 +88,7 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Student> students = FXCollections.observableArrayList();
+        private final ObservableList<Training> trainings = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Student> students) {
             this.students.setAll(students);
@@ -100,9 +100,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public Set<Training> getTrainings() {
-            return this.getTrainings();
-        }
+        public ObservableList<Training> getTrainingList() { return trainings; }
     }
 
 }

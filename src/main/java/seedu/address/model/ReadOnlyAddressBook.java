@@ -1,7 +1,5 @@
 package seedu.address.model;
 
-import java.util.Set;
-
 import javafx.collections.ObservableList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.Training;
@@ -17,6 +15,5 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Student> getStudentList();
 
-    Set<Training> getTrainings();
-
+    ObservableList<Training> getTrainingList();
 }
