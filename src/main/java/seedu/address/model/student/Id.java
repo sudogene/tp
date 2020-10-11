@@ -33,6 +33,10 @@ public class Id {
         this.value = value;
     }
 
+    public String getValue() {
+        return this.value;
+    }
+
     /**
      * Generates a new Id with auto-assigned value.
      */

@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.Training;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddCommandTest {
@@ -114,6 +115,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addTraining(Training training) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasTraining(Training training) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTraining(Training training) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -130,6 +146,11 @@ public class AddCommandTest {
 
         @Override
         public void deleteStudent(Student target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Training> getFilteredTrainingList() {
             throw new AssertionError("This method should not be called.");
         }
 

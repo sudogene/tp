@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.Training;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
+    private final FilteredList<Training> filteredTrainings;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
+        filteredTrainings = new FilteredList<>(this.addressBook.getTrainingList());
     }
 
     public ModelManager() {
@@ -111,6 +114,21 @@ public class ModelManager implements Model {
         addressBook.setStudent(target, editedStudent);
     }
 
+    @Override
+    public void addTraining(Training training) {
+        addressBook.addTraining(training);
+    }
+
+    @Override
+    public boolean hasTraining(Training training) {
+        return addressBook.hasTraining(training);
+    }
+
+    @Override
+    public void deleteTraining(Training training) {
+        addressBook.removeTraining(training);
+    }
+
     //=========== Filtered Student List Accessors =============================================================
 
     /**
@@ -120,6 +138,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Student> getFilteredStudentList() {
         return filteredStudents;
+    }
+
+    @Override
+    public ObservableList<Training> getFilteredTrainingList() {
+        return filteredTrainings;
     }
 
     @Override
