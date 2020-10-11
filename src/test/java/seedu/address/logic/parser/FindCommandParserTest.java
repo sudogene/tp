@@ -8,6 +8,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.student.AcademicYearMatchesPredicate;
 import seedu.address.model.student.EmailContainsKeywordPredicate;
 import seedu.address.model.student.IdMatchesPredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
@@ -41,11 +42,10 @@ public class FindCommandParserTest {
         FindCommand thirdExpectedFindCommand =
                 new FindCommand(PredicateList.of(
                         new EmailContainsKeywordPredicate("meow"),
-                        new IdMatchesPredicate("42")
+                        new AcademicYearMatchesPredicate("2"),
+                        new IdMatchesPredicate("1")
                 ));
-        assertParseSuccess(parser, " e/meow id/42", thirdExpectedFindCommand);
-
-        // TODO: Test for AcademicYearMatchesPredicate currently fails tests for unknown reason. But works in app.
+        assertParseSuccess(parser, " e/meow ay/2 id/1", thirdExpectedFindCommand);
     }
 
     @Test
