@@ -181,7 +181,6 @@ public class Student {
 
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
-                && otherStudent.getId().equals(getId())
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getMondayDismissal().equals(getMondayDismissal())
@@ -225,6 +224,24 @@ public class Student {
                 .append(getAcademicYear())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Returns only the essential information of Students (Name, Id, Phone, Email, Academic Year).
+     * @return Name, Phone, Email, Academic Year
+     */
+    public String studentEssentialPrinter() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("\n" + getName())
+                .append("\nId: ")
+                .append(getId())
+                .append("\nPhone: ")
+                .append(getPhone())
+                .append("\nEmail: ")
+                .append(getEmail())
+                .append("\nAcademic  Year: ")
+                .append(getAcademicYear());
         return builder.toString();
     }
 }

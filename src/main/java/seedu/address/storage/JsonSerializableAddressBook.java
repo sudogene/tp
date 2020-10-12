@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.Training;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -20,15 +21,19 @@ import seedu.address.model.student.Student;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
+    public static final String MESSAGE_DUPLICATE_TRAINING = "Training list contains duplicate Training Session(s).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
+    private final List<JsonAdaptedTraining> trainings = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given students.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("students") List<JsonAdaptedStudent> students) {
+    public JsonSerializableAddressBook(@JsonProperty("students") List<JsonAdaptedStudent> students,
+                                       @JsonProperty("trainings") List<JsonAdaptedTraining> trainings) {
         this.students.addAll(students);
+        this.trainings.addAll(trainings);
     }
 
     /**
@@ -38,6 +43,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
+        trainings.addAll(source.getTrainingList().stream().map(JsonAdaptedTraining::new).collect(Collectors.toList()));
     }
 
     /**
@@ -54,6 +60,14 @@ class JsonSerializableAddressBook {
             }
             addressBook.addStudent(student);
         }
+        for (JsonAdaptedTraining jsonAdaptedTraining : trainings) {
+            Training training = jsonAdaptedTraining.toModelType();
+            if (addressBook.hasTraining(training)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TRAINING);
+            }
+            addressBook.addTraining(training);
+        }
+
         return addressBook;
     }
 

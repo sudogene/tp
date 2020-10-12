@@ -100,7 +100,9 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<Training> getTrainingList() { return trainings; }
+        public ObservableList<Training> getTrainingList() {
+            return trainings;
+        }
     }
 
 }

@@ -84,5 +84,7 @@
     "thursdayDismissal" : "1500",
     "fridayDismissal" : "1500",
     "id": "7"
-  } ]
+  } ],
+
+  "trainings": []
 }
