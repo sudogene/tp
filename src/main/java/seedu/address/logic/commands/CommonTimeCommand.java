@@ -10,7 +10,7 @@ import seedu.address.model.student.CommonTimeFinder;
 import seedu.address.model.student.PredicateList;
 
 /**
- * Finds the latest dismissal time of all the students stated in he keywords.
+ * Finds the latest dismissal time of all the students stated in the keywords.
  * Keyword matching is case insensitive.
  */
 public class CommonTimeCommand extends Command {

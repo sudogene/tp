@@ -53,10 +53,12 @@ public class TypicalStudents {
             .withFridayDismissal("1542").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withAcademicYear("1")
-            .withEmail("lydia@example.com").build();
+            .withEmail("lydia@example.com")
+            .withTuesdayDismissal("1623").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
             .withAcademicYear("2")
-            .withEmail("anna@example.com").build();
+            .withEmail("anna@example.com")
+            .withFridayDismissal("1712").build();
 
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withPhone("8482424")
