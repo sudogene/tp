@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.LocalDateTimeUtil.VALID_LOCAL_DATE_TIME_2;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BOB;
 
@@ -20,6 +21,12 @@ public class StudentTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Student student = new StudentBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> student.getTags().remove(0));
+    }
+
+    @Test
+    public void asObservableList_modifyTrainingList_throwsUnsupportedOperationException() {
+        Student student = new StudentBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> student.getTrainingSchedule().remove(0));
     }
 
     @Test
@@ -81,6 +88,10 @@ public class StudentTest {
 
         // different email -> returns false
         editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different trainingSchedule -> returns false
+        editedAlice = new StudentBuilder(ALICE).withTrainingSchedules(VALID_LOCAL_DATE_TIME_2).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
