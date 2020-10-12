@@ -1,9 +1,11 @@
 package seedu.address.ui;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -43,17 +45,13 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label dismissalTime;
     @FXML
-    private Label mondayDismissal;
-    @FXML
-    private Label tuesdayDismissal;
-    @FXML
-    private Label wednesdayDismissal;
-    @FXML
-    private Label thursdayDismissal;
-    @FXML
-    private Label fridayDismissal;
+    private FlowPane dismissalTimes;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label trainingTag;
+    @FXML
+    private FlowPane trainingSchedules;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -67,16 +65,32 @@ public class StudentCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         email.setText(student.getEmail().value);
         academicYear.setText("Academic Year: " + student.getAcademicYear().value);
-        dismissalTime.setText("Dismissal Times");
+        dismissalTime.setText("Dismissal Times: ");
+        Label mondayDismissal = new Label();
+        Label tuesdayDismissal = new Label();
+        Label wednesdayDismissal = new Label();
+        Label thursdayDismissal = new Label();
+        Label fridayDismissal = new Label();
         mondayDismissal.setText("Monday: " + student.getMondayDismissal().toString());
         tuesdayDismissal.setText("Tuesday: " + student.getTuesdayDismissal().toString());
         wednesdayDismissal.setText("Wednesday: " + student.getWednesdayDismissal().toString());
         thursdayDismissal.setText("Thursday: " + student.getThursdayDismissal().toString());
         fridayDismissal.setText("Friday: " + student.getFridayDismissal().toString());
-
+        dismissalTimes.getChildren().add(mondayDismissal);
+        dismissalTimes.getChildren().add(tuesdayDismissal);
+        dismissalTimes.getChildren().add(wednesdayDismissal);
+        dismissalTimes.getChildren().add(thursdayDismissal);
+        dismissalTimes.getChildren().add(fridayDismissal);
+        Separator trainingSeparator = new Separator();
+        Separator dismissalTimesSeparator = new Separator();
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        trainingTag.setText("Trainings Scheduled: ");
+        student.getTrainingSchedule().stream()
+                .forEach(trainingSchedule -> trainingSchedules.getChildren()
+                        .add(new Label(trainingSchedule.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")))));
+
     }
 
     @Override

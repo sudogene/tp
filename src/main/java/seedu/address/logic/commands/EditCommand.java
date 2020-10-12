@@ -13,11 +13,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUESDAY_DISMISSAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDNESDAY_DISMISSAL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -122,10 +124,14 @@ public class EditCommand extends Command {
                 editStudentDescriptor.getThursdayDismissal().orElse(studentToEdit.getThursdayDismissal());
         Day fridayDismissal = editStudentDescriptor.getFridayDismissal().orElse(studentToEdit.getFridayDismissal());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+        List<LocalDateTime> trainingSchedules = studentToEdit.getTrainingSchedule().stream()
+                .collect(Collectors.toList());
         Id id = studentToEdit.getId();
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAcademicYear, updatedTags,
+        Student newStudent = new Student(updatedName, updatedPhone, updatedEmail, updatedAcademicYear, updatedTags,
             mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal, id);
+        newStudent.addAllTraining(trainingSchedules);
+        return newStudent;
     }
 
     @Override
