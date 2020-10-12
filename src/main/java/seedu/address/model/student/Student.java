@@ -228,7 +228,7 @@ public class Student {
     }
 
     /**
-     * Returns only the essentail information of Students (Name, Phone, Email, Academic Year).
+     * Returns only the essential information of Students (Name, Id, Phone, Email, Academic Year).
      * @return Name, Phone, Email, Academic Year
      */
     public String studentEssentialPrinter() {
