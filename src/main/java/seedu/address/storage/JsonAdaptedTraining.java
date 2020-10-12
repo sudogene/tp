@@ -38,7 +38,6 @@ class JsonAdaptedTraining {
         if (students != null) {
             this.students.addAll(students);
         }
-        System.out.println("students" + students.size());
     }
 
     /**

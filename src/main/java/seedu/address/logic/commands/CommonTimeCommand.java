@@ -40,6 +40,13 @@ public class CommonTimeCommand extends Command {
         return new CommandResult(commonDismissalTimesToString(commonDismissalTimes));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof CommonTimeCommand // instanceof handles nulls
+                && predicates.equals(((CommonTimeCommand) other).predicates)); // state check
+    }
+
     /**
      * Converts a list of LocalTime objects into string.
      * Returns a string version of the list.
