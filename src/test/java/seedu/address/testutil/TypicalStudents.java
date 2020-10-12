@@ -4,7 +4,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ACADEMICYEAR_AM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ACADEMICYEAR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -52,28 +51,27 @@ public class TypicalStudents {
             .withAcademicYear("1")
             .withEmail("lydia@example.com").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
-            .withId("7")
             .withAcademicYear("2")
             .withEmail("anna@example.com").build();
 
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withId("8")
+            .withId("7")
             .withAcademicYear("1")
             .withEmail("stefan@example.com").build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withId("9")
+            .withId("8")
             .withAcademicYear("2")
             .withEmail("hans@example.com").build();
 
     // Manually added - Student's details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withId(VALID_ID)
+            .withId("9")
             .withEmail(VALID_EMAIL_AMY)
             .withAcademicYear(VALID_ACADEMICYEAR_AMY)
             .withTags(VALID_TAG_FRIEND).build();
     public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withId(VALID_ID)
+            .withId("10")
             .withEmail(VALID_EMAIL_BOB)
             .withAcademicYear(VALID_ACADEMICYEAR_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
