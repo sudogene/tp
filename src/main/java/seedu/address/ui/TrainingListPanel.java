@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.student.Training;
 
 /**
- * Panel containing the list of students.
+ * Panel containing the list of trainings.
  */
 public class TrainingListPanel extends UiPart<Region> {
     private static final String FXML = "TrainingListPanel.fxml";
@@ -21,7 +21,7 @@ public class TrainingListPanel extends UiPart<Region> {
     private ListView<Training> trainingListView;
 
     /**
-     * Creates a {@code StudentListPanel} with the given {@code ObservableList}.
+     * Creates a {@code TrainingListPanel} with the given {@code ObservableList}.
      */
     public TrainingListPanel(ObservableList<Training> trainingList) {
         super(FXML);
@@ -30,7 +30,7 @@ public class TrainingListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Student} using a {@code StudentCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Training} using a {@code TrainingCard}.
      */
     class TrainingListViewCell extends ListCell<Training> {
         @Override

@@ -227,4 +227,22 @@ public class Student {
         getTags().forEach(builder::append);
         return builder.toString();
     }
+
+    /**
+     * Returns only the essentail information of Students (Name, Phone, Email, Academic Year).
+     * @return Name, Phone, Email, Academic Year
+     */
+    public String studentEssentialPrinter() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("\n" + getName())
+                .append("\nId: ")
+                .append(getId())
+                .append("\nPhone: ")
+                .append(getPhone())
+                .append("\nEmail: ")
+                .append(getEmail())
+                .append("\nAcademic  Year: ")
+                .append(getAcademicYear());
+        return builder.toString();
+    }
 }

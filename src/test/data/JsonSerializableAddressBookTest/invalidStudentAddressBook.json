@@ -10,5 +10,7 @@
     "wednesdayDismissal" : "1500",
     "thursdayDismissal" : "1500",
     "fridayDismissal" : "1500"
-  } ]
+  } ],
+
+  "trainings" : []
 }

@@ -3,7 +3,9 @@ package seedu.address.storage;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -36,6 +38,7 @@ class JsonAdaptedTraining {
         if (students != null) {
             this.students.addAll(students);
         }
+        System.out.println("students" + students.size());
     }
 
     /**
@@ -61,11 +64,13 @@ class JsonAdaptedTraining {
         }
 
         if (dateTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName()));
+            throw new IllegalValueException(String
+                    .format(MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName()));
         }
         final LocalDateTime modelDateTime = dateTime;
+        Set<Student> studentSet = new HashSet<>(studentList);
 
-        return new Training(modelDateTime);
+        return new Training(modelDateTime, studentSet);
     }
 
 }
