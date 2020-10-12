@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 class CommonTimeFinderTest {
 
-
     @Test
     void getCommonDismissalTimes_emptyList_defaultDismissalTimes() {
         List<LocalTime> expectedList = Arrays.asList(
@@ -31,7 +30,7 @@ class CommonTimeFinderTest {
     @Test
     void getCommonDismissalTimes_multipleStudentsList_latestDismissalTimes() {
         List<LocalTime> expectedList = Arrays.asList(
-                LocalTime.of(15, 0),
+                LocalTime.of(16, 21),
                 LocalTime.of(15, 0),
                 LocalTime.of(18, 0),
                 LocalTime.of(15, 0),
