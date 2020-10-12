@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -32,9 +31,7 @@ class JsonAdaptedTraining {
     @JsonCreator
     public JsonAdaptedTraining(@JsonProperty("dateTime") String dateTime,
                               @JsonProperty("students") List<JsonAdaptedStudent> students) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-
-        this.dateTime = LocalDateTime.parse(dateTime, formatter);
+        this.dateTime = LocalDateTime.parse(dateTime);
         if (students != null) {
             this.students.addAll(students);
         }

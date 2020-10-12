@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.address.testutil.LocalDateTimeUtil.VALID_LOCAL_DATE_TIME;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
@@ -36,12 +37,13 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Student editedStudent = new StudentBuilder().build();
-        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
+        Student editedStudent = new StudentBuilder().withTrainingSchedules(VALID_LOCAL_DATE_TIME).build();
+        EditStudentDescriptor descriptor =
+                new EditStudentDescriptorBuilder(editedStudent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
-
+        System.out.println(expectedMessage);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
 
