@@ -45,7 +45,7 @@ class CommonTimeCommandTest {
 
     @Test
     public void execute_oneNameKeyword_oneStudentMatchedDismissalTimes() {
-        String expectedMessage = "Monday: 13:00\n"
+        String expectedMessage = "Monday: 15:00\n"
                 + "Tuesday: 15:00\n" + "Wednesday: 15:00\n" + "Thursday: 17:00\n" + "Friday: 15:00";
         NameContainsKeywordsPredicate namePredicate = preparePredicate("Alice");
         PredicateList predicateList = new PredicateList(Arrays.asList(namePredicate));
