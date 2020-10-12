@@ -350,3 +350,31 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#trainingSchedules {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#trainingSchedules .label {
+    -fx-text-fill: white;
+    -fx-background-color: #800000;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#dismissalTimes {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#dismissalTimes .label {
+    -fx-text-fill: white;
+    -fx-background-color: #808000;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}

@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.Separator?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -33,12 +34,12 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="academicYear" styleClass="cell_small_label" text="\$academicYear" />
+      <Separator fx:id="trainingSeparator" />
+      <Label fx:id="trainingTag" styleClass="cell_small_label" text="\$trainingTag" />
+      <FlowPane fx:id="trainingSchedules" />
+      <Separator fx:id="dismissalTimeSeparator" />
       <Label fx:id="dismissalTime" styleClass="cell_small_label" text="\$dismissalTime" />
-      <Label fx:id="mondayDismissal" styleClass="cell_small_label" text="\$mondayDismissal" />
-      <Label fx:id="tuesdayDismissal" styleClass="cell_small_label" text="\$tuesdayDismissal" />
-      <Label fx:id="wednesdayDismissal" styleClass="cell_small_label" text="\$wednesdayDismissal" />
-      <Label fx:id="thursdayDismissal" styleClass="cell_small_label" text="\$thursdayDismissal" />
-      <Label fx:id="fridayDismissal" styleClass="cell_small_label" text="\$fridayDismissal" />
+      <FlowPane fx:id="dismissalTimes" />
 
     </VBox>
       <rowConstraints>
