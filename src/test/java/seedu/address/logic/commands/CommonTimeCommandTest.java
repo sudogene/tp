@@ -8,6 +8,11 @@ import static seedu.address.testutil.TypicalStudents.DANIEL;
 import static seedu.address.testutil.TypicalStudents.FIONA;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
+import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -16,12 +21,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.student.AcademicYearMatchesPredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.PredicateList;
-
-import java.time.LocalTime;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code CommonTimeCommand}.
