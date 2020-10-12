@@ -9,7 +9,8 @@
     "tuesdayDismissal" : "1500",
     "wednesdayDismissal" : "1500",
     "thursdayDismissal" : "1500",
-    "fridayDismissal" : "1500"
+    "fridayDismissal" : "1500",
+    "id": "1"
   }, {
     "name": "Student With Invalid Phone Field",
     "phone": "948asdf2424",
@@ -20,6 +21,7 @@
     "tuesdayDismissal" : "1500",
     "wednesdayDismissal" : "1500",
     "thursdayDismissal" : "1500",
-    "fridayDismissal" : "1500"
+    "fridayDismissal" : "1500",
+    "id": "1"
   } ]
 }

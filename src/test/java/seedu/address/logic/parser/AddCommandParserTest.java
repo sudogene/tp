@@ -95,6 +95,11 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddCommand.MESSAGE_USAGE);
 
+        // missing id prefix
+        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB
+                        + EMAIL_DESC_BOB + ACADEMICYEAR_DESC_BOB,
+                expectedMessage);
+
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB
                         + EMAIL_DESC_BOB + ACADEMICYEAR_DESC_BOB,
@@ -123,6 +128,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ACADEMICYEAR_DESC_BOB, Name.MESSAGE_CONSTRAINTS);

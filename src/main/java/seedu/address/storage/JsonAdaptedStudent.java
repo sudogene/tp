@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.AcademicYear;
 import seedu.address.model.student.Email;
+import seedu.address.model.student.Id;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
@@ -30,6 +31,7 @@ class JsonAdaptedStudent {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
 
+    private final String id;
     private final String name;
     private final String phone;
     private final String email;
@@ -53,7 +55,8 @@ class JsonAdaptedStudent {
                               @JsonProperty("tuesday") String tuesdayDismissal,
                               @JsonProperty("wednesday") String wednesdayDismissal,
                               @JsonProperty("thursday") String thursdayDismissal,
-                              @JsonProperty("friday") String fridayDismissal) {
+                              @JsonProperty("friday") String fridayDismissal,
+                              @JsonProperty("id") String id) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -66,12 +69,14 @@ class JsonAdaptedStudent {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.id = id;
     }
 
     /**
      * Converts a given {@code Student} into this class for Jackson use.
      */
     public JsonAdaptedStudent(Student source) {
+        id = source.getId().value;
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -174,8 +179,10 @@ class JsonAdaptedStudent {
         final Day friday = new Friday(fridayDismissal);
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
+
+        final Id studentId = new Id(id);
         return new Student(modelName, modelPhone, modelEmail, modelAcademicYear,
-            modelTags, monday, tuesday, wednesday, thursday, friday);
+            modelTags, monday, tuesday, wednesday, thursday, friday, studentId);
 
     }
 

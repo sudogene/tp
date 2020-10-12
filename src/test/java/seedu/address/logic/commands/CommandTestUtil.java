@@ -51,6 +51,7 @@ public class CommandTestUtil {
     public static final String VALID_WEDNESDAY_BOB = "1500";
     public static final String VALID_THURSDAY_BOB = "1500";
     public static final String VALID_FRIDAY_BOB = "1500";
+    public static final String VALID_ID = "1";
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -98,7 +99,8 @@ public class CommandTestUtil {
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAcademicYear(VALID_ACADEMICYEAR_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+                .withId(VALID_ID).build();
     }
 
     /**

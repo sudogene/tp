@@ -11,11 +11,13 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommonTimeCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTrainingCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.TrainingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -68,6 +70,12 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case TrainingCommand.COMMAND_WORD:
+            return new TrainingCommandParser().parse(arguments);
+
+        case DeleteTrainingCommand.COMMAND_WORD:
+            return new DeleteTrainingCommandParser().parse(arguments);
 
         case CommonTimeCommand.COMMAND_WORD:
             return new CommonTimeCommandParser().parse(arguments);

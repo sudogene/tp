@@ -8,6 +8,9 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.student.AcademicYearMatchesPredicate;
+import seedu.address.model.student.EmailContainsKeywordPredicate;
+import seedu.address.model.student.IdMatchesPredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.PhoneMatchesPredicate;
 import seedu.address.model.student.PredicateList;
@@ -34,6 +37,15 @@ public class FindCommandParserTest {
                         new PhoneMatchesPredicate("85355255")
                 ));
         assertParseSuccess(parser, "  \n  \t n/Alice Bob \t \n \n p/85355255", secondExpectedFindCommand);
+
+        // mixture of find parameters
+        FindCommand thirdExpectedFindCommand =
+                new FindCommand(PredicateList.of(
+                        new EmailContainsKeywordPredicate("meow"),
+                        new AcademicYearMatchesPredicate("2"),
+                        new IdMatchesPredicate("1")
+                ));
+        assertParseSuccess(parser, " e/meow ay/2 id/1", thirdExpectedFindCommand);
     }
 
     @Test

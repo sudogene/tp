@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.student.AcademicYear;
 import seedu.address.model.student.Email;
+import seedu.address.model.student.Id;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
@@ -30,7 +31,10 @@ public class StudentBuilder {
     public static final String DEFAULT_THURSDAY = "1500";
     public static final String DEFAULT_FRIDAY = "1500";
     public static final String DEFAULT_ACADEMICYEAR = "1";
+    public static final String DEFAULT_ID = "1";
 
+
+    private Id id;
     private Name name;
     private Phone phone;
     private Email email;
@@ -57,6 +61,7 @@ public class StudentBuilder {
         wednesdayDismissal = new Wednesday(DEFAULT_WEDNESDAY);
         thursdayDismissal = new Thursday(DEFAULT_THURSDAY);
         fridayDismissal = new Friday(DEFAULT_FRIDAY);
+        id = new Id(DEFAULT_ID);
     }
 
     /**
@@ -73,6 +78,7 @@ public class StudentBuilder {
         wednesdayDismissal = (Wednesday) studentToCopy.getWednesdayDismissal();
         thursdayDismissal = (Thursday) studentToCopy.getThursdayDismissal();
         fridayDismissal = (Friday) studentToCopy.getFridayDismissal();
+        id = studentToCopy.getId();
     }
 
     /**
@@ -157,11 +163,20 @@ public class StudentBuilder {
     }
 
     /**
+     * Sets the {@code Id} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withId(String id) {
+        this.id = new Id(id);
+        return this;
+    }
+
+    /**
      * Builds a student
      * @return Student
      */
     public Student build() {
         return new Student(name, phone, email, academicYear, tags,
-            mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal);
+            mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal, id);
     }
+
 }

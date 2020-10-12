@@ -24,6 +24,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.AcademicYear;
 import seedu.address.model.student.Email;
+import seedu.address.model.student.Id;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
@@ -42,9 +43,9 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ACADEMIC_YEAR,
-                    PREFIX_MONDAY_DISMISSAL, PREFIX_TUESDAY_DISMISSAL,
-                    PREFIX_WEDNESDAY_DISMISSAL, PREFIX_THURSDAY_DISMISSAL, PREFIX_FRIDAY_DISMISSAL, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                        PREFIX_ACADEMIC_YEAR, PREFIX_MONDAY_DISMISSAL, PREFIX_TUESDAY_DISMISSAL,
+                        PREFIX_WEDNESDAY_DISMISSAL, PREFIX_THURSDAY_DISMISSAL, PREFIX_FRIDAY_DISMISSAL, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ACADEMIC_YEAR)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -74,7 +75,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Student student = new Student(name, phone, email, academicYear, tagList, mondayDismissal, tuesdayDismissal,
-                wednesdayDismissal, thursdayDismissal, fridayDismissal);
+                wednesdayDismissal, thursdayDismissal, fridayDismissal, Id.newId());
 
         return new AddCommand(student);
     }

@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.student.AcademicYear;
 import seedu.address.model.student.Email;
+import seedu.address.model.student.Id;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
@@ -127,6 +128,14 @@ public class EditStudentDescriptorBuilder {
      */
     public EditStudentDescriptorBuilder withFriday(String friday) {
         descriptor.setFridayDismissal(new Friday(friday));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Id} of the {@code EditStudentDescriptor} that we are building.
+     */
+    public EditStudentDescriptorBuilder withId(String validId) {
+        descriptor.setId(new Id(validId));
         return this;
     }
 
