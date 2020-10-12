@@ -6,10 +6,10 @@
     "email" : "alice@example.com",
     "academicYear": "1",
     "tagged" : [ "friends" ],
-    "mondayDismissal" : "1500",
+    "mondayDismissal" : "1300",
     "tuesdayDismissal" : "1500",
     "wednesdayDismissal" : "1500",
-    "thursdayDismissal" : "1500",
+    "thursdayDismissal" : "1700",
     "fridayDismissal" : "1500",
     "id": "1"
   }, {
@@ -19,8 +19,8 @@
     "academicYear": "2",
     "tagged" : [ "owesMoney", "friends" ],
     "mondayDismissal" : "1500",
-    "tuesdayDismissal" : "1500",
-    "wednesdayDismissal" : "1500",
+    "tuesdayDismissal" : "1000",
+    "wednesdayDismissal" : "1800",
     "thursdayDismissal" : "1500",
     "fridayDismissal" : "1500",
     "id": "2"
@@ -31,7 +31,7 @@
     "academicYear": "3",
     "tagged" : [ ],
     "mondayDismissal" : "1500",
-    "tuesdayDismissal" : "1500",
+    "tuesdayDismissal" : "1400",
     "wednesdayDismissal" : "1500",
     "thursdayDismissal" : "1500",
     "fridayDismissal" : "1500",
@@ -42,9 +42,9 @@
     "email" : "cornelia@example.com",
     "academicYear": "4",
     "tagged" : [ "friends" ],
-    "mondayDismissal" : "1500",
+    "mondayDismissal" : "1621",
     "tuesdayDismissal" : "1500",
-    "wednesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1745",
     "thursdayDismissal" : "1500",
     "fridayDismissal" : "1500",
     "id": "4"
@@ -56,9 +56,9 @@
     "tagged" : [ ],
     "mondayDismissal" : "1500",
     "tuesdayDismissal" : "1500",
-    "wednesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1230",
     "thursdayDismissal" : "1500",
-    "fridayDismissal" : "1500",
+    "fridayDismissal" : "1542",
     "id": "5"
   }, {
     "name" : "Fiona Kunz",
@@ -67,7 +67,7 @@
     "academicYear": "1",
     "tagged" : [ ],
     "mondayDismissal" : "1500",
-    "tuesdayDismissal" : "1500",
+    "tuesdayDismissal" : "1623",
     "wednesdayDismissal" : "1500",
     "thursdayDismissal" : "1500",
     "fridayDismissal" : "1500",
@@ -82,7 +82,7 @@
     "tuesdayDismissal" : "1500",
     "wednesdayDismissal" : "1500",
     "thursdayDismissal" : "1500",
-    "fridayDismissal" : "1500",
+    "fridayDismissal" : "1712",
     "id": "7"
   } ]
 }
