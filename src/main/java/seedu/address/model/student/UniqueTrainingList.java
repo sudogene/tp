@@ -32,7 +32,7 @@ public class UniqueTrainingList implements Iterable<Training> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent student as the given argument.
+     * Returns true if the list contains an equivalent training as the given argument.
      */
     public boolean contains(Training toCheck) {
         requireNonNull(toCheck);
@@ -40,8 +40,8 @@ public class UniqueTrainingList implements Iterable<Training> {
     }
 
     /**
-     * Adds a student to the list.
-     * The student must not already exist in the list.
+     * Adds a training to the list.
+     * The training must not already exist in the list.
      */
     public void add(Training toAdd) {
         requireNonNull(toAdd);
@@ -80,11 +80,6 @@ public class UniqueTrainingList implements Iterable<Training> {
         if (!internalList.remove(toRemove)) {
             throw new TrainingNotFoundException();
         }
-    }
-
-    public void setTrainings(UniqueTrainingList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
     }
 
     /**

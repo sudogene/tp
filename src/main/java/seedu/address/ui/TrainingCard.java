@@ -34,8 +34,6 @@ public class TrainingCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label dateTime;
-    @FXML
     private FlowPane students;
 
     /**
@@ -51,8 +49,8 @@ public class TrainingCard extends UiPart<Region> {
         name.setText("Training Session at: " + training.getDateTime().format(formatter));
 
         training.getStudents().stream()
-                .sorted(Comparator.comparing(student -> student.toString()))
-                .forEach(student -> students.getChildren().add(new Label(student.toString())));
+                .sorted(Comparator.comparing(student -> student.getName().toString()))
+                .forEach(student -> students.getChildren().add(new Label(student.studentEssentialPrinter())));
     }
 
     @Override
