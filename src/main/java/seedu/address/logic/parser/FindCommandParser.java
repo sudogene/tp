@@ -95,7 +95,6 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             String idValue = argMultimap.getValue(PREFIX_ID).get();
-            System.out.println("idValue = " + idValue);
             predicates.add(new IdMatchesPredicate(idValue));
         }
 

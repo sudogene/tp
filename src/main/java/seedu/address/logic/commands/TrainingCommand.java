@@ -12,7 +12,7 @@ public class TrainingCommand extends Command {
 
     public static final String COMMAND_WORD = "training";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a Training Session"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a Training Session "
             + "Parameters: Date and Time (yyyy-MM-dd HHmm) "
             + "Example: "
             + COMMAND_WORD
