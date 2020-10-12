@@ -10,7 +10,7 @@
     "wednesdayDismissal" : "1500",
     "thursdayDismissal" : "1500",
     "fridayDismissal" : "1500",
-    "id" : "1"
+    "id": "1"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -22,7 +22,7 @@
     "wednesdayDismissal" : "1500",
     "thursdayDismissal" : "1500",
     "fridayDismissal" : "1500",
-    "id" : "1"
+    "id": "1"
   } ],
 
   "trainings" : []
