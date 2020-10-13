@@ -1,6 +1,9 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.student.AcademicYear;
@@ -40,6 +43,7 @@ public class StudentBuilder {
     private Email email;
     private AcademicYear academicYear;
     private Set<Tag> tags;
+    private List<LocalDateTime> trainingSchedules;
     private Monday mondayDismissal;
     private Tuesday tuesdayDismissal;
     private Wednesday wednesdayDismissal;
@@ -56,6 +60,7 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         academicYear = new AcademicYear(DEFAULT_ACADEMICYEAR);
         tags = new HashSet<>();
+        trainingSchedules = new ArrayList<>();
         mondayDismissal = new Monday(DEFAULT_MONDAY);
         tuesdayDismissal = new Tuesday(DEFAULT_TUESDAY);
         wednesdayDismissal = new Wednesday(DEFAULT_WEDNESDAY);
@@ -73,6 +78,7 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         academicYear = studentToCopy.getAcademicYear();
         tags = new HashSet<>(studentToCopy.getTags());
+        trainingSchedules = new ArrayList<>(studentToCopy.getTrainingSchedule());
         mondayDismissal = (Monday) studentToCopy.getMondayDismissal();
         tuesdayDismissal = (Tuesday) studentToCopy.getTuesdayDismissal();
         wednesdayDismissal = (Wednesday) studentToCopy.getWednesdayDismissal();
@@ -94,6 +100,15 @@ public class StudentBuilder {
      */
     public StudentBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code dateTimes} into a {@code TreeSet<LocalDateTime>} and set it to the {@code Student} that we are
+     * building.
+     */
+    public StudentBuilder withTrainingSchedules(LocalDateTime ... dateTimes) {
+        this.trainingSchedules = SampleDataUtil.getTrainingSchedule(dateTimes);
         return this;
     }
 
@@ -175,8 +190,10 @@ public class StudentBuilder {
      * @return Student
      */
     public Student build() {
-        return new Student(name, phone, email, academicYear, tags,
+        Student newStudent = new Student(name, phone, email, academicYear, tags,
             mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal, id);
+        newStudent.addAllTraining(trainingSchedules);
+        return newStudent;
     }
 
 }

@@ -17,7 +17,7 @@ public class TrainingBuilder {
     private Set<Student> students;
 
     /**
-     * Creates a {@code StudentBuilder} with the default details.
+     * Creates a {@code TrainingBuilder} with the default details.
      */
     public TrainingBuilder() {
         dateTime = DEFAULT_DATETIME;
@@ -25,7 +25,7 @@ public class TrainingBuilder {
     }
 
     /**
-     * Initializes the StudentBuilder with the data of {@code studentToCopy}.
+     * Initializes the TrainingBuilder with the data of {@code trainingToCopy}.
      */
     public TrainingBuilder(Training trainingToCopy) {
         dateTime = trainingToCopy.getDateTime();

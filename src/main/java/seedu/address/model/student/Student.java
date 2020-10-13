@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
@@ -64,6 +65,29 @@ public class Student {
     }
 
     /**
+     * Constructs the {@code Student} with a given id.
+     * Every field must be present and not null.
+     */
+    public Student(Name name, Phone phone, Email email, AcademicYear academicYear, Set<Tag> tags, Day mondayDismissal,
+                   Day tuesdayDismissal, Day wednesdayDismissal, Day thursdayDismissal,
+                   Day fridayDismissal, List<LocalDateTime> trainingSchedules, Id id) {
+        requireAllNonNull(name, phone, email, tags, academicYear, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
+                thursdayDismissal, fridayDismissal, trainingSchedules, id);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.academicYear = academicYear;
+        this.mondayDismissal = mondayDismissal;
+        this.tuesdayDismissal = tuesdayDismissal;
+        this.wednesdayDismissal = wednesdayDismissal;
+        this.thursdayDismissal = thursdayDismissal;
+        this.fridayDismissal = fridayDismissal;
+        this.tags.addAll(tags);
+        this.trainingSchedules.addAll(trainingSchedules);
+        this.id = id;
+    }
+
+    /**
      * Adds a training session to the student's schedule.
      * Training sessions are automatically sorted by their respective date and times.
      *
@@ -73,6 +97,18 @@ public class Student {
     public void addTraining(LocalDateTime trainingDateTime) {
         trainingSchedules.add(trainingDateTime);
     }
+
+    /**
+     * Adds a list of training sessions to the student's schedule.
+     * Training sessions are automatically sorted by their respective date and times.
+     *
+     * @param trainingDateTimes List of LocalDateTime corresponding to the trainings' dates and start times.
+     * Duplicates are not allowed and will not be added.
+     */
+    public void addAllTraining(List<LocalDateTime> trainingDateTimes) {
+        trainingSchedules.addAll(trainingDateTimes);
+    }
+
 
     /**
      * Checks if student has a training scheduled at the specified date and start time.
@@ -152,6 +188,14 @@ public class Student {
     }
 
     /**
+     * Returns an immutable training schedule set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<LocalDateTime> getTrainingSchedule() {
+        return Collections.unmodifiableSet(trainingSchedules);
+    }
+
+    /**
      * Returns true if both students of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two students.
      */
@@ -189,14 +233,15 @@ public class Student {
                 && otherStudent.getThursdayDismissal().equals(getThursdayDismissal())
                 && otherStudent.getFridayDismissal().equals(getFridayDismissal())
                 && otherStudent.getAcademicYear().equals(getAcademicYear())
-                && otherStudent.getTags().equals(getTags());
+                && otherStudent.getTags().equals(getTags())
+                && otherStudent.getTrainingSchedule().equals(getTrainingSchedule());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, academicYear, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
-                thursdayDismissal, fridayDismissal, tags, id);
+                thursdayDismissal, fridayDismissal, tags, id, trainingSchedules);
     }
 
     @Override
@@ -224,6 +269,8 @@ public class Student {
                 .append(getAcademicYear())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append(" Training Schedules");
+        getTrainingSchedule().forEach(builder::append);
         return builder.toString();
     }
 
