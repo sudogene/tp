@@ -19,63 +19,58 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.student.Student;
 import seedu.address.model.student.Training;
 import seedu.address.testutil.TypicalTraining;
 
-public class AddStudentCommandTest {
+public class DeleteStudentCommandTest {
 
     private Model model = new ModelManager(TypicalTraining.getTypicalAddressBook(), new UserPrefs());
 
-    public Model getModel() {
-        return model;
-    }
-
     @Test
     public void constructor_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddStudentCommand(INDEX_FIRST_STUDENT, null));
+        assertThrows(NullPointerException.class, () -> new DeleteStudentCommand(INDEX_FIRST_STUDENT, null));
     }
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddStudentCommand(null, VALID_ID_ARRAY));
+        assertThrows(NullPointerException.class, () -> new DeleteStudentCommand(null, VALID_ID_ARRAY));
     }
 
     @Test
-    public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
-        AddStudentCommand addStudentCommand = new AddStudentCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
-        Training editedTraining = new Training(VALID_DATETIME, new HashSet<>());
+    public void execute_studentAcceptedByModel_deleteSuccessful() throws Exception {
+        DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
+        Training editedTraining = new Training(VALID_DATETIME, new HashSet<Student>());
         editedTraining.addStudent(ALICE);
-        System.out.println(addStudentCommand.execute(model).getFeedbackToUser());
 
         String expectedMessage = String
-                .format(AddStudentCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS);
-        System.out.println(expectedMessage);
+                .format(DeleteStudentCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS.toString());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setTraining(model.getFilteredTrainingList().get(0), editedTraining);
 
-        assertCommandSuccess(addStudentCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteStudentCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void equals() {
-        AddStudentCommand addStudent1Command = new AddStudentCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
-        AddStudentCommand addStudent12Command = new AddStudentCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY2);
+        DeleteStudentCommand deleteStudent1Command = new DeleteStudentCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
+        DeleteStudentCommand deleteStudent12Command = new DeleteStudentCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY2);
 
         // same object -> returns true
-        assertTrue(addStudent1Command.equals(addStudent1Command));
+        assertTrue(deleteStudent1Command.equals(deleteStudent1Command));
 
         // same values -> returns true
-        AddStudentCommand addStudentCommandCopy = new AddStudentCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
-        assertTrue(addStudent1Command.equals(addStudentCommandCopy));
+        DeleteStudentCommand deleteStudentCommandCopy = new DeleteStudentCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
+        assertTrue(deleteStudent1Command.equals(deleteStudentCommandCopy));
 
         // different types -> returns false
-        assertFalse(addStudent1Command.equals(1));
+        assertFalse(deleteStudent1Command.equals(1));
 
         // null -> returns false
-        assertFalse(addStudent1Command.equals(null));
+        assertFalse(deleteStudent1Command.equals(null));
 
         // different student -> returns false
-        assertFalse(addStudent1Command.equals(addStudent12Command));
+        assertFalse(deleteStudent1Command.equals(deleteStudent12Command));
     }
 }

@@ -22,13 +22,12 @@ public class JsonAdaptedTrainingTest {
 
     @Test
     public void toModelType_invalidDateTime_throwsDateTimeParseException() {
-        assertThrows(DateTimeParseException.class
-                , () -> new JsonAdaptedTraining(new Training(LocalDateTime.parse("2020-20-20T19:00:00"))));
+        assertThrows(DateTimeParseException.class, () ->
+                new JsonAdaptedTraining(new Training(LocalDateTime.parse("2020-20-20T19:00:00"))));
     }
 
     @Test
     public void toModelType_nullDateTime_throwsNullPointerException() {
-        JsonAdaptedTraining training = new JsonAdaptedTraining(null);
-        assertThrows(NullPointerException.class, training::toModelType);
+        assertThrows(NullPointerException.class, () -> new JsonAdaptedTraining(null).toModelType());
     }
 }

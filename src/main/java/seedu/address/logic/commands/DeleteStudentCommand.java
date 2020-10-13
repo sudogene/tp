@@ -71,7 +71,14 @@ public class DeleteStudentCommand extends Command {
 
         model.setTraining(trainingToEdit, editedTraining);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, editedTraining));
+
+        String result = "";
+        for (String str : studentsToDelete) {
+            result += str + " ";
+        }
+        result = result.trim();
+
+        return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, result));
     }
 
     @Override
