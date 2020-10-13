@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommonTimeCommand;
 import seedu.address.model.student.AcademicYearMatchesPredicate;
+import seedu.address.model.student.AnyMatchPredicateList;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
-import seedu.address.model.student.PredicateList;
 
 class CommonTimeCommandParserTest {
 
@@ -20,7 +20,7 @@ class CommonTimeCommandParserTest {
     public void parse_validArgs_returnsCommonTimeCommand() {
         // no leading and trailing whitespaces
         CommonTimeCommand firstExpectedCommonTimeCommand =
-                new CommonTimeCommand(PredicateList.of(
+                new CommonTimeCommand(AnyMatchPredicateList.of(
                         new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")),
                         new AcademicYearMatchesPredicate("123456")
                 ));
@@ -28,7 +28,7 @@ class CommonTimeCommandParserTest {
 
         // multiple whitespaces between keywords
         CommonTimeCommand secondExpectedCommonTimeCommand =
-                new CommonTimeCommand(PredicateList.of(
+                new CommonTimeCommand(AnyMatchPredicateList.of(
                         new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")),
                         new AcademicYearMatchesPredicate("85355255")
                 ));
@@ -42,7 +42,7 @@ class CommonTimeCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        CommonTimeCommand expectedCommonTimeCommand = new CommonTimeCommand(PredicateList.of(
+        CommonTimeCommand expectedCommonTimeCommand = new CommonTimeCommand(AnyMatchPredicateList.of(
                 new AcademicYearMatchesPredicate("3")
         ));
         assertParseSuccess(parser, " ay/11111111 ay/22222222 ay/3", expectedCommonTimeCommand);

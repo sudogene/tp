@@ -6,6 +6,7 @@ import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
 import static seedu.address.testutil.TypicalStudents.DANIEL;
 import static seedu.address.testutil.TypicalStudents.FIONA;
+import static seedu.address.testutil.TypicalStudents.GEORGE;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.time.LocalTime;
@@ -19,8 +20,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.AcademicYearMatchesPredicate;
+import seedu.address.model.student.AnyMatchPredicateList;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
-import seedu.address.model.student.PredicateList;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code CommonTimeCommand}.
@@ -35,7 +36,9 @@ class CommonTimeCommandTest {
                 + "Tuesday: 15:00\n" + "Wednesday: 15:00\n" + "Thursday: 15:00\n" + "Friday: 15:00";
         NameContainsKeywordsPredicate namePredicate = preparePredicate(" ");
         AcademicYearMatchesPredicate academicYearPredicate = new AcademicYearMatchesPredicate(" ");
-        PredicateList predicateList = new PredicateList(Arrays.asList(namePredicate, academicYearPredicate));
+        AnyMatchPredicateList predicateList = new AnyMatchPredicateList(
+                Arrays.asList(namePredicate, academicYearPredicate)
+        );
         CommonTimeCommand command = new CommonTimeCommand(predicateList);
         expectedModel.updateFilteredStudentList(predicateList);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -47,7 +50,7 @@ class CommonTimeCommandTest {
         String expectedMessage = "Monday: 15:00\n"
                 + "Tuesday: 15:00\n" + "Wednesday: 15:00\n" + "Thursday: 17:00\n" + "Friday: 15:00";
         NameContainsKeywordsPredicate namePredicate = preparePredicate("Alice");
-        PredicateList predicateList = new PredicateList(Arrays.asList(namePredicate));
+        AnyMatchPredicateList predicateList = new AnyMatchPredicateList(Arrays.asList(namePredicate));
         CommonTimeCommand command = new CommonTimeCommand(predicateList);
         expectedModel.updateFilteredStudentList(predicateList);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -59,7 +62,7 @@ class CommonTimeCommandTest {
         String expectedMessage = "Monday: 16:21\n"
                 + "Tuesday: 15:00\n" + "Wednesday: 18:00\n" + "Thursday: 17:00\n" + "Friday: 15:00";
         NameContainsKeywordsPredicate namePredicate = preparePredicate("Alice Benson Daniel");
-        PredicateList predicateList = new PredicateList(Arrays.asList(namePredicate));
+        AnyMatchPredicateList predicateList = new AnyMatchPredicateList(Arrays.asList(namePredicate));
         CommonTimeCommand command = new CommonTimeCommand(predicateList);
         expectedModel.updateFilteredStudentList(predicateList);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -71,7 +74,7 @@ class CommonTimeCommandTest {
         String expectedMessage = "Monday: 15:00\n"
                 + "Tuesday: 16:23\n" + "Wednesday: 15:00\n" + "Thursday: 17:00\n" + "Friday: 15:00";
         AcademicYearMatchesPredicate academicYearPredicate = new AcademicYearMatchesPredicate("1");
-        PredicateList predicateList = new PredicateList(Arrays.asList(academicYearPredicate));
+        AnyMatchPredicateList predicateList = new AnyMatchPredicateList(Arrays.asList(academicYearPredicate));
         CommonTimeCommand command = new CommonTimeCommand(predicateList);
         expectedModel.updateFilteredStudentList(predicateList);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -79,12 +82,14 @@ class CommonTimeCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_allMatchLatestDismissalTimes() {
+    public void execute_multipleNameKeywordsSameAcademicYear_allMatchLatestDismissalTimes() {
         String expectedMessage = "Monday: 15:00\n"
                 + "Tuesday: 16:23\n" + "Wednesday: 15:00\n" + "Thursday: 17:00\n" + "Friday: 15:00";
         NameContainsKeywordsPredicate namePredicate = preparePredicate("Alice Kunz");
         AcademicYearMatchesPredicate academicYearPredicate = new AcademicYearMatchesPredicate("1");
-        PredicateList predicateList = new PredicateList(Arrays.asList(namePredicate, academicYearPredicate));
+        AnyMatchPredicateList predicateList = new AnyMatchPredicateList(
+                Arrays.asList(namePredicate, academicYearPredicate)
+        );
         CommonTimeCommand command = new CommonTimeCommand(predicateList);
         expectedModel.updateFilteredStudentList(predicateList);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -92,16 +97,18 @@ class CommonTimeCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_noMatchDefaultDismissalTimes() {
+    public void execute_multipleNameKeywordsDifferentAcademicYear_allMatchLatestDismissalTimes() {
         String expectedMessage = "Monday: 15:00\n"
-                + "Tuesday: 15:00\n" + "Wednesday: 15:00\n" + "Thursday: 15:00\n" + "Friday: 15:00";
-        NameContainsKeywordsPredicate namePredicate = preparePredicate("Daniel");
+                + "Tuesday: 16:23\n" + "Wednesday: 17:45\n" + "Thursday: 17:00\n" + "Friday: 17:12";
+        NameContainsKeywordsPredicate namePredicate = preparePredicate("Daniel Best");
         AcademicYearMatchesPredicate academicYearPredicate = new AcademicYearMatchesPredicate("1");
-        PredicateList predicateList = new PredicateList(Arrays.asList(namePredicate, academicYearPredicate));
+        AnyMatchPredicateList predicateList = new AnyMatchPredicateList(
+                Arrays.asList(namePredicate, academicYearPredicate)
+        );
         CommonTimeCommand command = new CommonTimeCommand(predicateList);
         expectedModel.updateFilteredStudentList(predicateList);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredStudentList());
+        assertEquals(Arrays.asList(ALICE, DANIEL, FIONA, GEORGE), model.getFilteredStudentList());
     }
 
     @Test
@@ -120,7 +127,7 @@ class CommonTimeCommandTest {
                 thursdayDismissalTime,
                 fridayDismissalTime);
         NameContainsKeywordsPredicate dummyPredicate = preparePredicate(" ");
-        PredicateList predicateList = new PredicateList(Arrays.asList(dummyPredicate));
+        AnyMatchPredicateList predicateList = new AnyMatchPredicateList(Arrays.asList(dummyPredicate));
         assertEquals(expectedMessage,
                 new CommonTimeCommand(predicateList).commonDismissalTimesToString(commonDismissalTimes));
     }
