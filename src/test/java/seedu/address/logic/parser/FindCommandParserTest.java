@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.student.AcademicYearMatchesPredicate;
+import seedu.address.model.student.AllMatchPredicateList;
 import seedu.address.model.student.EmailContainsKeywordPredicate;
 import seedu.address.model.student.IdMatchesPredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.PhoneMatchesPredicate;
-import seedu.address.model.student.AllMatchPredicateList;
 import seedu.address.model.student.time.Day;
 
 public class FindCommandParserTest {
