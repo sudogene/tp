@@ -9,14 +9,15 @@ import seedu.address.logic.commands.DeleteStudentFromTrainingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new AddStudentToTrainingCommand object
+ * Parses input arguments and creates a new DeleteStudentFromTrainingCommand object.
  */
-public class DeleteStudentCommandParser implements Parser<DeleteStudentFromTrainingCommand> {
+public class DeleteStudentFromTrainingCommandParser implements Parser<DeleteStudentFromTrainingCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddStudentToTrainingCommand
-     * and returns an AddStudentToTrainingCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Parses the given {@code String} of arguments in the context of the DeleteStudentFromTrainingCommand.
+     * and returns an DeleteStudentFromTrainingCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public DeleteStudentFromTrainingCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -26,7 +27,7 @@ public class DeleteStudentCommandParser implements Parser<DeleteStudentFromTrain
             index = ParserUtil.parseIndex(args.substring(0, 2));
         } catch (ParseException | StringIndexOutOfBoundsException pe) {
             throw new ParseException(String
-                    .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE), pe);
+                    .format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentFromTrainingCommand.MESSAGE_USAGE), pe);
         }
 
         try {
@@ -34,7 +35,7 @@ public class DeleteStudentCommandParser implements Parser<DeleteStudentFromTrain
             return new DeleteStudentFromTrainingCommand(index, studentIndexes);
         } catch (StringIndexOutOfBoundsException e) {
             throw new ParseException(String
-                    .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE));
+                    .format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentFromTrainingCommand.MESSAGE_USAGE));
         }
     }
 }

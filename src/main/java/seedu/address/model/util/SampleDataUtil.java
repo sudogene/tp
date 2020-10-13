@@ -30,9 +30,6 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static Student[] getSampleStudents() {
-        List<LocalDateTime> trainingSchedules = new ArrayList<>();
-        trainingSchedules.add(LocalDateTime.parse("2020-08-26 1800",
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")));
         Student alex = new Student(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new AcademicYear("2"), getTagSet("friends"), new Monday("1500"),
                 new Tuesday("1500"), new Wednesday("1500"),
@@ -58,12 +55,6 @@ public class SampleDataUtil {
                         new AcademicYear("1"), getTagSet("colleagues"), new Monday("1500"),
                         new Tuesday("1500"), new Wednesday("1500"),
                         new Thursday("1500"), new Friday("1500"), Id.newId());
-        alex.addAllTraining(trainingSchedules);
-        bernice.addAllTraining(trainingSchedules);
-        charlotte.addAllTraining(trainingSchedules);
-        david.addAllTraining(trainingSchedules);
-        irfan.addAllTraining(trainingSchedules);
-        roy.addAllTraining(trainingSchedules);
 
         return new Student[] {
             alex, bernice, charlotte, david, irfan, roy
