@@ -67,7 +67,7 @@ Shows a summarised list of available commands.
 Format: `help`
 
 ### Adding a student: `add`
-Adds a student to the student list.
+Adds a student to the student list. The student's Id is auto-assigned.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL ay/ACADEMIC_YEAR [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm]`
 
@@ -123,7 +123,7 @@ Examples:
 ### Find : `find`
 Find students based on specified fields.
 
-Format: `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm]`
+Format: `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [id/ID]`
 
 - At least one field needs to be filled
 - Name
@@ -147,6 +147,10 @@ Format: `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm
     - Students with dismissal times equal OR before the query time will be matched
 
       e.g. `d1/1500` will match `1500` and `1200`, but not `1530` on Monday
+
+- Id
+    - Student with the same Id value will be matched.
+    - Due to the nature of Id being unique, only one student should be matched.
 
 - Searching by more than one field
     - Find command will return student(s) that matches exactly with all the fields provided. e.g. `n/Alex p/123` will return `Alex Yeoh` only if his phone number matches `123`
@@ -185,6 +189,6 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]… [d1/MONDAY] [d2/TUESDAY] [d3/WEDNESDAY] [d4/THURSDAY] [d5/FRIDAY] ​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm]`<br> e.g., `find n/James Jake ay/2`
+**Find** | `find [n/KEYWORDS] [p/PHONE_NUMBER] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [id/ID]`<br> e.g., `find n/James Jake ay/2`
 **List** | `list`
 **Help** | `help`
