@@ -15,6 +15,7 @@ import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -22,58 +23,56 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.student.Training;
 import seedu.address.testutil.TypicalTraining;
 
-public class AddStudentCommandTest {
+public class DeleteStudentFromTrainingCommandTest {
 
     private Model model = new ModelManager(TypicalTraining.getTypicalAddressBook(), new UserPrefs());
 
-    public Model getModel() {
-        return model;
-    }
-
     @Test
     public void constructor_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddStudentCommand(INDEX_FIRST_STUDENT, null));
+        assertThrows(NullPointerException.class, () -> new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, null));
     }
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddStudentCommand(null, VALID_ID_ARRAY));
+        assertThrows(NullPointerException.class, () -> new DeleteStudentFromTrainingCommand(null, VALID_ID_ARRAY));
     }
 
     @Test
-    public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
-        AddStudentCommand addStudentCommand = new AddStudentCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
+    public void execute_studentAcceptedByModel_deleteSuccessful() throws Exception {
+        DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand = new DeleteStudentFromTrainingCommand(Index.fromOneBased(1), VALID_ID_ARRAY);
         Training editedTraining = new Training(VALID_DATETIME, new HashSet<>());
-        editedTraining.addStudent(ALICE);
+        Training trainingWithAlice = new Training(VALID_DATETIME, new HashSet<>());
+        trainingWithAlice.addStudent(ALICE);
+        model.setTraining(model.getFilteredTrainingList().get(0), trainingWithAlice);
 
         String expectedMessage = String
-                .format(AddStudentCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS);
+                .format(DeleteStudentFromTrainingCommand.MESSAGE_DELETE_STUDENT_SUCCESS, VALID_ID_STRINGS);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setTraining(model.getFilteredTrainingList().get(0), editedTraining);
 
-        assertCommandSuccess(addStudentCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteStudentFromTrainingCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void equals() {
-        AddStudentCommand addStudent1Command = new AddStudentCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
-        AddStudentCommand addStudent12Command = new AddStudentCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY2);
+        DeleteStudentFromTrainingCommand deleteStudent1Command = new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
+        DeleteStudentFromTrainingCommand deleteStudent12Command = new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY2);
 
         // same object -> returns true
-        assertTrue(addStudent1Command.equals(addStudent1Command));
+        assertTrue(deleteStudent1Command.equals(deleteStudent1Command));
 
         // same values -> returns true
-        AddStudentCommand addStudentCommandCopy = new AddStudentCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
-        assertTrue(addStudent1Command.equals(addStudentCommandCopy));
+        DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommandCopy = new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
+        assertTrue(deleteStudent1Command.equals(deleteStudentFromTrainingCommandCopy));
 
         // different types -> returns false
-        assertFalse(addStudent1Command.equals(1));
+        assertFalse(deleteStudent1Command.equals(1));
 
         // null -> returns false
-        assertFalse(addStudent1Command.equals(null));
+        assertFalse(deleteStudent1Command.equals(null));
 
         // different student -> returns false
-        assertFalse(addStudent1Command.equals(addStudent12Command));
+        assertFalse(deleteStudent1Command.equals(deleteStudent12Command));
     }
 }

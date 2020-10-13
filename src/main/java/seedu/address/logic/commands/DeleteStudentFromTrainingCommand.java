@@ -18,7 +18,7 @@ import seedu.address.model.student.Training;
 /**
  * Edits the details of an existing student in the address book.
  */
-public class DeleteStudentCommand extends Command {
+public class DeleteStudentFromTrainingCommand extends Command {
 
     public static final String COMMAND_WORD = "ts-delete";
 
@@ -38,7 +38,7 @@ public class DeleteStudentCommand extends Command {
      * @param index of the training in the filtered training list to delete
      * @param studentsToDelete corresponding Id of Students to delete
      */
-    public DeleteStudentCommand(Index index, String[] studentsToDelete) {
+    public DeleteStudentFromTrainingCommand(Index index, String[] studentsToDelete) {
         requireNonNull(index);
         requireNonNull(studentsToDelete);
 
@@ -66,7 +66,7 @@ public class DeleteStudentCommand extends Command {
         for (String str : studentsToDelete) {
             if (str.length() != 1) {
                 throw new CommandException(String
-                        .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
+                        .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE));
             }
             idList.add(new Id(str));
         }
@@ -117,12 +117,12 @@ public class DeleteStudentCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteStudentCommand)) {
+        if (!(other instanceof DeleteStudentFromTrainingCommand)) {
             return false;
         }
 
         // state check
-        DeleteStudentCommand e = (DeleteStudentCommand) other;
+        DeleteStudentFromTrainingCommand e = (DeleteStudentFromTrainingCommand) other;
         return index.equals(e.index)
                 && studentsToDelete.equals(e.studentsToDelete);
     }

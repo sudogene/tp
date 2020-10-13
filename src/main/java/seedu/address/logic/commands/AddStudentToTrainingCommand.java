@@ -19,7 +19,7 @@ import seedu.address.model.student.exceptions.DuplicateStudentException;
 /**
  * Edits the details of an existing student in the address book.
  */
-public class AddStudentCommand extends Command {
+public class AddStudentToTrainingCommand extends Command {
 
     public static final String COMMAND_WORD = "ts-add";
 
@@ -40,7 +40,7 @@ public class AddStudentCommand extends Command {
      * @param index of the Training Session to add Students to.
      * @param studentsToAdd corresponding Id of Students to add.
      */
-    public AddStudentCommand(Index index, String[] studentsToAdd) {
+    public AddStudentToTrainingCommand(Index index, String[] studentsToAdd) {
         requireNonNull(index);
         requireNonNull(studentsToAdd);
 
@@ -69,7 +69,7 @@ public class AddStudentCommand extends Command {
         for (String str : studentsToAdd) {
             if (str.length() != 1) {
                 throw new CommandException(String
-                        .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
+                        .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE));
             }
             idList.add(new Id(str));
         }
@@ -133,12 +133,12 @@ public class AddStudentCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddStudentCommand)) {
+        if (!(other instanceof AddStudentToTrainingCommand)) {
             return false;
         }
 
         // state check
-        AddStudentCommand e = (AddStudentCommand) other;
+        AddStudentToTrainingCommand e = (AddStudentToTrainingCommand) other;
         return index.equals(e.index)
                 && studentsToAdd.equals(e.studentsToAdd);
     }
