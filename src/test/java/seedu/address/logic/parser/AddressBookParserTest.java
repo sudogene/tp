@@ -22,9 +22,9 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.AllMatchPredicateList;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.PhoneMatchesPredicate;
-import seedu.address.model.student.PredicateList;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.StudentBuilder;
@@ -77,7 +77,7 @@ public class AddressBookParserTest {
                 FindCommand.COMMAND_WORD + " n/"
                         + keywords.stream().collect(Collectors.joining(" "))
                         + " p/123456");
-        assertEquals(new FindCommand(new PredicateList(Arrays.asList(
+        assertEquals(new FindCommand(new AllMatchPredicateList(Arrays.asList(
                 new NameContainsKeywordsPredicate(Arrays.asList("foo", "bar", "baz")),
                 new PhoneMatchesPredicate("123456")))), command);
     }

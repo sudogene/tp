@@ -10,8 +10,8 @@ import java.util.List;
 import seedu.address.logic.commands.CommonTimeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.AcademicYearMatchesPredicate;
+import seedu.address.model.student.AnyMatchPredicateList;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
-import seedu.address.model.student.PredicateList;
 
 /**
  * Parses input arguments and creates a CommonTimeCommand object
@@ -27,7 +27,7 @@ public class CommonTimeCommandParser implements Parser<CommonTimeCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ACADEMIC_YEAR);
 
-        PredicateList predicates = new PredicateList();
+        AnyMatchPredicateList predicates = new AnyMatchPredicateList();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String text = argMultimap.getValue(PREFIX_NAME).get();
             predicates.add(new NameContainsKeywordsPredicate(getKeywordsFromString(text)));

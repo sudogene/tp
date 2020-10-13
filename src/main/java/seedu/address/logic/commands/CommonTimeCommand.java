@@ -6,8 +6,8 @@ import java.time.LocalTime;
 import java.util.List;
 
 import seedu.address.model.Model;
+import seedu.address.model.student.AnyMatchPredicateList;
 import seedu.address.model.student.CommonTimeFinder;
-import seedu.address.model.student.PredicateList;
 
 /**
  * Finds the latest dismissal time of all the students stated in the keywords.
@@ -25,10 +25,10 @@ public class CommonTimeCommand extends Command {
 
     public static final String MESSAGE_NO_QUERY = "At least one valid field is required to find a common time.";
 
-    private final PredicateList predicates;
+    private final AnyMatchPredicateList predicates;
     private List<LocalTime> commonDismissalTimes;
 
-    public CommonTimeCommand(PredicateList predicates) {
+    public CommonTimeCommand(AnyMatchPredicateList predicates) {
         this.predicates = predicates;
     }
 
