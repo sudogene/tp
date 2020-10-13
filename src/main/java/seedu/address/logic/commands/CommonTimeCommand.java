@@ -10,7 +10,7 @@ import seedu.address.model.student.CommonTimeFinder;
 import seedu.address.model.student.PredicateList;
 
 /**
- * Finds the latest dismissal time of all the students stated in he keywords.
+ * Finds the latest dismissal time of all the students stated in the keywords.
  * Keyword matching is case insensitive.
  */
 public class CommonTimeCommand extends Command {
@@ -38,6 +38,13 @@ public class CommonTimeCommand extends Command {
         model.updateFilteredStudentList(predicates);
         commonDismissalTimes = new CommonTimeFinder(model.getFilteredStudentList()).getCommonDismissalTimes();
         return new CommandResult(commonDismissalTimesToString(commonDismissalTimes));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof CommonTimeCommand // instanceof handles nulls
+                && predicates.equals(((CommonTimeCommand) other).predicates)); // state check
     }
 
     /**

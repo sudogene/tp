@@ -23,11 +23,11 @@ public class CommonTimeFinder {
      */
     public CommonTimeFinder(List<Student> studentList) {
         this.studentList = studentList;
-        latestMondayDismissalTime = LocalTime.of(0, 0);
-        latestTuesdayDismissalTime = LocalTime.of(0, 0);
-        latestWednesdayDismissalTime = LocalTime.of(0, 0);
-        latestThursdayDismissalTime = LocalTime.of(0, 0);
-        latestFridayDismissalTime = LocalTime.of(0, 0);
+        latestMondayDismissalTime = LocalTime.of(15, 0);
+        latestTuesdayDismissalTime = LocalTime.of(15, 0);
+        latestWednesdayDismissalTime = LocalTime.of(15, 0);
+        latestThursdayDismissalTime = LocalTime.of(15, 0);
+        latestFridayDismissalTime = LocalTime.of(15, 0);
     }
 
     /**
@@ -59,23 +59,23 @@ public class CommonTimeFinder {
             }
 
             if (latestTuesdayDismissalTime.compareTo(
-                    student.getMondayDismissal().dismissalTime) < 0) {
-                latestTuesdayDismissalTime = student.getMondayDismissal().dismissalTime;
+                    student.getTuesdayDismissal().dismissalTime) < 0) {
+                latestTuesdayDismissalTime = student.getTuesdayDismissal().dismissalTime;
             }
 
             if (latestWednesdayDismissalTime.compareTo(
-                    student.getMondayDismissal().dismissalTime) < 0) {
-                latestWednesdayDismissalTime = student.getMondayDismissal().dismissalTime;
+                    student.getWednesdayDismissal().dismissalTime) < 0) {
+                latestWednesdayDismissalTime = student.getWednesdayDismissal().dismissalTime;
             }
 
             if (latestThursdayDismissalTime.compareTo(
-                    student.getMondayDismissal().dismissalTime) < 0) {
-                latestThursdayDismissalTime = student.getMondayDismissal().dismissalTime;
+                    student.getThursdayDismissal().dismissalTime) < 0) {
+                latestThursdayDismissalTime = student.getThursdayDismissal().dismissalTime;
             }
 
             if (latestFridayDismissalTime.compareTo(
-                    student.getMondayDismissal().dismissalTime) < 0) {
-                latestFridayDismissalTime = student.getMondayDismissal().dismissalTime;
+                    student.getFridayDismissal().dismissalTime) < 0) {
+                latestFridayDismissalTime = student.getFridayDismissal().dismissalTime;
             }
         }
     }

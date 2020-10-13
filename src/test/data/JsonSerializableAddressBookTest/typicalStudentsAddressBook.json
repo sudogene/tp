@@ -10,7 +10,7 @@
     "mondayDismissal" : "1500",
     "tuesdayDismissal" : "1500",
     "wednesdayDismissal" : "1500",
-    "thursdayDismissal" : "1500",
+    "thursdayDismissal" : "1700",
     "fridayDismissal" : "1500",
     "id": "1"
   }, {
@@ -20,9 +20,9 @@
     "academicYear": "2",
     "tagged" : [ "owesMoney", "friends" ],
     "trainingSchedule" : [ "2020-11-20T18:00:00" ],
-    "mondayDismissal" : "1500",
+    "mondayDismissal" : "1621",
     "tuesdayDismissal" : "1500",
-    "wednesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1800",
     "thursdayDismissal" : "1500",
     "fridayDismissal" : "1500",
     "id": "2"
@@ -34,7 +34,7 @@
     "tagged" : [ ],
     "trainingSchedule" : [ "2020-11-20T18:00:00" ],
     "mondayDismissal" : "1500",
-    "tuesdayDismissal" : "1500",
+    "tuesdayDismissal" : "1400",
     "wednesdayDismissal" : "1500",
     "thursdayDismissal" : "1500",
     "fridayDismissal" : "1500",
@@ -48,7 +48,7 @@
     "trainingSchedule" : [ "2020-11-20T18:00:00" ],
     "mondayDismissal" : "1500",
     "tuesdayDismissal" : "1500",
-    "wednesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1745",
     "thursdayDismissal" : "1500",
     "fridayDismissal" : "1500",
     "id": "4"
@@ -61,9 +61,9 @@
     "trainingSchedule" : [ "2020-11-20T18:00:00" ],
     "mondayDismissal" : "1500",
     "tuesdayDismissal" : "1500",
-    "wednesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1230",
     "thursdayDismissal" : "1500",
-    "fridayDismissal" : "1500",
+    "fridayDismissal" : "1542",
     "id": "5"
   }, {
     "name" : "Fiona Kunz",
@@ -73,7 +73,7 @@
     "tagged" : [ ],
     "trainingSchedule" : [ "2020-11-20T18:00:00" ],
     "mondayDismissal" : "1500",
-    "tuesdayDismissal" : "1500",
+    "tuesdayDismissal" : "1623",
     "wednesdayDismissal" : "1500",
     "thursdayDismissal" : "1500",
     "fridayDismissal" : "1500",
@@ -89,7 +89,7 @@
     "tuesdayDismissal" : "1500",
     "wednesdayDismissal" : "1500",
     "thursdayDismissal" : "1500",
-    "fridayDismissal" : "1500",
+    "fridayDismissal" : "1712",
     "id": "7"
   } ],
 
