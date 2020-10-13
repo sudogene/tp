@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUESDAY_DISMISSAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDNESDAY_DISMISSAL;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -52,6 +53,9 @@ public class CommandTestUtil {
     public static final String VALID_THURSDAY_BOB = "1500";
     public static final String VALID_FRIDAY_BOB = "1500";
     public static final String VALID_ID = "1";
+    public static final String VALID_ID_STRINGS = "1";
+    public static final String[] VALID_ID_ARRAY = new String[] {"1"};
+    public static final LocalDateTime VALID_DATETIME = LocalDateTime.parse("2020-11-20T19:00:00");
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;

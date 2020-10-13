@@ -1,7 +1,8 @@
 package seedu.address.storage;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -32,13 +33,15 @@ class JsonAdaptedTraining {
     @JsonCreator
     public JsonAdaptedTraining(@JsonProperty("dateTime") String dateTime,
                               @JsonProperty("students") List<JsonAdaptedStudent> students) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
-        this.dateTime = LocalDateTime.parse(dateTime, formatter);
-        if (students != null) {
-            this.students.addAll(students);
+        try {
+            this.dateTime = LocalDateTime.parse(dateTime);
+            if (students != null) {
+                this.students.addAll(students);
+            }
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("The date and time provided is not valid");
         }
-        System.out.println("students" + students.size());
     }
 
     /**
@@ -67,10 +70,10 @@ class JsonAdaptedTraining {
             throw new IllegalValueException(String
                     .format(MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName()));
         }
+
         final LocalDateTime modelDateTime = dateTime;
         Set<Student> studentSet = new HashSet<>(studentList);
 
         return new Training(modelDateTime, studentSet);
     }
-
 }
