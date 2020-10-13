@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.student.exceptions.DuplicateTrainingException;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
 import seedu.address.model.student.exceptions.TrainingNotFoundException;
@@ -62,10 +61,6 @@ public class UniqueTrainingList implements Iterable<Training> {
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new StudentNotFoundException();
-        }
-
-        if (!target.isSameTraining(editedTraining) && contains(editedTraining)) {
-            throw new DuplicateStudentException();
         }
 
         internalList.set(index, editedTraining);

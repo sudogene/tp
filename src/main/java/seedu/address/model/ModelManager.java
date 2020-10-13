@@ -115,6 +115,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setTraining(Training target, Training editedTraining) {
+        requireAllNonNull(target, editedTraining);
+        addressBook.setTraining(target, editedTraining);
+    }
+
+    @Override
     public void addTraining(Training training) {
         addressBook.addTraining(training);
     }

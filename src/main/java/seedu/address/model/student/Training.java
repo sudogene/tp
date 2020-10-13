@@ -57,10 +57,11 @@ public class Training {
      * @param student
      */
     public void removeStudent(Student student) {
-        if (students.contains(student)) {
-            throw new DuplicateStudentException();
-        } else {
-            this.students.add(student);
+        Set<Student> studentsCopy = new HashSet<>(students);
+        for (Student studentCheck : studentsCopy) {
+            if (student.getId().equals(studentCheck.getId())) {
+                students.remove(studentCheck);
+            }
         }
     }
 
