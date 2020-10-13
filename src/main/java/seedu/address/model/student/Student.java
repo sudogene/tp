@@ -2,7 +2,9 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -290,5 +292,36 @@ public class Student {
                 .append("\nAcademic  Year: ")
                 .append(getAcademicYear());
         return builder.toString();
+    }
+
+    /**
+     * Returns whether a student is able to attend a training at a particular DateTime
+     */
+    public boolean isAvailableAtDateTime(LocalDateTime dateTime) {
+        DayOfWeek day = dateTime.getDayOfWeek();
+
+        LocalTime queryTime = LocalTime.from(dateTime);
+        LocalTime studentTime;
+
+        switch (day) {
+        case MONDAY:
+            studentTime = mondayDismissal.dismissalTime;
+            return studentTime.equals(queryTime) || studentTime.isBefore(queryTime);
+        case TUESDAY:
+            studentTime = tuesdayDismissal.dismissalTime;
+            return studentTime.equals(queryTime) || studentTime.isBefore(queryTime);
+        case WEDNESDAY:
+            studentTime = wednesdayDismissal.dismissalTime;
+            return studentTime.equals(queryTime) || studentTime.isBefore(queryTime);
+        case THURSDAY:
+            studentTime = thursdayDismissal.dismissalTime;
+            return studentTime.equals(queryTime) || studentTime.isBefore(queryTime);
+        case FRIDAY:
+            studentTime = fridayDismissal.dismissalTime;
+            return studentTime.equals(queryTime) || studentTime.isBefore(queryTime);
+        default:
+            return false;
+        }
+
     }
 }
