@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -33,7 +32,6 @@ class JsonAdaptedTraining {
     @JsonCreator
     public JsonAdaptedTraining(@JsonProperty("dateTime") String dateTime,
                               @JsonProperty("students") List<JsonAdaptedStudent> students) {
-
         try {
             this.dateTime = LocalDateTime.parse(dateTime);
             if (students != null) {
