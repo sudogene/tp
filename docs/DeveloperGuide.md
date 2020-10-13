@@ -267,6 +267,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`  | user                                       | filter students by their Academic Year          | easily retrieve all students of a particular academic level |
 | `* *`  | user                                       | filter students by their Phone Numbers          | easily find students by their contact details |
 | `* *`  | user                                       | filter students by their dismissal time / schedules          | schedule training sessions |
+| `* *`  | user                                       | filter students by their Id             | easily identify one specific student |
 | `* *`  | user                                       | tag students by their Academic Year     | schedule trainings catered for students in a particular academic year |
 
 
