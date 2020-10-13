@@ -23,7 +23,7 @@ import seedu.address.model.student.EmailContainsKeywordPredicate;
 import seedu.address.model.student.IdMatchesPredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.PhoneMatchesPredicate;
-import seedu.address.model.student.PredicateList;
+import seedu.address.model.student.AllMatchPredicateList;
 import seedu.address.model.student.time.Day;
 import seedu.address.model.student.time.FridayDismissalPredicate;
 import seedu.address.model.student.time.MondayDismissalPredicate;
@@ -47,7 +47,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                         PREFIX_MONDAY_DISMISSAL, PREFIX_TUESDAY_DISMISSAL, PREFIX_WEDNESDAY_DISMISSAL,
                         PREFIX_THURSDAY_DISMISSAL, PREFIX_FRIDAY_DISMISSAL, PREFIX_ID);
 
-        PredicateList predicates = new PredicateList();
+        AllMatchPredicateList predicates = new AllMatchPredicateList();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String text = argMultimap.getValue(PREFIX_NAME).get();
             predicates.add(new NameContainsKeywordsPredicate(getKeywordsFromString(text)));

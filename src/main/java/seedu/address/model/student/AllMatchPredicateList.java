@@ -9,20 +9,20 @@ import java.util.function.Predicate;
  * Tests that a {@code Student}'s parameters match all the predicates in the predicate list.
  * If the predicate list is empty, it defaults to false.
  */
-public class PredicateList implements Predicate<Student> {
+public class AllMatchPredicateList implements Predicate<Student> {
     private final List<Predicate<Student>> predicates;
 
-    public PredicateList(List<Predicate<Student>> predicates) {
+    public AllMatchPredicateList(List<Predicate<Student>> predicates) {
         this.predicates = predicates;
     }
 
-    public PredicateList() {
+    public AllMatchPredicateList() {
         predicates = new LinkedList<>();
     }
 
     @SafeVarargs
-    public static PredicateList of(Predicate<Student>... predicates) {
-        return new PredicateList(Arrays.asList(predicates));
+    public static AllMatchPredicateList of(Predicate<Student>... predicates) {
+        return new AllMatchPredicateList(Arrays.asList(predicates));
     }
 
     public boolean add(Predicate<Student> predicate) {
@@ -45,8 +45,8 @@ public class PredicateList implements Predicate<Student> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof PredicateList // instanceof handles nulls
-                && predicates.equals(((PredicateList) other).predicates)); // state check
+                || (other instanceof AllMatchPredicateList // instanceof handles nulls
+                && predicates.equals(((AllMatchPredicateList) other).predicates)); // state check
     }
 
 }

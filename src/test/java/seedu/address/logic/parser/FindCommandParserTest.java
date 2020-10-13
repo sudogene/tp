@@ -13,7 +13,7 @@ import seedu.address.model.student.EmailContainsKeywordPredicate;
 import seedu.address.model.student.IdMatchesPredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.PhoneMatchesPredicate;
-import seedu.address.model.student.PredicateList;
+import seedu.address.model.student.AllMatchPredicateList;
 import seedu.address.model.student.time.Day;
 
 public class FindCommandParserTest {
@@ -24,7 +24,7 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand firstExpectedFindCommand =
-                new FindCommand(PredicateList.of(
+                new FindCommand(AllMatchPredicateList.of(
                         new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")),
                         new PhoneMatchesPredicate("123456")
                 ));
@@ -32,7 +32,7 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         FindCommand secondExpectedFindCommand =
-                new FindCommand(PredicateList.of(
+                new FindCommand(AllMatchPredicateList.of(
                         new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")),
                         new PhoneMatchesPredicate("85355255")
                 ));
@@ -40,7 +40,7 @@ public class FindCommandParserTest {
 
         // mixture of find parameters
         FindCommand thirdExpectedFindCommand =
-                new FindCommand(PredicateList.of(
+                new FindCommand(AllMatchPredicateList.of(
                         new EmailContainsKeywordPredicate("meow"),
                         new AcademicYearMatchesPredicate("2"),
                         new IdMatchesPredicate("1")
@@ -65,7 +65,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        FindCommand expectedFindCommand = new FindCommand(PredicateList.of(
+        FindCommand expectedFindCommand = new FindCommand(AllMatchPredicateList.of(
                 new PhoneMatchesPredicate("33333333")
         ));
         assertParseSuccess(parser, " p/11111111 p/22222222 p/33333333", expectedFindCommand);
