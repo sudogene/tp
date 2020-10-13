@@ -29,17 +29,20 @@ public class DeleteStudentFromTrainingCommandTest {
 
     @Test
     public void constructor_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, null));
+        assertThrows(NullPointerException.class, () ->
+                new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, null));
     }
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeleteStudentFromTrainingCommand(null, VALID_ID_ARRAY));
+        assertThrows(NullPointerException.class, () ->
+                new DeleteStudentFromTrainingCommand(null, VALID_ID_ARRAY));
     }
 
     @Test
     public void execute_studentAcceptedByModel_deleteSuccessful() throws Exception {
-        DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand = new DeleteStudentFromTrainingCommand(Index.fromOneBased(1), VALID_ID_ARRAY);
+        DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
+                new DeleteStudentFromTrainingCommand(Index.fromOneBased(1), VALID_ID_ARRAY);
         Training editedTraining = new Training(VALID_DATETIME, new HashSet<>());
         Training trainingWithAlice = new Training(VALID_DATETIME, new HashSet<>());
         trainingWithAlice.addStudent(ALICE);
@@ -56,14 +59,17 @@ public class DeleteStudentFromTrainingCommandTest {
 
     @Test
     public void equals() {
-        DeleteStudentFromTrainingCommand deleteStudent1Command = new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
-        DeleteStudentFromTrainingCommand deleteStudent12Command = new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY2);
+        DeleteStudentFromTrainingCommand deleteStudent1Command =
+                new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
+        DeleteStudentFromTrainingCommand deleteStudent12Command =
+                new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY2);
 
         // same object -> returns true
         assertTrue(deleteStudent1Command.equals(deleteStudent1Command));
 
         // same values -> returns true
-        DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommandCopy = new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
+        DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommandCopy =
+                new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
         assertTrue(deleteStudent1Command.equals(deleteStudentFromTrainingCommandCopy));
 
         // different types -> returns false
