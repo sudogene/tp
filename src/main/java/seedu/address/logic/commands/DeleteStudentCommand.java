@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
@@ -22,13 +23,13 @@ public class DeleteStudentCommand extends Command {
     public static final String COMMAND_WORD = "ts-delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the corresponding Students "
-            + "from the specified Training Session"
-            + " PARAMETERS: TRAINING_SESSION-ID STUDENT_ID..."
+            + "from the specified Training Session\n"
+            + "PARAMETERS: TRAINING_SESSION-ID STUDENT_ID..."
             + "\nExample: "
             + COMMAND_WORD + " 1 3,5,7";
 
-    public static final String MESSAGE_ADD_STUDENT_SUCCESS = "Deleted Student: %1$s";
-    public static final String MESSAGE_NOT_ADDED = "At least one student to be deleted must be specified.";
+    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
+    public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be deleted must be specified.";
 
     private final Index index;
     private final String[] studentsToDelete;
@@ -49,10 +50,13 @@ public class DeleteStudentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Training> lastShownList = model.getFilteredTrainingList();
-        List<Student> studentList = model.getFilteredStudentList();
+
+        if (studentsToDelete == null) {
+            throw new CommandException(MESSAGE_NO_STUDENTS_SPECIFIED);
+        }
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX);
         }
 
         Training trainingToEdit = lastShownList.get(index.getZeroBased());
@@ -60,25 +64,49 @@ public class DeleteStudentCommand extends Command {
 
         List<Id> idList = new ArrayList<>();
         for (String str : studentsToDelete) {
+            if (str.length() != 1) {
+                throw new CommandException(String
+                        .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
+            }
             idList.add(new Id(str));
         }
 
-        for (Student student : studentList) {
+        for (Student student : trainingToEdit.getStudents()) {
             if (idList.contains(student.getId())) {
                 editedTraining.removeStudent(student);
             }
         }
 
+        if (editedTraining.getStudents().size() == trainingToEdit.getStudents().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        }
+
         model.setTraining(trainingToEdit, editedTraining);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
+        String result = getStudentsDeleted();
+
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, result));
+    }
+
+    /**
+     * Returns a String with the IDs of the students deleted, removing duplicate IDs.
+     * @return String with Unique Ids of Students deleted.
+     */
+    public String getStudentsDeleted() {
         String result = "";
         for (String str : studentsToDelete) {
+            if (result.contains(str)) {
+                continue;
+            }
             result += str + " ";
         }
         result = result.trim();
+        return result;
+    }
 
-        return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, result));
+    public Index getIndex() {
+        return this.index;
     }
 
     @Override

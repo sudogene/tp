@@ -15,11 +15,11 @@ import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.student.Student;
 import seedu.address.model.student.Training;
 import seedu.address.testutil.TypicalTraining;
 
@@ -39,12 +39,14 @@ public class DeleteStudentCommandTest {
 
     @Test
     public void execute_studentAcceptedByModel_deleteSuccessful() throws Exception {
-        DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
-        Training editedTraining = new Training(VALID_DATETIME, new HashSet<Student>());
-        editedTraining.addStudent(ALICE);
+        DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(Index.fromOneBased(1), VALID_ID_ARRAY);
+        Training editedTraining = new Training(VALID_DATETIME, new HashSet<>());
+        Training trainingWithAlice = new Training(VALID_DATETIME, new HashSet<>());
+        trainingWithAlice.addStudent(ALICE);
+        model.setTraining(model.getFilteredTrainingList().get(0), trainingWithAlice);
 
         String expectedMessage = String
-                .format(DeleteStudentCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS.toString());
+                .format(DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS, VALID_ID_STRINGS);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setTraining(model.getFilteredTrainingList().get(0), editedTraining);

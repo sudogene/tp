@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE_TIME;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ class JsonAdaptedTraining {
                 this.students.addAll(students);
             }
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("The date and time provided is not valid");
+            throw new IllegalArgumentException(MESSAGE_INVALID_DATE_TIME);
         }
     }
 

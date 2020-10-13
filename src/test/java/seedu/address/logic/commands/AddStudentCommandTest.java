@@ -45,11 +45,9 @@ public class AddStudentCommandTest {
         AddStudentCommand addStudentCommand = new AddStudentCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
         Training editedTraining = new Training(VALID_DATETIME, new HashSet<>());
         editedTraining.addStudent(ALICE);
-        System.out.println(addStudentCommand.execute(model).getFeedbackToUser());
 
         String expectedMessage = String
                 .format(AddStudentCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS);
-        System.out.println(expectedMessage);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setTraining(model.getFilteredTrainingList().get(0), editedTraining);

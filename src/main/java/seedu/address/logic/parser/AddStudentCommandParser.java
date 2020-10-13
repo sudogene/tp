@@ -28,8 +28,12 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
                     .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE), pe);
         }
 
-        String[] studentIndexes = args.substring(3).split(",");
-
-        return new AddStudentCommand(index, studentIndexes);
+        try {
+            String[] studentIndexes = args.substring(3).split(",");
+            return new AddStudentCommand(index, studentIndexes);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new ParseException(String
+                    .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
+        }
     }
 }
