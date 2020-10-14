@@ -23,7 +23,7 @@ public class TypicalTraining {
     public static final Training VALID_TRAINING3 = new TrainingBuilder().withDateTime(VALID_LOCAL_DATE_TIME_3).build();
 
     /**
-     * Returns an {@code AddressBook} with all the typical trainings and two typical students.
+     * Returns an {@code AddressBook} with all the typical trainings.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
