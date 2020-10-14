@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -74,10 +75,13 @@ public class DeleteTrainingCommand extends Command {
     }
 
     private Student getStudentById(List<Student> studentsList, Id id) {
-        return studentsList.stream()
+        Optional<Student> filteredStudent = studentsList.stream()
                 .filter(student -> student.getId().equals(id))
-                .findFirst()
-                .get();
+                .findFirst();
+
+        assert filteredStudent.isPresent();
+
+        return filteredStudent.get();
     }
 
     @Override
