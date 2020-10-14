@@ -320,7 +320,8 @@ public class Student {
             studentTime = fridayDismissal.dismissalTime;
             return studentTime.equals(queryTime) || studentTime.isBefore(queryTime);
         default:
-            return false;
+            //Students do not have lessons on Saturday and Sunday, thus able to attend training.
+            return true;
         }
 
     }
