@@ -21,8 +21,6 @@ import seedu.address.model.student.time.Tuesday;
 import seedu.address.model.student.time.Wednesday;
 import seedu.address.model.tag.Tag;
 
-
-
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */

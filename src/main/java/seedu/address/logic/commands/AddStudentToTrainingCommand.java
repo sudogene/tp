@@ -104,7 +104,7 @@ public class AddStudentToTrainingCommand extends Command {
             }
 
             editedTraining.addStudent(editedStudent);
-            model.setStudent(studentToEdit, editedStudent);
+            model.setStudentInUniqueStudentList(studentToEdit, editedStudent);
         }
 
         model.setTraining(trainingToEdit, editedTraining);

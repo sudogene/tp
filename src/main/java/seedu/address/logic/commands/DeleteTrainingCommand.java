@@ -54,8 +54,10 @@ public class DeleteTrainingCommand extends Command {
                 .forEach(id -> {
                     Student studentToEdit = getStudentById(studentList, id);
                     Student editedStudent = createEditedStudent(studentToEdit, trainingToDelete);
-                    model.setStudent(studentToEdit, editedStudent);
+                    model.setStudentInUniqueStudentList(studentToEdit, editedStudent);
                 });
+
+        trainingToDelete.clearStudents();
 
         // Updating the model
         model.deleteTraining(trainingToDelete);

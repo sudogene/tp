@@ -76,7 +76,7 @@ public interface Model {
      * The student identity of {@code editedStudent} must not be the same as another
      * existing student in the address book.
      */
-    void setStudent(Student target, Student editedStudent);
+    void setStudentInUniqueStudentList(Student target, Student editedStudent);
 
     /**
      * Replaces the given training {@code target} with {@code editedTraining}.
@@ -115,4 +115,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
+
+    /**
+     * Updates the filter of the filtered training list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTrainingList(Predicate<Training> predicate);
 }

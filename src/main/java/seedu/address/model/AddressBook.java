@@ -67,7 +67,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setTraining(Training target, Training editedTraining) {
         requireNonNull(editedTraining);
-
         trainings.setTraining(target, editedTraining);
     }
 
@@ -121,9 +120,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The student identity of {@code editedStudent} must not be the same as another existing
      * student in the address book.
      */
-    public void setStudent(Student target, Student editedStudent) {
+    public void setStudentInUniqueStudentList(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
-
         students.setStudent(target, editedStudent);
     }
 
