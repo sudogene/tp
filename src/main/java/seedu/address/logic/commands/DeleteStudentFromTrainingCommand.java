@@ -107,7 +107,7 @@ public class DeleteStudentFromTrainingCommand extends Command {
         }
 
         for (int i = 0; i < targetStudentList.size(); i++) {
-            model.setStudent(targetStudentList.get(i), editedStudentList.get(i));
+            model.setStudentInUniqueStudentList(targetStudentList.get(i), editedStudentList.get(i));
         }
 
         model.setTraining(trainingToEdit, editedTraining);

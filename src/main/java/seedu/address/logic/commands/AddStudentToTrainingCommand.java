@@ -8,8 +8,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -116,7 +114,7 @@ public class AddStudentToTrainingCommand extends Command {
         }
 
         for (int i = 0; i < targetStudentList.size(); i++) {
-            model.setStudent(targetStudentList.get(i), editedStudentList.get(i));
+            model.setStudentInUniqueStudentList(targetStudentList.get(i), editedStudentList.get(i));
         }
 
         model.setTraining(trainingToEdit, editedTraining);

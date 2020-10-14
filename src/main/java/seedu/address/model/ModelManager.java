@@ -109,9 +109,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setStudent(Student target, Student editedStudent) {
+    public void setStudentInUniqueStudentList(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-        addressBook.setStudent(target, editedStudent);
+        addressBook.setStudentInUniqueStudentList(target, editedStudent);
     }
 
     @Override
@@ -155,6 +155,12 @@ public class ModelManager implements Model {
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredTrainingList(Predicate<Training> predicate) {
+        requireNonNull(predicate);
+        filteredTrainings.setPredicate(predicate);
     }
 
     @Override

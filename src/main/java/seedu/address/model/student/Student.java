@@ -343,4 +343,22 @@ public class Student {
         }
 
     }
+
+    /**
+     * Returns whether a student is able to attend all of his/her scheduled trainings
+     */
+    public boolean isAvailableForAllTrainingsScheduled() {
+        if (trainingSchedules.isEmpty()) {
+            return true;
+        }
+
+        boolean isAvailable = true;
+        for (LocalDateTime trainingSession: trainingSchedules) {
+            if (!isAvailableAtDateTime(trainingSession)) {
+                isAvailable = false;
+            }
+        }
+
+        return isAvailable;
+    }
 }

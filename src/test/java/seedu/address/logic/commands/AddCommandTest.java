@@ -155,7 +155,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setStudent(Student target, Student editedStudent) {
+        public void setStudentInUniqueStudentList(Student target, Student editedStudent) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -171,6 +171,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredTrainingList(Predicate<Training> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
