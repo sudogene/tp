@@ -1,10 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_STUDENTS_IN_TRAINING;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -76,6 +81,8 @@ public class AddStudentToTrainingCommand extends Command {
         Training editedTraining = new Training(trainingToEdit.getDateTime(), trainingToEdit.getStudents());
 
         //Student ID Checks - not invalid index, numbered index and exists in student list and not duplicated
+        List<Student> targetStudentList = new ArrayList<>();
+        List<Student> editedStudentList = new ArrayList<>();
         for (String str : studentsToAdd) {
             if (str.length() != 1) {
                 throw new CommandException(String
@@ -95,7 +102,7 @@ public class AddStudentToTrainingCommand extends Command {
             Student editedStudent = createEditedStudent(studentToEdit, editedTraining);
 
             if (!uniqueChecker(editedTraining, studentToEdit)) {
-                throw new CommandException(MESSAGE_DUPLICATE_STUDENTS);
+                throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
             }
 
             //Ensures student is available to attend training based on dismissal time
@@ -104,7 +111,12 @@ public class AddStudentToTrainingCommand extends Command {
             }
 
             editedTraining.addStudent(editedStudent);
-            model.setStudent(studentToEdit, editedStudent);
+            targetStudentList.add(studentToEdit);
+            editedStudentList.add(editedStudent);
+        }
+
+        for (int i = 0; i < targetStudentList.size(); i++) {
+            model.setStudent(targetStudentList.get(i), editedStudentList.get(i));
         }
 
         model.setTraining(trainingToEdit, editedTraining);
@@ -125,7 +137,7 @@ public class AddStudentToTrainingCommand extends Command {
     public boolean uniqueChecker(Training trainingToCheck, Student check) throws CommandException {
         for (Student student : trainingToCheck.getStudents()) {
             if (student.getId().equals(check.getId())) {
-                throw new CommandException(MESSAGE_DUPLICATE_STUDENTS);
+                throw new CommandException(MESSAGE_DUPLICATE_STUDENTS_IN_TRAINING);
             }
         }
         return true;

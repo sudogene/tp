@@ -58,6 +58,14 @@ public class UniqueStudentList implements Iterable<Student> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
+            for (Student student : internalList) {
+                System.out.println(student);
+            }
+            /*
+            System.out.println(target);
+            System.out.println(editedStudent);
+            System.out.println(target.equals(editedStudent));
+             */
             throw new StudentNotFoundException();
         }
 
