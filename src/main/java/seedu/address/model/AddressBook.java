@@ -65,7 +65,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The training identity of {@code editedTraining} must not be the same as another existing
      * training in the address book.
      */
-    public void setTrainings(Training target, Training editedTraining) {
+    public void setTraining(Training target, Training editedTraining) {
         requireNonNull(editedTraining);
 
         trainings.setTraining(target, editedTraining);

@@ -1,6 +1,9 @@
 package seedu.address.storage;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE_TIME;
+
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -31,9 +34,13 @@ class JsonAdaptedTraining {
     @JsonCreator
     public JsonAdaptedTraining(@JsonProperty("dateTime") String dateTime,
                               @JsonProperty("students") List<JsonAdaptedStudent> students) {
-        this.dateTime = LocalDateTime.parse(dateTime);
-        if (students != null) {
-            this.students.addAll(students);
+        try {
+            this.dateTime = LocalDateTime.parse(dateTime);
+            if (students != null) {
+                this.students.addAll(students);
+            }
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException(MESSAGE_INVALID_DATE_TIME);
         }
     }
 
@@ -63,10 +70,10 @@ class JsonAdaptedTraining {
             throw new IllegalValueException(String
                     .format(MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName()));
         }
+
         final LocalDateTime modelDateTime = dateTime;
         Set<Student> studentSet = new HashSet<>(studentList);
 
         return new Training(modelDateTime, studentSet);
     }
-
 }

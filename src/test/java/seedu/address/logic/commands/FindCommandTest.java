@@ -19,9 +19,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.student.AllMatchPredicateList;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.PhoneMatchesPredicate;
-import seedu.address.model.student.PredicateList;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -40,19 +40,19 @@ public class FindCommandTest {
                 new PhoneMatchesPredicate("12345678");
         PhoneMatchesPredicate secondPhonePredicate =
                 new PhoneMatchesPredicate("87654321");
-        PredicateList firstPredicateList =
-                new PredicateList(Arrays.asList(firstNamePredicate, firstPhonePredicate));
-        PredicateList secondPredicateList =
-                new PredicateList(Arrays.asList(secondNamePredicate, secondPhonePredicate));
+        AllMatchPredicateList firstAllMatchPredicateList =
+                new AllMatchPredicateList(Arrays.asList(firstNamePredicate, firstPhonePredicate));
+        AllMatchPredicateList secondAllMatchPredicateList =
+                new AllMatchPredicateList(Arrays.asList(secondNamePredicate, secondPhonePredicate));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicateList);
-        FindCommand findSecondCommand = new FindCommand(secondPredicateList);
+        FindCommand findFirstCommand = new FindCommand(firstAllMatchPredicateList);
+        FindCommand findSecondCommand = new FindCommand(secondAllMatchPredicateList);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicateList);
+        FindCommand findFirstCommandCopy = new FindCommand(firstAllMatchPredicateList);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -70,9 +70,11 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate namePredicate = preparePredicate(" ");
         PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate(" ");
-        PredicateList predicateList = new PredicateList(Arrays.asList(namePredicate, phonePredicate));
-        FindCommand command = new FindCommand(predicateList);
-        expectedModel.updateFilteredStudentList(predicateList);
+        AllMatchPredicateList allMatchPredicateList = new AllMatchPredicateList(
+                Arrays.asList(namePredicate, phonePredicate)
+        );
+        FindCommand command = new FindCommand(allMatchPredicateList);
+        expectedModel.updateFilteredStudentList(allMatchPredicateList);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredStudentList());
     }
@@ -81,9 +83,9 @@ public class FindCommandTest {
     public void execute_multipleNameKeywords_multipleStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate namePredicate = preparePredicate("Kurz Elle Kunz");
-        PredicateList predicateList = new PredicateList(Arrays.asList(namePredicate));
-        FindCommand command = new FindCommand(predicateList);
-        expectedModel.updateFilteredStudentList(predicateList);
+        AllMatchPredicateList allMatchPredicateList = new AllMatchPredicateList(Arrays.asList(namePredicate));
+        FindCommand command = new FindCommand(allMatchPredicateList);
+        expectedModel.updateFilteredStudentList(allMatchPredicateList);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredStudentList());
     }
@@ -92,9 +94,9 @@ public class FindCommandTest {
     public void execute_phoneKeyword_oneStudentFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
         PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate("9482224");
-        PredicateList predicateList = new PredicateList(Arrays.asList(phonePredicate));
-        FindCommand command = new FindCommand(predicateList);
-        expectedModel.updateFilteredStudentList(predicateList);
+        AllMatchPredicateList allMatchPredicateList = new AllMatchPredicateList(Arrays.asList(phonePredicate));
+        FindCommand command = new FindCommand(allMatchPredicateList);
+        expectedModel.updateFilteredStudentList(allMatchPredicateList);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ELLE), model.getFilteredStudentList());
     }
@@ -104,9 +106,11 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
         NameContainsKeywordsPredicate namePredicate = preparePredicate("Kurz Elle Kunz");
         PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate("9482427");
-        PredicateList predicateList = new PredicateList(Arrays.asList(namePredicate, phonePredicate));
-        FindCommand command = new FindCommand(predicateList);
-        expectedModel.updateFilteredStudentList(predicateList);
+        AllMatchPredicateList allMatchPredicateList = new AllMatchPredicateList(
+                Arrays.asList(namePredicate, phonePredicate)
+        );
+        FindCommand command = new FindCommand(allMatchPredicateList);
+        expectedModel.updateFilteredStudentList(allMatchPredicateList);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(FIONA), model.getFilteredStudentList());
     }
@@ -116,9 +120,11 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate namePredicate = preparePredicate("Kurz Elle Kunz");
         PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate("1234567");
-        PredicateList predicateList = new PredicateList(Arrays.asList(namePredicate, phonePredicate));
-        FindCommand command = new FindCommand(predicateList);
-        expectedModel.updateFilteredStudentList(predicateList);
+        AllMatchPredicateList allMatchPredicateList = new AllMatchPredicateList(
+                Arrays.asList(namePredicate, phonePredicate)
+        );
+        FindCommand command = new FindCommand(allMatchPredicateList);
+        expectedModel.updateFilteredStudentList(allMatchPredicateList);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredStudentList());
     }

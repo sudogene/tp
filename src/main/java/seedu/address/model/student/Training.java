@@ -42,32 +42,54 @@ public class Training {
 
     /**
      * Adds the specified student to the Training Session.
-     * @param student
+     * Also adds training's LocalDateTime to the student container
+     *
+     * @param student to be added
      */
     public void addStudent(Student student) {
         if (students.contains(student)) {
             throw new DuplicateStudentException();
         } else {
             this.students.add(student);
+            student.addTraining(getDateTime());
         }
     }
 
     /**
      * Removes the specified student from the Training Session.
-     * @param student
+     * Also removes training's LocalDateTime from the student container
+     *
+     * @param student to be removed
      */
     public void removeStudent(Student student) {
-        if (students.contains(student)) {
-            throw new DuplicateStudentException();
-        } else {
-            this.students.add(student);
+        Set<Student> studentsCopy = new HashSet<>(students);
+        for (Student studentCheck : studentsCopy) {
+            if (student.getId().equals(studentCheck.getId())) {
+                students.remove(studentCheck);
+                student.removeTraining(getDateTime());
+            }
         }
     }
 
     /**
+     * Checks if specified student is already present inside of training list.
+     *
+     * @param student to be checked
+     * @return true if student is present inside of training schedule.
+     */
+    public boolean hasStudent(Student student) {
+        return getStudents().contains(student);
+    }
+
+    /**
      * Clears all students from the TrainingSession.
+     * Also removes the training date from students' training schedules.
+     *
      */
     public void clearStudents() {
+        for (Student student : students) {
+            student.removeTraining(getDateTime());
+        }
         this.students.clear();
     }
 

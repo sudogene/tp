@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.student.PredicateList;
+import seedu.address.model.student.AllMatchPredicateList;
 
 /**
  * Finds and lists all students in address book whose name contains any of the argument keywords.
@@ -21,9 +21,9 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_NO_QUERY = "At least one valid field is required to find a student.";
 
-    private final PredicateList predicates;
+    private final AllMatchPredicateList predicates;
 
-    public FindCommand(PredicateList predicates) {
+    public FindCommand(AllMatchPredicateList predicates) {
         this.predicates = predicates;
     }
 

@@ -79,6 +79,14 @@ public interface Model {
     void setStudent(Student target, Student editedStudent);
 
     /**
+     * Replaces the given training {@code target} with {@code editedTraining}.
+     * {@code target} must exist in the address book.
+     * The student identity of {@code editedTraining} must not be the same as another
+     * existing training in the address book.
+     */
+    void setTraining(Training target, Training editedTraining);
+
+    /**
      * Adds the given Training Session.
      * @param training
      */
