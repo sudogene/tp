@@ -16,7 +16,7 @@ public class StudentTrainingSessionUtil {
             Set<LocalDateTime> trainingSchedules, Student student) {
         List<LocalDateTime> conflicts = trainingSchedules
                 .stream()
-                .filter(training -> student.isAvailableAtDateTime(training))
+                .filter(training -> !student.isAvailableAtDateTime(training))
                 .collect(Collectors.toList());
         return conflicts;
     }
