@@ -10,7 +10,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.LocalDateTimeUtil.VALID_LOCAL_DATE_TIME;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +29,6 @@ public class TypicalStudents {
             .withPhone("94351253")
             .withAcademicYear("1")
             .withThursdayDismissal("1700")
-            .withTrainingSchedules(VALID_LOCAL_DATE_TIME)
             .withTags("friends").build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
             .withId("2")
@@ -38,49 +36,41 @@ public class TypicalStudents {
             .withAcademicYear("2")
             .withMondayDismissal("1621")
             .withWednesdayDismissal("1800")
-            .withTrainingSchedules(VALID_LOCAL_DATE_TIME)
             .withTags("owesMoney", "friends").build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
             .withId("3")
             .withAcademicYear("3")
             .withTuesdayDismissal("1400")
-            .withTrainingSchedules(VALID_LOCAL_DATE_TIME)
             .withEmail("heinz@example.com").build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
             .withId("4")
             .withAcademicYear("4")
             .withWednesdayDismissal("1745")
-            .withTrainingSchedules(VALID_LOCAL_DATE_TIME)
             .withEmail("cornelia@example.com").withTags("friends").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
             .withId("5")
             .withAcademicYear("5")
             .withWednesdayDismissal("1230")
             .withFridayDismissal("1542")
-            .withTrainingSchedules(VALID_LOCAL_DATE_TIME)
             .withEmail("werner@example.com").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withId("6")
             .withAcademicYear("1")
             .withTuesdayDismissal("1623")
-            .withTrainingSchedules(VALID_LOCAL_DATE_TIME)
             .withEmail("lydia@example.com").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
             .withAcademicYear("2")
             .withFridayDismissal("1712")
-            .withTrainingSchedules(VALID_LOCAL_DATE_TIME)
             .withEmail("anna@example.com").build();
 
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withPhone("8482424")
             .withId("7")
             .withAcademicYear("1")
-            .withTrainingSchedules(VALID_LOCAL_DATE_TIME)
             .withEmail("stefan@example.com").build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("8482131")
             .withId("8")
             .withAcademicYear("2")
-            .withTrainingSchedules(VALID_LOCAL_DATE_TIME)
             .withEmail("hans@example.com").build();
 
     // Manually added - Student's details found in {@code CommandTestUtil}
@@ -88,13 +78,11 @@ public class TypicalStudents {
             .withId("9")
             .withEmail(VALID_EMAIL_AMY)
             .withAcademicYear(VALID_ACADEMICYEAR_AMY)
-            .withTrainingSchedules(VALID_LOCAL_DATE_TIME)
             .withTags(VALID_TAG_FRIEND).build();
     public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withId("10")
             .withEmail(VALID_EMAIL_BOB)
             .withAcademicYear(VALID_ACADEMICYEAR_BOB)
-            .withTrainingSchedules(VALID_LOCAL_DATE_TIME)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
