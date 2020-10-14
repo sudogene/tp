@@ -9,6 +9,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.student.Id;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.Training;
 
@@ -46,11 +47,15 @@ public class DeleteTrainingCommand extends Command {
         Training trainingToDelete = lastShownList.get(targetIndex.getZeroBased());
 
         // Deletes the training's date time from the students involved in that training
+        List<Student> studentList = model.getFilteredStudentList();
         trainingToDelete.getStudents()
-                .forEach(student -> model.setStudent(student,
-                        createEditedStudent(student, trainingToDelete)));
-
-        trainingToDelete.clearStudents();
+                .stream()
+                .map(Student::getId)
+                .forEach(id -> {
+                    Student studentToEdit = getStudentById(studentList, id);
+                    Student editedStudent = createEditedStudent(studentToEdit, trainingToDelete);
+                    model.setStudent(studentToEdit, editedStudent);
+                });
 
         // Updating the model
         model.deleteTraining(trainingToDelete);
@@ -64,6 +69,13 @@ public class DeleteTrainingCommand extends Command {
         Student newStudent = studentToEdit.cloneStudent();
         newStudent.removeTraining(trainingToDelete.getDateTime());
         return newStudent;
+    }
+
+    private Student getStudentById(List<Student> studentsList, Id id) {
+        return studentsList.stream()
+                .filter(student -> student.getId().equals(id))
+                .findFirst()
+                .get();
     }
 
     @Override
