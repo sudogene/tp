@@ -89,31 +89,6 @@ public class UniqueTrainingList implements Iterable<Training> {
         internalList.setAll(trainings);
     }
 
-//    //=========== Dealing with Students in Training sessions within TrainingList =============================================================
-//
-//    /**
-//     * Replaces the student {@code target} in the training session with {@code editedStudent}.
-//     * {@code target} must exist in the training session.
-//     * The student identity of {@code editedStudent} must not be the same as another existing student
-//     * in the training session.
-//     */
-//    public void setStudentInTrainingSession(Training targetTraining, Student targetStudent, Student editedStudent) {
-//        requireAllNonNull(targetTraining, targetStudent, editedStudent);
-//
-//        int index = internalList.indexOf(targetTraining);
-//        if (index == -1) {
-//            throw new TrainingNotFoundException();
-//        }
-//
-//        if (!targetStudent.isSameStudent(editedStudent) && targetTraining.hasStudent(editedStudent)) {
-//            throw new DuplicateStudentException();
-//        }
-//
-//        targetTraining.removeStudent(targetStudent);
-//
-//        //internalList.set(index, editedStudent);
-//    }
-
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

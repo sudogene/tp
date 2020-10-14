@@ -1,15 +1,14 @@
 package seedu.address.model.util;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.Training;
 import seedu.address.model.student.TrainingMatchesPredicate;
-
-import java.time.LocalDateTime;
-
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class StudentTrainingSessionUtil {
     public static List<LocalDateTime> getConflictsInStudentTrainingSchedule(
