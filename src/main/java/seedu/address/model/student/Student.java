@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -67,7 +68,7 @@ public class Student {
     }
 
     /**
-     * Constructs the {@code Student} with a given id.
+     * Constructs the {@code Student} with a given id and training schedules.
      * Every field must be present and not null.
      */
     public Student(Name name, Phone phone, Email email, AcademicYear academicYear, Set<Tag> tags, Day mondayDismissal,
@@ -87,6 +88,15 @@ public class Student {
         this.tags.addAll(tags);
         this.trainingSchedules.addAll(trainingSchedules);
         this.id = id;
+    }
+
+    /**
+     * Clones a student.
+     */
+    public Student cloneStudent() {
+        return new Student(getName(), getPhone(), getEmail(), getAcademicYear(), getTags(),
+                getMondayDismissal(), getTuesdayDismissal(), getWednesdayDismissal(), getThursdayDismissal(),
+                getFridayDismissal(), new ArrayList<>(getTrainingSchedule()), getId());
     }
 
     /**
