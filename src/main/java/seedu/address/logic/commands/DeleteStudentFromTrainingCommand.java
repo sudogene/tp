@@ -98,7 +98,7 @@ public class DeleteStudentFromTrainingCommand extends Command {
                 throw new CommandException(MESSAGE_INVALID_STUDENT);
             }
             editedTraining.removeStudent(editedStudent);
-            model.setStudent(studentToEdit, editedStudent);
+            model.setStudentInUniqueStudentList(studentToEdit, editedStudent);
         }
 
         model.setTraining(trainingToEdit, editedTraining);
