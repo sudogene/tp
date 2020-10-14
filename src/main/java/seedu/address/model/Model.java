@@ -76,7 +76,7 @@ public interface Model {
      * The student identity of {@code editedStudent} must not be the same as another
      * existing student in the address book.
      */
-    void setStudent(Student target, Student editedStudent);
+    void setStudentInUniqueStudentList(Student target, Student editedStudent);
 
     /**
      * Replaces the given training {@code target} with {@code editedTraining}.

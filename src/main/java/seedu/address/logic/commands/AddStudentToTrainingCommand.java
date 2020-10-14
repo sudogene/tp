@@ -97,7 +97,7 @@ public class AddStudentToTrainingCommand extends Command {
                 throw new CommandException(MESSAGE_DUPLICATE_STUDENTS);
             }
             editedTraining.addStudent(editedStudent);
-            model.setStudent(studentToEdit, editedStudent);
+            model.setStudentInUniqueStudentList(studentToEdit, editedStudent);
         }
 
         model.setTraining(trainingToEdit, editedTraining);
