@@ -47,7 +47,7 @@ public class DeleteTrainingCommand extends Command {
 
         // Deletes the training's date time from the students involved in that training
         trainingToDelete.getStudents()
-                .forEach(student -> model.setStudent(student,
+                .forEach(student -> model.setStudentInUniqueStudentList(student,
                         createEditedStudent(student, trainingToDelete)));
 
         trainingToDelete.clearStudents();
