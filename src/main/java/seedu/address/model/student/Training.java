@@ -66,9 +66,16 @@ public class Training {
         for (Student studentCheck : studentsCopy) {
             if (student.getId().equals(studentCheck.getId())) {
                 students.remove(studentCheck);
-                student.removeTraining(getDateTime());
+                removeDateTimeFromStudent(student);
             }
         }
+    }
+
+    /**
+     * Removes the training's date time from the student.
+     */
+    public void removeDateTimeFromStudent(Student student) {
+        student.removeTraining(getDateTime());
     }
 
     /**
@@ -82,13 +89,12 @@ public class Training {
     }
 
     /**
-     * Clears all students from the TrainingSession.
+     * Clears all students from the Training.
      * Also removes the training date from students' training schedules.
-     *
      */
     public void clearStudents() {
         for (Student student : students) {
-            student.removeTraining(getDateTime());
+            removeDateTimeFromStudent(student);
         }
         this.students.clear();
     }

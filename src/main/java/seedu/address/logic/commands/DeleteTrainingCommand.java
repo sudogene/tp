@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.student.Student;
 import seedu.address.model.student.Training;
 
 public class DeleteTrainingCommand extends Command {
@@ -42,8 +44,26 @@ public class DeleteTrainingCommand extends Command {
         }
 
         Training trainingToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        // Deletes the training's date time from the students involved in that training
+        trainingToDelete.getStudents()
+                .forEach(student -> model.setStudent(student,
+                        createEditedStudent(student, trainingToDelete)));
+
+        trainingToDelete.clearStudents();
+
+        // Updating the model
         model.deleteTraining(trainingToDelete);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, trainingToDelete));
+    }
+
+    private Student createEditedStudent(Student studentToEdit, Training trainingToDelete) {
+        requireNonNull(studentToEdit);
+        Student newStudent = studentToEdit.cloneStudent();
+        newStudent.removeTraining(trainingToDelete.getDateTime());
+        return newStudent;
     }
 
     @Override
