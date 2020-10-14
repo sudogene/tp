@@ -52,7 +52,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() throws ParseException {
         Student expectedStudent =
-                new StudentBuilder(BOB).withTags(VALID_TAG_FRIEND).withTrainingSchedules().build();
+                new StudentBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
             + ACADEMICYEAR_DESC_BOB + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
@@ -75,8 +75,7 @@ public class AddCommandParserTest {
 
         // multiple tags - all accepted
         Student expectedStudentMultipleTags = new StudentBuilder(BOB)
-                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).withTrainingSchedules()
-                .build();
+                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ACADEMICYEAR_DESC_BOB
             + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + MONDAY_DESC_BOB + TUESDAY_DESC_BOB + WEDNESDAY_DESC_BOB
             + THURSDAY_DESC_BOB + FRIDAY_DESC_BOB, new AddCommand(expectedStudentMultipleTags));
@@ -85,7 +84,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Student expectedStudent = new StudentBuilder(AMY).withTags().withTrainingSchedules()
+        Student expectedStudent = new StudentBuilder(AMY).withTags()
                 .build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + ACADEMICYEAR_DESC_AMY,
