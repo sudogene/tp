@@ -4,20 +4,28 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.student.AcademicYear;
+import seedu.address.model.student.Email;
 import seedu.address.model.student.Id;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.Training;
-import seedu.address.model.student.exceptions.DuplicateStudentException;
+import seedu.address.model.student.time.Day;
+import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing student in the address book.
+ * Adds an existing student to a training.
  */
 public class AddStudentToTrainingCommand extends Command {
 
@@ -25,7 +33,7 @@ public class AddStudentToTrainingCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the corresponding Students "
             + " to the specified Training Session\n"
-            + "PARAMETERS: TRAINING_SESSION-ID STUDENT_ID..."
+            + "Parameters: Training_Session-ID Student_ID..."
             + "\nExample: "
             + COMMAND_WORD + " 1 3,5,7";
 
@@ -51,6 +59,7 @@ public class AddStudentToTrainingCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Training> lastShownList = model.getFilteredTrainingList();
         List<Student> studentList = model.getFilteredStudentList();
 
@@ -65,24 +74,30 @@ public class AddStudentToTrainingCommand extends Command {
         Training trainingToEdit = lastShownList.get(index.getZeroBased());
         Training editedTraining = new Training(trainingToEdit.getDateTime(), trainingToEdit.getStudents());
 
-        List<Id> idList = new ArrayList<>();
+        //Student ID Checks - not invalid index, numbered index and exists in student list and not duplicated
         for (String str : studentsToAdd) {
             if (str.length() != 1) {
                 throw new CommandException(String
                         .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE));
             }
-            idList.add(new Id(str));
-        }
 
-        try {
-            for (Student student : studentList) {
-                if (idList.contains(student.getId()) && uniqueChecker(editedTraining, student)) {
-                    editedTraining.addStudent(student);
-                }
+            if (!StringUtil.isNonZeroUnsignedInteger(str)) {
+                throw new CommandException(String
+                        .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE));
             }
-        } catch (DuplicateStudentException e) {
-            System.out.println("test");
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENTS);
+
+            if (Integer.parseInt(str) > studentList.size() || Integer.parseInt(str) <= 0) {
+                throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            }
+
+            Student studentToEdit = studentList.get(Integer.parseInt(str) - 1);
+            Student editedStudent = createEditedStudent(studentToEdit, editedTraining);
+
+            if (!uniqueChecker(editedTraining, studentToEdit)) {
+                throw new CommandException(MESSAGE_DUPLICATE_STUDENTS);
+            }
+            editedTraining.addStudent(editedStudent);
+            model.setStudent(studentToEdit, editedStudent);
         }
 
         model.setTraining(trainingToEdit, editedTraining);
@@ -96,7 +111,7 @@ public class AddStudentToTrainingCommand extends Command {
     /**
      * Checks that the Training Specified does not contain the Student to Add.
      * @param trainingToCheck
-     * @param check
+     * @param check Student to check.
      * @return boolean that indicates whether Student to be added is unique.
      * @throws CommandException
      */
@@ -107,6 +122,30 @@ public class AddStudentToTrainingCommand extends Command {
             }
         }
         return true;
+    }
+
+    private static Student createEditedStudent(Student studentToEdit, Training editedTraining) {
+        assert studentToEdit != null;
+
+        Name updatedName = studentToEdit.getName();
+        Phone updatedPhone = studentToEdit.getPhone();
+        Email updatedEmail = studentToEdit.getEmail();
+        AcademicYear updatedAcademicYear = studentToEdit.getAcademicYear();
+        Day mondayDismissal = studentToEdit.getMondayDismissal();
+        Day tuesdayDismissal = studentToEdit.getTuesdayDismissal();
+        Day wednesdayDismissal = studentToEdit.getWednesdayDismissal();
+        Day thursdayDismissal = studentToEdit.getThursdayDismissal();
+        Day fridayDismissal = studentToEdit.getFridayDismissal();
+        Set<Tag> updatedTags = studentToEdit.getTags();
+        List<LocalDateTime> trainingSchedules = studentToEdit.getTrainingSchedule().stream()
+                .collect(Collectors.toList());
+        trainingSchedules.add(editedTraining.getDateTime());
+        Id id = studentToEdit.getId();
+
+        Student newStudent = new Student(updatedName, updatedPhone, updatedEmail, updatedAcademicYear, updatedTags,
+                mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal, id);
+        newStudent.addAllTraining(trainingSchedules);
+        return newStudent;
     }
 
     /**
