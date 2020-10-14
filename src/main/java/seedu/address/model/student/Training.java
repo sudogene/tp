@@ -72,6 +72,16 @@ public class Training {
     }
 
     /**
+     * Checks if specified student is already present inside of training list.
+     *
+     * @param student to be checked
+     * @return true if student is present inside of training schedule.
+     */
+    public boolean hasStudent(Student student) {
+        return getStudents().contains(student);
+    }
+
+    /**
      * Clears all students from the TrainingSession.
      * Also removes the training date from students' training schedules.
      *
