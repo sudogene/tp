@@ -14,7 +14,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUESDAY_DISMISSAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDNESDAY_DISMISSAL;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +24,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.Training;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 /**
@@ -55,11 +53,11 @@ public class CommandTestUtil {
     public static final String VALID_FRIDAY_BOB = "1500";
     public static final String VALID_ID = "1";
     public static final String VALID_ID_STRINGS = "1";
+    public static final String VALID_ID_STRINGS3 = "1 2 3";
     public static final String[] VALID_ID_ARRAY = new String[] {"1"};
+    public static final String[] INVALID_ID_ARRAY = new String[] {"9"};
     public static final String[] VALID_ID_ARRAY2 = new String[]{"1", "2"};
-    public static final LocalDateTime VALID_DATETIME = LocalDateTime.parse("2020-11-20T19:00:00");
-    public static final Training VALID_TRAINING = new Training(VALID_DATETIME);
-
+    public static final String[] VALID_ID_ARRAY3 = new String[]{"1", "2", "3"};
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

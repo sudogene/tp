@@ -1,56 +1,76 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.student.Student;
 import seedu.address.model.student.Training;
 
 public class DeleteTrainingCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-training";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the specified Training Session"
-            + "Parameters: Date and Time (dddd-MM-dd HHmm)"
-            + "Example: "
-            + COMMAND_WORD
-            + "12-12-2000 1800";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes the training session identified by the index number used in the displayed training list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Training Session at: %1$s deleted";
+    public static final String MESSAGE_SUCCESS = "Deleted Training: %1$s";
 
-    private final Training toDelete;
+    private final Index targetIndex;
 
     /**
      * Creates an AddCommand to add the specified {@code Student}
      */
-    public DeleteTrainingCommand(LocalDateTime dateTime) {
-        requireNonNull(dateTime);
-        toDelete = new Training(dateTime);
-    }
-
-    public Training getDeleteTraining() {
-        return this.toDelete;
+    public DeleteTrainingCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
+        this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasTraining(toDelete)) {
-            model.deleteTraining(toDelete);
-        } else {
-            throw new CommandException("The specified Training Session does not exist");
+        List<Training> lastShownList = model.getFilteredTrainingList();
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toDelete));
+
+        Training trainingToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        // Deletes the training's date time from the students involved in that training
+        trainingToDelete.getStudents()
+                .forEach(student -> model.setStudent(student,
+                        createEditedStudent(student, trainingToDelete)));
+
+        trainingToDelete.clearStudents();
+
+        // Updating the model
+        model.deleteTraining(trainingToDelete);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, trainingToDelete));
+    }
+
+    private Student createEditedStudent(Student studentToEdit, Training trainingToDelete) {
+        requireNonNull(studentToEdit);
+        Student newStudent = studentToEdit.cloneStudent();
+        newStudent.removeTraining(trainingToDelete.getDateTime());
+        return newStudent;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteTrainingCommand // instanceof handles nulls
-                && toDelete.equals(((DeleteTrainingCommand) other).toDelete));
+                && targetIndex.equals(((DeleteTrainingCommand) other).targetIndex));
     }
 
 }
