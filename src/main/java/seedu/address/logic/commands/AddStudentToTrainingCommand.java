@@ -40,7 +40,8 @@ public class AddStudentToTrainingCommand extends Command {
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "Added Student: %1$s";
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be added must be specified.";
     public static final String MESSAGE_DUPLICATE_STUDENTS = "This Student is already in the Training Session!";
-
+    public static final String MESSAGE_STUDENT_UNAVAILABLE = "This student cannot be added to the training as his " +
+            "dismissal time on the specified day falls after the training's start time!";
     private final Index index;
     private final String[] studentsToAdd;
 
@@ -96,6 +97,12 @@ public class AddStudentToTrainingCommand extends Command {
             if (!uniqueChecker(editedTraining, studentToEdit)) {
                 throw new CommandException(MESSAGE_DUPLICATE_STUDENTS);
             }
+
+            //Ensures student is available to attend training based on dismissal time
+            if (!studentToEdit.isAvailableAtDateTime(editedTraining.getDateTime())) {
+                throw new CommandException(MESSAGE_STUDENT_UNAVAILABLE);
+            }
+
             editedTraining.addStudent(editedStudent);
             model.setStudent(studentToEdit, editedStudent);
         }
