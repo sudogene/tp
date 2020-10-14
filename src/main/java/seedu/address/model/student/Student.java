@@ -325,4 +325,19 @@ public class Student {
         }
 
     }
+
+    public boolean isAvailableForAllTrainingsScheduled() {
+        if (trainingSchedules.isEmpty()) {
+            return true;
+        }
+
+        boolean isAvailable = true;
+        for (LocalDateTime trainingSession: trainingSchedules) {
+            if (!isAvailableAtDateTime(trainingSession)) {
+                isAvailable = false;
+            }
+        }
+
+        return isAvailable;
+    }
 }

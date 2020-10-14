@@ -158,6 +158,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredTrainingList(Predicate<Training> predicate) {
+        requireNonNull(predicate);
+        filteredTrainings.setPredicate(predicate);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {

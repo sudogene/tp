@@ -32,8 +32,10 @@ import seedu.address.model.student.Id;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.Training;
 import seedu.address.model.student.time.Day;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.StudentTrainingSessionUtil;
 
 /**
  * Edits the details of an existing student in the address book.
@@ -86,17 +88,31 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredStudentList();
+        List<Student> lastShownStudentList = model.getFilteredStudentList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownStudentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Student studentToEdit = lastShownList.get(index.getZeroBased());
+        Student studentToEdit = lastShownStudentList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+        }
+
+        if (!editedStudent.isAvailableForAllTrainingsScheduled()) {
+            List<LocalDateTime> dateTimesUnableToAttend = StudentTrainingSessionUtil
+                    .getConflictsInStudentTrainingSchedule(editedStudent.getTrainingSchedule(), editedStudent);
+            List<Training> trainingsUnableToAttend = StudentTrainingSessionUtil
+                    .getTrainingListFromDateTimeList(dateTimesUnableToAttend, model);
+
+            for (Training training: trainingsUnableToAttend) {
+                Training editedTraining = new Training(training.getDateTime(), training.getStudents());
+                editedTraining.removeStudent(studentToEdit);
+                editedStudent.removeTraining(training.getDateTime());
+                model.setTraining(training, editedTraining);
+            }
         }
 
         model.setStudentInUniqueStudentList(studentToEdit, editedStudent);

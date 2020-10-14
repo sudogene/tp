@@ -125,6 +125,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.setStudent(target, editedStudent);
     }
 
+//    /**
+//     * Replaces the given student {@code target} in the training session with {@code editedStudent}.
+//     * {@code target} must exist in the training session.
+//     * The student identity of {@code editedStudent} must not be the same as another existing
+//     * student in the training session.
+//     */
+//    public void setStudentInUniqueTrainingList(Training targetTraining, Student targetStudent, Student editedStudent) {
+//        requireNonNull(editedStudent);
+//        trainings.setStudentInTrainingSession(targetTraining, targetStudent, editedStudent);
+//    }
+
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
