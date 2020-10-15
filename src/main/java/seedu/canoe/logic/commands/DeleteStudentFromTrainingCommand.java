@@ -2,6 +2,7 @@ package seedu.canoe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
@@ -35,9 +36,9 @@ public class DeleteStudentFromTrainingCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the corresponding Students "
             + "from the specified Training Session\n"
-            + "Parameters: Training_Session-ID Student_ID..."
+            + "Parameters: Training_Session-ID " + PREFIX_ID + "Student_ID..."
             + "\nExample: "
-            + COMMAND_WORD + " 1 3,5,7";
+            + COMMAND_WORD + "1 " + PREFIX_ID + "3,5,7";
 
     public static final String MESSAGE_INVALID_STUDENT = "One of the"
             + " Students provided is not inside of the training specified!";

@@ -2,6 +2,7 @@ package seedu.canoe.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.AddStudentToTrainingCommand;
@@ -19,21 +20,30 @@ public class AddStudentCommandParser implements Parser<AddStudentToTrainingComma
      */
     public AddStudentToTrainingCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        ArgumentMultimap argMultimap =
+            ArgumentTokenizer.tokenize(args, PREFIX_ID);
+
         Index index;
 
         try {
-            index = ParserUtil.parseIndex(args.substring(0, 2));
-        } catch (ParseException | StringIndexOutOfBoundsException pe) {
-            throw new ParseException(String
-                    .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE), pe);
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddStudentToTrainingCommand.MESSAGE_USAGE), pe);
         }
 
-        try {
-            String[] studentIndexes = args.substring(3).split(",");
-            return new AddStudentToTrainingCommand(index, studentIndexes);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new ParseException(String
-                    .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE));
+        String[] studentIndexes = new String[0];
+
+
+        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
+            String text = argMultimap.getValue(PREFIX_ID).get();
+            studentIndexes = text.split(",");
         }
+
+        if (studentIndexes.length == 0) {
+            throw new ParseException(AddStudentToTrainingCommand.MESSAGE_NO_STUDENTS_SPECIFIED);
+        }
+
+        return new AddStudentToTrainingCommand(index, studentIndexes);
     }
 }
