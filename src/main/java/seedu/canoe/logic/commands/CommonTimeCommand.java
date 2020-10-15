@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalTime;
 import java.util.List;
 
-import seedu.canoe.logic.parser.exceptions.ParseException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.AnyMatchPredicateList;
 import seedu.canoe.model.student.CommonTimeFinder;
@@ -25,9 +24,6 @@ public class CommonTimeCommand extends Command {
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     public static final String MESSAGE_NO_QUERY = "At least one valid field is required to find a common time.";
-    public static final String MESSAGE_NO_STUDENT = "No student matches that criteria! Hence, no common time can be " +
-            "returned.";
-
     private final AnyMatchPredicateList predicates;
     private List<LocalTime> commonDismissalTimes;
 
@@ -36,13 +32,9 @@ public class CommonTimeCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws ParseException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredStudentList(predicates);
-        if (model.getFilteredStudentList().size() == 0) {
-            model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
-            throw new ParseException(MESSAGE_NO_STUDENT);
-        }
         commonDismissalTimes = new CommonTimeFinder(model.getFilteredStudentList()).getCommonDismissalTimes();
         return new CommandResult(commonDismissalTimesToString(commonDismissalTimes));
     }
