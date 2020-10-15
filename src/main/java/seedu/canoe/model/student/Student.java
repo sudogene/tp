@@ -311,6 +311,19 @@ public class Student {
     }
 
     /**
+     * Returns whether a student has a training at a particular DateTime already
+     */
+    public boolean hasTrainingAtDateTime(LocalDateTime dateTime) {
+        //Has a training scheduled on the same date already
+        for (LocalDateTime training: trainingSchedules) {
+            if (LocalDate.from(training).isEqual(LocalDate.from(dateTime))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns whether a student is able to attend a training at a particular DateTime
      */
     public boolean isAvailableAtDateTime(LocalDateTime dateTime) {
@@ -318,13 +331,6 @@ public class Student {
 
         LocalTime queryTime = LocalTime.from(dateTime);
         LocalTime studentTime;
-
-        //Has a training scheduled on the same date already
-        for (LocalDateTime training: trainingSchedules) {
-            if (LocalDate.from(training).isEqual(LocalDate.from(dateTime))) {
-                return false;
-            }
-        }
 
         switch (day) {
         case MONDAY:
