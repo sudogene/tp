@@ -301,7 +301,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *   1b. Student with the same name already exists.
     *   1b1. CanoE-COACH displays an error message.
-        Use case ends.
+        Use case resumes at step 1.
         
 *   1c. Details have invalid format.
     *   1c1. CanoE-COACH displays an error message.
@@ -406,27 +406,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *   1b. Training with the same date and time already exists.
     *   1b1. CanoE-COACH displays an error message.
-        Use case ends.
+        Use case resumes at step 1.
         
 **UC08: Delete a training**
 
 **MSS**
 
-1.  User requests to list trainings
-2.  CanoE-COACH shows a list of trainings
-3.  User requests to delete a specific training in the list
-4.  CanoE-COACH deletes the training
-5.  CanoE-COACH removes the training from all the students that are attending the training.
+1.  User requests to delete a specific training in the list
+2.  CanoE-COACH deletes the training
+3.  CanoE-COACH removes the training from all the students that are attending the training.
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-  Use case ends.
-
-* 3a. The given index is invalid.
-    * 3a1. CanoE-COACH shows an error message.
-      Use case resumes at step 2.
+* 2a. The given index is invalid.
+    * 2a1. CanoE-COACH shows an error message.
+      Use case resumes at step 1.
       
 **UC09: Add students to the training**
 
