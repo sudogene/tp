@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -37,7 +38,8 @@ public class DeleteStudentFromTrainingCommand extends Command {
             + "\nExample: "
             + COMMAND_WORD + " 1 3,5,7";
 
-    public static final String MESSAGE_INVALID_STUDENT = "Student is not inside of the training specified!";
+    public static final String MESSAGE_INVALID_STUDENT = "One of the"
+            + " Students provided is not inside of the training specified!";
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be deleted must be specified.";
 
@@ -76,6 +78,8 @@ public class DeleteStudentFromTrainingCommand extends Command {
         Training editedTraining = new Training(trainingToEdit.getDateTime(), trainingToEdit.getStudents());
 
         //Student ID Checks - not invalid index, numbered index and exists in student list and exists inside of training
+        List<Student> targetStudentList = new ArrayList<>();
+        List<Student> editedStudentList = new ArrayList<>();
         for (String str : studentsToDelete) {
             if (str.length() != 1) {
                 throw new CommandException(String
@@ -98,7 +102,12 @@ public class DeleteStudentFromTrainingCommand extends Command {
                 throw new CommandException(MESSAGE_INVALID_STUDENT);
             }
             editedTraining.removeStudent(editedStudent);
-            model.setStudentInUniqueStudentList(studentToEdit, editedStudent);
+            targetStudentList.add(studentToEdit);
+            editedStudentList.add(editedStudent);
+        }
+
+        for (int i = 0; i < targetStudentList.size(); i++) {
+            model.setStudentInUniqueStudentList(targetStudentList.get(i), editedStudentList.get(i));
         }
 
         model.setTraining(trainingToEdit, editedTraining);

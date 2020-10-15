@@ -59,7 +59,7 @@ public class AddStudentToTrainingCommandTest {
         //Training class should contain JONAS too
         assertTrue(getModel().getFilteredTrainingList().get(0).getStudents().contains(getModel()
                 .getFilteredStudentList().get(0)));
-        assertThrows(CommandException.class, AddStudentToTrainingCommand.MESSAGE_DUPLICATE_STUDENTS, () ->
+        assertThrows(CommandException.class, Messages.MESSAGE_DUPLICATE_STUDENTS_IN_TRAINING, () ->
                 addStudentToTrainingCommand.execute(getModel()));
     }
 
@@ -87,7 +87,7 @@ public class AddStudentToTrainingCommandTest {
         //Training class should contain student3 too
         assertTrue(getModel().getFilteredTrainingList().get(0).getStudents().contains(getModel()
                 .getFilteredStudentList().get(2)));
-        assertThrows(CommandException.class, AddStudentToTrainingCommand.MESSAGE_DUPLICATE_STUDENTS, () ->
+        assertThrows(CommandException.class, Messages.MESSAGE_DUPLICATE_STUDENTS_IN_TRAINING, () ->
                 addStudentToTrainingCommand.execute(getModel()));
     }
 

@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -42,8 +43,15 @@ public class Student {
 
     private final Set<Tag> tags = new HashSet<>();
 
+    class TreeSet_Comparator implements Comparator<LocalDateTime> {
+        public int compare(LocalDateTime dateTime1, LocalDateTime dateTime2)
+        {
+            return dateTime1.compareTo(dateTime2);
+        }
+    }
+
     //Collection of scheduled training dates tagged to the particular student
-    private final TreeSet<LocalDateTime> trainingSchedules = new TreeSet<>();
+    private final TreeSet<LocalDateTime> trainingSchedules = new TreeSet<>(new TreeSet_Comparator());
 
     /**
      * Constructs the {@code Student} with a given id.
@@ -281,7 +289,7 @@ public class Student {
                 .append(getAcademicYear())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append(" Training Schedules");
+        builder.append(" Training Schedules: ");
         getTrainingSchedule().forEach(builder::append);
         return builder.toString();
     }
