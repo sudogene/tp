@@ -3,6 +3,7 @@ package seedu.canoe.model.student;
 import static seedu.canoe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -42,14 +43,14 @@ public class Student {
 
     private final Set<Tag> tags = new HashSet<>();
 
-    class TreeSet_Comparator implements Comparator<LocalDateTime> {
+    class TreeSetComparator implements Comparator<LocalDateTime> {
         public int compare(LocalDateTime dateTime1, LocalDateTime dateTime2) {
             return dateTime1.compareTo(dateTime2);
         }
     }
 
     //Collection of scheduled training dates tagged to the particular student
-    private final TreeSet<LocalDateTime> trainingSchedules = new TreeSet<>(new TreeSet_Comparator());
+    private final TreeSet<LocalDateTime> trainingSchedules = new TreeSet<>(new TreeSetComparator());
 
     /**
      * Constructs the {@code Student} with a given id.
@@ -317,6 +318,13 @@ public class Student {
 
         LocalTime queryTime = LocalTime.from(dateTime);
         LocalTime studentTime;
+
+        //Has a training scheduled on the same date already
+        for (LocalDateTime training: trainingSchedules) {
+            if (LocalDate.from(training).isEqual(LocalDate.from(dateTime))) {
+                return false;
+            }
+        }
 
         switch (day) {
         case MONDAY:
