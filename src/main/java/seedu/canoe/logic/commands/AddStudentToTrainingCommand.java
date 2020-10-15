@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.canoe.commons.core.Messages.MESSAGE_DUPLICATE_STUDENTS_IN_TRAINING;
 import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
@@ -37,9 +38,9 @@ public class AddStudentToTrainingCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the corresponding Students "
             + " to the specified Training Session\n"
-            + "Parameters: Training_Session-ID Student_ID..."
+            + "Parameters: Training_Session-ID " + PREFIX_ID + "Student_ID..."
             + "\nExample: "
-            + COMMAND_WORD + " 1 3,5,7";
+            + COMMAND_WORD +  "1 " + PREFIX_ID + "3,5,7";
 
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "Added Student: %1$s";
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be added must be specified.";
