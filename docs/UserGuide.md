@@ -187,7 +187,7 @@ Examples:
 - `commonTime ay/1` returns the latest dismissal times for all the students in the student list who are in Academic Year 1.
 - `commonTime n/Alex Jane Mary` returns the latest dismissal times for any student with names Alex, Jane or Mary. Take note the rules above for matching applies.
 
-### Create Training : 'training'
+### Create Training : `training`
 Creates a new training at the specified date and time.
 
 Format: `training yyyy-MM-dd HHmm`
@@ -195,20 +195,23 @@ Format: `training yyyy-MM-dd HHmm`
 Examples:
 - `training 2020-10-10 1800`
 
-### Delete Training : 'delete-training'
+### Delete Training : `delete-training`
 Deletes an existing training based on the training index.
+
+Format: `delete-training TRAINING_INDEX`
 
 * Training index refers to the index of the training in the displayed training list.
 * All students inside of the training to be deleted will be cleared.
 * Only one training index can be specified at a time.
 
-Format: `delete-training TRAINING_INDEX`
 
 Examples:
 - `delete-training 2` removes the training with index 2 in the displayed training list. 
 
-### Add Student to Training : 'ts-add'
+### Add Student to Training : `ts-add`
 Adds students to a training.
+
+Format: `ts-add TRAINING_INDEX STUDENT_INDEX...`
 
 * Training index refers to the index of the training in the displayed training list.
 * Student index refers to the index of the student in the displayed student list.
@@ -217,22 +220,21 @@ Adds students to a training.
 
 > Note: Training schedules can also be viewed on the student list panel and they will update as you add students to trainings.
 
-Format: `ts-add TRAINING_INDEX STUDENT_INDEX...`
-
 Examples:
 - `ts-add 2 1,2,3` adds students with indexes 1,2,3 to training 1.
 
-### Delete Student from Training : 'ts-delete'
+### Delete Student from Training : `ts-delete`
 Deletes students from a training.
+
+Format: `ts-delete TRAINING_INDEX STUDENT_INDEX...`
 
 * Training index refers to the index of the training in the displayed training list.
 * Student index refers to the index of the student in the displayed student list.
 * Multiple students can be deleted with the same command by inputing multiple student indexes separated with a comma.
 * Only one training index can be specified at a time.
 
-> Note: Training schedules can also be viewed on the student list panel and they will update as you delete students from trainings.
-
-Format: `ts-delete TRAINING_INDEX STUDENT_INDEX...`
+> Note: Training schedules can also be viewed on the student list panel and it will update as you delete students from
+> trainings.
 
 Examples:
 - `ts-delete 2 1,2,3` deletes students with indexes 1,2,3 from training 1.
@@ -240,9 +242,10 @@ Examples:
 ### Clearing all entries: `clear`
 Clears the student and training list of all existing students and trainings.
 
+Format: `clear`
+
 > Note: Be careful, this deletes all data stored inside of the program, including student and training records. All sample data will be cleared too.
 
-Format: `clear`
 
 ### Exiting the program: `exit`
 Exits the program.
