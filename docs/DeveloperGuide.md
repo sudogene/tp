@@ -23,11 +23,11 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2021S1-CS2103-F10-1/tp/tree/master/docs/diagrams) folder. 
 
 </div>
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -62,11 +62,12 @@ The sections below give more details of each component.
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 **API** :
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+[`Ui.java`](https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel
+`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -78,7 +79,7 @@ The `UI` component,
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 **API** :
-[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+[`Logic.java`](https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/logic/Logic.java)
 
 1. `Logic` uses the `CanoeCoachParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
@@ -97,17 +98,20 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/model/Model.java)
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user’s preferences.
-* stores the address book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the CanoeCoach data.
+* exposes an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that
+ the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `CanoeCoach`, which `Person` references. This allows `CanoeCoach` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP
+) model is given below. It has a `Tag` list in the `CanoeCoach`, which `Student` references. This allows `CanoeCoach` to
+ only require one `Tag` object per unique `Tag`, instead of each `Student` needing their own `Tag` object.<br>
 ![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
 
 </div>
@@ -117,11 +121,11 @@ The `Model`,
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/storage/Storage.java)
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
-* can save the address book data in json format and read it back.
+* can save the CanoeCoach data in json format and read it back.
 
 ### Common classes
 
@@ -139,31 +143,31 @@ This section describes some noteworthy details on how certain features are imple
 
 The proposed undo/redo mechanism is facilitated by `VersionedCanoeCoach`. It extends `CanoeCoach` with an undo/redo history, stored internally as an `canoeCoachStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedCanoeCoach#commit()` — Saves the current address book state in its history.
-* `VersionedCanoeCoach#undo()` — Restores the previous address book state from its history.
-* `VersionedCanoeCoach#redo()` — Restores a previously undone address book state from its history.
+* `VersionedCanoeCoach#commit()` — Saves the current CanoeCoach state in its history.
+* `VersionedCanoeCoach#undo()` — Restores the previous CanoeCoach state from its history.
+* `VersionedCanoeCoach#redo()` — Restores a previously undone CanoeCoach state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitCanoeCoach()`, `Model#undoCanoeCoach()` and `Model#redoCanoeCoach()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedCanoeCoach` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedCanoeCoach` will be initialized with the initial CanoeCoach state, and the `currentStatePointer` pointing to that single CanoeCoach state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitCanoeCoach()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `canoeCoachStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th student in the CanoeCoach. The `delete` command calls `Model#commitCanoeCoach()`, causing the modified state of the CanoeCoach after the `delete 5` command executes to be saved in the `canoeCoachStateList`, and the `currentStatePointer` is shifted to the newly inserted CanoeCoach state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitCanoeCoach()`, causing another modified address book state to be saved into the `canoeCoachStateList`.
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitCanoeCoach()`, causing another modified CanoeCoach state to be saved into the `canoeCoachStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitCanoeCoach()`, so the address book state will not be saved into the `canoeCoachStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitCanoeCoach()`, so the CanoeCoach state will not be saved into the `canoeCoachStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCanoeCoach()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCanoeCoach()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous CanoeCoach state, and restores the CanoeCoach to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -180,17 +184,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoCanoeCoach()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoCanoeCoach()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the CanoeCoach to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `canoeCoachStateList.size() - 1`, pointing to the latest address book state, then there are no undone CanoeCoach states to restore. The `redo` command uses `Model#canRedoCanoeCoach()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `canoeCoachStateList.size() - 1`, pointing to the latest CanoeCoach state, then there are no undone CanoeCoach states to restore. The `redo` command uses `Model#canRedoCanoeCoach()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitCanoeCoach()`, `Model#undoCanoeCoach()` or `Model#redoCanoeCoach()`. Thus, the `canoeCoachStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the CanoeCoach, such as `list`, will usually not call `Model#commitCanoeCoach()`, `Model#undoCanoeCoach()` or `Model#redoCanoeCoach()`. Thus, the `canoeCoachStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitCanoeCoach()`. Since the `currentStatePointer` is not pointing at the end of the `canoeCoachStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitCanoeCoach()`. Since the `currentStatePointer` is not pointing at the end of the `canoeCoachStateList`, all CanoeCoach states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -202,14 +206,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ##### Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire CanoeCoach.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+  * Cons: We must ensure that the implementation of each individual command is correct.
 
 _{more aspects and alternatives to be added}_
 
