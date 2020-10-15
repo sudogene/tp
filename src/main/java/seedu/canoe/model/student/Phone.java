@@ -4,11 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.canoe.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Student's phone number in the canoe book.
+ * Represents a Student's phone number in the canoe coach book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {
-
 
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";

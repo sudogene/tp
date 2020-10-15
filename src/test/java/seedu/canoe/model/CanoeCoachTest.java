@@ -22,25 +22,25 @@ import seedu.canoe.model.student.Training;
 import seedu.canoe.model.student.exceptions.DuplicateStudentException;
 import seedu.canoe.testutil.StudentBuilder;
 
-public class AddressBookTest {
+public class CanoeCoachTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final CanoeCoach canoeCoach = new CanoeCoach();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getStudentList());
+        assertEquals(Collections.emptyList(), canoeCoach.getStudentList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> canoeCoach.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        CanoeCoach newData = getTypicalAddressBook();
+        canoeCoach.resetData(newData);
+        assertEquals(newData, canoeCoach);
     }
 
     @Test
@@ -49,48 +49,48 @@ public class AddressBookTest {
         Student editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newStudents);
+        CanoeCoachStub newData = new CanoeCoachStub(newStudents);
 
-        assertThrows(DuplicateStudentException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateStudentException.class, () -> canoeCoach.resetData(newData));
     }
 
     @Test
     public void hasStudent_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasStudent(null));
+        assertThrows(NullPointerException.class, () -> canoeCoach.hasStudent(null));
     }
 
     @Test
     public void hasStudent_studentNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasStudent(ALICE));
+        assertFalse(canoeCoach.hasStudent(ALICE));
     }
 
     @Test
     public void hasStudent_studentInAddressBook_returnsTrue() {
-        addressBook.addStudent(ALICE);
-        assertTrue(addressBook.hasStudent(ALICE));
+        canoeCoach.addStudent(ALICE);
+        assertTrue(canoeCoach.hasStudent(ALICE));
     }
 
     @Test
     public void hasStudent_studentWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addStudent(ALICE);
+        canoeCoach.addStudent(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasStudent(editedAlice));
+        assertTrue(canoeCoach.hasStudent(editedAlice));
     }
 
     @Test
     public void getStudentList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getStudentList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> canoeCoach.getStudentList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose students list can violate interface constraints.
+     * A stub ReadOnlyCanoeCoach whose students list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class CanoeCoachStub implements ReadOnlyCanoeCoach {
         private final ObservableList<Student> students = FXCollections.observableArrayList();
         private final ObservableList<Training> trainings = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Student> students) {
+        CanoeCoachStub(Collection<Student> students) {
             this.students.setAll(students);
         }
 

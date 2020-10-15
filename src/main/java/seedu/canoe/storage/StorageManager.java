@@ -7,25 +7,25 @@ import java.util.logging.Logger;
 
 import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.commons.exceptions.DataConversionException;
-import seedu.canoe.model.ReadOnlyAddressBook;
+import seedu.canoe.model.ReadOnlyCanoeCoach;
 import seedu.canoe.model.ReadOnlyUserPrefs;
 import seedu.canoe.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of CanoeCoach data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private CanoeCoachStorage canoeCoachStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code CanoeCoachStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(CanoeCoachStorage canoeCoachStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.canoeCoachStorage = canoeCoachStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -47,33 +47,33 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ CanoeCoach methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getCanoeCoachFilePath() {
+        return canoeCoachStorage.getCanoeCoachFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyCanoeCoach> readCanoeCoach() throws DataConversionException, IOException {
+        return readCanoeCoach(canoeCoachStorage.getCanoeCoachFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyCanoeCoach> readCanoeCoach(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return canoeCoachStorage.readCanoeCoach(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveCanoeCoach(ReadOnlyCanoeCoach canoeCoach) throws IOException {
+        saveCanoeCoach(canoeCoach, canoeCoachStorage.getCanoeCoachFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveCanoeCoach(ReadOnlyCanoeCoach canoeCoach, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        canoeCoachStorage.saveCanoeCoach(canoeCoach, filePath);
     }
 
 }

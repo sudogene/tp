@@ -11,10 +11,10 @@ import seedu.canoe.model.student.UniqueStudentList;
 import seedu.canoe.model.student.UniqueTrainingList;
 
 /**
- * Wraps all data at the canoe-book level
+ * Wraps all data at the canoe coach book level
  * Duplicates are not allowed (by .isSameStudent comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class CanoeCoach implements ReadOnlyCanoeCoach {
 
     private final UniqueStudentList students;
     private final UniqueTrainingList trainings;
@@ -31,12 +31,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         trainings = new UniqueTrainingList();
     }
 
-    public AddressBook() {}
+    public CanoeCoach() {}
 
     /**
-     * Creates an AddressBook using the Students in the {@code toBeCopied}
+     * Creates an CanoeCoach using the Students in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public CanoeCoach(ReadOnlyCanoeCoach toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -71,9 +71,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code CanoeCoach} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyCanoeCoach newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
@@ -126,7 +126,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code CanoeCoach}.
      * {@code key} must exist in the canoe book.
      */
     public void removeStudent(Student key) {
@@ -163,8 +163,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && students.equals(((AddressBook) other).students));
+                || (other instanceof CanoeCoach // instanceof handles nulls
+                && students.equals(((CanoeCoach) other).students));
     }
 
     @Override

@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.canoe.model.AddressBook;
-import seedu.canoe.model.ReadOnlyAddressBook;
+import seedu.canoe.model.CanoeCoach;
+import seedu.canoe.model.ReadOnlyCanoeCoach;
 import seedu.canoe.model.student.AcademicYear;
 import seedu.canoe.model.student.Email;
 import seedu.canoe.model.student.Id;
@@ -22,7 +22,7 @@ import seedu.canoe.model.student.time.Wednesday;
 import seedu.canoe.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code CanoeCoach} with sample data.
  */
 public class SampleDataUtil {
     public static Student[] getSampleStudents() {
@@ -57,8 +57,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyCanoeCoach getCanoeCoachBook() {
+        CanoeCoach sampleAb = new CanoeCoach();
         for (Student sampleStudent : getSampleStudents()) {
             sampleAb.addStudent(sampleStudent);
         }

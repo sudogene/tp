@@ -74,7 +74,4 @@ public class Day {
         return dismissalTime.hashCode();
     }
 
-
 }
-
-

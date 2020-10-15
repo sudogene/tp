@@ -25,7 +25,7 @@ public class DeleteTrainingCommandTest {
 
         String expectedMessage = String.format(DeleteTrainingCommand.MESSAGE_SUCCESS, trainingToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getCanoeCoach(), new UserPrefs());
         expectedModel.deleteTraining(trainingToDelete);
 
         assertCommandSuccess(deleteTrainingCommand, model, expectedMessage, expectedModel);

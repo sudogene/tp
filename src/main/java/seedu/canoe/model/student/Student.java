@@ -18,7 +18,7 @@ import seedu.canoe.model.student.time.Day;
 import seedu.canoe.model.tag.Tag;
 
 /**
- * Represents a Student in the canoe book.
+ * Represents a Student in the canoe coach book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Student {
@@ -32,7 +32,6 @@ public class Student {
     private final Phone phone;
     private final Email email;
     private final AcademicYear academicYear;
-
 
     // Dismissal Times
     private final Day mondayDismissal;
@@ -128,7 +127,6 @@ public class Student {
     public void addAllTraining(List<LocalDateTime> trainingDateTimes) {
         trainingSchedules.addAll(trainingDateTimes);
     }
-
 
     /**
      * Checks if student has a training scheduled at the specified date and start time.

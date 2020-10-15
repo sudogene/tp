@@ -10,10 +10,10 @@ import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.logic.commands.Command;
 import seedu.canoe.logic.commands.CommandResult;
 import seedu.canoe.logic.commands.exceptions.CommandException;
-import seedu.canoe.logic.parser.AddressBookParser;
+import seedu.canoe.logic.parser.CanoeCoachParser;
 import seedu.canoe.logic.parser.exceptions.ParseException;
 import seedu.canoe.model.Model;
-import seedu.canoe.model.ReadOnlyAddressBook;
+import seedu.canoe.model.ReadOnlyCanoeCoach;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.student.Training;
 import seedu.canoe.storage.Storage;
@@ -27,7 +27,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final CanoeCoachParser canoeCoachParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -35,7 +35,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        canoeCoachParser = new CanoeCoachParser();
     }
 
     @Override
@@ -43,11 +43,11 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = canoeCoachParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveCanoeCoach(model.getCanoeCoach());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -56,8 +56,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyCanoeCoach getCanoeCoach() {
+        return model.getCanoeCoach();
     }
 
     @Override
@@ -71,8 +71,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getCanoeCoachFilePath() {
+        return model.getCanoeCoachFilePath();
     }
 
     @Override

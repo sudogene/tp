@@ -5,9 +5,9 @@ import seedu.canoe.model.student.Student;
 import seedu.canoe.model.student.Training;
 
 /**
- * Unmodifiable view of an canoe book
+ * Unmodifiable view of a canoe coach book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyCanoeCoach {
 
     /**
      * Returns an unmodifiable view of the students list.

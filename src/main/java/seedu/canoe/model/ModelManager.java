@@ -15,33 +15,33 @@ import seedu.canoe.model.student.Student;
 import seedu.canoe.model.student.Training;
 
 /**
- * Represents the in-memory model of the canoe book data.
+ * Represents the in-memory model of the canoe coach data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final CanoeCoach canoeCoach;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<Training> filteredTrainings;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given canoeCoach and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyCanoeCoach canoeCoach, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(canoeCoach, userPrefs);
 
-        logger.fine("Initializing with canoe book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with canoe book: " + canoeCoach + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.canoeCoach = new CanoeCoach(canoeCoach);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
-        filteredTrainings = new FilteredList<>(this.addressBook.getTrainingList());
+        filteredStudents = new FilteredList<>(this.canoeCoach.getStudentList());
+        filteredTrainings = new FilteredList<>(this.canoeCoach.getTrainingList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new CanoeCoach(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -69,77 +69,77 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getCanoeCoachFilePath() {
+        return userPrefs.getCanoeCoachFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setCanoeCoachFilePath(Path canoeCoachFilePath) {
+        requireNonNull(canoeCoachFilePath);
+        userPrefs.setCanoeCoachFilePath(canoeCoachFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== CanoeCoach ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setCanoeCoach(ReadOnlyCanoeCoach canoeCoach) {
+        this.canoeCoach.resetData(canoeCoach);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyCanoeCoach getCanoeCoach() {
+        return canoeCoach;
     }
 
     @Override
     public boolean hasStudent(Student student) {
         requireNonNull(student);
-        return addressBook.hasStudent(student);
+        return canoeCoach.hasStudent(student);
     }
 
     @Override
     public void deleteStudent(Student target) {
-        addressBook.removeStudent(target);
+        canoeCoach.removeStudent(target);
     }
 
     @Override
     public void addStudent(Student student) {
-        addressBook.addStudent(student);
+        canoeCoach.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
     public void setStudentInUniqueStudentList(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-        addressBook.setStudentInUniqueStudentList(target, editedStudent);
+        canoeCoach.setStudentInUniqueStudentList(target, editedStudent);
     }
 
     @Override
     public void setTraining(Training target, Training editedTraining) {
         requireAllNonNull(target, editedTraining);
-        addressBook.setTraining(target, editedTraining);
+        canoeCoach.setTraining(target, editedTraining);
     }
 
     @Override
     public void addTraining(Training training) {
-        addressBook.addTraining(training);
+        canoeCoach.addTraining(training);
     }
 
     @Override
     public boolean hasTraining(Training training) {
-        return addressBook.hasTraining(training);
+        return canoeCoach.hasTraining(training);
     }
 
     @Override
     public void deleteTraining(Training training) {
-        addressBook.removeTraining(training);
+        canoeCoach.removeTraining(training);
     }
 
     //=========== Filtered Student List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedCanoeCoach}
      */
     @Override
     public ObservableList<Student> getFilteredStudentList() {
@@ -177,7 +177,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return canoeCoach.equals(other.canoeCoach)
                 && userPrefs.equals(other.userPrefs)
                 && filteredStudents.equals(other.filteredStudents);
     }

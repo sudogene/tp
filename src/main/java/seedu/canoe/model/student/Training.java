@@ -15,7 +15,8 @@ public class Training {
 
     /**
      * Constructor with only LocalDateTime.
-     * @param dateTime
+     *
+     * @param dateTime of training
      */
     public Training(LocalDateTime dateTime) {
         this.dateTime = dateTime;
@@ -24,8 +25,9 @@ public class Training {
     /**
      * Constructor with both LocalDateTime and a Set of Students.
      * Initialises Training with the specified set of students.
-     * @param dateTime
-     * @param students
+     *
+     * @param dateTime of training
+     * @param students set of students
      */
     public Training(LocalDateTime dateTime, Set<Student> students) {
         this.dateTime = dateTime;

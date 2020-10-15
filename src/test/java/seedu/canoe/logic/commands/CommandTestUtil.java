@@ -20,7 +20,7 @@ import java.util.List;
 
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.exceptions.CommandException;
-import seedu.canoe.model.AddressBook;
+import seedu.canoe.model.CanoeCoach;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.NameContainsKeywordsPredicate;
 import seedu.canoe.model.student.Student;
@@ -144,11 +144,11 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        CanoeCoach expectedCanoeCoach = new CanoeCoach(actualModel.getCanoeCoach());
         List<Student> expectedFilteredList = new ArrayList<>(actualModel.getFilteredStudentList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedCanoeCoach, actualModel.getCanoeCoach());
         assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
     }
     /**

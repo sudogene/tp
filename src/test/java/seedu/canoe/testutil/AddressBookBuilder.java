@@ -1,34 +1,34 @@
 package seedu.canoe.testutil;
 
-import seedu.canoe.model.AddressBook;
+import seedu.canoe.model.CanoeCoach;
 import seedu.canoe.model.student.Student;
 
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withStudent("John", "Doe").build();}
+ *     {@code CanoeCoach ab = new AddressBookBuilder().withStudent("John", "Doe").build();}
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private CanoeCoach canoeCoach;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        canoeCoach = new CanoeCoach();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public AddressBookBuilder(CanoeCoach canoeCoach) {
+        this.canoeCoach = canoeCoach;
     }
 
     /**
-     * Adds a new {@code Student} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Student} to the {@code CanoeCoach} that we are building.
      */
     public AddressBookBuilder withStudent(Student student) {
-        addressBook.addStudent(student);
+        canoeCoach.addStudent(student);
         return this;
     }
 
-    public AddressBook build() {
-        return addressBook;
+    public CanoeCoach build() {
+        return canoeCoach;
     }
 }

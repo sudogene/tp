@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Represents a Student's id.
+ * Represents a Student's id in the canoe coach book.
  */
 public class Id {
     public static final String MESSAGE_CONSTRAINTS = "Id must be numeric and unique.";

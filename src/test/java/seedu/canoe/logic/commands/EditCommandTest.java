@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.EditCommand.EditStudentDescriptor;
-import seedu.canoe.model.AddressBook;
+import seedu.canoe.model.CanoeCoach;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.ModelManager;
 import seedu.canoe.model.UserPrefs;
@@ -43,7 +43,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
         System.out.println(expectedMessage);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CanoeCoach(model.getCanoeCoach()), new UserPrefs());
         expectedModel.setStudentInUniqueStudentList(model.getFilteredStudentList().get(0), editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -64,7 +64,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CanoeCoach(model.getCanoeCoach()), new UserPrefs());
         expectedModel.setStudentInUniqueStudentList(lastStudent, editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -77,7 +77,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CanoeCoach(model.getCanoeCoach()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -93,7 +93,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CanoeCoach(model.getCanoeCoach()), new UserPrefs());
         expectedModel.setStudentInUniqueStudentList(model.getFilteredStudentList().get(0), editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -113,7 +113,7 @@ public class EditCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
         // edit student in filtered list into a duplicate in canoe book
-        Student studentInList = model.getAddressBook().getStudentList().get(INDEX_SECOND_STUDENT.getZeroBased());
+        Student studentInList = model.getCanoeCoach().getStudentList().get(INDEX_SECOND_STUDENT.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT,
                 new EditStudentDescriptorBuilder(studentInList).build());
 
@@ -139,7 +139,7 @@ public class EditCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
         Index outOfBoundIndex = INDEX_SECOND_STUDENT;
         // ensures that outOfBoundIndex is still in bounds of canoe book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getStudentList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getCanoeCoach().getStudentList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());

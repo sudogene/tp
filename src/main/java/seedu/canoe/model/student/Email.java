@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.canoe.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Student's email in the canoe book.
+ * Represents a Student's email in the canoe coach book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {
@@ -32,7 +32,7 @@ public class Email {
     /**
      * Constructs an {@code Email}.
      *
-     * @param email A valid email canoe.
+     * @param email A valid email address.
      */
     public Email(String email) {
         requireNonNull(email);

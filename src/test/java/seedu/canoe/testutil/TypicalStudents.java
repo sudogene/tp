@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.canoe.model.AddressBook;
+import seedu.canoe.model.CanoeCoach;
 import seedu.canoe.model.student.Student;
 
 /**
@@ -91,10 +91,10 @@ public class TypicalStudents {
     private TypicalStudents() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical students.
+     * Returns an {@code CanoeCoach} with all the typical students.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static CanoeCoach getTypicalAddressBook() {
+        CanoeCoach ab = new CanoeCoach();
         for (Student student : getTypicalStudents()) {
             ab.addStudent(student);
         }

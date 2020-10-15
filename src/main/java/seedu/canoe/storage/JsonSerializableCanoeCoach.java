@@ -9,16 +9,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.canoe.commons.exceptions.IllegalValueException;
-import seedu.canoe.model.AddressBook;
-import seedu.canoe.model.ReadOnlyAddressBook;
+import seedu.canoe.model.CanoeCoach;
+import seedu.canoe.model.ReadOnlyCanoeCoach;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.student.Training;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable CanoeCoach that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "canoecoach")
+class JsonSerializableCanoeCoach {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
     public static final String MESSAGE_DUPLICATE_TRAINING = "Training list contains duplicate Training Session(s).";
@@ -27,48 +27,48 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedTraining> trainings = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given students.
+     * Constructs a {@code JsonSerializableCanoeCoach} with the given students.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("students") List<JsonAdaptedStudent> students,
-                                       @JsonProperty("trainings") List<JsonAdaptedTraining> trainings) {
+    public JsonSerializableCanoeCoach(@JsonProperty("students") List<JsonAdaptedStudent> students,
+                                      @JsonProperty("trainings") List<JsonAdaptedTraining> trainings) {
         this.students.addAll(students);
         this.trainings.addAll(trainings);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyCanoeCoach} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableCanoeCoach}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableCanoeCoach(ReadOnlyCanoeCoach source) {
         students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
         trainings.addAll(source.getTrainingList().stream().map(JsonAdaptedTraining::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this canoe book into the model's {@code AddressBook} object.
+     * Converts this canoe coach book into the model's {@code CanoeCoach} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public CanoeCoach toModelType() throws IllegalValueException {
+        CanoeCoach canoeCoach = new CanoeCoach();
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             Student student = jsonAdaptedStudent.toModelType();
-            if (addressBook.hasStudent(student)) {
+            if (canoeCoach.hasStudent(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
-            addressBook.addStudent(student);
+            canoeCoach.addStudent(student);
         }
         for (JsonAdaptedTraining jsonAdaptedTraining : trainings) {
             Training training = jsonAdaptedTraining.toModelType();
-            if (addressBook.hasTraining(training)) {
+            if (canoeCoach.hasTraining(training)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TRAINING);
             }
-            addressBook.addTraining(training);
+            canoeCoach.addTraining(training);
         }
 
-        return addressBook;
+        return canoeCoach;
     }
 
 }

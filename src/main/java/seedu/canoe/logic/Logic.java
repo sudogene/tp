@@ -7,7 +7,7 @@ import seedu.canoe.commons.core.GuiSettings;
 import seedu.canoe.logic.commands.CommandResult;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.logic.parser.exceptions.ParseException;
-import seedu.canoe.model.ReadOnlyAddressBook;
+import seedu.canoe.model.ReadOnlyCanoeCoach;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.student.Training;
 
@@ -25,11 +25,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the CanoeCoach.
      *
-     * @see seedu.canoe.model.Model#getAddressBook()
+     * @see seedu.canoe.model.Model#getCanoeCoach()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyCanoeCoach getCanoeCoach();
 
     /** Returns an unmodifiable view of the filtered list of students */
     ObservableList<Student> getFilteredStudentList();
@@ -40,7 +40,7 @@ public interface Logic {
     /**
      * Returns the user prefs' canoe book file path.
      */
-    Path getAddressBookFilePath();
+    Path getCanoeCoachFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

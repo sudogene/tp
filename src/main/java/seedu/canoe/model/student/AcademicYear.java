@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.canoe.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Student's name in the canoe book.
+ * Represents a Student's name in the canoe coach book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAcademicYear(String)}
  */
 public class AcademicYear {
@@ -13,7 +13,7 @@ public class AcademicYear {
             "The Academic Year should only contain a number between 1 to 5.";
 
     /*
-     * The first character of the canoe must not be a whitespace,
+     * The first character of the input must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[1-5]";

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Student}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Training}'s {@code dateTime} matches any of the keywords given.
  */
 public class TrainingMatchesPredicate implements Predicate<Training> {
     private final List<LocalDateTime> localDateTimes;

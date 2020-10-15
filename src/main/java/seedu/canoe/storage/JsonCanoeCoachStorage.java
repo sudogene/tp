@@ -12,41 +12,41 @@ import seedu.canoe.commons.exceptions.DataConversionException;
 import seedu.canoe.commons.exceptions.IllegalValueException;
 import seedu.canoe.commons.util.FileUtil;
 import seedu.canoe.commons.util.JsonUtil;
-import seedu.canoe.model.ReadOnlyAddressBook;
+import seedu.canoe.model.ReadOnlyCanoeCoach;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access CanoeCoach data stored as a json file on the hard disk.
  */
-public class JsonAddressBookStorage implements AddressBookStorage {
+public class JsonCanoeCoachStorage implements CanoeCoachStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonCanoeCoachStorage.class);
 
     private Path filePath;
 
-    public JsonAddressBookStorage(Path filePath) {
+    public JsonCanoeCoachStorage(Path filePath) {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getCanoeCoachFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyCanoeCoach> readCanoeCoach() throws DataConversionException {
+        return readCanoeCoach(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readCanoeCoach()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyCanoeCoach> readCanoeCoach(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
+        Optional<JsonSerializableCanoeCoach> jsonAddressBook = JsonUtil.readJsonFile(
+                filePath, JsonSerializableCanoeCoach.class);
         if (!jsonAddressBook.isPresent()) {
             return Optional.empty();
         }
@@ -60,21 +60,21 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveCanoeCoach(ReadOnlyCanoeCoach canoeCoach) throws IOException {
+        saveCanoeCoach(canoeCoach, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}.
+     * Similar to {@link #saveCanoeCoach(ReadOnlyCanoeCoach)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveCanoeCoach(ReadOnlyCanoeCoach canoeCoach, Path filePath) throws IOException {
+        requireNonNull(canoeCoach);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableCanoeCoach(canoeCoach), filePath);
     }
 
 }

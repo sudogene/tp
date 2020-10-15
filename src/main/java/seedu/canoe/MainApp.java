@@ -15,19 +15,11 @@ import seedu.canoe.commons.util.ConfigUtil;
 import seedu.canoe.commons.util.StringUtil;
 import seedu.canoe.logic.Logic;
 import seedu.canoe.logic.LogicManager;
-import seedu.canoe.model.AddressBook;
-import seedu.canoe.model.Model;
-import seedu.canoe.model.ModelManager;
-import seedu.canoe.model.ReadOnlyAddressBook;
-import seedu.canoe.model.ReadOnlyUserPrefs;
-import seedu.canoe.model.UserPrefs;
+import seedu.canoe.model.*;
+import seedu.canoe.model.CanoeCoach;
 import seedu.canoe.model.util.SampleDataUtil;
-import seedu.canoe.storage.AddressBookStorage;
-import seedu.canoe.storage.JsonAddressBookStorage;
-import seedu.canoe.storage.JsonUserPrefsStorage;
-import seedu.canoe.storage.Storage;
-import seedu.canoe.storage.StorageManager;
-import seedu.canoe.storage.UserPrefsStorage;
+import seedu.canoe.storage.*;
+import seedu.canoe.storage.CanoeCoachStorage;
 import seedu.canoe.ui.Ui;
 import seedu.canoe.ui.UiManager;
 
@@ -48,7 +40,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing CanoeCoach ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -56,8 +48,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        CanoeCoachStorage canoeCoachStorage = new JsonCanoeCoachStorage(userPrefs.getCanoeCoachFilePath());
+        storage = new StorageManager(canoeCoachStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -69,25 +61,25 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s canoe book and {@code userPrefs}. <br>
-     * The data from the sample canoe book will be used instead if {@code storage}'s canoe book is not found,
-     * or an empty canoe book will be used instead if errors occur when reading {@code storage}'s canoe book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s canoe coach book and {@code userPrefs}. <br>
+     * The data from the sample canoe coach book will be used instead if {@code storage}'s canoe coach book is not found,
+     * or an empty canoe coach book will be used instead if errors occur when reading {@code storage}'s canoe coach book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyCanoeCoach> canoeCoachOptional;
+        ReadOnlyCanoeCoach initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            canoeCoachOptional = storage.readCanoeCoach();
+            if (!canoeCoachOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample CanoeCoach");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = canoeCoachOptional.orElseGet(SampleDataUtil::getCanoeCoachBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty CanoeCoach");
+            initialData = new CanoeCoach();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty CanoeCoach");
+            initialData = new CanoeCoach();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -151,7 +143,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty CanoeCoach");
             initializedPrefs = new UserPrefs();
         }
 
@@ -167,7 +159,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting CanoeCoach " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

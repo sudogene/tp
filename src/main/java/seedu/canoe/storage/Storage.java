@@ -5,14 +5,14 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.canoe.commons.exceptions.DataConversionException;
-import seedu.canoe.model.ReadOnlyAddressBook;
+import seedu.canoe.model.ReadOnlyCanoeCoach;
 import seedu.canoe.model.ReadOnlyUserPrefs;
 import seedu.canoe.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends CanoeCoachStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -21,12 +21,12 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getCanoeCoachFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyCanoeCoach> readCanoeCoach() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveCanoeCoach(ReadOnlyCanoeCoach canoeCoach) throws IOException;
 
 }

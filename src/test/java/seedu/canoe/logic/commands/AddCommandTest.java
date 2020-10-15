@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.canoe.commons.core.GuiSettings;
 import seedu.canoe.logic.commands.exceptions.CommandException;
-import seedu.canoe.model.AddressBook;
+import seedu.canoe.model.CanoeCoach;
 import seedu.canoe.model.Model;
-import seedu.canoe.model.ReadOnlyAddressBook;
+import seedu.canoe.model.ReadOnlyCanoeCoach;
 import seedu.canoe.model.ReadOnlyUserPrefs;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.student.Training;
@@ -100,12 +100,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getCanoeCoachFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setCanoeCoachFilePath(Path canoeCoachFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -130,12 +130,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setCanoeCoach(ReadOnlyCanoeCoach canoeCoach) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyCanoeCoach getCanoeCoach() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -217,8 +217,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyCanoeCoach getCanoeCoach() {
+            return new CanoeCoach();
         }
     }
 

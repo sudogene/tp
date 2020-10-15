@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Student}'s parameters match all the predicates in the predicate list.
+ * Tests that the searched parameters match all the predicates in the predicate list.
  * If the predicate list is empty, it defaults to false.
  */
 public class AllMatchPredicateList implements Predicate<Student> {

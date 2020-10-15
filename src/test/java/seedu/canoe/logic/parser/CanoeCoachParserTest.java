@@ -30,9 +30,9 @@ import seedu.canoe.testutil.EditStudentDescriptorBuilder;
 import seedu.canoe.testutil.StudentBuilder;
 import seedu.canoe.testutil.StudentUtil;
 
-public class AddressBookParserTest {
+public class CanoeCoachParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final CanoeCoachParser parser = new CanoeCoachParser();
 
     @Test
     public void parseCommand_add() throws Exception {

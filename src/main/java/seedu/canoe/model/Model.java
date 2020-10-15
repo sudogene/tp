@@ -36,37 +36,37 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' canoe book file path.
+     * Returns the user prefs' canoe coach file path.
      */
-    Path getAddressBookFilePath();
+    Path getCanoeCoachFilePath();
 
     /**
-     * Sets the user prefs' canoe book file path.
+     * Sets the user prefs' canoe coach file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setCanoeCoachFilePath(Path canoeCoachFilePath);
 
     /**
-     * Replaces canoe book data with the data in {@code addressBook}.
+     * Replaces canoe coach data with the data in {@code canoeCoach}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setCanoeCoach(ReadOnlyCanoeCoach canoeCoach);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the CanoeCoach */
+    ReadOnlyCanoeCoach getCanoeCoach();
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the canoe book.
+     * Returns true if a student with the same identity as {@code student} exists in the canoe coach book.
      */
     boolean hasStudent(Student student);
 
     /**
      * Deletes the given student.
-     * The student must exist in the canoe book.
+     * The student must exist in the canoe coach book.
      */
     void deleteStudent(Student target);
 
     /**
      * Adds the given student.
-     * {@code student} must not already exist in the canoe book.
+     * {@code student} must not already exist in the canoe coach book.
      */
     void addStudent(Student student);
 
@@ -74,7 +74,7 @@ public interface Model {
      * Replaces the given student {@code target} with {@code editedStudent}.
      * {@code target} must exist in the canoe book.
      * The student identity of {@code editedStudent} must not be the same as another
-     * existing student in the canoe book.
+     * existing student in the canoe coach book.
      */
     void setStudentInUniqueStudentList(Student target, Student editedStudent);
 
@@ -82,19 +82,21 @@ public interface Model {
      * Replaces the given training {@code target} with {@code editedTraining}.
      * {@code target} must exist in the canoe book.
      * The student identity of {@code editedTraining} must not be the same as another
-     * existing training in the canoe book.
+     * existing training in the canoe coach book.
      */
     void setTraining(Training target, Training editedTraining);
 
     /**
      * Adds the given Training Session.
-     * @param training
+     *
+     * @param training to be added.
      */
     void addTraining(Training training);
 
     /**
-     * Returns true if the Training Session already exists in the canoe book.
-     * @param training
+     * Returns true if the Training Session already exists in the canoe coach book.
+     *
+     * @param training to be checked.
      */
     boolean hasTraining(Training training);
 
@@ -106,7 +108,8 @@ public interface Model {
 
     /**
      * Deletes the specified Training Session.
-     * @param training
+     *
+     * @param training to be deleted.
      */
     void deleteTraining(Training training);
 

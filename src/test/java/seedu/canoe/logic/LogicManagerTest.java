@@ -24,10 +24,10 @@ import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.logic.parser.exceptions.ParseException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.ModelManager;
-import seedu.canoe.model.ReadOnlyAddressBook;
+import seedu.canoe.model.ReadOnlyCanoeCoach;
 import seedu.canoe.model.UserPrefs;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.storage.JsonAddressBookStorage;
+import seedu.canoe.storage.JsonCanoeCoachStorage;
 import seedu.canoe.storage.JsonUserPrefsStorage;
 import seedu.canoe.storage.StorageManager;
 import seedu.canoe.testutil.StudentBuilder;
@@ -43,8 +43,8 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonCanoeCoachStorage addressBookStorage =
+                new JsonCanoeCoachStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -70,9 +70,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        // Setup LogicManager with JsonCanoeCoachIoExceptionThrowingStub
+        JsonCanoeCoachStorage addressBookStorage =
+                new JsonCanoeCoachIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
@@ -129,7 +129,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getCanoeCoach(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -149,13 +149,13 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
+    private static class JsonCanoeCoachIoExceptionThrowingStub extends JsonCanoeCoachStorage {
+        private JsonCanoeCoachIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        public void saveCanoeCoach(ReadOnlyCanoeCoach canoeCoach, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

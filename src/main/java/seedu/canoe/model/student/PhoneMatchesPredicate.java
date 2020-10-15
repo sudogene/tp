@@ -12,7 +12,6 @@ public class PhoneMatchesPredicate implements Predicate<Student> {
         this.phoneValue = phoneValue;
     }
 
-
     @Override
     public boolean test(Student student) {
         return student.getPhone().value.equals(phoneValue);

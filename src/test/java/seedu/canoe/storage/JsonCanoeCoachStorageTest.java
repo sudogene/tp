@@ -16,11 +16,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.canoe.commons.exceptions.DataConversionException;
-import seedu.canoe.model.AddressBook;
-import seedu.canoe.model.ReadOnlyAddressBook;
+import seedu.canoe.model.CanoeCoach;
+import seedu.canoe.model.ReadOnlyCanoeCoach;
 
-public class JsonAddressBookStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+public class JsonCanoeCoachStorageTest {
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonCanoeCoachStorageTest");
 
     @TempDir
     public Path testFolder;
@@ -30,8 +30,8 @@ public class JsonAddressBookStorageTest {
         assertThrows(NullPointerException.class, () -> readAddressBook(null));
     }
 
-    private java.util.Optional<ReadOnlyAddressBook> readAddressBook(String filePath) throws Exception {
-        return new JsonAddressBookStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+    private java.util.Optional<ReadOnlyCanoeCoach> readAddressBook(String filePath) throws Exception {
+        return new JsonCanoeCoachStorage(Paths.get(filePath)).readCanoeCoach(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -47,42 +47,42 @@ public class JsonAddressBookStorageTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatCanoeCoach.json"));
     }
 
     @Test
     public void readAddressBook_invalidStudentAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidStudentAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidStudentCanoeCoach.json"));
     }
 
     @Test
     public void readAddressBook_invalidAndValidStudentAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidStudentAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidStudentCanoeCoach.json"));
     }
 
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
-        AddressBook original = getTypicalAddressBook();
-        JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
+        CanoeCoach original = getTypicalAddressBook();
+        JsonCanoeCoachStorage jsonAddressBookStorage = new JsonCanoeCoachStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyAddressBook readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        jsonAddressBookStorage.saveCanoeCoach(original, filePath);
+        ReadOnlyCanoeCoach readBack = jsonAddressBookStorage.readCanoeCoach(filePath).get();
+        assertEquals(original, new CanoeCoach(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addStudent(HOON);
         original.removeStudent(ALICE);
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        jsonAddressBookStorage.saveCanoeCoach(original, filePath);
+        readBack = jsonAddressBookStorage.readCanoeCoach(filePath).get();
+        assertEquals(original, new CanoeCoach(readBack));
 
         // Save and read without specifying file path
         original.addStudent(IDA);
-        jsonAddressBookStorage.saveAddressBook(original); // file path not specified
-        readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
-        assertEquals(original, new AddressBook(readBack));
+        jsonAddressBookStorage.saveCanoeCoach(original); // file path not specified
+        readBack = jsonAddressBookStorage.readCanoeCoach().get(); // file path not specified
+        assertEquals(original, new CanoeCoach(readBack));
 
     }
 
@@ -94,10 +94,10 @@ public class JsonAddressBookStorageTest {
     /**
      * Saves {@code addressBook} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) {
+    private void saveAddressBook(ReadOnlyCanoeCoach addressBook, String filePath) {
         try {
-            new JsonAddressBookStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+            new JsonCanoeCoachStorage(Paths.get(filePath))
+                    .saveCanoeCoach(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
@@ -105,6 +105,6 @@ public class JsonAddressBookStorageTest {
 
     @Test
     public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new AddressBook(), null));
+        assertThrows(NullPointerException.class, () -> saveAddressBook(new CanoeCoach(), null));
     }
 }

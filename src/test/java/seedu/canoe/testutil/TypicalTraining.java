@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.canoe.model.AddressBook;
+import seedu.canoe.model.CanoeCoach;
 import seedu.canoe.model.student.Training;
 
 public class TypicalTraining {
@@ -23,10 +23,10 @@ public class TypicalTraining {
     public static final Training VALID_TRAINING3 = new TrainingBuilder().withDateTime(VALID_LOCAL_DATE_TIME_3).build();
 
     /**
-     * Returns an {@code AddressBook} with all the typical trainings.
+     * Returns an {@code CanoeCoach} with all the typical trainings.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static CanoeCoach getTypicalAddressBook() {
+        CanoeCoach ab = new CanoeCoach();
         for (Training training : getTypicalTrainings()) {
             ab.addTraining(training);
         }
