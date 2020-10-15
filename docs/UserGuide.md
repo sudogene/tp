@@ -103,6 +103,9 @@ Format: `edit STUDENT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [ay/ACADEMIC_YEAR] [d1/
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
 * You can remove all of the student’s tags by typing `t/` without specifying any tags after it.
+* Take note that editing the details of a student will also propagate the changes on the training panel.
+* Be careful when editing dismissal times, as this might automatically remove students from scheduled trainings if
+ the updated dismissal time on the same day of the week is now later than the time of the student's scheduled trainings.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com d1/1600` Edits the phone number and email address of the 1st student in the displayed student list to be `91234567` and `johndoe@example.com` respectively. This also changes his Monday's dismissal time to 1600.
@@ -116,6 +119,7 @@ Format: `delete STUDENT_INDEX`
 - Deletes the student at the specified `STUDENT_INDEX`.
 - The student index refers to the index number shown in the displayed student list.
 - The index must be an unsigned integer 1, 2, 3, …
+- This will remove the student from all of his/her scheduled training sessions.
 
 Examples:
 - `delete 2` deletes the 2nd student in the displayed student list.
@@ -181,6 +185,8 @@ Format: `commonTime [n/KEYWORDS] [ay/ACADEMIC_YEAR]`
 
 - Searching by more than one field
     - Common Time command will return student(s) that matches any of the fields provided.
+    
+- If no student matches the search criteria, the default dismissal time of 1500 for all 5 days will be returned.
 
 Examples:
 - `commonTime n/alex ay/1` returns the latest dismissal times for any student with names containing the whole word `alex`, **OR** who are in Academic Year 1.
@@ -214,9 +220,13 @@ Adds students to a training.
 Format: `ts-add TRAINING_INDEX STUDENT_INDEX...`
 
 * Training index refers to the index of the training in the displayed training list.
-* Student index refers to the index of the student in the displayed student list.
+* Student index refers to the index of the student in the entire student list (can be viewed with `list` command).
 * Multiple students can be added with the same command by inputing multiple student indexes separated with a comma.
 * Only one training index can be specified at a time.
+* Each student can only be added to a **SINGLE** training on the same date regardless of time.
+* Student's dismissal time for the same day should also be equal or earlier than the time of the training. (i.e
+. Student's dismissal time for Monday should be equal or earlier than the time of a training that falls on a Monday
+ for him/her to be successfully added.)
 
 > Note: Training schedules can also be viewed on the student list panel and they will update as you add students to trainings.
 
@@ -229,7 +239,7 @@ Deletes students from a training.
 Format: `ts-delete TRAINING_INDEX STUDENT_INDEX...`
 
 * Training index refers to the index of the training in the displayed training list.
-* Student index refers to the index of the student in the displayed student list.
+* Student index refers to the index of the student in the entire student list (can be viewed with `list` command).
 * Multiple students can be deleted with the same command by inputing multiple student indexes separated with a comma.
 * Only one training index can be specified at a time.
 
