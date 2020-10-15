@@ -257,18 +257,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | see everyone’s available schedules       |  find a common available time to have classes.                                                                             |
-| `* * *`  | user                                       | delete students that have quit and automatically remove them from my schedule                | keep track of only current active students                |
-| `* * *`    | user                                       | add the available schedules of a particular student   | know when that student is available to have classes              |
-| `* * *`      | user | easily create new student record entries          | store information/data of students in a structured way    |
-| `* * *`      | user | easily modify the personal details of my students          | see the most accurate information    |
-| `* * *`  | user                                       | filter students by their name          | easily retrieve the details of a particular student without having to go through the entire list |
-| `* *`  | user                                       | filter students by their Academic Year          | easily retrieve all students of a particular academic level |
-| `* *`  | user                                       | filter students by their Phone Numbers          | easily find students by their contact details |
-| `* *`  | user                                       | filter students by their dismissal time / schedules          | schedule training sessions |
-| `* *`  | user                                       | filter students by their Id             | easily identify one specific student |
-| `* *`  | user                                       | tag students by their Academic Year     | schedule trainings catered for students in a particular academic year |
+| `* * *`  | new user | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user     | create new student record entries          | store data of students in a structured way    |
+| `* * *`  | user     | see the contact information of the students        | contact them easily when necessary.    |
+| `* * *`  | user     | see the academic year that the students belong to      | use it as a metric to group the students for training.    |
+| `* * *`  | user     | see the dismissal times of the students       |  find a common available time to have classes.           |
+| `* *  `  | user     | be able to tag students        |  highlight students who may need more attention.           |
+| `* * *`  | user     | delete students that have quit              | keep track of only current active students                |
+| `* * *`  | user     | easily modify the details of my students          | see the most accurate updated information    |
+| `* * *`  | user     | find students by their name          | easily retrieve the details of any student without having to go through the entire list |
+| `* *`    | user     | find students by their Academic Year          | easily retrieve all students from a particular academic level |
+| `* *`    | user     | find students by their Phone Numbers          | easily retrieve the details of a particular student by their contact details |
+| `* * *`  | user     | find students by their dismissal time        | easily find students whose dismissal times are before a given dismissal time  |
+| `* *`    | user     | find students by their Id             | easily retrieve the details of a particular student without having to go through the entire list  |
+| `* *`    | user     | determine the earliest time to conduct training given a subgroup of students | schedule training at the earliest possible time for these students |
+| `* * *`  | user     | create new Training sessions | schedule training at a given date and time |
+| `* * *`  | user     | delete a Training session that was already created | make changes to the schedule |
+| `* * *`  | user     | add students to a training session | view who are the students to expect for a training |
+| `* * *`  | user     | delete students from a training session | remove students who are unable to come for training |
+| `* * `   | user     | view the trainings that a student will be attending | determine the number of sessions he has attended |
 
 
 *{More to be added}*
@@ -287,14 +294,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
--   1a. Name, phone number, email, or academic year is missing.
+*   1a. Name, phone number, email, or academic year is missing.
 
-    -   1a1. CanoE-COACH displays an error message.
+    *  1a1. CanoE-COACH displays an error message.
         Use case resumes at step 1.
 
--   1b. Student with the same name already exists.
-    -   1b1. CanoE-COACH displays an error message.
+*   1b. Student with the same name already exists.
+    *   1b1. CanoE-COACH displays an error message.
         Use case ends.
+        
+*   1c. Details have invalid format.
+    *   1c1. CanoE-COACH displays an error message.
+        Use case resumes at step 1.
 
 **UC02: Delete a student**
 
@@ -304,6 +315,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  CanoE-COACH shows a list of students
 3.  User requests to delete a specific student in the list
 4.  CanoE-COACH deletes the student
+5.  CanoE-COACH removes the student from all the trainings he is scheduled in.
     Use case ends.
 
 **Extensions**
@@ -315,14 +327,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. CanoE-COACH shows an error message.
       Use case resumes at step 2.
 
-**UC03: Edit a Student**
+**UC03: Edit a Student's particulars**
 
 **MSS**
 
 1.  User requests to list students
 2.  CanoE-COACH shows a list of students
 3.  User requests to edit a specific student in the list
-4.  CanoE-COACH edits the student's particulars
+4.  CanoE-COACH edits the student's details
     Use case ends.
 
 **Extensions**
@@ -334,7 +346,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. CanoE-COACH shows an error message.
       Use case resumes at step 2.
 
-**UC04: Find a Student**
+* 4a. The student's new dismissal time is later than a training that he has been scheduled for.
+    * 4a1. Student is removed from the Training.
+    Use case ends.
+       
+
+**UC04: Find students**
 
 **MSS**
 
@@ -355,6 +372,99 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to clear all students
 2.  CanoE-COACH deletes all existing students in the student list
     Use case ends.
+    
+    
+**UC06: Find Common Time to conduct training for students**
+
+**MSS**
+
+1.  User requests to find common time to conduct training for a specified sub-group of students
+2.  CanoE-COACH shows a list of students that have been specified by user.
+2.  CanoE-COACH shows shows the latest dismissal times for the list of students.
+    Use case ends.
+    
+**Extensions**
+
+* 1a. There are no parameters specified in the commonTime command.
+  * 1a1. CanoE-COACH shows an error message.
+      Use case resumes at step 1.
+
+**UC07: Add a Training**
+
+**MSS**
+
+1. User requests to add a Training to the training list.
+2. CanoE-COACH adds the training.
+    Use case ends.
+
+**Extensions**
+
+*   1a. Date or time is missing.
+
+    *  1a1. CanoE-COACH displays an error message.
+        Use case resumes at step 1.
+
+*   1b. Training with the same date and time already exists.
+    *   1b1. CanoE-COACH displays an error message.
+        Use case ends.
+        
+**UC08: Delete a training**
+
+**MSS**
+
+1.  User requests to list trainings
+2.  CanoE-COACH shows a list of trainings
+3.  User requests to delete a specific training in the list
+4.  CanoE-COACH deletes the training
+5.  CanoE-COACH removes the training from all the students that are attending the training.
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. CanoE-COACH shows an error message.
+      Use case resumes at step 2.
+      
+**UC09: Add students to the training**
+
+**MSS**
+
+1.  User requests to add students to training.
+2.  CanoE-COACH adds the specified students to the training. 
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student's dismissal time is later than the time the training is scheduled for.
+  * 2a1. CanoE-COACH shows an error message.
+        Use case resumes at step 1.
+
+* 2b. The student or training does not exist.
+    * 2b1. CanoE-COACH shows an error message.
+      Use case resumes at step 1.
+      
+**UC10: Delete student from training**
+
+**MSS**
+
+1.  User requests to delete student from training.
+2.  CanoE-COACH deletes the specified student from the training.
+3.  CanoE-COACH deletes the training from the student's list of trainings.
+    Use case ends.
+
+**Extensions**
+
+* 2a. Student was not attending the training
+  * 2a1. CanoE-COACH shows an error message.
+        Use case resumes at step 1.
+
+* 2b. The student or training does not exist.
+    * 2b1. CanoE-COACH shows an error message.
+      Use case resumes at step 1.
+
 
 *{More to be added}*
 
