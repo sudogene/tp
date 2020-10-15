@@ -40,7 +40,7 @@ public class AddStudentToTrainingCommand extends Command {
             + " to the specified Training Session\n"
             + "Parameters: Training_Session-ID " + PREFIX_ID + "Student_ID..."
             + "\nExample: "
-            + COMMAND_WORD +  "1 " + PREFIX_ID + "3,5,7";
+            + COMMAND_WORD + "1 " + PREFIX_ID + "3,5,7";
 
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "Added Student: %1$s";
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be added must be specified.";

@@ -38,12 +38,12 @@ public class DeleteStudentFromTrainingCommandParser implements Parser<DeleteStud
 
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             String text = argMultimap.getValue(PREFIX_ID).get();
-                studentIndexes = text.split(",");
-            }
+            studentIndexes = text.split(",");
+        }
 
         if (studentIndexes.length == 0) {
             throw new ParseException(DeleteStudentFromTrainingCommand.MESSAGE_NO_STUDENTS_SPECIFIED);
-            }
+        }
 
         return new DeleteStudentFromTrainingCommand(index, studentIndexes);
 

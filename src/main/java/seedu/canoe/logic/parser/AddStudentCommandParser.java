@@ -2,9 +2,10 @@ package seedu.canoe.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
+
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.AddStudentToTrainingCommand;
-import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 import seedu.canoe.logic.parser.exceptions.ParseException;
 
 /**
