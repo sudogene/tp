@@ -1,0 +1,39 @@
+package seedu.canoe.logic.parser;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import seedu.canoe.commons.core.index.Index;
+import seedu.canoe.logic.commands.AddStudentToTrainingCommand;
+import seedu.canoe.logic.parser.exceptions.ParseException;
+
+/**
+ * Parses input arguments and creates a new AddStudentToTrainingCommand object
+ */
+public class AddStudentCommandParser implements Parser<AddStudentToTrainingCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the AddStudentToTrainingCommand
+     * and returns an AddStudentToTrainingCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public AddStudentToTrainingCommand parse(String args) throws ParseException {
+        requireNonNull(args);
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(args.substring(0, 2));
+        } catch (ParseException | StringIndexOutOfBoundsException pe) {
+            throw new ParseException(String
+                    .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE), pe);
+        }
+
+        try {
+            String[] studentIndexes = args.substring(3).split(",");
+            return new AddStudentToTrainingCommand(index, studentIndexes);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new ParseException(String
+                    .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE));
+        }
+    }
+}
