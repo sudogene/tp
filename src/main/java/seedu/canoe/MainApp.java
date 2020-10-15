@@ -15,11 +15,19 @@ import seedu.canoe.commons.util.ConfigUtil;
 import seedu.canoe.commons.util.StringUtil;
 import seedu.canoe.logic.Logic;
 import seedu.canoe.logic.LogicManager;
-import seedu.canoe.model.*;
 import seedu.canoe.model.CanoeCoach;
+import seedu.canoe.model.Model;
+import seedu.canoe.model.ModelManager;
+import seedu.canoe.model.ReadOnlyCanoeCoach;
+import seedu.canoe.model.ReadOnlyUserPrefs;
+import seedu.canoe.model.UserPrefs;
 import seedu.canoe.model.util.SampleDataUtil;
-import seedu.canoe.storage.*;
 import seedu.canoe.storage.CanoeCoachStorage;
+import seedu.canoe.storage.JsonCanoeCoachStorage;
+import seedu.canoe.storage.JsonUserPrefsStorage;
+import seedu.canoe.storage.Storage;
+import seedu.canoe.storage.StorageManager;
+import seedu.canoe.storage.UserPrefsStorage;
 import seedu.canoe.ui.Ui;
 import seedu.canoe.ui.UiManager;
 
@@ -61,9 +69,11 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s canoe coach book and {@code userPrefs}. <br>
-     * The data from the sample canoe coach book will be used instead if {@code storage}'s canoe coach book is not found,
-     * or an empty canoe coach book will be used instead if errors occur when reading {@code storage}'s canoe coach book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s canoe coach book and {@code userPrefs}.
+     * <br>
+     * The data from the sample canoe coach book will be used instead if {@code storage}'s canoe coach book
+     * is not found, or an empty canoe coach book will be used instead if errors occur when reading {@code storage}'s
+     * canoe coach book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyCanoeCoach> canoeCoachOptional;
