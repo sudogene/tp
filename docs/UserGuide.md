@@ -217,7 +217,7 @@ Examples:
 ### Add Student to Training : `ts-add`
 Adds students to a training.
 
-Format: `ts-add TRAINING_INDEX STUDENT_INDEX...`
+Format: `ts-add TRAINING_INDEX id/STUDENT_INDEX...`
 
 * Training index refers to the index of the training in the displayed training list.
 * Student index refers to the index of the student in the entire student list (can be viewed with `list` command).
@@ -231,12 +231,12 @@ Format: `ts-add TRAINING_INDEX STUDENT_INDEX...`
 > Note: Training schedules can also be viewed on the student list panel and they will update as you add students to trainings.
 
 Examples:
-- `ts-add 2 1,2,3` adds students with indexes 1,2,3 to training 1.
+- `ts-add 2 id/1,2,3` adds students with indexes 1,2,3 to training 1.
 
 ### Delete Student from Training : `ts-delete`
 Deletes students from a training.
 
-Format: `ts-delete TRAINING_INDEX STUDENT_INDEX...`
+Format: `ts-delete TRAINING_INDEX id/STUDENT_INDEX...`
 
 * Training index refers to the index of the training in the displayed training list.
 * Student index refers to the index of the student in the entire student list (can be viewed with `list` command).
@@ -247,7 +247,7 @@ Format: `ts-delete TRAINING_INDEX STUDENT_INDEX...`
 > trainings.
 
 Examples:
-- `ts-delete 2 1,2,3` deletes students with indexes 1,2,3 from training 1.
+- `ts-delete 2 id/1,2,3` deletes students with indexes 1,2,3 from training 1.
 
 ### Clearing all entries: `clear`
 Clears the student and training list of all existing students and trainings.
@@ -282,7 +282,7 @@ Action | Format, Examples
 **commonTime** | `commonTime [n/KEYWORDS] [ay/ACADEMIC_YEAR]`<br> e.g., `commonTime n/alex ay/1`
 **training** | `training yyyy-MM-dd HHmm`<br> e.g., `training 2021-01-20 1800`
 **delete-training** | `delete-training TRAINING_INDEX`<br> e.g., `delete-training 1`
-**ts-add** | `ts-add TRAINING_INDEX STUDENT_INDEX...`<br> e.g., `ts-add 1 1,2,3`
-**ts-delete** | `ts-delete TRAINING_INDEX STUDENT_INDEX...`<br> e.g., `ts-delete 1 1,2,3`
+**ts-add** | `ts-add TRAINING_INDEX id/STUDENT_INDEX...`<br> e.g., `ts-add 1 id/1,2,3`
+**ts-delete** | `ts-delete TRAINING_INDEX id/STUDENT_INDEX...`<br> e.g., `ts-delete 1 id/1,2,3`
 **List** | `list`
 **Help** | `help`
