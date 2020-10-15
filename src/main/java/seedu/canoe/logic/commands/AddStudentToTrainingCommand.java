@@ -110,7 +110,8 @@ public class AddStudentToTrainingCommand extends Command {
             }
 
             //Ensures student is available to attend training based on dismissal time
-            if (!studentToEdit.isAvailableAtDateTime(editedTraining.getDateTime())) {
+            if (!studentToEdit.isAvailableAtDateTime(editedTraining.getDateTime())
+                    || studentToEdit.hasTrainingAtDateTime(editedTraining.getDateTime())) {
                 throw new CommandException(MESSAGE_STUDENT_UNAVAILABLE);
             }
 

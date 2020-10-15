@@ -115,17 +115,17 @@ public class EditCommand extends Command {
                 editedStudent.removeTraining(training.getDateTime());
                 model.setTraining(training, editedTraining);
             }
-        } else {
-            List<LocalDateTime> studentTrainingDateTimeList = new ArrayList<>(editedStudent.getTrainingSchedule());
-            List<Training> studentTrainingList = StudentTrainingSessionUtil
-                    .getTrainingListFromDateTimeList(studentTrainingDateTimeList, model);
+        }
 
-            for (Training training: studentTrainingList) {
-                Training editedTraining = new Training(training.getDateTime(), training.getStudents());
-                editedTraining.removeStudent(studentToEdit);
-                editedTraining.addStudent(editedStudent);
-                model.setTraining(training, editedTraining);
-            }
+        List<LocalDateTime> studentTrainingDateTimeList = new ArrayList<>(editedStudent.getTrainingSchedule());
+        List<Training> studentTrainingList = StudentTrainingSessionUtil
+                .getTrainingListFromDateTimeList(studentTrainingDateTimeList, model);
+
+        for (Training training: studentTrainingList) {
+            Training editedTraining = new Training(training.getDateTime(), training.getStudents());
+            editedTraining.removeStudent(studentToEdit);
+            editedTraining.addStudent(editedStudent);
+            model.setTraining(training, editedTraining);
         }
 
         model.setStudentInUniqueStudentList(studentToEdit, editedStudent);
