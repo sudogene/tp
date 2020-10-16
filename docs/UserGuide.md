@@ -1,11 +1,9 @@
----
+﻿---
 layout: page
 title: User Guide
 ---
 
-CanoE-COACH is a **desktop app for managing training schedules for secondary school canoe teams, optimized for use via
- a Command Line Interface** (CLI) while still having the benefits of a Graphical Interface (GUI). If you can type fast
-, CanoE-COACH can get your training scheduling done faster than traditional GUI apps.
+CanoE-COACH is a **desktop app for managing training schedules for secondary school canoe teams, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical Interface (GUI). If you can type fast, CanoE-COACH can get your training scheduling done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -28,8 +26,8 @@ CanoE-COACH is a **desktop app for managing training schedules for secondary sch
 
    * **`list`** : Lists all students.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com ay/2` : Adds a student named
-    `John Doe` to the student list.
+   * **`add`**`n/Steven Soo p/98665432 e/stev@example.com ay/2` : Adds a student named
+    `Steven Soo` to the student list.
 
    * **`delete`**`3` : Deletes the 3rd student shown in the student list.
 
@@ -51,10 +49,10 @@ CanoE-COACH is a **desktop app for managing training schedules for secondary sch
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/treasurer` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/treasurer`, `t/treasurer t/EXCO` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -67,7 +65,7 @@ Shows a summarised list of available commands.
 Format: `help`
 
 ### Adding a student: `add`
-Adds a student to the student list. The student's Id is auto-assigned.
+Adds a student to the student list. The student will be auto-assigned a unique `id`.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL ay/ACADEMIC_YEAR [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [t/TAG]`
 
@@ -83,9 +81,12 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL ay/ACADEMIC_YEAR [d1/HHmm d2/HHmm d3/
 
 </center>
 
-* Academic year ranges from `1` to `5`.
+* Academic year ranges from `1` to `5` and represents Secondary 1 to 5.
 * `d1/ d2/ d3/ d4/ d5/` corresponds to the dismissal times on different days. They are optional fields.
 * The default dismissal time is 1500. If the user inputs `d1/1700 d5/1200`, then the record will be equivalent to `d1/1700 d2/1500 d3/1500 d4/1500 d5/1200`
+
+> Be careful of adding duplicates:
+> * Student names can be the same, but they should not share the same contact number **AND** email address
 
 Examples:
 - `add n/Benjamin p/12345678 e/littleicemaiden@rocket.com ay/3 d1/1330 d2/1730 d3/1600 d4/1200 d5/1100`
@@ -95,30 +96,33 @@ Examples:
 
 Edits an existing student in the student list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [ay/ACADEMIC_YEAR] [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [t/TAG]…​`
+Format: `edit STUDENT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [ay/ACADEMIC_YEAR] [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [t/TAG]…​`
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `STUDENT_INDEX`. The student index refers to the index number shown in the displayed student list. The student index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
-* You can remove all the student’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all of the student’s tags by typing `t/` without specifying any tags after it.
+* Take note that editing the details of a student will also propagate the changes on the training panel.
+* Be careful when editing dismissal times, as this might automatically remove students from scheduled trainings if
+ the updated dismissal time on the same day of the week is now later than the time of the student's scheduled trainings.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com d1/1600` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively. Also changes Monday's dismissal time to 1600.
+*  `edit 1 p/91234567 e/johndoe@example.com d1/1600` Edits the phone number and email address of the 1st student in the displayed student list to be `91234567` and `johndoe@example.com` respectively. This also changes his Monday's dismissal time to 1600.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
 
 ### Delete student: `delete`
 Deletes the specified student from the nominal roll.
 
-Format: `delete INDEX`
-- Deletes the student at the specified `INDEX`.
-- The index refers to the index number shown in the displayed student list.
+Format: `delete STUDENT_INDEX`
+- Deletes the student at the specified `STUDENT_INDEX`.
+- The student index refers to the index number shown in the displayed student list.
 - The index must be an unsigned integer 1, 2, 3, …
+- This will remove the student from all of his/her scheduled training sessions.
 
 Examples:
-- `delete 2` deletes the 2nd student in the student list.
+- `delete 2` deletes the 2nd student in the displayed student list.
 
 ### Find : `find`
 Find students based on specified fields.
@@ -143,14 +147,14 @@ Format: `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm
 - Academic Year
     - Value will match exactly. e.g. `2` will match `2` but not `1`
 
-- Dismissal Time (d1 to d5)
+- Dismissal Time (`d1` to `d5`)
     - Students with dismissal times equal OR before the query time will be matched
 
       e.g. `d1/1500` will match `1500` and `1200`, but not `1530` on Monday
 
 - Id
-    - Student with the same Id value will be matched.
-    - Due to the nature of Id being unique, only one student should be matched.
+    - Student with the same `id` value will be matched.
+    - Due to the nature of id being unique, only one student should be matched.
 
 - Searching by more than one field
     - Find command will return student(s) that matches exactly with all the fields provided. e.g. `n/Alex p/123` will return `Alex Yeoh` only if his phone number matches `123`
@@ -160,8 +164,8 @@ Examples:
 - `find n/alex david` returns `Alex Yeoh`, `David Li`
 - `find n/alex david p/123` returns `Alex Yeoh`
 - `find e/alexyeoh@example.com p/123` returns `Alex Yeoh`
-- `find n/Alex d2/1600` returns `Alex Yeoh`, provided his dismissal time on Tuesday falls before `1600`
-- `find e/alexyeoh@example.com p/456` returns an empty list
+- `find n/Alex d2/1600` returns `Alex Yeoh`, provided his dismissal time on Tuesday falls at or before `1600`
+- `find e/alexyeoh@example.com p/456` returns an empty list, if such an email **AND** contact number is not present in the student list
 
 ### Common Time : `commonTime`
 Returns the latest dismissal times on all days for all of the students in the specified subgroup. This would be the earliest
@@ -174,31 +178,84 @@ Format: `commonTime [n/KEYWORDS] [ay/ACADEMIC_YEAR]`
     - The search is case-insensitive. e.g `hans` will match `Hans`
     - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
     - Only full words will be matched e.g. `Han` will not match `Hans`
-    - Students matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+    - Students matching at least one keyword will be checked (i.e. OR search). e.g. `Hans Bo` will match `Hans Gruber`, `Bo Yang`
 
 - Academic Year
     - Value will match exactly. e.g. `2` will match `2` but not `1`
 
 - Searching by more than one field
     - Common Time command will return student(s) that matches any of the fields provided.
+    
+- If no student matches the search criteria, the default dismissal time of 1500 for all 5 days will be returned.
 
 Examples:
-- `commonTime n/alex ay/1` returns the latest dismissal times for any student with name Alex, and students who are in Academic Year 1.
-- `commonTime ay/1` returns the latest dismissal times for all the students in the list who are in Academic Year 1.
-- `commonTime n/Alex Jane Mary` returns the latest dismissal times for any student with names Alex, Jane or Mary.
+- `commonTime n/alex ay/1` returns the latest dismissal times for any student with names containing the whole word `alex`, **OR** who are in Academic Year 1.
+- `commonTime ay/1` returns the latest dismissal times for all the students in the student list who are in Academic Year 1.
+- `commonTime n/Alex Jane Mary` returns the latest dismissal times for any student with names Alex, Jane or Mary. Take note the rules above for matching applies.
 
-### Create Training : 'training'
-Create a new training at the specified date and time.
+### Create Training : `training`
+Creates a new training at the specified date and time.
 
 Format: `training yyyy-MM-dd HHmm`
 
 Examples:
 - `training 2020-10-10 1800`
 
+### Delete Training : `delete-training`
+Deletes an existing training based on the training index.
+
+Format: `delete-training TRAINING_INDEX`
+
+* Training index refers to the index of the training in the displayed training list.
+* All students inside of the training to be deleted will be cleared.
+* Only one training index can be specified at a time.
+
+
+Examples:
+- `delete-training 2` removes the training with index 2 in the displayed training list. 
+
+### Add Student to Training : `ts-add`
+Adds students to a training.
+
+Format: `ts-add TRAINING_INDEX id/STUDENT_INDEX...`
+
+* Training index refers to the index of the training in the displayed training list.
+* Student index refers to the index of the student in the entire student list (can be viewed with `list` command).
+* Multiple students can be added with the same command by inputing multiple student indexes separated with a comma.
+* Only one training index can be specified at a time.
+* Each student can only be added to a **SINGLE** training on the same date regardless of time.
+* Student's dismissal time for the same day should also be equal or earlier than the time of the training. (i.e
+. Student's dismissal time for Monday should be equal or earlier than the time of a training that falls on a Monday
+ for him/her to be successfully added.)
+
+> Note: Training schedules can also be viewed on the student list panel and they will update as you add students to trainings.
+
+Examples:
+- `ts-add 2 id/1,2,3` adds students with indexes 1,2,3 to training 1.
+
+### Delete Student from Training : `ts-delete`
+Deletes students from a training.
+
+Format: `ts-delete TRAINING_INDEX id/STUDENT_INDEX...`
+
+* Training index refers to the index of the training in the displayed training list.
+* Student index refers to the index of the student in the entire student list (can be viewed with `list` command).
+* Multiple students can be deleted with the same command by inputing multiple student indexes separated with a comma.
+* Only one training index can be specified at a time.
+
+> Note: Training schedules can also be viewed on the student list panel and it will update as you delete students from
+> trainings.
+
+Examples:
+- `ts-delete 2 id/1,2,3` deletes students with indexes 1,2,3 from training 1.
+
 ### Clearing all entries: `clear`
-Clears the terminal of all previous commands.
+Clears the student and training list of all existing students and trainings.
 
 Format: `clear`
+
+> Note: Be careful, this deletes all data stored inside of the program, including student and training records. All sample data will be cleared too.
+
 
 ### Exiting the program: `exit`
 Exits the program.
@@ -219,8 +276,13 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL ay/ACADEMIC_YEAR [t/TAG]… [d1/MONDAY] [d2/TUESDAY] [d3/WEDNESDAY] [d4/THURSDAY] [d5/FRIDAY]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com ay/1 t/friend`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]… [d1/MONDAY] [d2/TUESDAY] [d3/WEDNESDAY] [d4/THURSDAY] [d5/FRIDAY] ​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete** | `delete STUDENT_INDEX`<br> e.g., `delete 3`
+**Edit** | `edit STUDENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]… [d1/MONDAY] [d2/TUESDAY] [d3/WEDNESDAY] [d4/THURSDAY] [d5/FRIDAY] ​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find [n/KEYWORDS] [p/PHONE_NUMBER] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [id/ID]`<br> e.g., `find n/James Jake ay/2`
+**commonTime** | `commonTime [n/KEYWORDS] [ay/ACADEMIC_YEAR]`<br> e.g., `commonTime n/alex ay/1`
+**training** | `training yyyy-MM-dd HHmm`<br> e.g., `training 2021-01-20 1800`
+**delete-training** | `delete-training TRAINING_INDEX`<br> e.g., `delete-training 1`
+**ts-add** | `ts-add TRAINING_INDEX id/STUDENT_INDEX...`<br> e.g., `ts-add 1 id/1,2,3`
+**ts-delete** | `ts-delete TRAINING_INDEX id/STUDENT_INDEX...`<br> e.g., `ts-delete 1 id/1,2,3`
 **List** | `list`
 **Help** | `help`

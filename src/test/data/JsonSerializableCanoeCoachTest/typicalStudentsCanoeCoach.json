@@ -1,0 +1,97 @@
+{
+  "_comment": "CanoeCoach save file which contains the same Student values as in TypicalStudents#getTypicalCanoeCoach()",
+  "students": [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "academicYear": "1",
+    "tagged" : [ "friends" ],
+    "trainingSchedule" : [ ],
+    "mondayDismissal" : "1500",
+    "tuesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1500",
+    "thursdayDismissal" : "1700",
+    "fridayDismissal" : "1500",
+    "id": "1"
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "academicYear": "2",
+    "tagged" : [ "owesMoney", "friends" ],
+    "trainingSchedule" : [ ],
+    "mondayDismissal" : "1621",
+    "tuesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1800",
+    "thursdayDismissal" : "1500",
+    "fridayDismissal" : "1500",
+    "id": "2"
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "academicYear": "3",
+    "tagged" : [ ],
+    "trainingSchedule" : [ ],
+    "mondayDismissal" : "1500",
+    "tuesdayDismissal" : "1400",
+    "wednesdayDismissal" : "1500",
+    "thursdayDismissal" : "1500",
+    "fridayDismissal" : "1500",
+    "id": "3"
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "academicYear": "4",
+    "tagged" : [ "friends" ],
+    "trainingSchedule" : [ ],
+    "mondayDismissal" : "1500",
+    "tuesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1745",
+    "thursdayDismissal" : "1500",
+    "fridayDismissal" : "1500",
+    "id": "4"
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "academicYear": "5",
+    "tagged" : [ ],
+    "trainingSchedule" : [ ],
+    "mondayDismissal" : "1500",
+    "tuesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1230",
+    "thursdayDismissal" : "1500",
+    "fridayDismissal" : "1542",
+    "id": "5"
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "academicYear": "1",
+    "tagged" : [ ],
+    "trainingSchedule" : [ ],
+    "mondayDismissal" : "1500",
+    "tuesdayDismissal" : "1623",
+    "wednesdayDismissal" : "1500",
+    "thursdayDismissal" : "1500",
+    "fridayDismissal" : "1500",
+    "id": "6"
+  }, {
+    "name" : "George Best",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "academicYear": "2",
+    "tagged" : [ ],
+    "trainingSchedule" : [ ],
+    "mondayDismissal" : "1500",
+    "tuesdayDismissal" : "1500",
+    "wednesdayDismissal" : "1500",
+    "thursdayDismissal" : "1500",
+    "fridayDismissal" : "1712",
+    "id": "7"
+  } ],
+
+  "trainings": []
+}
