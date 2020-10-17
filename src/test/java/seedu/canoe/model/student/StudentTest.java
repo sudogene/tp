@@ -71,7 +71,7 @@ public class StudentTest {
         assertTrue(ALICE.isSameStudent(editedAlice));
 
         // different email only -> returns true
-        editedAlice = new StudentBuilder(ALICE).withPhone(VALID_EMAIL_BOB).build();
+        editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
     }
 
