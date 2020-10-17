@@ -58,6 +58,7 @@ public class StudentTest {
         // same name, same phone, same email, different attributes -> returns true
         editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
+
     }
 
     @Test
