@@ -47,58 +47,90 @@ public class FindCommandParser implements Parser<FindCommand> {
                         PREFIX_MONDAY_DISMISSAL, PREFIX_TUESDAY_DISMISSAL, PREFIX_WEDNESDAY_DISMISSAL,
                         PREFIX_THURSDAY_DISMISSAL, PREFIX_FRIDAY_DISMISSAL, PREFIX_ID);
 
+        boolean checkEmptyString = false;
         AllMatchPredicateList predicates = new AllMatchPredicateList();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String text = argMultimap.getValue(PREFIX_NAME).get();
-            predicates.add(new NameContainsKeywordsPredicate(getKeywordsFromString(text)));
+            if (text.equals("")) {
+                checkEmptyString = true;
+            } else {
+                predicates.add(new NameContainsKeywordsPredicate(getKeywordsFromString(text)));
+            }
         }
 
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             String phoneValue = argMultimap.getValue(PREFIX_PHONE).get();
-            predicates.add(new PhoneMatchesPredicate(phoneValue));
+            if (!phoneValue.equals("")) {
+                checkEmptyString = false;
+                predicates.add(new PhoneMatchesPredicate(phoneValue));
+            }
         }
 
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             String keyword = argMultimap.getValue(PREFIX_EMAIL).get();
-            predicates.add(new EmailContainsKeywordPredicate(keyword));
+            if (!keyword.equals("")) {
+                checkEmptyString = false;
+                predicates.add(new EmailContainsKeywordPredicate(keyword));
+            }
         }
 
         if (argMultimap.getValue(PREFIX_ACADEMIC_YEAR).isPresent()) {
             String academicYearValue = argMultimap.getValue(PREFIX_ACADEMIC_YEAR).get();
-            predicates.add(new AcademicYearMatchesPredicate(academicYearValue));
+            if (!academicYearValue.equals("")) {
+                checkEmptyString = false;
+                predicates.add(new AcademicYearMatchesPredicate(academicYearValue));
+            }
         }
 
         if (argMultimap.getValue(PREFIX_MONDAY_DISMISSAL).isPresent()) {
             String timeString = argMultimap.getValue(PREFIX_MONDAY_DISMISSAL).get();
-            predicates.add(new MondayDismissalPredicate(getTimeFromString(timeString)));
+            if (!timeString.equals("")) {
+                checkEmptyString = false;
+                predicates.add(new MondayDismissalPredicate(getTimeFromString(timeString)));
+            }
         }
 
         if (argMultimap.getValue(PREFIX_TUESDAY_DISMISSAL).isPresent()) {
             String timeString = argMultimap.getValue(PREFIX_TUESDAY_DISMISSAL).get();
-            predicates.add(new TuesdayDismissalPredicate(getTimeFromString(timeString)));
+            if (!timeString.equals("")) {
+                checkEmptyString = false;
+                predicates.add(new TuesdayDismissalPredicate(getTimeFromString(timeString)));
+            }
         }
 
         if (argMultimap.getValue(PREFIX_WEDNESDAY_DISMISSAL).isPresent()) {
             String timeString = argMultimap.getValue(PREFIX_WEDNESDAY_DISMISSAL).get();
-            predicates.add(new WednesdayDismissalPredicate(getTimeFromString(timeString)));
+            if (!timeString.equals("")) {
+                checkEmptyString = false;
+                predicates.add(new WednesdayDismissalPredicate(getTimeFromString(timeString)));
+            }
         }
 
         if (argMultimap.getValue(PREFIX_THURSDAY_DISMISSAL).isPresent()) {
             String timeString = argMultimap.getValue(PREFIX_THURSDAY_DISMISSAL).get();
-            predicates.add(new ThursdayDismissalPredicate(getTimeFromString(timeString)));
+            if (!timeString.equals("")) {
+                checkEmptyString = false;
+                predicates.add(new ThursdayDismissalPredicate(getTimeFromString(timeString)));
+            }
         }
 
         if (argMultimap.getValue(PREFIX_FRIDAY_DISMISSAL).isPresent()) {
             String timeString = argMultimap.getValue(PREFIX_FRIDAY_DISMISSAL).get();
-            predicates.add(new FridayDismissalPredicate(getTimeFromString(timeString)));
+            if (!timeString.equals("")) {
+                checkEmptyString = false;
+                predicates.add(new FridayDismissalPredicate(getTimeFromString(timeString)));
+            }
         }
 
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             String idValue = argMultimap.getValue(PREFIX_ID).get();
-            predicates.add(new IdMatchesPredicate(idValue));
+            if (!idValue.equals("")) {
+                checkEmptyString = false;
+                predicates.add(new IdMatchesPredicate(idValue));
+            }
         }
 
-        if (predicates.isEmpty()) {
+        if (predicates.isEmpty() || checkEmptyString) {
             throw new ParseException(FindCommand.MESSAGE_NO_QUERY);
         }
 

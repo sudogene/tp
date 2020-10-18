@@ -27,18 +27,27 @@ public class CommonTimeCommandParser implements Parser<CommonTimeCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ACADEMIC_YEAR);
 
+        boolean checkEmptyString = false;
+
         AnyMatchPredicateList predicates = new AnyMatchPredicateList();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String text = argMultimap.getValue(PREFIX_NAME).get();
-            predicates.add(new NameContainsKeywordsPredicate(getKeywordsFromString(text)));
+            if (text.equals("")) {
+                checkEmptyString = true;
+            } else {
+                predicates.add(new NameContainsKeywordsPredicate(getKeywordsFromString(text)));
+            }
         }
 
         if (argMultimap.getValue(PREFIX_ACADEMIC_YEAR).isPresent()) {
             String academicYearValue = argMultimap.getValue(PREFIX_ACADEMIC_YEAR).get();
-            predicates.add(new AcademicYearMatchesPredicate(academicYearValue));
+            if (!academicYearValue.equals("")) {
+                checkEmptyString = false;
+                predicates.add(new AcademicYearMatchesPredicate(academicYearValue));
+            }
         }
 
-        if (predicates.isEmpty()) {
+        if (predicates.isEmpty() || checkEmptyString) {
             throw new ParseException(CommonTimeCommand.MESSAGE_NO_QUERY);
         }
 

@@ -24,7 +24,6 @@ public class CommonTimeCommand extends Command {
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     public static final String MESSAGE_NO_QUERY = "At least one valid field is required to find a common time.";
-
     private final AnyMatchPredicateList predicates;
     private List<LocalTime> commonDismissalTimes;
 

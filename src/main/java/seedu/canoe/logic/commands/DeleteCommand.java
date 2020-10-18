@@ -1,6 +1,7 @@
 package seedu.canoe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -54,6 +55,7 @@ public class DeleteCommand extends Command {
         }
 
         model.deleteStudent(studentToDelete);
+        model.updateFilteredTrainingList(PREDICATE_SHOW_ALL_TRAININGS);
         return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete));
     }
 

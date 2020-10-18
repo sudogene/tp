@@ -23,11 +23,11 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2021S1-CS2103-F10-1/tp/tree/master/docs/diagrams) folder. 
 
 </div>
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -62,11 +62,12 @@ The sections below give more details of each component.
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 **API** :
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+[`Ui.java`](https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel
+`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -78,7 +79,7 @@ The `UI` component,
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 **API** :
-[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+[`Logic.java`](https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/logic/Logic.java)
 
 1. `Logic` uses the `CanoeCoachParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
@@ -97,17 +98,20 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/model/Model.java)
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user’s preferences.
-* stores the address book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the CanoeCoach data.
+* exposes an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that
+ the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `CanoeCoach`, which `Person` references. This allows `CanoeCoach` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP
+) model is given below. It has a `Tag` list in the `CanoeCoach`, which `Student` references. This allows `CanoeCoach` to
+ only require one `Tag` object per unique `Tag`, instead of each `Student` needing their own `Tag` object.<br>
 ![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
 
 </div>
@@ -117,11 +121,11 @@ The `Model`,
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/storage/Storage.java)
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
-* can save the address book data in json format and read it back.
+* can save the CanoeCoach data in json format and read it back.
 
 ### Common classes
 
@@ -139,31 +143,31 @@ This section describes some noteworthy details on how certain features are imple
 
 The proposed undo/redo mechanism is facilitated by `VersionedCanoeCoach`. It extends `CanoeCoach` with an undo/redo history, stored internally as an `canoeCoachStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedCanoeCoach#commit()` — Saves the current address book state in its history.
-* `VersionedCanoeCoach#undo()` — Restores the previous address book state from its history.
-* `VersionedCanoeCoach#redo()` — Restores a previously undone address book state from its history.
+* `VersionedCanoeCoach#commit()` — Saves the current CanoeCoach state in its history.
+* `VersionedCanoeCoach#undo()` — Restores the previous CanoeCoach state from its history.
+* `VersionedCanoeCoach#redo()` — Restores a previously undone CanoeCoach state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitCanoeCoach()`, `Model#undoCanoeCoach()` and `Model#redoCanoeCoach()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedCanoeCoach` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedCanoeCoach` will be initialized with the initial CanoeCoach state, and the `currentStatePointer` pointing to that single CanoeCoach state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitCanoeCoach()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `canoeCoachStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th student in the CanoeCoach. The `delete` command calls `Model#commitCanoeCoach()`, causing the modified state of the CanoeCoach after the `delete 5` command executes to be saved in the `canoeCoachStateList`, and the `currentStatePointer` is shifted to the newly inserted CanoeCoach state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitCanoeCoach()`, causing another modified address book state to be saved into the `canoeCoachStateList`.
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitCanoeCoach()`, causing another modified CanoeCoach state to be saved into the `canoeCoachStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitCanoeCoach()`, so the address book state will not be saved into the `canoeCoachStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitCanoeCoach()`, so the CanoeCoach state will not be saved into the `canoeCoachStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCanoeCoach()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCanoeCoach()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous CanoeCoach state, and restores the CanoeCoach to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -180,17 +184,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoCanoeCoach()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoCanoeCoach()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the CanoeCoach to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `canoeCoachStateList.size() - 1`, pointing to the latest address book state, then there are no undone CanoeCoach states to restore. The `redo` command uses `Model#canRedoCanoeCoach()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `canoeCoachStateList.size() - 1`, pointing to the latest CanoeCoach state, then there are no undone CanoeCoach states to restore. The `redo` command uses `Model#canRedoCanoeCoach()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitCanoeCoach()`, `Model#undoCanoeCoach()` or `Model#redoCanoeCoach()`. Thus, the `canoeCoachStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the CanoeCoach, such as `list`, will usually not call `Model#commitCanoeCoach()`, `Model#undoCanoeCoach()` or `Model#redoCanoeCoach()`. Thus, the `canoeCoachStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitCanoeCoach()`. Since the `currentStatePointer` is not pointing at the end of the `canoeCoachStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitCanoeCoach()`. Since the `currentStatePointer` is not pointing at the end of the `canoeCoachStateList`, all CanoeCoach states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -202,14 +206,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ##### Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire CanoeCoach.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+  * Cons: We must ensure that the implementation of each individual command is correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -257,18 +261,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | see everyone’s available schedules       |  find a common available time to have classes.                                                                             |
-| `* * *`  | user                                       | delete students that have quit and automatically remove them from my schedule                | keep track of only current active students                |
-| `* * *`    | user                                       | add the available schedules of a particular student   | know when that student is available to have classes              |
-| `* * *`      | user | easily create new student record entries          | store information/data of students in a structured way    |
-| `* * *`      | user | easily modify the personal details of my students          | see the most accurate information    |
-| `* * *`  | user                                       | filter students by their name          | easily retrieve the details of a particular student without having to go through the entire list |
-| `* *`  | user                                       | filter students by their Academic Year          | easily retrieve all students of a particular academic level |
-| `* *`  | user                                       | filter students by their Phone Numbers          | easily find students by their contact details |
-| `* *`  | user                                       | filter students by their dismissal time / schedules          | schedule training sessions |
-| `* *`  | user                                       | filter students by their Id             | easily identify one specific student |
-| `* *`  | user                                       | tag students by their Academic Year     | schedule trainings catered for students in a particular academic year |
+| `* * *`  | new user | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user     | create new student record entries          | store data of students in a structured way    |
+| `* * *`  | user     | see the contact information of the students        | contact them easily when necessary.    |
+| `* * *`  | user     | see the academic year that the students belong to      | use it as a metric to group the students for training.    |
+| `* * *`  | user     | see the dismissal times of the students       |  find a common available time to have classes.           |
+| `* *  `  | user     | be able to tag students        |  highlight students who may need more attention.           |
+| `* * *`  | user     | delete students that have quit              | keep track of only current active students                |
+| `* * *`  | user     | easily modify the details of my students          | see the most accurate updated information    |
+| `* * *`  | user     | find students by their name          | easily retrieve the details of any student without having to go through the entire list |
+| `* *`    | user     | find students by their Academic Year          | easily retrieve all students from a particular academic level |
+| `* *`    | user     | find students by their Phone Numbers          | easily retrieve the details of a particular student by their contact details |
+| `* * *`  | user     | find students by their dismissal time        | easily find students whose dismissal times are before a given dismissal time  |
+| `* *`    | user     | find students by their Id             | easily retrieve the details of a particular student without having to go through the entire list  |
+| `* *`    | user     | determine the earliest time to conduct training given a subgroup of students | schedule training at the earliest possible time for these students |
+| `* * *`  | user     | create new Training sessions | schedule training at a given date and time |
+| `* * *`  | user     | delete a Training session that was already created | make changes to the schedule |
+| `* * *`  | user     | add students to a training session | view who are the students to expect for a training |
+| `* * *`  | user     | delete students from a training session | remove students who are unable to come for training |
+| `* * `   | user     | view the trainings that a student will be attending | determine the number of sessions he has attended |
 
 
 *{More to be added}*
@@ -287,14 +298,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
--   1a. Name, phone number, email, or academic year is missing.
+*   1a. Name, phone number, email, or academic year is missing.
 
-    -   1a1. CanoE-COACH displays an error message.
+    *  1a1. CanoE-COACH displays an error message.
         Use case resumes at step 1.
 
--   1b. Student with the same name already exists.
-    -   1b1. CanoE-COACH displays an error message.
-        Use case ends.
+*   1b. Student with the same name already exists.
+    *   1b1. CanoE-COACH displays an error message.
+        Use case resumes at step 1.
+        
+*   1c. Details have invalid format.
+    *   1c1. CanoE-COACH displays an error message.
+        Use case resumes at step 1.
 
 **UC02: Delete a student**
 
@@ -304,6 +319,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  CanoE-COACH shows a list of students
 3.  User requests to delete a specific student in the list
 4.  CanoE-COACH deletes the student
+5.  CanoE-COACH removes the student from all the trainings he is scheduled in.
     Use case ends.
 
 **Extensions**
@@ -315,14 +331,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. CanoE-COACH shows an error message.
       Use case resumes at step 2.
 
-**UC03: Edit a Student**
+**UC03: Edit a Student's particulars**
 
 **MSS**
 
 1.  User requests to list students
 2.  CanoE-COACH shows a list of students
 3.  User requests to edit a specific student in the list
-4.  CanoE-COACH edits the student's particulars
+4.  CanoE-COACH edits the student's details
     Use case ends.
 
 **Extensions**
@@ -334,7 +350,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. CanoE-COACH shows an error message.
       Use case resumes at step 2.
 
-**UC04: Find a Student**
+* 4a. The student's new dismissal time is later than a training that he has been scheduled for.
+    * 4a1. Student is removed from the Training.
+    Use case ends.
+       
+
+**UC04: Find students**
 
 **MSS**
 
@@ -355,6 +376,94 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to clear all students
 2.  CanoE-COACH deletes all existing students in the student list
     Use case ends.
+    
+    
+**UC06: Find Common Time to conduct training for students**
+
+**MSS**
+
+1.  User requests to find common time to conduct training for a specified sub-group of students
+2.  CanoE-COACH shows a list of students that have been specified by user.
+2.  CanoE-COACH shows shows the latest dismissal times for the list of students.
+    Use case ends.
+    
+**Extensions**
+
+* 1a. There are no parameters specified in the commonTime command.
+  * 1a1. CanoE-COACH shows an error message.
+      Use case resumes at step 1.
+
+**UC07: Add a Training**
+
+**MSS**
+
+1. User requests to add a Training to the training list.
+2. CanoE-COACH adds the training.
+    Use case ends.
+
+**Extensions**
+
+*   1a. Date or time is missing.
+
+    *  1a1. CanoE-COACH displays an error message.
+        Use case resumes at step 1.
+
+*   1b. Training with the same date and time already exists.
+    *   1b1. CanoE-COACH displays an error message.
+        Use case resumes at step 1.
+        
+**UC08: Delete a training**
+
+**MSS**
+
+1.  User requests to delete a specific training in the list
+2.  CanoE-COACH deletes the training
+3.  CanoE-COACH removes the training from all the students that are attending the training.
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+    * 2a1. CanoE-COACH shows an error message.
+      Use case resumes at step 1.
+      
+**UC09: Add students to the training**
+
+**MSS**
+
+1.  User requests to add students to training.
+2.  CanoE-COACH adds the specified students to the training. 
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student's dismissal time is later than the time the training is scheduled for.
+  * 2a1. CanoE-COACH shows an error message.
+        Use case resumes at step 1.
+
+* 2b. The student or training does not exist.
+    * 2b1. CanoE-COACH shows an error message.
+      Use case resumes at step 1.
+      
+**UC10: Delete student from training**
+
+**MSS**
+
+1.  User requests to delete student from training.
+2.  CanoE-COACH deletes the specified student from the training.
+3.  CanoE-COACH deletes the training from the student's list of trainings.
+    Use case ends.
+
+**Extensions**
+
+* 2a. Student was not attending the training
+  * 2a1. CanoE-COACH shows an error message.
+        Use case resumes at step 1.
+
+* 2b. The student or training does not exist.
+    * 2b1. CanoE-COACH shows an error message.
+      Use case resumes at step 1.
+
 
 *{More to be added}*
 

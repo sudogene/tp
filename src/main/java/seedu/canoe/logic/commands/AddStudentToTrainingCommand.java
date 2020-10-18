@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.canoe.commons.core.Messages.MESSAGE_DUPLICATE_STUDENTS_IN_TRAINING;
 import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,15 +38,15 @@ public class AddStudentToTrainingCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the corresponding Students "
             + " to the specified Training Session\n"
-            + "Parameters: Training_Session-ID Student_ID..."
+            + "Parameters: Training_Session-ID " + PREFIX_ID + "Student_ID..."
             + "\nExample: "
-            + COMMAND_WORD + " 1 3,5,7";
+            + COMMAND_WORD + "1 " + PREFIX_ID + "3,5,7";
 
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "Added Student: %1$s";
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be added must be specified.";
-    public static final String MESSAGE_DUPLICATE_STUDENTS = "This Student is already in the Training Session!";
-    public static final String MESSAGE_STUDENT_UNAVAILABLE = "This student cannot be added to the training as his "
-            + "dismissal time on the specified day falls after the training's start time!";
+    public static final String MESSAGE_STUDENT_UNAVAILABLE = "This student cannot be added to the training as "
+            + "either his dismissal time on the specified day falls after the training's start time or he has a "
+            + "training scheduled on the same date already!";
     private final Index index;
     private final String[] studentsToAdd;
 
@@ -63,6 +65,10 @@ public class AddStudentToTrainingCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        //Added in case previous command is find
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        model.updateFilteredTrainingList(PREDICATE_SHOW_ALL_TRAININGS);
 
         List<Training> lastShownList = model.getFilteredTrainingList();
         List<Student> studentList = model.getFilteredStudentList();
@@ -104,7 +110,8 @@ public class AddStudentToTrainingCommand extends Command {
             }
 
             //Ensures student is available to attend training based on dismissal time
-            if (!studentToEdit.isAvailableAtDateTime(editedTraining.getDateTime())) {
+            if (!studentToEdit.isAvailableAtDateTime(editedTraining.getDateTime())
+                    || studentToEdit.hasTrainingAtDateTime(editedTraining.getDateTime())) {
                 throw new CommandException(MESSAGE_STUDENT_UNAVAILABLE);
             }
 

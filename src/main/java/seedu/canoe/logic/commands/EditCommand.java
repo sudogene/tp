@@ -12,8 +12,10 @@ import static seedu.canoe.logic.parser.CliSyntax.PREFIX_THURSDAY_DISMISSAL;
 import static seedu.canoe.logic.parser.CliSyntax.PREFIX_TUESDAY_DISMISSAL;
 import static seedu.canoe.logic.parser.CliSyntax.PREFIX_WEDNESDAY_DISMISSAL;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -115,7 +117,19 @@ public class EditCommand extends Command {
             }
         }
 
+        List<LocalDateTime> studentTrainingDateTimeList = new ArrayList<>(editedStudent.getTrainingSchedule());
+        List<Training> studentTrainingList = StudentTrainingSessionUtil
+                .getTrainingListFromDateTimeList(studentTrainingDateTimeList, model);
+
+        for (Training training: studentTrainingList) {
+            Training editedTraining = new Training(training.getDateTime(), training.getStudents());
+            editedTraining.removeStudent(studentToEdit);
+            editedTraining.addStudent(editedStudent);
+            model.setTraining(training, editedTraining);
+        }
+
         model.setStudentInUniqueStudentList(studentToEdit, editedStudent);
+        model.updateFilteredTrainingList(PREDICATE_SHOW_ALL_TRAININGS);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
     }
