@@ -1,7 +1,9 @@
 package seedu.canoe.ui;
 
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.Comparator;
+import java.util.Locale;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -48,7 +50,10 @@ public class TrainingCard extends UiPart<Region> {
         this.training = training;
         id.setText(displayedIndex + ". ");
         Separator trainingCardSeparator = new Separator();
-        name.setText("Training Session at: " + training.getDateTime().format(formatter));
+        String day = training.getDateTime().getDayOfWeek().getDisplayName(TextStyle.SHORT,
+                Locale.getDefault());
+        name.setText("Training on: " + training.getDateTime().format(formatter)
+                + " (" + day + ")");
 
         training.getStudents().stream()
                 .sorted(Comparator.comparing(student -> student.getName().toString()))
