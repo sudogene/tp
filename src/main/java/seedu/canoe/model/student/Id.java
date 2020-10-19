@@ -17,6 +17,9 @@ public class Id {
     /** validates if the string is numeric */
     public static final String VALIDATION_REGEX = "-?\\d+(\\.\\d+)?";
 
+    /** placeholder value */
+    public static final String PLACEHOLDER_VALUE = "0";
+
     /** fields allowing auto-assignment and uniqueness of Id value */
     private static int lastUsedId = 0;
     private static final Set<String> usedIds = new HashSet<>();
@@ -28,8 +31,10 @@ public class Id {
      */
     public Id(String value) {
         requireNonNull(value);
-        Id.usedIds.add(value);
-        Id.lastUsedId = Integer.parseInt(value);
+        if (!value.equals(PLACEHOLDER_VALUE)) {
+            Id.usedIds.add(value);
+            Id.lastUsedId = Integer.parseInt(value);
+        }
         this.value = value;
     }
 
@@ -54,6 +59,10 @@ public class Id {
             return !Id.usedIds.contains(test);
         }
         return false;
+    }
+
+    public static Id getPlaceHolderId() {
+        return new Id(Id.PLACEHOLDER_VALUE);
     }
 
     public static int getLastUsedId() {

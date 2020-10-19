@@ -41,12 +41,20 @@ public class IdTest {
     }
 
     @Test
+    public void getPlaceHolderId() {
+        assertEquals(Id.getPlaceHolderId(), new Id(Id.PLACEHOLDER_VALUE));
+    }
+
+    @Test
     public void getLastUsedId() {
         new Id("300");
         assertEquals(Id.getLastUsedId(), 300);
 
         new Id("301");
         new Id("302");
+        assertEquals(Id.getLastUsedId(), 302);
+
+        Id.getPlaceHolderId();
         assertEquals(Id.getLastUsedId(), 302);
     }
 }

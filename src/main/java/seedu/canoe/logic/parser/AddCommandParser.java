@@ -75,7 +75,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Student student = new Student(name, phone, email, academicYear, tagList, mondayDismissal, tuesdayDismissal,
-                wednesdayDismissal, thursdayDismissal, fridayDismissal, Id.newId());
+                wednesdayDismissal, thursdayDismissal, fridayDismissal, Id.getPlaceHolderId());
 
         return new AddCommand(student);
     }
