@@ -11,7 +11,7 @@ import seedu.canoe.model.student.TrainingMatchesIdPredicate;
 /**
  * Finds and lists all trainings in canoe book which match the student id specified.
  */
-public class FindAllTrainingCommand extends Command {
+public class FindStudentTrainingCommand extends Command {
 
     public static final String COMMAND_WORD = "find-training";
 
@@ -29,9 +29,10 @@ public class FindAllTrainingCommand extends Command {
     private final TrainingMatchesIdPredicate trainingPredicates;
 
     /**
-     * Creates an FindTrainingCommand to find all the specified {@code Student}'s trainings.
+     * Creates an FindStudentTrainingCommand to find all the specified {@code Student}'s trainings.
      */
-    public FindAllTrainingCommand(IdMatchesPredicate studentPredicates, TrainingMatchesIdPredicate trainingPredicates) {
+    public FindStudentTrainingCommand(IdMatchesPredicate studentPredicates,
+                                      TrainingMatchesIdPredicate trainingPredicates) {
         this.studentPredicates = studentPredicates;
         this.trainingPredicates = trainingPredicates;
     }
@@ -59,8 +60,8 @@ public class FindAllTrainingCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindAllTrainingCommand // instanceof handles nulls
-                && studentPredicates.equals(((FindAllTrainingCommand) other).studentPredicates)
-                && trainingPredicates.equals(((FindAllTrainingCommand) other).trainingPredicates)); // state check
+                || (other instanceof FindStudentTrainingCommand // instanceof handles nulls
+                && studentPredicates.equals(((FindStudentTrainingCommand) other).studentPredicates)
+                && trainingPredicates.equals(((FindStudentTrainingCommand) other).trainingPredicates)); // state check
     }
 }
