@@ -21,6 +21,7 @@ public class TrainingCommand extends Command {
     public static final String MESSAGE_SUCCESS_TRAINING = "New Training Session created at: %1$s";
     public static final String MESSAGE_DUPLICATE_TRAINING = "There "
             + "already exists a Training Session at this Date and Time";
+    public static final String MESSAGE_PAST_TRAINING = "Trainings can only be scheduled for the future!";
 
     private final Training toAdd;
 
@@ -40,11 +41,15 @@ public class TrainingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasTraining(toAdd)) {
+        if (getTraining().getDateTime().isBefore(LocalDateTime.now())) {
+            throw new CommandException(MESSAGE_PAST_TRAINING);
+        }
+
+        if (model.hasTraining(getTraining())) {
             throw new CommandException(MESSAGE_DUPLICATE_TRAINING);
         }
 
-        model.addTraining(toAdd);
+        model.addTraining(getTraining());
         return new CommandResult(String.format(MESSAGE_SUCCESS_TRAINING, toAdd));
     }
 
@@ -52,6 +57,6 @@ public class TrainingCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TrainingCommand // instanceof handles nulls
-                && toAdd.equals(((TrainingCommand) other).toAdd));
+                && getTraining().equals(((TrainingCommand) other).getTraining()));
     }
 }
