@@ -11,7 +11,6 @@ import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.AnyMatchPredicateList;
 import seedu.canoe.model.student.CommonTimeFinder;
-import seedu.canoe.model.student.exceptions.StudentNotFoundException;
 
 /**
  * Finds the latest dismissal time of all the students stated in the keywords.
