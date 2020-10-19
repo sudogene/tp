@@ -24,9 +24,6 @@ import seedu.canoe.model.tag.Tag;
  */
 public class Student {
 
-    // Tracks total students and used for assigning unique Id
-    private static int totalNumberOfStudents = 0;
-
     // Identity fields
     private final Id id;
     private final Name name;
@@ -107,7 +104,21 @@ public class Student {
     }
 
     /**
-     * Adds a training that the student is attending to the student's schedule.
+
+     * Creates a student with a new valid Id if it was constructed with placeholder Id.
+     * If the student already has a valid Id, the same student is returned.
+     */
+    public Student createStudentWithValidId() {
+        if (getId().equals(Id.getPlaceHolderId())) {
+            return new Student(getName(), getPhone(), getEmail(), getAcademicYear(), getTags(),
+                    getMondayDismissal(), getTuesdayDismissal(), getWednesdayDismissal(), getThursdayDismissal(),
+                    getFridayDismissal(), new ArrayList<>(getTrainingSchedule()), Id.newId());
+        }
+        return this;
+    }
+
+    /**
+     * Adds a training session to the student's schedule.
      * Training sessions are automatically sorted by their respective date and times.
      *
      * @param attendingTraining Training that the student is attending.
@@ -224,6 +235,7 @@ public class Student {
 
         return otherStudent != null
                 && otherStudent.getName().equals(getName())
+                && otherStudent.getAcademicYear().equals(getAcademicYear())
                 && (otherStudent.getPhone().equals(getPhone()) || otherStudent.getEmail().equals(getEmail()));
     }
 

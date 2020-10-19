@@ -108,11 +108,17 @@ public class DeleteStudentFromTrainingCommand extends Command {
             if (!containStudentChecker(editedTraining, studentToEdit)) {
                 throw new CommandException(MESSAGE_INVALID_STUDENT);
             }
+
+            /*
+            Add students that have passed all checks to the corresponding lists first without
+            modifying the model.
+             */
             editedTraining.removeStudent(editedStudent);
             targetStudentList.add(studentToEdit);
             editedStudentList.add(editedStudent);
         }
 
+        //All checked passed at this point, iterate through student lists to update the model.
         for (int i = 0; i < targetStudentList.size(); i++) {
             model.setStudentInUniqueStudentList(targetStudentList.get(i), editedStudentList.get(i));
         }
@@ -169,7 +175,7 @@ public class DeleteStudentFromTrainingCommand extends Command {
 
     /**
      * Returns a String with the IDs of the students deleted, removing duplicate IDs.
-     * @return String with Unique Ids of Students deleted.
+     * @return String with Unique Ids of Students deleted
      */
     public String getStudentsDeleted() {
         String result = "";
@@ -183,6 +189,10 @@ public class DeleteStudentFromTrainingCommand extends Command {
         return result;
     }
 
+    /**
+     * Return the index of the Training.
+     * @return index of Training
+     */
     public Index getIndex() {
         return this.index;
     }

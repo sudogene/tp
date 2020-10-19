@@ -115,11 +115,16 @@ public class AddStudentToTrainingCommand extends Command {
                 throw new CommandException(MESSAGE_STUDENT_UNAVAILABLE);
             }
 
+            /*
+            Add students that have passed all checks to the corresponding lists first without
+            modifying the model.
+             */
             editedTraining.addStudent(editedStudent);
             targetStudentList.add(studentToEdit);
             editedStudentList.add(editedStudent);
         }
 
+        //All checked passed at this point, iterate through student lists to update the model.
         for (int i = 0; i < targetStudentList.size(); i++) {
             model.setStudentInUniqueStudentList(targetStudentList.get(i), editedStudentList.get(i));
         }

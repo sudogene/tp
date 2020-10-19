@@ -42,7 +42,6 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
-        System.out.println(expectedMessage);
         Model expectedModel = new ModelManager(new CanoeCoach(model.getCanoeCoach()), new UserPrefs());
         expectedModel.setStudentInUniqueStudentList(model.getFilteredStudentList().get(0), editedStudent);
 

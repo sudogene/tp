@@ -10,6 +10,7 @@ import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.ModelManager;
 
@@ -27,6 +28,16 @@ public class TrainingCommandTest {
         String expectedCommandResult = new TrainingCommand(validDateTime).execute(expectedModel).getFeedbackToUser();
         assertCommandSuccess(new TrainingCommand(VALID_TRAINING.getDateTime()),
                 model, expectedCommandResult, expectedModel);
+    }
+
+    //tests with a invalid Training object set in the past
+    @Test
+    public void execute_pastTraining_throwsCommandException() throws Exception {
+        LocalDateTime pastDateTime = LocalDateTime.parse("2020-08-26 1800",
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        TrainingCommand pastTrainingCommand = new TrainingCommand(pastDateTime);
+        assertThrows(CommandException.class, TrainingCommand.MESSAGE_PAST_TRAINING, () ->
+            pastTrainingCommand.execute(expectedModel));
     }
 
     //tests with a invalid Training object with invalid month.

@@ -71,8 +71,9 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        model.addStudent(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        Student validToAdd = toAdd.createStudentWithValidId();
+        model.addStudent(validToAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, validToAdd));
     }
 
     @Override
