@@ -32,7 +32,7 @@ public class FindAllTrainingCommandParser implements Parser<FindAllTrainingComma
 
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             String idValue = argMultimap.getValue(PREFIX_ID).get();
-            if (!idValue.matches("\\d+")){
+            if (!idValue.matches("\\d+")) {
                 throw new ParseException(FindAllTrainingCommand.MESSAGE_ONE_STUDENT_QUERY);
             }
             if (!idValue.equals("")) {
