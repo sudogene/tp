@@ -105,6 +105,16 @@ public class Training {
     }
 
     /**
+     * Checks if specified student id is present inside of training list.
+     *
+     * @param studentId to be checked
+     * @return true if student id is present inside of training schedule.
+     */
+    public boolean hasStudentId(Id studentId) {
+        return getStudents().stream().map(student -> student.getId()).anyMatch(id -> id.equals(studentId));
+    }
+
+    /**
      * Clears all students from the Training.
      * Also removes the training date from students' training schedules.
      */
