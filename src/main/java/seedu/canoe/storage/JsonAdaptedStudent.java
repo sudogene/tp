@@ -1,6 +1,5 @@
 package seedu.canoe.storage;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.canoe.commons.exceptions.IllegalValueException;
 import seedu.canoe.model.student.AcademicYear;
+import seedu.canoe.model.student.Attend;
 import seedu.canoe.model.student.Email;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Name;
@@ -43,7 +43,7 @@ class JsonAdaptedStudent {
     private final String thursdayDismissal;
     private final String fridayDismissal;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final List<LocalDateTime> trainingSchedule = new ArrayList<>();
+    private final List<Attend> trainingSchedule = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -58,7 +58,7 @@ class JsonAdaptedStudent {
                               @JsonProperty("wednesday") String wednesdayDismissal,
                               @JsonProperty("thursday") String thursdayDismissal,
                               @JsonProperty("friday") String fridayDismissal,
-                              @JsonProperty("trainingSchedule") List<LocalDateTime> trainingSchedule,
+                              @JsonProperty("trainingSchedule") List<Attend> trainingSchedule,
                               @JsonProperty("id") String id) {
         this.name = name;
         this.phone = phone;

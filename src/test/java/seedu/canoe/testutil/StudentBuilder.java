@@ -1,12 +1,12 @@
 package seedu.canoe.testutil;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import seedu.canoe.model.student.AcademicYear;
+import seedu.canoe.model.student.Attend;
 import seedu.canoe.model.student.Email;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Name;
@@ -43,7 +43,7 @@ public class StudentBuilder {
     private Email email;
     private AcademicYear academicYear;
     private Set<Tag> tags;
-    private List<LocalDateTime> trainingSchedules;
+    private List<Attend> trainingSchedules;
     private Monday mondayDismissal;
     private Tuesday tuesdayDismissal;
     private Wednesday wednesdayDismissal;
@@ -107,7 +107,7 @@ public class StudentBuilder {
      * Parses the {@code dateTimes} into a {@code TreeSet<LocalDateTime>} and set it to the {@code Student} that we are
      * building.
      */
-    public StudentBuilder withTrainingSchedules(LocalDateTime ... dateTimes) {
+    public StudentBuilder withTrainingSchedules(Attend ... dateTimes) {
         this.trainingSchedules = SampleDataUtil.getTrainingSchedule(dateTimes);
         return this;
     }

@@ -43,14 +43,14 @@ public class Student {
 
     private final Set<Tag> tags = new HashSet<>();
 
-    class TreeSetComparator implements Comparator<LocalDateTime> {
-        public int compare(LocalDateTime dateTime1, LocalDateTime dateTime2) {
-            return dateTime1.compareTo(dateTime2);
+    class TreeSetComparator implements Comparator<Attend> {
+        public int compare(Attend attend1, Attend attend2) {
+            return attend1.compareTo(attend2);
         }
     }
 
     //Collection of scheduled training dates tagged to the particular student
-    private final TreeSet<LocalDateTime> trainingSchedules = new TreeSet<>(new TreeSetComparator());
+    private final TreeSet<Attend> trainingSchedules = new TreeSet<>(new TreeSetComparator());
 
     /**
      * Constructs the {@code Student} with a given id.
@@ -80,7 +80,7 @@ public class Student {
      */
     public Student(Name name, Phone phone, Email email, AcademicYear academicYear, Set<Tag> tags, Day mondayDismissal,
                    Day tuesdayDismissal, Day wednesdayDismissal, Day thursdayDismissal,
-                   Day fridayDismissal, List<LocalDateTime> trainingSchedules, Id id) {
+                   Day fridayDismissal, List<Attend> trainingSchedules, Id id) {
         requireAllNonNull(name, phone, email, tags, academicYear, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
                 thursdayDismissal, fridayDismissal, trainingSchedules, id);
         this.name = name;
@@ -107,25 +107,25 @@ public class Student {
     }
 
     /**
-     * Adds a training session to the student's schedule.
+     * Adds a training that the student is attending to the student's schedule.
      * Training sessions are automatically sorted by their respective date and times.
      *
-     * @param trainingDateTime LocalDateTime corresponding to the training's date and start time.
+     * @param attendingTraining Training that the student is attending.
      * Duplicates are not allowed and will not be added.
      */
-    public void addTraining(LocalDateTime trainingDateTime) {
-        trainingSchedules.add(trainingDateTime);
+    public void addTraining(Attend attendingTraining) {
+        trainingSchedules.add(attendingTraining);
     }
 
     /**
-     * Adds a list of training sessions to the student's schedule.
+     * Adds a list of training sessions that the student is attending to the student's schedule.
      * Training sessions are automatically sorted by their respective date and times.
      *
-     * @param trainingDateTimes List of LocalDateTime corresponding to the trainings' dates and start times.
+     * @param attendingTrainings List of Trainings that the student is going to attending.
      * Duplicates are not allowed and will not be added.
      */
-    public void addAllTraining(List<LocalDateTime> trainingDateTimes) {
-        trainingSchedules.addAll(trainingDateTimes);
+    public void addAllTraining(List<Attend> attendingTrainings) {
+        trainingSchedules.addAll(attendingTrainings);
     }
 
     /**
@@ -135,7 +135,7 @@ public class Student {
      * Specified training must exist in the student's training schedule.
      * @return true If a training has been scheduled at the specified date and time.
      */
-    public boolean containsTraining(LocalDateTime trainingDateTime) {
+    public boolean containsTraining(Attend trainingDateTime) {
         return trainingSchedules.contains(trainingDateTime);
     }
 
@@ -144,7 +144,7 @@ public class Student {
      *
      * @param trainingDateTime LocalDateTime corresponding to the training's date and start time.
      */
-    public void removeTraining(LocalDateTime trainingDateTime) {
+    public void removeTraining(Attend trainingDateTime) {
         if (containsTraining(trainingDateTime)) {
             trainingSchedules.remove(trainingDateTime);
         }
@@ -209,7 +209,7 @@ public class Student {
      * Returns an immutable training schedule set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<LocalDateTime> getTrainingSchedule() {
+    public Set<Attend> getTrainingSchedule() {
         return Collections.unmodifiableSet(trainingSchedules);
     }
 
@@ -315,8 +315,8 @@ public class Student {
      */
     public boolean hasTrainingAtDateTime(LocalDateTime dateTime) {
         //Has a training scheduled on the same date already
-        for (LocalDateTime training: trainingSchedules) {
-            if (LocalDate.from(training).isEqual(LocalDate.from(dateTime))) {
+        for (Attend training: trainingSchedules) {
+            if (LocalDate.from(training.getTrainingTime()).isEqual(LocalDate.from(dateTime))) {
                 return true;
             }
         }
@@ -364,8 +364,8 @@ public class Student {
         }
 
         boolean isAvailable = true;
-        for (LocalDateTime trainingSession: trainingSchedules) {
-            if (!isAvailableAtDateTime(trainingSession)) {
+        for (Attend trainingSession: trainingSchedules) {
+            if (!isAvailableAtDateTime(trainingSession.getTrainingTime())) {
                 isAvailable = false;
             }
         }

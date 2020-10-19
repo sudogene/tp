@@ -89,7 +89,8 @@ public class StudentCard extends UiPart<Region> {
         trainingTag.setText("Trainings Scheduled: ");
         student.getTrainingSchedule().stream()
                 .forEach(trainingSchedule -> trainingSchedules.getChildren()
-                        .add(new Label(trainingSchedule.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")))));
+                        .add(new Label((trainingSchedule.getTrainingTime())
+                            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")))));
 
     }
 
