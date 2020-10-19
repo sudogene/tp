@@ -39,6 +39,7 @@ public class EditStudentDescriptorBuilder {
     public EditStudentDescriptorBuilder(Student student) {
         descriptor = new EditCommand.EditStudentDescriptor();
         descriptor.setName(student.getName());
+        descriptor.setAcademicYear(student.getAcademicYear());
         descriptor.setPhone(student.getPhone());
         descriptor.setEmail(student.getEmail());
         descriptor.setTags(student.getTags());
