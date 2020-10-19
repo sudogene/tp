@@ -21,7 +21,7 @@ public class TrainingCommand extends Command {
     public static final String MESSAGE_SUCCESS_TRAINING = "New Training Session created at: %1$s";
     public static final String MESSAGE_DUPLICATE_TRAINING = "There "
             + "already exists a Training Session at this Date and Time";
-    public static final String MESSAGE_PAST_TRAINING = "Trainings can only be scheduled for the future!";
+    public static final String MESSAGE_PAST_TRAINING = "Trainings cannot be scheduled for dates that are past!";
 
     private final Training toAdd;
 
