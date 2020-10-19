@@ -3,7 +3,6 @@ package seedu.canoe.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
+import seedu.canoe.model.student.Attend;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.student.Training;
 import seedu.canoe.model.util.StudentTrainingSessionUtil;
@@ -45,9 +45,9 @@ public class DeleteCommand extends Command {
         }
 
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
-        List<LocalDateTime> studentTrainingDateTimeList = new ArrayList<>(studentToDelete.getTrainingSchedule());
+        List<Attend> studentTrainingAttendList = new ArrayList<>(studentToDelete.getTrainingSchedule());
         List<Training> studentTrainings = StudentTrainingSessionUtil
-                .getTrainingListFromDateTimeList(studentTrainingDateTimeList, model);
+                .getTrainingListFromAttendList(studentTrainingAttendList, model);
         for (Training training: studentTrainings) {
             Training editedTraining = new Training(training.getDateTime(), training.getStudents());
             editedTraining.removeStudent(studentToDelete);

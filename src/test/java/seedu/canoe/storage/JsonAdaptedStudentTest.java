@@ -5,7 +5,6 @@ import static seedu.canoe.storage.JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FORMA
 import static seedu.canoe.testutil.Assert.assertThrows;
 import static seedu.canoe.testutil.TypicalStudents.BENSON;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.canoe.commons.exceptions.IllegalValueException;
 import seedu.canoe.model.student.AcademicYear;
+import seedu.canoe.model.student.Attend;
 import seedu.canoe.model.student.Email;
 import seedu.canoe.model.student.Name;
 import seedu.canoe.model.student.Phone;
@@ -43,7 +43,7 @@ public class JsonAdaptedStudentTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<LocalDateTime> VALID_TRAINING_SCHEDULE = BENSON.getTrainingSchedule().stream()
+    private static final List<Attend> VALID_TRAINING_SCHEDULE = BENSON.getTrainingSchedule().stream()
             .collect(Collectors.toList());
 
 

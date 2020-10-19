@@ -11,6 +11,7 @@ import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
+import seedu.canoe.model.student.Attend;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.student.Training;
@@ -75,7 +76,7 @@ public class DeleteTrainingCommand extends Command {
     private Student createEditedStudent(Student studentToEdit, Training trainingToDelete) {
         requireNonNull(studentToEdit);
         Student newStudent = studentToEdit.cloneStudent();
-        newStudent.removeTraining(trainingToDelete.getDateTime());
+        newStudent.removeTraining(new Attend(trainingToDelete.getDateTime()));
         return newStudent;
     }
 
