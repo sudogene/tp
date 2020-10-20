@@ -36,12 +36,15 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
 
         AnyMatchPredicateList predicates = new AnyMatchPredicateList();
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
-            String id = argMultimap.getValue(PREFIX_ID).get();
-            if (id.equals("")) {
+            String ids = argMultimap.getValue(PREFIX_ID).get();
+            if (ids.equals("")) {
                 logger.warning("No id found after id prefix!");
                 isEmptyString = true;
             } else {
-                predicates.add(new IdMatchesPredicate(id));
+                String[] studentIds = ids.split(",");
+                for (String id : studentIds) {
+                    predicates.add(new IdMatchesPredicate(id));
+                }
             }
         }
 

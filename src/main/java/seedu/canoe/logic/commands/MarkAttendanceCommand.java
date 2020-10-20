@@ -19,7 +19,7 @@ public class MarkAttendanceCommand extends Command {
 
     public static final Logger logger = LogsCenter.getLogger(MarkAttendanceCommand.class);
 
-    public static final String COMMAND_WORD = "attend";
+    public static final String COMMAND_WORD = "mark-attend";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gets all students in the training session" +
             " whose Ids corresponds to the specified Ids and marks them as attended the training session.\n"
@@ -29,7 +29,7 @@ public class MarkAttendanceCommand extends Command {
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be added must be specified.";
     public static final String MESSAGE_INVALID_STUDENT_MARKED = "Some students do not have specified"
             + " training session scheduled!";
-    public static final String MESSAGE_MARK_AS_ATTENDED_SUCCESS = "Marked students as attended!";
+    public static final String MESSAGE_MARK_AS_ATTENDED_SUCCESS = "Marked these students as attended: %1$s!";
 
     private final Index trainingIndex;
     private final AnyMatchPredicateList predicates;
@@ -68,9 +68,10 @@ public class MarkAttendanceCommand extends Command {
         for (Student student : attendedStudents) {
             student.attendTrainingSession(unattendedTrainingSession, attendedTrainingSession);
         }
+        String result = getStudentIdsAsString(attendedStudents);
 
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(MESSAGE_MARK_AS_ATTENDED_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_MARK_AS_ATTENDED_SUCCESS, result));
     }
 
     @Override
@@ -95,5 +96,19 @@ public class MarkAttendanceCommand extends Command {
             };
         }
         return true;
+    }
+
+    /**
+     * Returns a String with the IDs of the students.
+     *
+     * @return String with Unique Ids of Students.
+     */
+    public String getStudentIdsAsString(List<Student> students) {
+        String result = "";
+        for (Student student : students) {
+            result += student.getId() + " ";
+        }
+        result = result.trim();
+        return result;
     }
 }
