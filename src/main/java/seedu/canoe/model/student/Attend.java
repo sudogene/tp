@@ -5,10 +5,11 @@ import java.time.LocalDateTime;
 public class Attend implements Comparable<Attend> {
 
     private final LocalDateTime trainingTime;
-    private boolean hasAttended = false;
+    private boolean hasAttended;
 
     public Attend(LocalDateTime trainingSession) {
         this.trainingTime = trainingSession;
+        hasAttended = false;
     }
 
     public void attendsTraining() {
