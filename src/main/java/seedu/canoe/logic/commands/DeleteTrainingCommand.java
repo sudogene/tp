@@ -30,7 +30,7 @@ public class DeleteTrainingCommand extends Command {
     private final Index targetIndex;
 
     /**
-     * Creates an AddCommand to add the specified {@code Student}
+     * Creates a DeleteTrainingCommand to delete the specified {@code Training} based on the training index.
      */
     public DeleteTrainingCommand(Index targetIndex) {
         requireNonNull(targetIndex);
