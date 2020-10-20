@@ -47,7 +47,7 @@ public class Student {
     }
 
     //Collection of scheduled training dates tagged to the particular student
-    private final TreeSet<Attend> trainingSchedules = new TreeSet<>(new TreeSetComparator());
+    private final TreeSet<Attend> trainingAttendances = new TreeSet<>(new TreeSetComparator());
 
     /**
      * Constructs the {@code Student} with a given id.
@@ -77,9 +77,9 @@ public class Student {
      */
     public Student(Name name, Phone phone, Email email, AcademicYear academicYear, Set<Tag> tags, Day mondayDismissal,
                    Day tuesdayDismissal, Day wednesdayDismissal, Day thursdayDismissal,
-                   Day fridayDismissal, List<Attend> trainingSchedules, Id id) {
+                   Day fridayDismissal, List<Attend> trainingAttendances, Id id) {
         requireAllNonNull(name, phone, email, tags, academicYear, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
-                thursdayDismissal, fridayDismissal, trainingSchedules, id);
+                thursdayDismissal, fridayDismissal, trainingAttendances, id);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -90,7 +90,7 @@ public class Student {
         this.thursdayDismissal = thursdayDismissal;
         this.fridayDismissal = fridayDismissal;
         this.tags.addAll(tags);
-        this.trainingSchedules.addAll(trainingSchedules);
+        this.trainingAttendances.addAll(trainingAttendances);
         this.id = id;
     }
 
@@ -100,7 +100,7 @@ public class Student {
     public Student cloneStudent() {
         return new Student(getName(), getPhone(), getEmail(), getAcademicYear(), getTags(),
                 getMondayDismissal(), getTuesdayDismissal(), getWednesdayDismissal(), getThursdayDismissal(),
-                getFridayDismissal(), new ArrayList<>(getTrainingSchedule()), getId());
+                getFridayDismissal(), new ArrayList<>(getTrainingAttendances()), getId());
     }
 
     /**
@@ -111,60 +111,60 @@ public class Student {
         if (getId().equals(Id.getPlaceHolderId())) {
             return new Student(getName(), getPhone(), getEmail(), getAcademicYear(), getTags(),
                     getMondayDismissal(), getTuesdayDismissal(), getWednesdayDismissal(), getThursdayDismissal(),
-                    getFridayDismissal(), new ArrayList<>(getTrainingSchedule()), Id.newId());
+                    getFridayDismissal(), new ArrayList<>(getTrainingAttendances()), Id.newId());
         }
         return this;
     }
 
     /**
-     * Adds a training session to the student's schedule.
-     * Training sessions are automatically sorted by their respective date and times.
+     * Adds a training session that the student is attending to the student's schedule.
+     * Attendances are automatically sorted by their respective date and times.
      *
-     * @param attendingTraining Training that the student is attending.
+     * @param trainingAttendance Attendance representing the training that the student is attending.
      * Duplicates are not allowed and will not be added.
      */
-    public void addTraining(Attend attendingTraining) {
-        trainingSchedules.add(attendingTraining);
+    public void addAttendance(Attend trainingAttendance) {
+        trainingAttendances.add(trainingAttendance);
     }
 
     /**
      * Adds a list of training sessions that the student is attending to the student's schedule.
-     * Training sessions are automatically sorted by their respective date and times.
+     * Attendances are automatically sorted by their respective date and times.
      *
-     * @param attendingTrainings List of Trainings that the student is going to attending.
+     * @param attendingTrainings List of Trainings that the student is going to be attending.
      * Duplicates are not allowed and will not be added.
      */
-    public void addAllTraining(List<Attend> attendingTrainings) {
-        trainingSchedules.addAll(attendingTrainings);
+    public void addAllAttendances(List<Attend> attendingTrainings) {
+        trainingAttendances.addAll(attendingTrainings);
     }
 
     /**
-     * Checks if student has a training scheduled at the specified date and start time.
+     * Checks if student is to attend a training scheduled
      *
-     * @param trainingDateTime LocalDateTime corresponding to the training's date and start time.
-     * Specified training must exist in the student's training schedule.
-     * @return true If a training has been scheduled at the specified date and time.
+     * @param attend Attendance corresponding to the training that the student is supposed to attend.
+     * Specified Attendance must exist in the student's training schedule.
+     * @return true If Attendance is scheduled for the Student.
      */
-    public boolean containsTraining(Attend trainingDateTime) {
-        return trainingSchedules.contains(trainingDateTime);
+    public boolean containsAttendance(Attend attend) {
+        return trainingAttendances.contains(attend);
     }
 
     /**
-     * Removes a scheduled training from the student's training schedule.
+     * Removes an Attendance from the Student
      *
-     * @param trainingDateTime LocalDateTime corresponding to the training's date and start time.
+     * @param attend Attendance to remove
      */
-    public void removeTraining(Attend trainingDateTime) {
-        if (containsTraining(trainingDateTime)) {
-            trainingSchedules.remove(trainingDateTime);
+    public void removeAttendance(Attend attend) {
+        if (containsAttendance(attend)) {
+            trainingAttendances.remove(attend);
         }
     }
 
     /**
-     * Removes all trainings scheduled for the student.
+     * Removes all Attendances for the student.
      */
-    public void removeAllTraining() {
-        trainingSchedules.clear();
+    public void removeAllAttendances() {
+        trainingAttendances.clear();
     }
 
     public Id getId() {
@@ -216,11 +216,11 @@ public class Student {
     }
 
     /**
-     * Returns an immutable training schedule set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable Attendance set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Attend> getTrainingSchedule() {
-        return Collections.unmodifiableSet(trainingSchedules);
+    public Set<Attend> getTrainingAttendances() {
+        return Collections.unmodifiableSet(trainingAttendances);
     }
 
     /**
@@ -263,14 +263,14 @@ public class Student {
                 && otherStudent.getFridayDismissal().equals(getFridayDismissal())
                 && otherStudent.getAcademicYear().equals(getAcademicYear())
                 && otherStudent.getTags().equals(getTags())
-                && otherStudent.getTrainingSchedule().equals(getTrainingSchedule());
+                && otherStudent.getTrainingAttendances().equals(getTrainingAttendances());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, academicYear, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
-                thursdayDismissal, fridayDismissal, tags, id, trainingSchedules);
+                thursdayDismissal, fridayDismissal, tags, id, trainingAttendances);
     }
 
     @Override
@@ -299,7 +299,7 @@ public class Student {
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         builder.append(" Training Schedules: ");
-        getTrainingSchedule().forEach(builder::append);
+        getTrainingAttendances().forEach(builder::append);
         return builder.toString();
     }
 
@@ -322,12 +322,12 @@ public class Student {
     }
 
     /**
-     * Returns whether a student has a training at a particular DateTime already
+     * Returns whether a student has an Attendance at a particular DateTime already
      */
-    public boolean hasTrainingAtDateTime(LocalDateTime dateTime) {
+    public boolean hasAttendanceAtDateTime(LocalDateTime dateTime) {
         //Has a training scheduled on the same date already
-        for (Attend training: trainingSchedules) {
-            if (LocalDate.from(training.getTrainingTime()).isEqual(LocalDate.from(dateTime))) {
+        for (Attend attendance: trainingAttendances) {
+            if (LocalDate.from(attendance.getTrainingTime()).isEqual(LocalDate.from(dateTime))) {
                 return true;
             }
         }
@@ -367,15 +367,15 @@ public class Student {
     }
 
     /**
-     * Returns whether a student is able to attend all of his/her scheduled trainings
+     * Returns whether a student is able to attend all of his/her Attendances.
      */
-    public boolean isAvailableForAllTrainingsScheduled() {
-        if (trainingSchedules.isEmpty()) {
+    public boolean isAvailableForAllAttendances() {
+        if (trainingAttendances.isEmpty()) {
             return true;
         }
 
         boolean isAvailable = true;
-        for (Attend trainingSession: trainingSchedules) {
+        for (Attend trainingSession: trainingAttendances) {
             if (!isAvailableAtDateTime(trainingSession.getTrainingTime())) {
                 isAvailable = false;
             }
@@ -390,9 +390,9 @@ public class Student {
      * @param trainingSessionToAttend training session to mark as attended.
      */
     public void attendTrainingSession(Attend trainingSessionToAttend, Attend trainingSessionAttended) {
-        assert(containsTraining(trainingSessionToAttend));
+        assert(containsAttendance(trainingSessionToAttend));
 
-        trainingSchedules.remove(trainingSessionToAttend);
-        trainingSchedules.add(trainingSessionAttended);
+        trainingAttendances.remove(trainingSessionToAttend);
+        trainingAttendances.add(trainingSessionAttended);
     }
 }

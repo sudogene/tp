@@ -16,7 +16,7 @@ class JsonAdaptedAttend {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Attend's %s field is missing!";
 
     private final LocalDateTime trainingTime;
-    private boolean hasAttended;
+    private boolean hasAttended = false;
 
     /**
      * Constructs a {@code JsonAdaptedAttend} with the given {@code trainingTime}.
@@ -24,7 +24,6 @@ class JsonAdaptedAttend {
     @JsonCreator
     public JsonAdaptedAttend(@JsonProperty("trainingTime") LocalDateTime trainingTime) {
         this.trainingTime = trainingTime;
-        hasAttended = false;
     }
 
     /**

@@ -98,7 +98,7 @@ public class MarkAttendanceCommand extends Command {
      */
     public boolean studentsHaveTrainingSession(Attend trainingSession, List<Student> studentsToCheck) {
         for (Student student: studentsToCheck) {
-            if (!student.containsTraining(trainingSession)) {
+            if (!student.containsAttendance(trainingSession)) {
                 return false;
             };
         }

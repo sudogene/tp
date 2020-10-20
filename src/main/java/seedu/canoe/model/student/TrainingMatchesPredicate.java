@@ -7,15 +7,15 @@ import java.util.function.Predicate;
  * Tests that a {@code Training}'s {@code dateTime} matches any of the keywords given.
  */
 public class TrainingMatchesPredicate implements Predicate<Training> {
-    private final List<Attend> trainingsAttending;
+    private final List<Attend> trainingAttendances;
 
-    public TrainingMatchesPredicate(List<Attend> trainingsAttending) {
-        this.trainingsAttending = trainingsAttending;
+    public TrainingMatchesPredicate(List<Attend> trainingAttendances) {
+        this.trainingAttendances = trainingAttendances;
     }
 
     @Override
     public boolean test(Training training) {
-        return trainingsAttending.stream()
+        return trainingAttendances.stream()
                 .anyMatch(trainingAttending -> trainingAttending.getTrainingTime().equals(training.getDateTime()));
     }
 
@@ -23,7 +23,7 @@ public class TrainingMatchesPredicate implements Predicate<Training> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TrainingMatchesPredicate // instanceof handles nulls
-                && trainingsAttending.equals(((TrainingMatchesPredicate) other).trainingsAttending)); // state check
+                && trainingAttendances.equals(((TrainingMatchesPredicate) other).trainingAttendances)); // state check
     }
 
 }

@@ -39,10 +39,11 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ACADEMIC_YEAR + "2 "
-            + PREFIX_MONDAY_DISMISSAL + "1600 " + PREFIX_TUESDAY_DISMISSAL
-            + "1500 " + PREFIX_WEDNESDAY_DISMISSAL + "1400 "
-            + PREFIX_THURSDAY_DISMISSAL + "1700 " + PREFIX_FRIDAY_DISMISSAL
-            + "1800 "
+            + PREFIX_MONDAY_DISMISSAL + "1600 "
+            + PREFIX_TUESDAY_DISMISSAL + "1500 "
+            + PREFIX_WEDNESDAY_DISMISSAL + "1400 "
+            + PREFIX_THURSDAY_DISMISSAL + "1700 "
+            + PREFIX_FRIDAY_DISMISSAL + "1800 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

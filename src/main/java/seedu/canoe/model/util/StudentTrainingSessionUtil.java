@@ -11,7 +11,7 @@ import seedu.canoe.model.student.Training;
 import seedu.canoe.model.student.TrainingMatchesPredicate;
 
 public class StudentTrainingSessionUtil {
-    public static List<Attend> getConflictsInStudentTrainingSchedule(
+    public static List<Attend> getConflictsInStudentTrainingAttendances(
             Set<Attend> trainingSchedules, Student student) {
         List<Attend> conflicts = trainingSchedules
                 .stream()
@@ -20,8 +20,8 @@ public class StudentTrainingSessionUtil {
         return conflicts;
     }
 
-    public static List<Training> getTrainingListFromAttendList(List<Attend> trainingsAttending, Model model) {
-        TrainingMatchesPredicate predicate = new TrainingMatchesPredicate(trainingsAttending);
+    public static List<Training> getTrainingListFromTrainingAttendances(List<Attend> trainingAttendances, Model model) {
+        TrainingMatchesPredicate predicate = new TrainingMatchesPredicate(trainingAttendances);
         model.updateFilteredTrainingList(predicate);
         return model.getFilteredTrainingList();
     }

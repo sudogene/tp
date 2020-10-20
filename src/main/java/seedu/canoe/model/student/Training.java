@@ -66,7 +66,7 @@ public class Training {
             throw new DuplicateStudentException();
         } else {
             this.students.add(student);
-            student.addTraining(new Attend(getDateTime()));
+            student.addAttendance(new Attend(getDateTime()));
         }
     }
 
@@ -90,7 +90,7 @@ public class Training {
      * Removes the training's date time from the student.
      */
     public void removeDateTimeFromStudent(Student student) {
-        student.removeTraining(new Attend(getDateTime()));
+        student.removeAttendance(new Attend(getDateTime()));
     }
 
     /**
