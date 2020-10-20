@@ -88,7 +88,8 @@ public class StudentCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         trainingTag.setText("Trainings Scheduled (Most recent upcoming 3): ");
-        student.getTrainingSchedule().stream().filter(dateTime -> dateTime.isAfter(LocalDateTime.now())).limit(3)
+        student.getTrainingSchedule().stream()
+                .filter(training -> training.getTrainingTime().isAfter(LocalDateTime.now())).limit(3)
                 .forEach(trainingSchedule -> trainingSchedules.getChildren()
                         .add(new Label((trainingSchedule.getTrainingTime())
                             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")))));
