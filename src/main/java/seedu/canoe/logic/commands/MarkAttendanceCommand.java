@@ -2,6 +2,7 @@ package seedu.canoe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.canoe.commons.core.Messages.MESSAGE_STUDENTS_NOT_FOUND;
+import static seedu.canoe.commons.core.Messages.MESSAGE_TRAININGS_NOT_FOUND;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.logging.Logger;
 
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.commons.core.LogsCenter;
+import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.AnyMatchPredicateList;
 import seedu.canoe.model.student.Attend;
@@ -40,21 +42,26 @@ public class MarkAttendanceCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         logger.info("=============================[ Executing MarkAttendanceCommand ]===========================");
         requireNonNull(model);
+        List<Training> lastShownList = model.getFilteredTrainingList();
+
+        if (trainingIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(MESSAGE_TRAININGS_NOT_FOUND);
+        }
+
         model.updateFilteredStudentList(predicates);
 
         if (model.getFilteredStudentList().isEmpty()) {
             logger.warning("Ids match zero students.");
-            return new CommandResult(MESSAGE_STUDENTS_NOT_FOUND);
+            model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+            throw new CommandException(MESSAGE_STUDENTS_NOT_FOUND);
         }
 
         List<Student> attendedStudents = model.getFilteredStudentList();
-        List<Training> lastShownList = model.getFilteredTrainingList();
 
         Training training = lastShownList.get(trainingIndex.getZeroBased());
-//        Training editedTraining = new Training(training.getDateTime(), training.getStudents());
 
         Attend unattendedTrainingSession = new Attend(training.getDateTime());
         Attend attendedTrainingSession = new Attend(training.getDateTime());
