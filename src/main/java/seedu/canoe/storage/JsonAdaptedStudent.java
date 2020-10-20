@@ -43,7 +43,7 @@ class JsonAdaptedStudent {
     private final String thursdayDismissal;
     private final String fridayDismissal;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final List<Attend> trainingSchedule = new ArrayList<>();
+    private final List<JsonAdaptedAttend> trainingSchedule = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -58,7 +58,7 @@ class JsonAdaptedStudent {
                               @JsonProperty("wednesday") String wednesdayDismissal,
                               @JsonProperty("thursday") String thursdayDismissal,
                               @JsonProperty("friday") String fridayDismissal,
-                              @JsonProperty("trainingSchedule") List<Attend> trainingSchedule,
+                              @JsonProperty("trainingSchedule") List<JsonAdaptedAttend> trainingSchedule,
                               @JsonProperty("id") String id) {
         this.name = name;
         this.phone = phone;
@@ -98,6 +98,7 @@ class JsonAdaptedStudent {
                 .collect(Collectors.toList()));
 
         trainingSchedule.addAll(source.getTrainingSchedule().stream()
+                .map(JsonAdaptedAttend::new)
                 .collect(Collectors.toList()));
     }
 
@@ -111,6 +112,7 @@ class JsonAdaptedStudent {
         for (JsonAdaptedTag tag : tagged) {
             studentTags.add(tag.toModelType());
         }
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -193,7 +195,9 @@ class JsonAdaptedStudent {
         Student student = new Student(modelName, modelPhone, modelEmail, modelAcademicYear,
             modelTags, monday, tuesday, wednesday, thursday, friday, studentId);
 
-        student.addAllTraining(trainingSchedule);
+        for (JsonAdaptedAttend attend : trainingSchedule) {
+            student.addTraining(attend.toModelType());
+        }
 
         return student;
 
