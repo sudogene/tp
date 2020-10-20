@@ -29,6 +29,7 @@ public class AddAllStudentToTrainingCommand extends Command {
             + "\nExample: "
             + COMMAND_WORD + "1";
 
+    public static final String MESSAGE_TRAINING_CANNOT_ADD = "No more students can be added to this training";
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "Added available students: %1$s";
     public static final String MESSAGE_NO_STUDENTS = "At least one student must be be available for the training.";
 
@@ -52,17 +53,21 @@ public class AddAllStudentToTrainingCommand extends Command {
         List<Training> trainingList = model.getFilteredTrainingList();
         List<Student> studentList = model.getFilteredStudentList();
 
-        // Checks if training index is invalid
+        // Checks if valid
         if (index.getZeroBased() >= trainingList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX);
         }
 
-        // Checks if student list is empty
         if (studentList.isEmpty()) {
             throw new CommandException(MESSAGE_NO_STUDENTS);
         }
 
         Training training = trainingList.get(index.getZeroBased());
+        if (!training.canAddStudent()) {
+            throw new CommandException(MESSAGE_TRAINING_CANNOT_ADD);
+        }
+
+        // Adding students to the training
         Training editedTraining = training.cloneTraining();
         LocalDateTime trainingDateTime = training.getDateTime();
         List<Student> addedStudents = new ArrayList<>();
