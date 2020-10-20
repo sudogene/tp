@@ -111,7 +111,7 @@ public class AddStudentToTrainingCommand extends Command {
 
             //Ensures student is available to attend training based on dismissal time
             if (!studentToEdit.isAvailableAtDateTime(editedTraining.getDateTime())
-                    || studentToEdit.hasTrainingAtDateTime(editedTraining.getDateTime())) {
+                    || studentToEdit.hasAttendanceAtDateTime(editedTraining.getDateTime())) {
                 throw new CommandException(MESSAGE_STUDENT_UNAVAILABLE);
             }
 
@@ -166,14 +166,14 @@ public class AddStudentToTrainingCommand extends Command {
         Day thursdayDismissal = studentToEdit.getThursdayDismissal();
         Day fridayDismissal = studentToEdit.getFridayDismissal();
         Set<Tag> updatedTags = studentToEdit.getTags();
-        List<Attend> trainingSchedules = studentToEdit.getTrainingSchedule().stream()
+        List<Attend> trainingAttendances = studentToEdit.getTrainingAttendances().stream()
                 .collect(Collectors.toList());
-        trainingSchedules.add(new Attend(editedTraining.getDateTime()));
+        trainingAttendances.add(new Attend(editedTraining.getDateTime()));
         Id id = studentToEdit.getId();
 
         Student newStudent = new Student(updatedName, updatedPhone, updatedEmail, updatedAcademicYear, updatedTags,
                 mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal, id);
-        newStudent.addAllTraining(trainingSchedules);
+        newStudent.addAllAttendances(trainingAttendances);
         return newStudent;
     }
 

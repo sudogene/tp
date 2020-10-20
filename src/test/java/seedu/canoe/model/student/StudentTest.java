@@ -29,7 +29,7 @@ public class StudentTest {
     @Test
     public void asObservableList_modifyTrainingList_throwsUnsupportedOperationException() {
         Student student = new StudentBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> student.getTrainingSchedule().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> student.getTrainingAttendances().remove(0));
     }
 
     @Test
@@ -109,8 +109,8 @@ public class StudentTest {
         editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different trainingSchedule -> returns false
-        editedAlice = new StudentBuilder(ALICE).withTrainingSchedules(new Attend(VALID_LOCAL_DATE_TIME_2)).build();
+        // different trainingAttendances -> returns false
+        editedAlice = new StudentBuilder(ALICE).withTrainingAttendances(new Attend(VALID_LOCAL_DATE_TIME_2)).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false

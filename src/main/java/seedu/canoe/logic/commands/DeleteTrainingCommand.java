@@ -76,7 +76,7 @@ public class DeleteTrainingCommand extends Command {
     private Student createEditedStudent(Student studentToEdit, Training trainingToDelete) {
         requireNonNull(studentToEdit);
         Student newStudent = studentToEdit.cloneStudent();
-        newStudent.removeTraining(new Attend(trainingToDelete.getDateTime()));
+        newStudent.removeAttendance(new Attend(trainingToDelete.getDateTime()));
         return newStudent;
     }
 

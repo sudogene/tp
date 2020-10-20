@@ -103,23 +103,23 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        if (!editedStudent.isAvailableForAllTrainingsScheduled()) {
+        if (!editedStudent.isAvailableForAllAttendances()) {
             List<Attend> dateTimesUnableToAttend = StudentTrainingSessionUtil
-                    .getConflictsInStudentTrainingSchedule(editedStudent.getTrainingSchedule(), editedStudent);
+                    .getConflictsInStudentTrainingAttendances(editedStudent.getTrainingAttendances(), editedStudent);
             List<Training> trainingsUnableToAttend = StudentTrainingSessionUtil
-                    .getTrainingListFromAttendList(dateTimesUnableToAttend, model);
+                    .getTrainingListFromTrainingAttendances(dateTimesUnableToAttend, model);
 
             for (Training training: trainingsUnableToAttend) {
                 Training editedTraining = new Training(training.getDateTime(), training.getStudents());
                 editedTraining.removeStudent(studentToEdit);
-                editedStudent.removeTraining(new Attend(training.getDateTime()));
+                editedStudent.removeAttendance(new Attend(training.getDateTime()));
                 model.setTraining(training, editedTraining);
             }
         }
 
-        List<Attend> studentTrainingDateTimeList = new ArrayList<>(editedStudent.getTrainingSchedule());
+        List<Attend> studentTrainingDateTimeList = new ArrayList<>(editedStudent.getTrainingAttendances());
         List<Training> studentTrainingList = StudentTrainingSessionUtil
-                .getTrainingListFromAttendList(studentTrainingDateTimeList, model);
+                .getTrainingListFromTrainingAttendances(studentTrainingDateTimeList, model);
 
         for (Training training: studentTrainingList) {
             Training editedTraining = new Training(training.getDateTime(), training.getStudents());
@@ -154,13 +154,13 @@ public class EditCommand extends Command {
                 editStudentDescriptor.getThursdayDismissal().orElse(studentToEdit.getThursdayDismissal());
         Day fridayDismissal = editStudentDescriptor.getFridayDismissal().orElse(studentToEdit.getFridayDismissal());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
-        List<Attend> trainingSchedules = studentToEdit.getTrainingSchedule().stream()
+        List<Attend> trainingAttendances = studentToEdit.getTrainingAttendances().stream()
                 .collect(Collectors.toList());
         Id id = studentToEdit.getId();
 
         Student newStudent = new Student(updatedName, updatedPhone, updatedEmail, updatedAcademicYear, updatedTags,
             mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal, id);
-        newStudent.addAllTraining(trainingSchedules);
+        newStudent.addAllAttendances(trainingAttendances);
         return newStudent;
     }
 

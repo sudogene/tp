@@ -18,7 +18,7 @@ import seedu.canoe.model.student.CommonTimeFinder;
  */
 public class CommonTimeCommand extends Command {
 
-    public static final Logger logger = LogsCenter.getLogger(CommonTimeCommand.class);
+
 
     public static final String COMMAND_WORD = "common-time";
 
@@ -29,6 +29,7 @@ public class CommonTimeCommand extends Command {
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     public static final String MESSAGE_NO_QUERY = "At least one valid field is required to find a common time.";
+    private final Logger logger = LogsCenter.getLogger(CommonTimeCommand.class);
     private final AnyMatchPredicateList predicates;
     private List<LocalTime> commonDismissalTimes;
 

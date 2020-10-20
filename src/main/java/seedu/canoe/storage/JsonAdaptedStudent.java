@@ -43,7 +43,7 @@ class JsonAdaptedStudent {
     private final String thursdayDismissal;
     private final String fridayDismissal;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final List<Attend> trainingSchedule = new ArrayList<>();
+    private final List<Attend> trainingAttendances = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -58,7 +58,7 @@ class JsonAdaptedStudent {
                               @JsonProperty("wednesday") String wednesdayDismissal,
                               @JsonProperty("thursday") String thursdayDismissal,
                               @JsonProperty("friday") String fridayDismissal,
-                              @JsonProperty("trainingSchedule") List<Attend> trainingSchedule,
+                              @JsonProperty("trainingAttendances") List<Attend> trainingAttendances,
                               @JsonProperty("id") String id) {
         this.name = name;
         this.phone = phone;
@@ -72,8 +72,8 @@ class JsonAdaptedStudent {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
-        if (trainingSchedule != null) {
-            this.trainingSchedule.addAll(trainingSchedule);
+        if (trainingAttendances != null) {
+            this.trainingAttendances.addAll(trainingAttendances);
         }
         this.id = id;
     }
@@ -97,7 +97,7 @@ class JsonAdaptedStudent {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
 
-        trainingSchedule.addAll(source.getTrainingSchedule().stream()
+        trainingAttendances.addAll(source.getTrainingAttendances().stream()
                 .collect(Collectors.toList()));
     }
 
@@ -193,7 +193,7 @@ class JsonAdaptedStudent {
         Student student = new Student(modelName, modelPhone, modelEmail, modelAcademicYear,
             modelTags, monday, tuesday, wednesday, thursday, friday, studentId);
 
-        student.addAllTraining(trainingSchedule);
+        student.addAllAttendances(trainingAttendances);
 
         return student;
 

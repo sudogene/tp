@@ -58,7 +58,7 @@ public class DeleteStudentFromTrainingCommandTest {
         assertEquals(String.format(AddStudentToTrainingCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS),
                 commandResult.getFeedbackToUser());
         //Student should have dateTime added to his field
-        assertTrue(getModel().getFilteredStudentList().get(0).containsTraining(new Attend(VALID_LOCAL_DATE_TIME_5)));
+        assertTrue(getModel().getFilteredStudentList().get(0).containsAttendance(new Attend(VALID_LOCAL_DATE_TIME_5)));
         //One student Jonas inside of the training container
         assertTrue(getModel().getFilteredTrainingList().get(0).getStudents().size() == 1);
         //Training class should contain JONAS too
@@ -69,7 +69,7 @@ public class DeleteStudentFromTrainingCommandTest {
         assertEquals(String.format(DeleteStudentFromTrainingCommand.MESSAGE_DELETE_STUDENT_SUCCESS, VALID_ID_STRINGS),
                 commandResult2.getFeedbackToUser());
         //Student should not have dateTime in his field anymore
-        assertFalse(getModel().getFilteredStudentList().get(0).containsTraining(new Attend(VALID_LOCAL_DATE_TIME_5)));
+        assertFalse(getModel().getFilteredStudentList().get(0).containsAttendance(new Attend(VALID_LOCAL_DATE_TIME_5)));
         //Nobody inside of the training container
         assertTrue(getModel().getFilteredTrainingList().get(0).getStudents().size() == 0);
         //Training class should not contain JONAS too
@@ -93,11 +93,11 @@ public class DeleteStudentFromTrainingCommandTest {
                 commandResult2.getFeedbackToUser());
 
         //Student 1 should not have dateTime added to his field
-        assertFalse(getModel().getFilteredStudentList().get(0).containsTraining(new Attend(VALID_LOCAL_DATE_TIME_5)));
+        assertFalse(getModel().getFilteredStudentList().get(0).containsAttendance(new Attend(VALID_LOCAL_DATE_TIME_5)));
         //Student 2 should not have dateTime added to his field
-        assertFalse(getModel().getFilteredStudentList().get(1).containsTraining(new Attend(VALID_LOCAL_DATE_TIME_5)));
+        assertFalse(getModel().getFilteredStudentList().get(1).containsAttendance(new Attend(VALID_LOCAL_DATE_TIME_5)));
         //Student 3 should not have dateTime added to his field
-        assertFalse(getModel().getFilteredStudentList().get(2).containsTraining(new Attend(VALID_LOCAL_DATE_TIME_5)));
+        assertFalse(getModel().getFilteredStudentList().get(2).containsAttendance(new Attend(VALID_LOCAL_DATE_TIME_5)));
         //0 students inside of the training container
         assertTrue(getModel().getFilteredTrainingList().get(0).getStudents().size() == 0);
         //Training class should not contain student1 too
@@ -123,7 +123,7 @@ public class DeleteStudentFromTrainingCommandTest {
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, () ->
                 deleteStudentFromTrainingCommand.execute(getModel()));
         //Student should still have dateTime in his field
-        assertTrue(getModel().getFilteredStudentList().get(0).containsTraining(new Attend(VALID_LOCAL_DATE_TIME_5)));
+        assertTrue(getModel().getFilteredStudentList().get(0).containsAttendance(new Attend(VALID_LOCAL_DATE_TIME_5)));
         //Student Jonas should be inside of the training container
         assertFalse(getModel().getFilteredTrainingList().get(0).getStudents().size() == 0);
         //Training class should contain JONAS too
