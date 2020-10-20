@@ -77,8 +77,8 @@ public class SampleDataUtil {
     /**
      * Returns a training schedule list containing the list of LocalDateTimes given.
      */
-    public static List<Attend> getTrainingSchedule(Attend... dateTime) {
-        return Arrays.stream(dateTime)
+    public static List<Attend> getTrainingAttendances(Attend... attendance) {
+        return Arrays.stream(attendance)
                 .collect(Collectors.toList());
     }
 

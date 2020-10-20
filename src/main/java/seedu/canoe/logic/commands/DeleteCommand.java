@@ -45,9 +45,9 @@ public class DeleteCommand extends Command {
         }
 
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
-        List<Attend> studentTrainingAttendList = new ArrayList<>(studentToDelete.getTrainingSchedule());
+        List<Attend> trainingAttendances = new ArrayList<>(studentToDelete.getTrainingAttendances());
         List<Training> studentTrainings = StudentTrainingSessionUtil
-                .getTrainingListFromAttendList(studentTrainingAttendList, model);
+                .getTrainingListFromTrainingAttendances(trainingAttendances, model);
         for (Training training: studentTrainings) {
             Training editedTraining = new Training(training.getDateTime(), training.getStudents());
             editedTraining.removeStudent(studentToDelete);

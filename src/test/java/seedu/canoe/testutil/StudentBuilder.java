@@ -43,7 +43,7 @@ public class StudentBuilder {
     private Email email;
     private AcademicYear academicYear;
     private Set<Tag> tags;
-    private List<Attend> trainingSchedules;
+    private List<Attend> trainingAttendances;
     private Monday mondayDismissal;
     private Tuesday tuesdayDismissal;
     private Wednesday wednesdayDismissal;
@@ -60,7 +60,7 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         academicYear = new AcademicYear(DEFAULT_ACADEMICYEAR);
         tags = new HashSet<>();
-        trainingSchedules = new ArrayList<>();
+        trainingAttendances = new ArrayList<>();
         mondayDismissal = new Monday(DEFAULT_MONDAY);
         tuesdayDismissal = new Tuesday(DEFAULT_TUESDAY);
         wednesdayDismissal = new Wednesday(DEFAULT_WEDNESDAY);
@@ -78,7 +78,7 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         academicYear = studentToCopy.getAcademicYear();
         tags = new HashSet<>(studentToCopy.getTags());
-        trainingSchedules = new ArrayList<>(studentToCopy.getTrainingSchedule());
+        trainingAttendances = new ArrayList<>(studentToCopy.getTrainingAttendances());
         mondayDismissal = (Monday) studentToCopy.getMondayDismissal();
         tuesdayDismissal = (Tuesday) studentToCopy.getTuesdayDismissal();
         wednesdayDismissal = (Wednesday) studentToCopy.getWednesdayDismissal();
@@ -104,11 +104,11 @@ public class StudentBuilder {
     }
 
     /**
-     * Parses the {@code dateTimes} into a {@code TreeSet<LocalDateTime>} and set it to the {@code Student} that we are
-     * building.
+     * Parses the {@code trainingAttendances} into a {@code TreeSet<Attend>} and set it to the {@code Student}
+     * that we are building.
      */
-    public StudentBuilder withTrainingSchedules(Attend ... dateTimes) {
-        this.trainingSchedules = SampleDataUtil.getTrainingSchedule(dateTimes);
+    public StudentBuilder withTrainingAttendances(Attend ... trainingAttendances) {
+        this.trainingAttendances = SampleDataUtil.getTrainingAttendances(trainingAttendances);
         return this;
     }
 
@@ -192,7 +192,7 @@ public class StudentBuilder {
     public Student build() {
         Student newStudent = new Student(name, phone, email, academicYear, tags,
             mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal, id);
-        newStudent.addAllTraining(trainingSchedules);
+        newStudent.addAllAttendances(trainingAttendances);
         return newStudent;
     }
 

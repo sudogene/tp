@@ -52,7 +52,7 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label trainingTag;
     @FXML
-    private FlowPane trainingSchedules;
+    private FlowPane trainingAttendances;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -88,9 +88,10 @@ public class StudentCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         trainingTag.setText("Trainings Scheduled (Most recent upcoming 3): ");
-        student.getTrainingSchedule().stream().filter(dateTime -> dateTime.isAfter(LocalDateTime.now())).limit(3)
-                .forEach(trainingSchedule -> trainingSchedules.getChildren()
-                        .add(new Label((trainingSchedule.getTrainingTime())
+        student.getTrainingAttendances().stream().filter(dateTime -> (dateTime.getTrainingTime())
+            .isAfter(LocalDateTime.now())).limit(3)
+                .forEach(trainingAttendance -> trainingAttendances.getChildren()
+                        .add(new Label((trainingAttendance.getTrainingTime())
                             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")))));
 
     }
