@@ -20,7 +20,7 @@ import seedu.canoe.model.student.NameContainsKeywordsPredicate;
  */
 public class CommonTimeCommandParser implements Parser<CommonTimeCommand> {
 
-    private static final Logger logger = LogsCenter.getLogger(CommonTimeCommand.class);
+    private static final Logger logger = LogsCenter.getLogger(CommonTimeCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the CommonTimeCommand

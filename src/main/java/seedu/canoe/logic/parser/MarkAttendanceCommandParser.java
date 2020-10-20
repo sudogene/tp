@@ -15,7 +15,7 @@ import seedu.canoe.model.student.IdMatchesPredicate;
 
 public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand>{
 
-    private static final Logger logger = LogsCenter.getLogger(MarkAttendanceCommand.class);
+    private static final Logger logger = LogsCenter.getLogger(MarkAttendanceCommandParser.class);
 
     public MarkAttendanceCommand parse(String args) throws ParseException {
         logger.info("=============================[ Parsing CommonTimeCommand ]===========================");
