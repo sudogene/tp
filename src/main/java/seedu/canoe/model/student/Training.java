@@ -1,8 +1,10 @@
 package seedu.canoe.model.student;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.canoe.model.student.exceptions.DuplicateStudentException;
 
@@ -11,7 +13,19 @@ public class Training {
 
     public static final String MESSAGE_CONSTRAINTS = "Must be a valid date and time.";
     private final LocalDateTime dateTime;
-    private final Set<Student> students = new HashSet<Student>();
+
+    //Used a TreeSet with Comparator to sort Students by increasing Unique ID values.
+    private final TreeSet<Student> students = new TreeSet<>(new StudentComparator());
+
+    /**
+     * Student Comparator class that implements the compare method to compare unique IDs.
+     */
+    class StudentComparator implements Comparator<Student> {
+        public int compare(Student student1, Student student2) {
+            return Integer.parseInt(student1.getId().value)
+                    - Integer.parseInt(student2.getId().value);
+        }
+    }
 
     /**
      * Constructor with only LocalDateTime.
@@ -88,6 +102,16 @@ public class Training {
      */
     public boolean hasStudent(Student student) {
         return getStudents().contains(student);
+    }
+
+    /**
+     * Checks if specified student id is present inside of training list.
+     *
+     * @param studentId to be checked
+     * @return true if student id is present inside of training schedule.
+     */
+    public boolean hasStudentId(Id studentId) {
+        return getStudents().stream().map(student -> student.getId()).anyMatch(id -> id.equals(studentId));
     }
 
     /**

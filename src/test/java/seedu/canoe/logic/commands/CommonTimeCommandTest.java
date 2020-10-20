@@ -32,8 +32,7 @@ class CommonTimeCommandTest {
 
     @Test
     public void execute_zeroKeywords_defaultDismissalTimes() {
-        String expectedMessage = "Monday: 15:00\n"
-                + "Tuesday: 15:00\n" + "Wednesday: 15:00\n" + "Thursday: 15:00\n" + "Friday: 15:00";
+        String expectedMessage = "Search result matches no students!";
         NameContainsKeywordsPredicate namePredicate = preparePredicate(" ");
         AcademicYearMatchesPredicate academicYearPredicate = new AcademicYearMatchesPredicate(" ");
         AnyMatchPredicateList predicateList = new AnyMatchPredicateList(

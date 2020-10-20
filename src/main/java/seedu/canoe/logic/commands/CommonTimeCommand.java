@@ -1,10 +1,13 @@
 package seedu.canoe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.canoe.commons.core.Messages.MESSAGE_STUDENTS_NOT_FOUND;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.AnyMatchPredicateList;
 import seedu.canoe.model.student.CommonTimeFinder;
@@ -15,7 +18,9 @@ import seedu.canoe.model.student.CommonTimeFinder;
  */
 public class CommonTimeCommand extends Command {
 
-    public static final String COMMAND_WORD = "commonTime";
+    public static final Logger logger = LogsCenter.getLogger(CommonTimeCommand.class);
+
+    public static final String COMMAND_WORD = "common-time";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds a common time amongst all selected students "
@@ -33,8 +38,15 @@ public class CommonTimeCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        logger.info("=============================[ Executing CommonTimeCommand ]===========================");
         requireNonNull(model);
         model.updateFilteredStudentList(predicates);
+
+        if (model.getFilteredStudentList().isEmpty()) {
+            logger.warning("Keywords match zero students.");
+            return new CommandResult(MESSAGE_STUDENTS_NOT_FOUND);
+        }
+
         commonDismissalTimes = new CommonTimeFinder(model.getFilteredStudentList()).getCommonDismissalTimes();
         return new CommandResult(commonDismissalTimesToString(commonDismissalTimes));
     }
