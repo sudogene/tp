@@ -18,8 +18,6 @@ import seedu.canoe.model.student.CommonTimeFinder;
  */
 public class CommonTimeCommand extends Command {
 
-
-
     public static final String COMMAND_WORD = "common-time";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD

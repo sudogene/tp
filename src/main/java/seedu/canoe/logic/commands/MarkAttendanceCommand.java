@@ -8,8 +8,8 @@ import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import java.util.List;
 import java.util.logging.Logger;
 
-import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.commons.core.LogsCenter;
+import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.AnyMatchPredicateList;
@@ -23,8 +23,8 @@ public class MarkAttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "mark-attend";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gets all students in the training session" +
-            " whose Ids corresponds to the specified Ids and marks them as attended the training session.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gets all students in the training session"
+            + " whose Ids corresponds to the specified Ids and marks them as attended the training session.\n"
             + "Parameters: ID [MORE_IDS]...\n"
             + "Example: " + COMMAND_WORD + " 2 id/1,4,19";
 
@@ -36,6 +36,12 @@ public class MarkAttendanceCommand extends Command {
     private final Index trainingIndex;
     private final AnyMatchPredicateList predicates;
 
+    /**
+     * Constructs a new MarkAttendanceCommand object.
+     *
+     * @param trainingIndex index of training.
+     * @param predicates list of predicates.
+     */
     public MarkAttendanceCommand(Index trainingIndex, AnyMatchPredicateList predicates) {
         this.trainingIndex = trainingIndex;
         this.predicates = predicates;
@@ -100,7 +106,7 @@ public class MarkAttendanceCommand extends Command {
         for (Student student: studentsToCheck) {
             if (!student.containsAttendance(trainingSession)) {
                 return false;
-            };
+            }
         }
         return true;
     }

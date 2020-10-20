@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.AddCommand;
 import seedu.canoe.logic.commands.ClearCommand;
 import seedu.canoe.logic.commands.DeleteCommand;

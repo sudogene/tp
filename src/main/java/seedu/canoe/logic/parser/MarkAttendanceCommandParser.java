@@ -13,10 +13,15 @@ import seedu.canoe.logic.parser.exceptions.ParseException;
 import seedu.canoe.model.student.AnyMatchPredicateList;
 import seedu.canoe.model.student.IdMatchesPredicate;
 
-public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand>{
+public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand> {
 
     private static final Logger logger = LogsCenter.getLogger(MarkAttendanceCommandParser.class);
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the MarkAttendanceCommand
+     * and returns a MarkAttendanceCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public MarkAttendanceCommand parse(String args) throws ParseException {
         logger.info("=============================[ Parsing CommonTimeCommand ]===========================");
         requireNonNull(args);

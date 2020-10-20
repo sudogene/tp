@@ -9,9 +9,7 @@ import static seedu.canoe.testutil.TypicalIndexes.INDEX_THIRD_TRAINING;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.canoe.logic.commands.CommonTimeCommand;
 import seedu.canoe.logic.commands.MarkAttendanceCommand;
-import seedu.canoe.model.student.AcademicYearMatchesPredicate;
 import seedu.canoe.model.student.AnyMatchPredicateList;
 import seedu.canoe.model.student.IdMatchesPredicate;
 
@@ -20,7 +18,7 @@ class MarkAttendanceCommandParserTest {
     private MarkAttendanceCommandParser parser = new MarkAttendanceCommandParser();
 
     @Test
-    public void parse_validArgs_returnsMarkAttendanceCommand(){
+    public void parse_validArgs_returnsMarkAttendanceCommand() {
         MarkAttendanceCommand firstExpectedMarkAttendanceCommand =
                 new MarkAttendanceCommand(INDEX_THIRD_TRAINING, AnyMatchPredicateList.of(
                         new IdMatchesPredicate("2"),
