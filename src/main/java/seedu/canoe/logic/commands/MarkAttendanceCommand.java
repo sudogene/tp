@@ -26,6 +26,9 @@ public class MarkAttendanceCommand extends Command {
             + "Parameters: ID [MORE_IDS]...\n"
             + "Example: " + COMMAND_WORD + " 2 id/1,4,19";
 
+    public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be added must be specified.";
+    public static final String MESSAGE_INVALID_STUDENT_MARKED = "Some students do not have specified"
+            + " training session scheduled!";
     public static final String MESSAGE_MARK_AS_ATTENDED_SUCCESS = "Marked students as attended!";
 
     private final Index trainingIndex;
@@ -49,12 +52,21 @@ public class MarkAttendanceCommand extends Command {
 
         List<Student> attendedStudents = model.getFilteredStudentList();
         List<Training> lastShownList = model.getFilteredTrainingList();
+
         Training training = lastShownList.get(trainingIndex.getZeroBased());
+//        Training editedTraining = new Training(training.getDateTime(), training.getStudents());
+
+        Attend unattendedTrainingSession = new Attend(training.getDateTime());
         Attend attendedTrainingSession = new Attend(training.getDateTime());
         attendedTrainingSession.attendsTraining();
 
+        if (!studentsHaveTrainingSession(unattendedTrainingSession, attendedStudents)) {
+            logger.warning("Some students do not contain training session");
+            return new CommandResult(MESSAGE_INVALID_STUDENT_MARKED);
+        }
+
         for (Student student : attendedStudents) {
-            student.attendTrainingSession(attendedTrainingSession);
+            student.attendTrainingSession(unattendedTrainingSession, attendedTrainingSession);
         }
 
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
@@ -66,5 +78,22 @@ public class MarkAttendanceCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof MarkAttendanceCommand // instanceof handles nulls
                 && predicates.equals(((MarkAttendanceCommand) other).predicates)); // state check
+    }
+
+    /**
+     * Checks the list of students and returns whether all the students have the training
+     * session as part of their schedule.
+     *
+     * @param trainingSession to be checked for.
+     * @param studentsToCheck list of students to check.
+     * @return true if students have training session scheduled, false if otherwise.
+     */
+    public boolean studentsHaveTrainingSession(Attend trainingSession, List<Student> studentsToCheck) {
+        for (Student student: studentsToCheck) {
+            if (!student.containsTraining(trainingSession)) {
+                return false;
+            };
+        }
+        return true;
     }
 }

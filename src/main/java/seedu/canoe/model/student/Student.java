@@ -387,12 +387,12 @@ public class Student {
     /**
      * Mark student's attendance for a training session as attended.
      *
-     * @param trainingSession training session to mark as attended.
+     * @param trainingSessionToAttend training session to mark as attended.
      */
-    public void attendTrainingSession(Attend trainingSession) {
-        assert(containsTraining(trainingSession));
-        Attend attendedTrainingSession = new Attend(trainingSession.getTrainingTime());
-        trainingSchedules.remove(trainingSession);
-        trainingSchedules.add(attendedTrainingSession);
+    public void attendTrainingSession(Attend trainingSessionToAttend, Attend trainingSessionAttended) {
+        assert(containsTraining(trainingSessionToAttend));
+
+        trainingSchedules.remove(trainingSessionToAttend);
+        trainingSchedules.add(trainingSessionAttended);
     }
 }
