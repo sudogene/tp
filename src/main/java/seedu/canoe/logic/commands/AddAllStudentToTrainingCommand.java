@@ -76,16 +76,19 @@ public class AddAllStudentToTrainingCommand extends Command {
                     addedStudents.add(student);
                 });
 
-        model.setTraining(training, editedTraining);
         Optional<String> addedStudentsMessage = getStudentsMessage(addedStudents);
         if (addedStudentsMessage.isEmpty()) {
             throw new CommandException(MESSAGE_NO_STUDENTS);
         }
+
+        model.setTraining(training, editedTraining);
         return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS,
                 addedStudentsMessage.get()));
     }
 
     private void addStudentToTraining(Training training, Student student, Model model) {
+        assert training != null && student != null && model != null;
+
         training.addStudent(student);
         Student editedStudent = student.cloneStudent();
         editedStudent.addTraining(training.getDateTime());
@@ -93,6 +96,8 @@ public class AddAllStudentToTrainingCommand extends Command {
     }
 
     private Optional<String> getStudentsMessage(List<Student> students) {
+        assert !students.isEmpty();
+
         return students.stream()
                 .map(Student::getId)
                 .map(Id::toString)
