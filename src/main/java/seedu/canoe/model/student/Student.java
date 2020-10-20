@@ -104,7 +104,6 @@ public class Student {
     }
 
     /**
-
      * Creates a student with a new valid Id if it was constructed with placeholder Id.
      * If the student already has a valid Id, the same student is returned.
      */
@@ -383,5 +382,17 @@ public class Student {
         }
 
         return isAvailable;
+    }
+
+    /**
+     * Mark student's attendance for a training session as attended.
+     *
+     * @param trainingSession training session to mark as attended.
+     */
+    public void attendTrainingSession(Attend trainingSession) {
+        assert(containsTraining(trainingSession));
+        Attend attendedTrainingSession = new Attend(trainingSession.getTrainingTime());
+        trainingSchedules.remove(trainingSession);
+        trainingSchedules.add(attendedTrainingSession);
     }
 }
