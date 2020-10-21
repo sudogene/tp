@@ -113,5 +113,9 @@ class MarkAttendanceCommandTest {
         MarkAttendanceCommand command = new MarkAttendanceCommand(
                 trainingIndex, AnyMatchPredicateList.of(firstIdPredicate, secondIdPredicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+        // Reset students in typical address book
+        firstStudent.removeAllAttendances();
+        secondStudent.removeAllAttendances();
     }
 }
