@@ -56,6 +56,14 @@ public class Training {
         return this.students;
     }
 
+    public Training cloneTraining() {
+        return new Training(dateTime, students);
+    }
+
+    public boolean canAddStudent() {
+        return dateTime.isAfter(LocalDateTime.now());
+    }
+
     /**
      * Adds the specified student to the Training Session.
      * Also adds training's LocalDateTime to the student container
