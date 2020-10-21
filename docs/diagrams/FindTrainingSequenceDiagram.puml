@@ -4,15 +4,13 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":CanoeCoachParser" as CanoeCoachParser LOGIC_COLOR
+participant "u:FindStudentTrainingCommandParser" as FindStudentTrainingCommandParser LOGIC_COLOR
 participant "u:FindStudentTrainingCommand" as FindStudentTrainingCommand LOGIC_COLOR
+participant "u:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-end box
-
-box Logic LOGIC_COLOR_T1
-participant "u:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 [-> LogicManager : execute(find-training)
@@ -21,12 +19,27 @@ activate LogicManager
 LogicManager -> CanoeCoachParser : parseCommand(find-training)
 activate CanoeCoachParser
 
+create FindStudentTrainingCommandParser
+CanoeCoachParser -> FindStudentTrainingCommandParser
+activate FindStudentTrainingCommandParser
+
+FindStudentTrainingCommandParser --> CanoeCoachParser
+deactivate FindStudentTrainingCommandParser
+
+CanoeCoachParser -> FindStudentTrainingCommandParser : parse("id/1")
+activate FindStudentTrainingCommandParser
+
 create FindStudentTrainingCommand
-CanoeCoachParser -> FindStudentTrainingCommand
+FindStudentTrainingCommandParser -> FindStudentTrainingCommand
 activate FindStudentTrainingCommand
 
-FindStudentTrainingCommand --> CanoeCoachParser
+FindStudentTrainingCommand --> FindStudentTrainingCommandParser
 deactivate FindStudentTrainingCommand
+
+FindStudentTrainingCommandParser --> CanoeCoachParser : u
+deactivate FindStudentTrainingCommandParser
+FindStudentTrainingCommandParser -[hidden]-> CanoeCoachParser
+destroy FindStudentTrainingCommandParser
 
 CanoeCoachParser --> LogicManager : u
 deactivate CanoeCoachParser
@@ -44,15 +57,15 @@ activate Model
 Model --> FindStudentTrainingCommand
 deactivate Model
 
-FindStudentTrainingCommand -> CommandResult : <<create>>
+create CommandResult
+FindStudentTrainingCommand -> CommandResult
 activate CommandResult
-CommandResult -> FindStudentTrainingCommand
+
+CommandResult --> FindStudentTrainingCommand
 deactivate CommandResult
 
 FindStudentTrainingCommand --> LogicManager : result
 deactivate FindStudentTrainingCommand
-FindStudentTrainingCommand-[hidden]-> LogicManager : result
-destroy FindStudentTrainingCommand
 
 [<--LogicManager
 deactivate LogicManager
