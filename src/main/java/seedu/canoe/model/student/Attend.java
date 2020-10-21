@@ -1,6 +1,7 @@
 package seedu.canoe.model.student;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents an attendance for a training session.
@@ -67,5 +68,17 @@ public class Attend implements Comparable<Attend> {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        String result = getTrainingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        if (hasAttended) {
+            result += " [\u2713]";
+        } else {
+            result += " [\u2717]";
+        }
+        return result;
+
     }
 }

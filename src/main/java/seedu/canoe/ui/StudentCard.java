@@ -1,7 +1,6 @@
 package seedu.canoe.ui;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -90,9 +89,8 @@ public class StudentCard extends UiPart<Region> {
         trainingTag.setText("Trainings Scheduled (Most recent upcoming 3): ");
         student.getTrainingAttendances().stream()
                 .filter(training -> training.getTrainingTime().isAfter(LocalDateTime.now())).limit(3)
-                .forEach(trainingSchedule -> trainingAttendances.getChildren()
-                        .add(new Label((trainingSchedule.getTrainingTime())
-                                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")))));
+                .forEach(trainingAttendance -> trainingAttendances.getChildren()
+                        .add(new Label(trainingAttendance.toString())));
     }
 
     @Override
