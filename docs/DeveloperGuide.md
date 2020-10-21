@@ -152,6 +152,8 @@ Step 1. The user launches the application. As the student panel only displays th
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateFilteredStudentList()` or `Model#updateFilteredTrainingList()`, so the GUI state will not be changed or altered.
 
+</div>
+
 The following sequence diagram shows how the `find-training` operation works:
 
 ![FindTrainingSequenceDiagram](images/FindTrainingSequenceDiagram.png)
