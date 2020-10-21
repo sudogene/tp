@@ -91,7 +91,7 @@ public class AddAllStudentToTrainingCommand extends Command {
     /**
      * Checks if the {@code Training} is able to add the {@code Student}
      */
-    public boolean isAbleToAddStudent(Student student, Training training) {
+    public static boolean isAbleToAddStudent(Student student, Training training) {
         LocalDateTime trainingDateTime = training.getDateTime();
         return student.isAvailableAtDateTime(trainingDateTime)
                 && !student.hasTrainingAtDateTime(trainingDateTime)
