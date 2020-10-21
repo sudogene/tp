@@ -40,7 +40,7 @@ public class Student {
 
     private final Set<Tag> tags = new HashSet<>();
 
-    class TreeSetComparator implements Comparator<LocalDateTime> {
+    private static class TreeSetComparator implements Comparator<LocalDateTime> {
         public int compare(LocalDateTime dateTime1, LocalDateTime dateTime2) {
             return dateTime1.compareTo(dateTime2);
         }

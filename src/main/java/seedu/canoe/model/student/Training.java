@@ -20,7 +20,7 @@ public class Training {
     /**
      * Student Comparator class that implements the compare method to compare unique IDs.
      */
-    class StudentComparator implements Comparator<Student> {
+    private static class StudentComparator implements Comparator<Student> {
         public int compare(Student student1, Student student2) {
             return Integer.parseInt(student1.getId().value)
                     - Integer.parseInt(student2.getId().value);
