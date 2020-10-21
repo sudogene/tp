@@ -249,6 +249,20 @@ Format: `ts-delete TRAINING_INDEX id/STUDENT_INDEX...`
 Examples:
 - `ts-delete 2 id/1,2,3` deletes students with indexes 1,2,3 from training 1.
 
+### Find all of a student's training : `find-training`
+Finds all of a student's trainings.
+
+Format: `find-training id/STUDENT_INDEX`
+
+* Student index refers to the unique index of the student in the entire student list (can be viewed with `list` command).
+* Only ONE student id can be specified in the same command
+* Both the student and training panels will be filtered should the command be successfully executed
+
+> Note: Only the most recent upcoming 3 Training dates are displayed on the student panel. Hence, this function is handy for displaying the full training history (past and present)
+
+Examples:
+- `find-training id/1` filters the student and training panel to show only the student with index 1 and all of his past and present trainings on the training panel.
+- 
 ### Clearing all entries: `clear`
 Clears the student and training list of all existing students and trainings.
 
@@ -284,5 +298,6 @@ Action | Format, Examples
 **delete-training** | `delete-training TRAINING_INDEX`<br> e.g., `delete-training 1`
 **ts-add** | `ts-add TRAINING_INDEX id/STUDENT_INDEX...`<br> e.g., `ts-add 1 id/1,2,3`
 **ts-delete** | `ts-delete TRAINING_INDEX id/STUDENT_INDEX...`<br> e.g., `ts-delete 1 id/1,2,3`
+**find-training** | `find-training id/STUDENT_INDEX...`<br> e.g., `find-training id/1`
 **List** | `list`
 **Help** | `help`
