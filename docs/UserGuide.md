@@ -185,7 +185,7 @@ Format: `commonTime [n/KEYWORDS] [ay/ACADEMIC_YEAR]`
 
 - Searching by more than one field
     - Common Time command will return student(s) that matches any of the fields provided.
-    
+
 - If no student matches the search criteria, the default dismissal time of 1500 for all 5 days will be returned.
 
 Examples:
@@ -212,7 +212,7 @@ Format: `delete-training TRAINING_INDEX`
 
 
 Examples:
-- `delete-training 2` removes the training with index 2 in the displayed training list. 
+- `delete-training 2` removes the training with index 2 in the displayed training list.
 
 ### Add Student to Training : `ts-add`
 Adds students to a training.
@@ -262,7 +262,7 @@ Format: `find-training id/STUDENT_INDEX`
 
 Examples:
 - `find-training id/1` filters the student and training panel to show only the student with index 1 and all of his past and present trainings on the training panel.
-- 
+
 ### Clearing all entries: `clear`
 Clears the student and training list of all existing students and trainings.
 

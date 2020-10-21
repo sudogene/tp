@@ -23,7 +23,7 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2021S1-CS2103-F10-1/tp/tree/master/docs/diagrams) folder. 
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2021S1-CS2103-F10-1/tp/tree/master/docs/diagrams) folder.
 
 </div>
 
@@ -140,15 +140,15 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The find-training mechanism extends `Command` with the ability to view all training history (past and present) of a single student. This command is supported by methods in the `Model` interface, namely `Model#updateFilteredStudentList()`,  and`Model#updateFilteredTrainingList()`. 
+The find-training mechanism extends `Command` with the ability to view all training history (past and present) of a single student. This command is supported by methods in the `Model` interface, namely `Model#updateFilteredStudentList()`,  and`Model#updateFilteredTrainingList()`.
 
 ![TrainingMatchesIdPredicate](images/TrainingMatchesIdPredicate.png)
 
-This command is supported by the `TrainingMatchesIdPredicate`, which assists to check if a particular student ID is present in a particular training. From the above class diagram, the `TrainingMatchesIdPredicate#test()` method is used to achieve this. 
+This command is supported by the `TrainingMatchesIdPredicate`, which assists to check if a particular student ID is present in a particular training. From the above class diagram, the `TrainingMatchesIdPredicate#test()` method is used to achieve this.
 
 Given below is an example usage scenario and how the find-training mechanism behaves at each step.
 
-Step 1. The user launches the application. As the student panel only displays the most recent 3 upcoming trainings scheduled, the user executes `find-training id/5` command to view all the trainings of the uniquely identified 5th student in the CanoeCoach. 
+Step 1. The user launches the application. As the student panel only displays the most recent 3 upcoming trainings scheduled, the user executes `find-training id/5` command to view all the trainings of the uniquely identified 5th student in the CanoeCoach.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateFilteredStudentList()` or `Model#updateFilteredTrainingList()`, so the GUI state will not be changed or altered.
 
@@ -343,7 +343,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *   1b. Student with the same name already exists.
     *   1b1. CanoE-COACH displays an error message.
         Use case resumes at step 1.
-        
+
 *   1c. Details have invalid format.
     *   1c1. CanoE-COACH displays an error message.
         Use case resumes at step 1.
@@ -390,7 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 4a. The student's new dismissal time is later than a training that he has been scheduled for.
     * 4a1. Student is removed from the Training.
     Use case ends.
-       
+
 
 **UC04: Find students**
 
@@ -423,7 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  CanoE-COACH shows a list of students that have been specified by user.
 2.  CanoE-COACH shows shows the latest dismissal times for the list of students.
     Use case ends.
-    
+
 **Extensions**
 
 * 1a. There are no parameters specified in the commonTime command.
@@ -448,7 +448,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *   1b. Training with the same date and time already exists.
     *   1b1. CanoE-COACH displays an error message.
         Use case resumes at step 1.
-        
+    
 **UC08: Delete a training**
 
 **MSS**
@@ -463,13 +463,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The given index is invalid.
     * 2a1. CanoE-COACH shows an error message.
       Use case resumes at step 1.
-      
+
 **UC09: Add students to the training**
 
 **MSS**
 
 1.  User requests to add students to training.
-2.  CanoE-COACH adds the specified students to the training. 
+2.  CanoE-COACH adds the specified students to the training.
     Use case ends.
 
 **Extensions**
@@ -481,7 +481,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. The student or training does not exist.
     * 2b1. CanoE-COACH shows an error message.
       Use case resumes at step 1.
-      
+
 **UC10: Delete student from training**
 
 **MSS**
