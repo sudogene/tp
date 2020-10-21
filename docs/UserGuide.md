@@ -185,7 +185,7 @@ Format: `commonTime [n/KEYWORDS] [ay/ACADEMIC_YEAR]`
 
 - Searching by more than one field
     - Common Time command will return student(s) that matches any of the fields provided.
-    
+
 - If no student matches the search criteria, the default dismissal time of 1500 for all 5 days will be returned.
 
 Examples:
@@ -212,7 +212,7 @@ Format: `delete-training TRAINING_INDEX`
 
 
 Examples:
-- `delete-training 2` removes the training with index 2 in the displayed training list. 
+- `delete-training 2` removes the training with index 2 in the displayed training list.
 
 ### Add Student to Training : `ts-add`
 Adds students to a training.
@@ -267,6 +267,20 @@ Format: `ts-delete TRAINING_INDEX id/STUDENT_INDEX...`
 Examples:
 - `ts-delete 2 id/1,2,3` deletes students with indexes 1,2,3 from training 1.
 
+### Find all of a student's training : `find-training`
+Finds all of a student's trainings.
+
+Format: `find-training id/STUDENT_INDEX`
+
+* Student index refers to the unique index of the student in the entire student list (can be viewed with `list` command).
+* Only ONE student id can be specified in the same command
+* Both the student and training panels will be filtered should the command be successfully executed
+
+> Note: Only the most recent upcoming 3 Training dates are displayed on the student panel. Hence, this function is handy for displaying the full training history (past and present)
+
+Examples:
+- `find-training id/1` filters the student and training panel to show only the student with index 1 and all of his past and present trainings on the training panel.
+
 ### Clearing all entries: `clear`
 Clears the student and training list of all existing students and trainings.
 
@@ -303,5 +317,6 @@ Action | Format, Examples
 **ts-add** | `ts-add TRAINING_INDEX id/STUDENT_INDEX...`<br> e.g., `ts-add 1 id/1,2,3`
 **ts-addall** | `ts-addall TRAINING_INDEX`<br> e.g., `ts-addall 1`
 **ts-delete** | `ts-delete TRAINING_INDEX id/STUDENT_INDEX...`<br> e.g., `ts-delete 1 id/1,2,3`
+**find-training** | `find-training id/STUDENT_INDEX...`<br> e.g., `find-training id/1`
 **List** | `list`
 **Help** | `help`

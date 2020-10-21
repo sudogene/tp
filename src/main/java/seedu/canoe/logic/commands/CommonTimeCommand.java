@@ -18,7 +18,7 @@ import seedu.canoe.model.student.CommonTimeFinder;
  */
 public class CommonTimeCommand extends Command {
 
-    public static final Logger logger = LogsCenter.getLogger(CommonTimeCommand.class);
+    public static final Logger LOGGER = LogsCenter.getLogger(CommonTimeCommand.class);
 
     public static final String COMMAND_WORD = "common-time";
 
@@ -38,12 +38,12 @@ public class CommonTimeCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        logger.info("=============================[ Executing CommonTimeCommand ]===========================");
+        LOGGER.info("=============================[ Executing CommonTimeCommand ]===========================");
         requireNonNull(model);
         model.updateFilteredStudentList(predicates);
 
         if (model.getFilteredStudentList().isEmpty()) {
-            logger.warning("Keywords match zero students.");
+            LOGGER.warning("Keywords match zero students.");
             return new CommandResult(MESSAGE_STUDENTS_NOT_FOUND);
         }
 
