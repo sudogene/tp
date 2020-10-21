@@ -18,7 +18,8 @@ StorageManager o--> CanoeCoachStorage
 
 JsonUserPrefsStorage .left.|> UserPrefsStorage
 JsonCanoeCoachStorage .left.|> CanoeCoachStorage
-JsonCanoeCoachStorage .down.> JsonSerializableCanoeCoachStorage
-JsonSerializableCanoeCoachStorage .right.> JsonSerializableStudent
-JsonSerializableStudent .right.> JsonAdaptedTag
+JsonCanoeCoachStorage .down.> JsonSerializableCanoeCoach
+JsonSerializableCanoeCoach .right.> JsonAdaptedStudent
+JsonSerializableCanoeCoach .left.> JsonAdaptedTraining
+JsonAdaptedStudent .right.> JsonAdaptedTag
 @enduml

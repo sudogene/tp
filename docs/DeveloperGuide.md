@@ -23,7 +23,7 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2021S1-CS2103-F10-1/tp/tree/master/docs/diagrams) folder. 
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2021S1-CS2103-F10-1/tp/tree/master/docs/diagrams) folder.
 
 </div>
 
@@ -65,7 +65,7 @@ The sections below give more details of each component.
 [`Ui.java`](https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel
-`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+`,  `TrainingListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -104,14 +104,14 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user’s preferences.
 * stores the CanoeCoach data.
-* exposes an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that
+* exposes an unmodifiable `ObservableList<Student>`  and `ObservableList<Training>` that can be 'observed' e.g. the UI can be bound to this list so that
  the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP
 ) model is given below. It has a `Tag` list in the `CanoeCoach`, which `Student` references. This allows `CanoeCoach` to
- only require one `Tag` object per unique `Tag`, instead of each `Student` needing their own `Tag` object.<br>
+ only require one `Tag` object per unique `Tag`, instead of each `Student` needing their own `Tag` object. At the same time, each student contains references to 5 day objects, each storing the dismissal time of Monday, Tuesday, Wednesday, Thursday and Friday. <br>
 ![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
 
 </div>
@@ -132,10 +132,52 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.canoe.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Find-training feature
+
+#### Implementation
+
+The find-training mechanism extends `Command` with the ability to view all training history (past and present) of a single student. This command is supported by methods in the `Model` interface, namely `Model#updateFilteredStudentList()`,  and`Model#updateFilteredTrainingList()`.
+
+![TrainingMatchesIdPredicate](images/TrainingMatchesIdPredicate.png)
+
+This command is supported by the `TrainingMatchesIdPredicate`, which assists to check if a particular student ID is present in a particular training. From the above class diagram, the `TrainingMatchesIdPredicate#test()` method is used to achieve this.
+
+Given below is an example usage scenario and how the find-training mechanism behaves at each step.
+
+Step 1. The user launches the application. As the student panel only displays the most recent 3 upcoming trainings scheduled, the user executes `find-training id/5` command to view all the trainings of the uniquely identified 5th student in the CanoeCoach.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateFilteredStudentList()` or `Model#updateFilteredTrainingList()`, so the GUI state will not be changed or altered.
+
+</div>
+
+The following sequence diagram shows how the `find-training` operation works:
+
+![FindTrainingSequenceDiagram](images/FindTrainingSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindTrainingCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![FindTrainingActivityDiagram](images/FindTrainingActivityDiagram.png)
+
+#### Design consideration:
+
+##### Aspect: How find-training executes
+
+* **Alternative 1 (current choice):** Filters both the student and training lists based on the student index.
+  * Pros: Easy to implement.
+  * Cons: Double panel filter required
+
+* **Alternative 2:** Filters only the student list and retrieve all trainings of the student from student list to display.
+  * Pros: Only one panel filter required
+  * Cons: Training objects are not stored directly within the student class, hence it might be difficult to retrieve trainings
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -217,9 +259,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -306,7 +345,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *   1b. Student with the same name already exists.
     *   1b1. CanoE-COACH displays an error message.
         Use case resumes at step 1.
-        
+
 *   1c. Details have invalid format.
     *   1c1. CanoE-COACH displays an error message.
         Use case resumes at step 1.
@@ -353,7 +392,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 4a. The student's new dismissal time is later than a training that he has been scheduled for.
     * 4a1. Student is removed from the Training.
     Use case ends.
-       
+
 
 **UC04: Find students**
 
@@ -386,7 +425,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  CanoE-COACH shows a list of students that have been specified by user.
 2.  CanoE-COACH shows shows the latest dismissal times for the list of students.
     Use case ends.
-    
+
 **Extensions**
 
 * 1a. There are no parameters specified in the commonTime command.
@@ -411,7 +450,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *   1b. Training with the same date and time already exists.
     *   1b1. CanoE-COACH displays an error message.
         Use case resumes at step 1.
-        
+    
 **UC08: Delete a training**
 
 **MSS**
@@ -426,13 +465,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The given index is invalid.
     * 2a1. CanoE-COACH shows an error message.
       Use case resumes at step 1.
-      
+
 **UC09: Add students to the training**
 
 **MSS**
 
 1.  User requests to add students to training.
-2.  CanoE-COACH adds the specified students to the training. 
+2.  CanoE-COACH adds the specified students to the training.
     Use case ends.
 
 **Extensions**
@@ -444,7 +483,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. The student or training does not exist.
     * 2b1. CanoE-COACH shows an error message.
       Use case resumes at step 1.
-      
+
 **UC10: Delete student from training**
 
 **MSS**
@@ -464,6 +503,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. CanoE-COACH shows an error message.
       Use case resumes at step 1.
 
+**UC11: Add all students to the training**
+
+**MSS**
+
+1.  User requests to add all students to training.
+2.  CanoE-COACH adds all students to the training. 
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student list is empty.
+  * 2a1. CanoE-COACH shows an error message.
+        Use case resumes at step 1.
+
+* 2b. No student can be added to the training.
+    * 2b1. CanoE-COACH shows an error message.
+      Use case resumes at step 1.
 
 *{More to be added}*
 

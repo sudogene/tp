@@ -6,6 +6,7 @@ import static seedu.canoe.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.canoe.logic.commands.AddAllStudentToTrainingCommand;
 import seedu.canoe.logic.commands.AddCommand;
 import seedu.canoe.logic.commands.AddStudentToTrainingCommand;
 import seedu.canoe.logic.commands.ClearCommand;
@@ -95,6 +96,9 @@ public class CanoeCoachParser {
 
         case MarkAttendanceCommand.COMMAND_WORD:
             return new MarkAttendanceCommandParser().parse(arguments);
+
+        case AddAllStudentToTrainingCommand.COMMAND_WORD:
+            return new AddAllStudentCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

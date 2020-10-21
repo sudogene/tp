@@ -1,9 +1,9 @@
 package seedu.canoe.testutil;
 
-import static seedu.canoe.testutil.LocalDateTimeUtil.VALID_LOCAL_DATE_TIME;
-import static seedu.canoe.testutil.LocalDateTimeUtil.VALID_LOCAL_DATE_TIME_1;
-import static seedu.canoe.testutil.LocalDateTimeUtil.VALID_LOCAL_DATE_TIME_3;
-import static seedu.canoe.testutil.LocalDateTimeUtil.VALID_LOCAL_DATE_TIME_4;
+import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_FOUR_DAYS;
+import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_ONE_DAY;
+import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_THREE_DAYS;
+import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_TWO_DAYS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,13 +14,17 @@ import seedu.canoe.model.student.Training;
 
 public class TypicalTraining {
 
-    public static final Training VALID_TRAINING = new TrainingBuilder().withDateTime(VALID_LOCAL_DATE_TIME_1).build();
+    public static final Training VALID_TRAINING = new TrainingBuilder()
+            .withDateTime(DATE_TIME_NOW_PLUS_ONE_DAY).build();
 
-    public static final Training VALID_TRAINING1 = new TrainingBuilder().withDateTime(VALID_LOCAL_DATE_TIME).build();
+    public static final Training VALID_TRAINING1 = new TrainingBuilder()
+            .withDateTime(DATE_TIME_NOW_PLUS_TWO_DAYS).build();
 
-    public static final Training VALID_TRAINING2 = new TrainingBuilder().withDateTime(VALID_LOCAL_DATE_TIME_4).build();
+    public static final Training VALID_TRAINING2 = new TrainingBuilder()
+            .withDateTime(DATE_TIME_NOW_PLUS_THREE_DAYS).build();
 
-    public static final Training VALID_TRAINING3 = new TrainingBuilder().withDateTime(VALID_LOCAL_DATE_TIME_3).build();
+    public static final Training VALID_TRAINING3 = new TrainingBuilder()
+            .withDateTime(DATE_TIME_NOW_PLUS_FOUR_DAYS).build();
 
     /**
      * Returns an {@code CanoeCoach} with all the typical trainings.

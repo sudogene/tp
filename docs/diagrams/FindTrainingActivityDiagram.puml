@@ -1,0 +1,15 @@
+@startuml
+start
+:User executes find-training command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([valid student index])
+    :updateFilteredStudentList;
+    :updateFilteredTrainingList;
+else ([else])
+    :prompt for valid input;
+endif
+stop
+@enduml
