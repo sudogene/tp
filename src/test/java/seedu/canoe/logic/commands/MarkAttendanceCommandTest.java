@@ -7,7 +7,6 @@ import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIRST_TRAINING;
 import static seedu.canoe.testutil.TypicalIndexes.INDEX_SECOND_TRAINING;
 import static seedu.canoe.testutil.TypicalIndexes.INDEX_THIRD_TRAINING;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -102,7 +101,7 @@ class MarkAttendanceCommandTest {
 
         Student firstStudent = TypicalStudents.BENSON;
         Student secondStudent = TypicalStudents.ELLE;
-        Attend attend = new Attend(LocalDateTime.of(2020, 11, 20, 18, 0));
+        Attend attend = new Attend(firstTraining.getDateTime());
         firstStudent.addAttendance(attend);
         secondStudent.addAttendance(attend);
         expectedModel.setStudentInUniqueStudentList(studentList.get(0), firstStudent);
