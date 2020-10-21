@@ -22,7 +22,8 @@ class JsonAdaptedAttend {
      * Constructs a {@code JsonAdaptedAttend} with the given {@code trainingTime}.
      */
     @JsonCreator
-    public JsonAdaptedAttend(@JsonProperty("trainingTime") LocalDateTime trainingTime, @JsonProperty("hasAttended") boolean hasAttended) {
+    public JsonAdaptedAttend(@JsonProperty("trainingTime") LocalDateTime trainingTime,
+                             @JsonProperty("hasAttended") boolean hasAttended) {
         this.trainingTime = trainingTime;
         this.hasAttended = hasAttended;
     }

@@ -19,7 +19,7 @@ import seedu.canoe.model.student.Training;
 
 public class MarkAttendanceCommand extends Command {
 
-    public static final Logger logger = LogsCenter.getLogger(MarkAttendanceCommand.class);
+    public static final Logger LOGGER = LogsCenter.getLogger(MarkAttendanceCommand.class);
 
     public static final String COMMAND_WORD = "mark-attend";
 
@@ -49,7 +49,7 @@ public class MarkAttendanceCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        logger.info("=============================[ Executing MarkAttendanceCommand ]===========================");
+        LOGGER.info("=============================[ Executing MarkAttendanceCommand ]===========================");
         requireNonNull(model);
         List<Training> lastShownList = model.getFilteredTrainingList();
 
@@ -60,7 +60,7 @@ public class MarkAttendanceCommand extends Command {
         model.updateFilteredStudentList(predicates);
 
         if (model.getFilteredStudentList().isEmpty()) {
-            logger.warning("Ids match zero students.");
+            LOGGER.warning("Ids match zero students.");
             model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
             throw new CommandException(MESSAGE_STUDENTS_NOT_FOUND);
         }
@@ -74,7 +74,7 @@ public class MarkAttendanceCommand extends Command {
         attendedTrainingSession.attendsTraining();
 
         if (!studentsHaveTrainingSession(unattendedTrainingSession, attendedStudents)) {
-            logger.warning("Some students do not contain training session");
+            LOGGER.warning("Some students do not contain training session");
             return new CommandResult(MESSAGE_INVALID_STUDENT_MARKED);
         }
 
