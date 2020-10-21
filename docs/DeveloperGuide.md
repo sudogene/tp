@@ -503,6 +503,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. CanoE-COACH shows an error message.
       Use case resumes at step 1.
 
+**UC11: Add all students to the training**
+
+**MSS**
+
+1.  User requests to add all students to training.
+2.  CanoE-COACH adds all students to the training. 
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student list is empty.
+  * 2a1. CanoE-COACH shows an error message.
+        Use case resumes at step 1.
+
+* 2b. No student can be added to the training.
+    * 2b1. CanoE-COACH shows an error message.
+      Use case resumes at step 1.
 
 *{More to be added}*
 

@@ -42,6 +42,7 @@ public class AddStudentToTrainingCommand extends Command {
             + "\nExample: "
             + COMMAND_WORD + "1 " + PREFIX_ID + "3,5,7";
 
+    public static final String MESSAGE_TRAINING_CANNOT_ADD = "No more students can be added to this training";
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "Added Student: %1$s";
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be added must be specified.";
     public static final String MESSAGE_STUDENT_UNAVAILABLE = "This student cannot be added to the training as "
@@ -82,6 +83,11 @@ public class AddStudentToTrainingCommand extends Command {
         }
 
         Training trainingToEdit = lastShownList.get(index.getZeroBased());
+        /* CONDITION TO CHECK IF THE CURRENT DATE TIME IS ALREADY AFTER TRAINING'S STARTING DATE TIME
+        if (!trainingToEdit.canAddStudent()) {
+            throw new CommandException(MESSAGE_TRAINING_CANNOT_ADD);
+        }*/
+
         Training editedTraining = new Training(trainingToEdit.getDateTime(), trainingToEdit.getStudents());
 
         //Student ID Checks - not invalid index, numbered index and exists in student list and not duplicated

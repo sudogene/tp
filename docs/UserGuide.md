@@ -233,6 +233,24 @@ Format: `ts-add TRAINING_INDEX id/STUDENT_INDEX...`
 Examples:
 - `ts-add 2 id/1,2,3` adds students with indexes 1,2,3 to training 1.
 
+### Add All Student to Training : `ts-addall`
+Adds all students to a training.
+
+Format: `ts-addall TRAINING_INDEX`
+
+* Training index refers to the index of the training in the displayed training list.
+* All students displayed in the student list will be added to the training if they can be added.
+* A student can be added to the training if and only if:
+   * They are available for the training's date time
+   * They do not have an existing training at that date time
+   * The training does not already contain that student
+* Students that are not available will be ignored.
+
+> Note: Training schedules can also be viewed on the student list panel and they will update as you add students to trainings.
+
+Examples:
+- `ts-addall 1` adds all students from the displayed student list to training 1.
+
 ### Delete Student from Training : `ts-delete`
 Deletes students from a training.
 
@@ -297,6 +315,7 @@ Action | Format, Examples
 **training** | `training yyyy-MM-dd HHmm`<br> e.g., `training 2021-01-20 1800`
 **delete-training** | `delete-training TRAINING_INDEX`<br> e.g., `delete-training 1`
 **ts-add** | `ts-add TRAINING_INDEX id/STUDENT_INDEX...`<br> e.g., `ts-add 1 id/1,2,3`
+**ts-addall** | `ts-addall TRAINING_INDEX`<br> e.g., `ts-addall 1`
 **ts-delete** | `ts-delete TRAINING_INDEX id/STUDENT_INDEX...`<br> e.g., `ts-delete 1 id/1,2,3`
 **find-training** | `find-training id/STUDENT_INDEX...`<br> e.g., `find-training id/1`
 **List** | `list`
