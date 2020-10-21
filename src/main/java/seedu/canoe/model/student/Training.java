@@ -8,7 +8,6 @@ import java.util.TreeSet;
 
 import seedu.canoe.model.student.exceptions.DuplicateStudentException;
 
-
 public class Training {
 
     public static final String MESSAGE_CONSTRAINTS = "Must be a valid date and time.";

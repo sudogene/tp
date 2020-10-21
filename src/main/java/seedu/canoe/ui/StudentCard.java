@@ -88,12 +88,11 @@ public class StudentCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         trainingTag.setText("Trainings Scheduled (Most recent upcoming 3): ");
-        student.getTrainingAttendances().stream().filter(dateTime -> (dateTime.getTrainingTime())
-            .isAfter(LocalDateTime.now())).limit(3)
-                .forEach(trainingAttendance -> trainingAttendances.getChildren()
-                        .add(new Label((trainingAttendance.getTrainingTime())
-                            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")))));
-
+        student.getTrainingAttendances().stream()
+                .filter(training -> training.getTrainingTime().isAfter(LocalDateTime.now())).limit(3)
+                .forEach(trainingSchedule -> trainingAttendances.getChildren()
+                        .add(new Label((trainingSchedule.getTrainingTime())
+                                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")))));
     }
 
     @Override

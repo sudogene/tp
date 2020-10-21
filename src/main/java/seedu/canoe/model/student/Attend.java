@@ -2,13 +2,13 @@ package seedu.canoe.model.student;
 
 import java.time.LocalDateTime;
 
-
 /**
  * Represents an attendance for a training session.
  */
 public class Attend implements Comparable<Attend> {
 
     private final LocalDateTime trainingTime;
+
     //By default, hasAttended is false when initialised.
     private boolean hasAttended = false;
 
@@ -27,7 +27,6 @@ public class Attend implements Comparable<Attend> {
     public void attendsTraining() {
         hasAttended = true;
     }
-
 
     /**
      * Getter method for the time that the training is held.
@@ -69,7 +68,4 @@ public class Attend implements Comparable<Attend> {
             return false;
         }
     }
-
-
-
 }

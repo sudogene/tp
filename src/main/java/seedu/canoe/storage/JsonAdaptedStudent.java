@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.canoe.commons.exceptions.IllegalValueException;
 import seedu.canoe.model.student.AcademicYear;
-import seedu.canoe.model.student.Attend;
 import seedu.canoe.model.student.Email;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Name;
@@ -43,7 +42,7 @@ class JsonAdaptedStudent {
     private final String thursdayDismissal;
     private final String fridayDismissal;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final List<Attend> trainingAttendances = new ArrayList<>();
+    private final List<JsonAdaptedAttend> trainingAttendances = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -58,7 +57,7 @@ class JsonAdaptedStudent {
                               @JsonProperty("wednesday") String wednesdayDismissal,
                               @JsonProperty("thursday") String thursdayDismissal,
                               @JsonProperty("friday") String fridayDismissal,
-                              @JsonProperty("trainingAttendances") List<Attend> trainingAttendances,
+                              @JsonProperty("trainingAttendances") List<JsonAdaptedAttend>trainingAttendances,
                               @JsonProperty("id") String id) {
         this.name = name;
         this.phone = phone;
@@ -98,6 +97,7 @@ class JsonAdaptedStudent {
                 .collect(Collectors.toList()));
 
         trainingAttendances.addAll(source.getTrainingAttendances().stream()
+                .map(JsonAdaptedAttend::new)
                 .collect(Collectors.toList()));
     }
 
@@ -111,6 +111,7 @@ class JsonAdaptedStudent {
         for (JsonAdaptedTag tag : tagged) {
             studentTags.add(tag.toModelType());
         }
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -193,10 +194,11 @@ class JsonAdaptedStudent {
         Student student = new Student(modelName, modelPhone, modelEmail, modelAcademicYear,
             modelTags, monday, tuesday, wednesday, thursday, friday, studentId);
 
-        student.addAllAttendances(trainingAttendances);
+        for (JsonAdaptedAttend attend : trainingAttendances) {
+            student.addAttendance(attend.toModelType());
+        }
 
         return student;
-
     }
 
 }

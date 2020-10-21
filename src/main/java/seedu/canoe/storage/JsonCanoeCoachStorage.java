@@ -45,14 +45,14 @@ public class JsonCanoeCoachStorage implements CanoeCoachStorage {
     public Optional<ReadOnlyCanoeCoach> readCanoeCoach(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableCanoeCoach> jsonAddressBook = JsonUtil.readJsonFile(
+        Optional<JsonSerializableCanoeCoach> jsonCanoeCoach = JsonUtil.readJsonFile(
                 filePath, JsonSerializableCanoeCoach.class);
-        if (!jsonAddressBook.isPresent()) {
+        if (!jsonCanoeCoach.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonCanoeCoach.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
