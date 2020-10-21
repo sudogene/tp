@@ -83,9 +83,10 @@ public class AddStudentToTrainingCommand extends Command {
         }
 
         Training trainingToEdit = lastShownList.get(index.getZeroBased());
+        /* CONDITION TO CHECK IF THE CURRENT DATE TIME IS ALREADY AFTER TRAINING'S STARTING DATE TIME
         if (!trainingToEdit.canAddStudent()) {
             throw new CommandException(MESSAGE_TRAINING_CANNOT_ADD);
-        }
+        }*/
 
         Training editedTraining = new Training(trainingToEdit.getDateTime(), trainingToEdit.getStudents());
 
