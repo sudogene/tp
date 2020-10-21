@@ -69,13 +69,10 @@ public class AddAllStudentToTrainingCommand extends Command {
 
         // Adding students to the training
         Training editedTraining = training.cloneTraining();
-        LocalDateTime trainingDateTime = training.getDateTime();
         List<Student> addedStudents = new ArrayList<>();
 
         studentList.stream()
-                .filter(student -> student.isAvailableAtDateTime(trainingDateTime)
-                    && !student.hasTrainingAtDateTime(trainingDateTime)
-                    && !training.hasStudent(student))
+                .filter(student -> isAbleToAddStudent(student, training))
                 .forEach(student -> {
                     addStudentToTraining(editedTraining, student, model);
                     addedStudents.add(student);
@@ -89,6 +86,16 @@ public class AddAllStudentToTrainingCommand extends Command {
         model.setTraining(training, editedTraining);
         return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS,
                 addedStudentsMessage.get()));
+    }
+
+    /**
+     * Checks if the {@code Training} is able to add the {@code Student}
+     */
+    public boolean isAbleToAddStudent(Student student, Training training) {
+        LocalDateTime trainingDateTime = training.getDateTime();
+        return student.isAvailableAtDateTime(trainingDateTime)
+                && !student.hasTrainingAtDateTime(trainingDateTime)
+                && !training.hasStudent(student);
     }
 
     private void addStudentToTraining(Training training, Student student, Model model) {
