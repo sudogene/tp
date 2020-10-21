@@ -22,8 +22,9 @@ class JsonAdaptedAttend {
      * Constructs a {@code JsonAdaptedAttend} with the given {@code trainingTime}.
      */
     @JsonCreator
-    public JsonAdaptedAttend(@JsonProperty("trainingTime") LocalDateTime trainingTime) {
+    public JsonAdaptedAttend(@JsonProperty("trainingTime") LocalDateTime trainingTime, @JsonProperty("hasAttended") boolean hasAttended) {
         this.trainingTime = trainingTime;
+        this.hasAttended = hasAttended;
     }
 
     /**
@@ -45,7 +46,10 @@ class JsonAdaptedAttend {
             throw new IllegalValueException(String
                     .format(MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName()));
         }
-
-        return new Attend(trainingTime);
+        Attend attend = new Attend(trainingTime);
+        if (hasAttended) {
+            attend.attendsTraining();
+        }
+        return attend;
     }
 }
