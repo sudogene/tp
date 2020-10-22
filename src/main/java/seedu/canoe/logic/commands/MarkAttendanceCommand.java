@@ -103,6 +103,7 @@ public class MarkAttendanceCommand extends Command {
      * @return true if students have training session scheduled, false if otherwise.
      */
     public boolean studentsHaveTrainingSession(Attend trainingSession, List<Student> studentsToCheck) {
+        assert trainingSession != null;
         for (Student student: studentsToCheck) {
             if (!student.containsAttendance(trainingSession)) {
                 return false;

@@ -5,7 +5,9 @@ import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.exceptions.CommandException;
@@ -19,6 +21,8 @@ import seedu.canoe.model.util.StudentTrainingSessionUtil;
  * Deletes a student identified using it's displayed index from the canoe book.
  */
 public class DeleteCommand extends Command {
+
+    public static final Logger LOGGER = LogsCenter.getLogger(DeleteCommand.class);
 
     public static final String COMMAND_WORD = "delete";
 
@@ -37,10 +41,12 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        LOGGER.info("=============================[ Executing DeleteCommand ]===========================");
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            LOGGER.warning("Index is invalid.");
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 

@@ -225,6 +225,38 @@ The following activity diagram summarizes what happens when a user executes the 
   * Pros: Easy to implement
   * Cons: More restrictive and less friendly to the user
 
+### Attendance class
+
+#### Implementation
+
+The Attendance class represents a Student attending a Training. A list of Attendance is stored in the Student, and represents all the trainings that the Student would be attending. 
+
+The Attendance class is initialised with the LocalDateTime of a Training. Currently, it also stores information about whether the Student had attended the Training or not. By default, the Attendance is marked as unattended. 
+
+The following shows the relationship between Student, Training and Attendance.
+
+![Relationship of Attend, Training, Student](images/TrainingStudentAttendRS.png)
+
+
+#### Design considerations:
+#### Aspect: How to keep track of which trainings that a Student is attending
+
+*  **Alternative 1:** Store a list of trainings that the Student is attending in the Student.
+	* Pros: Easier implementation in the short run.
+	* Cons: This causes cyclic-dependency and is undesirable.
+
+* **Alternative 2 (Previous iteration):** Store a list of LocalDateTime in the Student, each representing the time of a Training that the Student is attending. 
+	* Pros: Relatively easy to implement
+	* Cons: It is difficult to extend features related to Attendance, and it is inflexible.
+
+* **Alternative 3:** Store a list of Attendances in a wrapper class, that could have, for example, a Hashmap that maps a Student to the list of Attendances.
+	* Pros: This will lead to higher cohesion and low coupling, and increases the maintainability of the code.
+	* Cons: It is more complex to implement. Much harder to display the attendance of a Student in the StudentCard in this current iteration.
+
+* **Alternative 4 (Current iteration):**  Store a list of Attendance in the Student.
+	* Pros: Difficulty of implementation is lower than Alternative 3. Able to support other functions easily compared to Alternative 2. 
+	* Cons: Potentially prone to bugs.
+
 ### Mark-attend feature
 
 #### Implementation

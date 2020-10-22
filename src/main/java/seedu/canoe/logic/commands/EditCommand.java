@@ -20,8 +20,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.commons.util.CollectionUtil;
@@ -43,6 +45,8 @@ import seedu.canoe.model.util.StudentTrainingSessionUtil;
  * Edits the details of an existing student in the canoe book.
  */
 public class EditCommand extends Command {
+
+    public static final Logger LOGGER = LogsCenter.getLogger(EditCommand.class);
 
     public static final String COMMAND_WORD = "edit";
 
@@ -80,6 +84,7 @@ public class EditCommand extends Command {
      * @param editStudentDescriptor details to edit the student with
      */
     public EditCommand(Index index, EditStudentDescriptor editStudentDescriptor) {
+        LOGGER.info("=============================[ Executing EditCommand ]===========================");
         requireNonNull(index);
         requireNonNull(editStudentDescriptor);
 
@@ -93,6 +98,7 @@ public class EditCommand extends Command {
         List<Student> lastShownStudentList = model.getFilteredStudentList();
 
         if (index.getZeroBased() >= lastShownStudentList.size()) {
+            LOGGER.warning("Index is invalid.");
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
@@ -100,6 +106,7 @@ public class EditCommand extends Command {
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
+            LOGGER.warning("No fields have been edited");
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
