@@ -6,18 +6,20 @@ import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.commons.util.StringUtil;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.AcademicYear;
+import seedu.canoe.model.student.Attend;
 import seedu.canoe.model.student.Email;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Name;
@@ -31,6 +33,7 @@ import seedu.canoe.model.tag.Tag;
  * Deletes an existing student from a training.
  */
 public class DeleteStudentFromTrainingCommand extends Command {
+    public static final Logger LOGGER = LogsCenter.getLogger(DeleteStudentFromTrainingCommand.class);
 
     public static final String COMMAND_WORD = "ts-delete";
 
@@ -62,6 +65,8 @@ public class DeleteStudentFromTrainingCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        LOGGER.info("=============================[ Executing DeleteStudentFromTrainingCommand ]========"
+            + "===================");
         requireNonNull(model);
 
         //Added in case previous command is find
@@ -73,11 +78,13 @@ public class DeleteStudentFromTrainingCommand extends Command {
 
         //Ensures that command contains at least one student to delete
         if (studentsToDelete == null) {
+            LOGGER.warning("No student is specified!");
             throw new CommandException(MESSAGE_NO_STUDENTS_SPECIFIED);
         }
 
         //Ensures correct training index
         if (index.getZeroBased() >= lastShownList.size()) {
+            LOGGER.warning("Training index is incorrect.");
             throw new CommandException(Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX);
         }
 
@@ -94,6 +101,7 @@ public class DeleteStudentFromTrainingCommand extends Command {
             }
 
             if (!StringUtil.isNonZeroUnsignedInteger(str)) {
+                LOGGER.warning("Training index is incorrect.");
                 throw new CommandException(String
                         .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE));
             }
@@ -162,14 +170,14 @@ public class DeleteStudentFromTrainingCommand extends Command {
         Day thursdayDismissal = studentToEdit.getThursdayDismissal();
         Day fridayDismissal = studentToEdit.getFridayDismissal();
         Set<Tag> updatedTags = studentToEdit.getTags();
-        List<LocalDateTime> trainingSchedules = studentToEdit.getTrainingSchedule().stream()
+        List<Attend> trainingAttendances = studentToEdit.getTrainingAttendances().stream()
                 .collect(Collectors.toList());
-        trainingSchedules.remove(editedTraining.getDateTime());
+        trainingAttendances.remove(editedTraining.getDateTime());
         Id id = studentToEdit.getId();
 
         Student newStudent = new Student(updatedName, updatedPhone, updatedEmail, updatedAcademicYear, updatedTags,
                 mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal, id);
-        newStudent.addAllTraining(trainingSchedules);
+        newStudent.addAllAttendances(trainingAttendances);
         return newStudent;
     }
 

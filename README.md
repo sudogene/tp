@@ -31,7 +31,7 @@ For more in-depth information on the CanoE-COACH visit [our website](https://ay2
 
    * **`delete`**`3` : Deletes the 3rd student shown in the current student list.
 
-   * **`filter`**`n/alex n/david` : Returns `Alex Yeoh`, `David Li`.
+   * **`find`**`n/alex n/david` : Returns `Alex Yeoh`, `David Li`.
 
    * **`clear`** : Deletes all students.
 

@@ -36,7 +36,7 @@
       <Label fx:id="academicYear" styleClass="cell_small_label" text="\$academicYear" />
       <Separator fx:id="trainingSeparator" />
       <Label fx:id="trainingTag" styleClass="cell_small_label" text="\$trainingTag" />
-      <FlowPane fx:id="trainingSchedules" />
+      <FlowPane fx:id="trainingAttendances" />
       <Separator fx:id="dismissalTimeSeparator" />
       <Label fx:id="dismissalTime" styleClass="cell_small_label" text="\$dismissalTime" />
       <FlowPane fx:id="dismissalTimes" />
