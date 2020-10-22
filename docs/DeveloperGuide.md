@@ -178,6 +178,49 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Only one panel filter required
   * Cons: Training objects are not stored directly within the student class, hence it might be difficult to retrieve trainings
 
+### Mark-attend feature
+
+#### Implementation
+
+The mark-attend mechanism extends `Command` with the ability to mark a student as having attended a particular training session.
+
+This feature makes use of the `Attend` class which each student keeps track of. As stated above, by default an `Attend` object is constructed with `hasAttended = false`. This command sets `hasAttended` to equal to `true`.
+
+The mark-attend command takes in a `Training` index and multiple `Student` ids as input. Any error in the input format will result in the whole command being discarded and the state of the canoe coach book will remain unchanged.
+A list of possible input errors are listed below:
+- `Training` index is out of range -> `Training` cannot be found
+- `Student` index is out of range -> `Student` cannot be found
+- Empty parameters. i.e. `Training` index and/or `Student` ids not input
+- `Student` does not have specified `Training` as part of its schedule
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateFilteredStudentList()`, so the GUI state will not be changed or altered.
+
+</div>
+
+The following shows the sequence flow for the `mark-attend` command:
+
+![MarkAttendanceSequenceDiagram](images/MarkAttendanceSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateFilteredStudentList()`, so the GUI state will not be changed or altered.
+
+</div>
+
+The following activity diagram shows the flow of events when a user executes a `mark-attend` command:
+
+![MarkAttendanceActivityDiagram](images/MarkAttendanceActivityDiagram.png)
+
+#### Design consideration:
+
+##### Aspect: How a student's attendance is tracked
+
+* **Alternative 1:** Create a variable in training with a key-value pair to track student and student's attendance.
+  * Pros: Each student is paired with it's own attendance upon addition to the training.
+  * Cons: A key-value pair variable makes the code more complicated than it has to be.
+
+* **Alternative 2 (current choice):** Use of a class to store attendance of a student for a scheduled training.
+  * Pros: A class is easier to maintain and access than a key-value pair. Code is simpler. 
+  * Cons: A new class has to be created and refactoring of the code base has to be done.
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -522,6 +565,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 *{More to be added}*
+
+**UC12: Mark student as having attended training session**
+
+**MSS**
+
+1.  User requests to mark student as attended a training.
+2.  CanoE-COACH marks specified student as attended the specified training.
+    Use case ends.
+    
+**Extensions**
+
+* 1a. Specified training cannot be found.
+  * 1a1. CanoE-COACH shows an error message.
+    Use case ends.
+    
+* 1a. Specified student cannot be found.
+  * 1a1. CanoE-COACH shows an error message.
+    Use case ends.
+    
+* 2a. The student list is empty.
+  * 2a1. CanoE-COACH shows an error message.
+    Use case resumes at step 1.
+
+* 2a. Specified student does not have specified training scheduled.
+  * 2a1. CanoE-COACH shows an error message.
+    Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
