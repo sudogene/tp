@@ -192,9 +192,19 @@ A list of possible input errors are listed below:
 - `Student` index is out of range -> `Student` cannot be found
 - Empty parameters. i.e. `Training` index and/or `Student` ids not input
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateFilteredStudentList()` or `Model#updateFilteredTrainingList()`, so the GUI state will not be changed or altered.
+
+</div>
+
 The following shows the sequence flow for the `mark-attend` command:
+![MarkAttendanceDiagram](images/MarkAttendanceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateFilteredStudentList()` or `Model#updateFilteredTrainingList()`, so the GUI state will not be changed or altered.
+
+</div>
 
 The following activity diagram shows the flow of events when a user executes a `mark-attend` command:
+
 
 ### \[Proposed\] Undo/redo feature
 

@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CanoeCoachParser" as CanoeCoachParser LOGIC_COLOR
+participant "u:MarkAttendanceCommandParser" as MarkAttendanceCommandParser LOGIC_COLOR
+participant "u:MarkAttendanceCommand" as MarkAttendanceCommand LOGIC_COLOR
+participant "u:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(userInput)
+activate LogicManager
+
+LogicManager -> CanoeCoachParser : parseCommand(userInput)
+activate CanoeCoachParser
+
+create MarkAttendanceCommandParser
+CanoeCoachParser -> MarkAttendanceCommandParser
+activate MarkAttendanceCommandParser
+
+MarkAttendanceCommandParser --> CanoeCoachParser
+deactivate MarkAttendanceCommandParser
+
+CanoeCoachParser -> MarkAttendanceCommandParser : parse(arguments)
+activate MarkAttendanceCommandParser
+
+create MarkAttendanceCommand
+MarkAttendanceCommandParser -> MarkAttendanceCommand
+activate MarkAttendanceCommand
+
+MarkAttendanceCommand --> MarkAttendanceCommandParser
+deactivate MarkAttendanceCommand
+
+MarkAttendanceCommandParser --> CanoeCoachParser : u
+deactivate MarkAttendanceCommandParser
+MarkAttendanceCommandParser -[hidden]-> CanoeCoachParser
+destroy MarkAttendanceCommandParser
+
+CanoeCoachParser --> LogicManager : u
+deactivate CanoeCoachParser
+
+LogicManager -> MarkAttendanceCommand : execute(model)
+activate MarkAttendanceCommand
+
+MarkAttendanceCommand -> Model : getFilteredTrainingList()
+activate Model
+Model --> MarkAttendanceCommand
+deactivate Model
+
+MarkAttendanceCommand -> Model : updateFilteredStudentList()
+activate Model
+Model --> MarkAttendanceCommand
+deactivate Model
+
+MarkAttendanceCommand -> Model : getFilteredStudentList()
+activate Model
+Model --> MarkAttendanceCommand
+deactivate Model
+
+create CommandResult
+MarkAttendanceCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MarkAttendanceCommand
+deactivate CommandResult
+
+MarkAttendanceCommand --> LogicManager : result
+deactivate MarkAttendanceCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
