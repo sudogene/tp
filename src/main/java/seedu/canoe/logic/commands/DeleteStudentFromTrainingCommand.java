@@ -9,8 +9,10 @@ import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.commons.util.StringUtil;
@@ -31,6 +33,7 @@ import seedu.canoe.model.tag.Tag;
  * Deletes an existing student from a training.
  */
 public class DeleteStudentFromTrainingCommand extends Command {
+    public static final Logger LOGGER = LogsCenter.getLogger(DeleteStudentFromTrainingCommand.class);
 
     public static final String COMMAND_WORD = "ts-delete";
 
@@ -62,6 +65,8 @@ public class DeleteStudentFromTrainingCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        LOGGER.info("=============================[ Executing DeleteStudentFromTrainingCommand ]========"
+            + "===================");
         requireNonNull(model);
 
         //Added in case previous command is find
@@ -73,11 +78,13 @@ public class DeleteStudentFromTrainingCommand extends Command {
 
         //Ensures that command contains at least one student to delete
         if (studentsToDelete == null) {
+            LOGGER.warning("No student is specified!");
             throw new CommandException(MESSAGE_NO_STUDENTS_SPECIFIED);
         }
 
         //Ensures correct training index
         if (index.getZeroBased() >= lastShownList.size()) {
+            LOGGER.warning("Training index is incorrect.");
             throw new CommandException(Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX);
         }
 
@@ -94,6 +101,7 @@ public class DeleteStudentFromTrainingCommand extends Command {
             }
 
             if (!StringUtil.isNonZeroUnsignedInteger(str)) {
+                LOGGER.warning("Training index is incorrect.");
                 throw new CommandException(String
                         .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE));
             }
