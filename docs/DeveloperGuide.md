@@ -191,20 +191,23 @@ A list of possible input errors are listed below:
 - `Training` index is out of range -> `Training` cannot be found
 - `Student` index is out of range -> `Student` cannot be found
 - Empty parameters. i.e. `Training` index and/or `Student` ids not input
+- `Student` does not have specified `Training` as per of it's schedule
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateFilteredStudentList()` or `Model#updateFilteredTrainingList()`, so the GUI state will not be changed or altered.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateFilteredStudentList()`, so the GUI state will not be changed or altered.
 
 </div>
 
 The following shows the sequence flow for the `mark-attend` command:
-![MarkAttendanceDiagram](images/MarkAttendanceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateFilteredStudentList()` or `Model#updateFilteredTrainingList()`, so the GUI state will not be changed or altered.
+![MarkAttendanceSequenceDiagram](images/MarkAttendanceSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateFilteredStudentList()`, so the GUI state will not be changed or altered.
 
 </div>
 
 The following activity diagram shows the flow of events when a user executes a `mark-attend` command:
 
+![MarkAttendanceActivityDiagram](images/MarkAttendanceActivityDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -549,6 +552,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 *{More to be added}*
+
+**UC12: Mark student as having attended training session**
+
+**MSS**
+
+1.  User requests to mark student as attended a training.
+2.  CanoE-COACH marks specified student as attended the specified training.
+    Use case ends.
+    
+**Extensions**
+
+* 1a. Specified training cannot be found.
+  * 1a1. CanoE-COACH shows an error message.
+    Use case ends.
+    
+* 1a. Specified student cannot be found.
+  * 1a1. CanoE-COACH shows an error message.
+    Use case ends.
+    
+* 2a. The student list is empty.
+  * 2a1. CanoE-COACH shows an error message.
+    Use case resumes at step 1.
+
+* 2a. Specified student does not have specified training scheduled.
+  * 2a1. CanoE-COACH shows an error message.
+    Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
