@@ -17,20 +17,29 @@ Class ReadOnlyUserPrefs
 
 Package Student {
 Class Student
+Class Id
 Class Email
 Class Name
 Class AcademicYear
 Class Phone
+Class Day
+Class LocalDateTime
 Class UniqueStudentList
+}
+
+Package Training {
+Class Training
+Class UniqueTrainingList
 }
 
 Package Tag {
 Class Tag
 }
-}
+
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
+
 
 CanoeCoach .up.|> ReadOnlyCanoeCoach
 
@@ -42,15 +51,29 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 CanoeCoach *--> "1" UniqueStudentList
 UniqueStudentList o--> "*" Student
+Student *--> Id
 Student *--> Name
 Student *--> Phone
 Student *--> Email
 Student *--> AcademicYear
+Student *-> "*" LocalDateTime
+Student *--> "            5" Day
 Student *--> "*" Tag
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> AcademicYear
 AcademicYear -[hidden]right-> Email
 
-ModelManager -->"1" Student : filtered list
+CanoeCoach *-[hidden]-> "1" UniqueTrainingList
+CanoeCoach *-[hidden]-> "1" UniqueTrainingList
+CanoeCoach *-[hidden]-> "1" UniqueTrainingList
+CanoeCoach *-[hidden]-> "1" UniqueTrainingList
+CanoeCoach *--> "1 " UniqueTrainingList
+UniqueTrainingList o--> "*" Training
+UniqueTrainingList o-[hidden]-> "*" Training
+Training ---> Student
+
+ModelManager -->"1" Student :  filtered list
+ModelManager -->"1" Training :  filtered list
+
 @enduml

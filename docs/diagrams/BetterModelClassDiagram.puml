@@ -14,8 +14,18 @@ UniqueStudentList o-right-> Student
 
 Student -up-> "*" Tag
 
+Student *--> Id
 Student *--> Name
 Student *--> Phone
 Student *--> Email
 Student *--> AcademicYear
+Student o-> "*" LocalDateTime
+Student *--> "5" Day
+
+Day <|-- Monday
+Day <|-- Tuesday
+Day <|-- Wednesday
+Day <|-- Thursday
+Day <|-- Friday
+
 @enduml
