@@ -1,0 +1,21 @@
+@startuml
+start
+:User executes mark-attend command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([else])
+    :prompt for valid input;
+else ([valid training index])
+if () then ([valid student index])
+    :getFilteredTrainingList;
+    :updateFilteredStudentList;
+    :getFilteredStudentList;
+    :attendTrainingSession;
+else ([else])
+    :prompt for valid input;
+endif
+endif
+stop
+@enduml

@@ -65,6 +65,7 @@ public class TypicalStudents {
             .withEmail("lydia@example.com").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best")
             .withPhone("9482442")
+            .withId("7")
             .withAcademicYear("2")
             .withFridayDismissal("1712")
             .withEmail("anna@example.com").build();

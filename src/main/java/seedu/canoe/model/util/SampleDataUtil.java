@@ -1,6 +1,5 @@
 package seedu.canoe.model.util;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -9,6 +8,7 @@ import java.util.stream.Collectors;
 import seedu.canoe.model.CanoeCoach;
 import seedu.canoe.model.ReadOnlyCanoeCoach;
 import seedu.canoe.model.student.AcademicYear;
+import seedu.canoe.model.student.Attend;
 import seedu.canoe.model.student.Email;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Name;
@@ -77,8 +77,8 @@ public class SampleDataUtil {
     /**
      * Returns a training schedule list containing the list of LocalDateTimes given.
      */
-    public static List<LocalDateTime> getTrainingSchedule(LocalDateTime... dateTime) {
-        return Arrays.stream(dateTime)
+    public static List<Attend> getTrainingAttendances(Attend... attendance) {
+        return Arrays.stream(attendance)
                 .collect(Collectors.toList());
     }
 

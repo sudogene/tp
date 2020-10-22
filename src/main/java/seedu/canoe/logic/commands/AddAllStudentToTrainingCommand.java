@@ -13,6 +13,7 @@ import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
+import seedu.canoe.model.student.Attend;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.student.Training;
@@ -94,7 +95,7 @@ public class AddAllStudentToTrainingCommand extends Command {
     public static boolean isAbleToAddStudent(Student student, Training training) {
         LocalDateTime trainingDateTime = training.getDateTime();
         return student.isAvailableAtDateTime(trainingDateTime)
-                && !student.hasTrainingAtDateTime(trainingDateTime)
+                && !student.hasAttendanceAtDateTime(trainingDateTime)
                 && !training.hasStudent(student);
     }
 
@@ -103,7 +104,7 @@ public class AddAllStudentToTrainingCommand extends Command {
 
         training.addStudent(student);
         Student editedStudent = student.cloneStudent();
-        editedStudent.addTraining(training.getDateTime());
+        editedStudent.addAttendance(new Attend(training.getDateTime()));
         model.setStudentInUniqueStudentList(student, editedStudent);
     }
 
