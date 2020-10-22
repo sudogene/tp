@@ -109,8 +109,6 @@ public class AddAllStudentToTrainingCommand extends Command {
     }
 
     private Optional<String> getStudentsMessage(List<Student> students) {
-        assert !students.isEmpty();
-
         return students.stream()
                 .map(Student::getId)
                 .map(Id::toString)
