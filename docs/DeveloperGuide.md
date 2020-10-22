@@ -184,7 +184,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 The mechanism to add Students to Training Sessions works by taking in the user inputs of the Index of the Training Session to be edited,
 as well as the Ids of the Students to be added, and adds the corresponding Students to the Training Session at the
-specified index. 
+specified index.
 
 It extends `Command` with the overwritten `AddStudentToTrainingCommand#execute()` method
 that checks a number of fields as follows before adding the Student to the Training Session:
@@ -192,9 +192,8 @@ that checks a number of fields as follows before adding the Student to the Train
 - Whether the student can attend the Training using `Student#isAvalable(LocalDateTime dateTime)`
 - Whether the student is already in the Training Session using `AddStudentToTrainingCommand#uniqueChecker(Student student)`
 
-After all the checks have passed, the Student is then added to the Training Session and the model updated using 
-`Model#setStudent(Student targetStudent, Student editedStudent)`, 
-and `Model#setTraining(Training targetTraining, Training editedTraining)`. 
+After all the checks have passed, the Student is then added to the Training Session and the model updated using `Model#setStudent(Student targetStudent, Student editedStudent)`,
+and `Model#setTraining(Training targetTraining, Training editedTraining)`.
 
 If any of the Students fail any of the checks, the command is discarded and the corresponding `CommandException`
 will be thrown to notify the user of the error.
@@ -234,7 +233,7 @@ The activity diagram below shows what happens when a new `ts-add` command is exe
 the student to be added is not a duplicate.
     * Pros : This  is easier to implement than the key-value pair approach.
     * Cons : Checks have to be done carefully in during Command execution to prevent duplicates or bugs.
-    
+
 ### Add all students to training feature
 
 #### Implementation
