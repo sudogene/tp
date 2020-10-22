@@ -20,14 +20,14 @@ import seedu.canoe.model.student.NameContainsKeywordsPredicate;
  */
 public class CommonTimeCommandParser implements Parser<CommonTimeCommand> {
 
-    private static final Logger logger = LogsCenter.getLogger(CommonTimeCommandParser.class);
+    private static final Logger LOGGER = LogsCenter.getLogger(CommonTimeCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the CommonTimeCommand
      * and returns a CommonTimeCommand object for execution.
      */
     public CommonTimeCommand parse(String args) throws ParseException {
-        logger.info("=============================[ Parsing CommonTimeCommand ]===========================");
+        LOGGER.info("=============================[ Parsing CommonTimeCommand ]===========================");
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ACADEMIC_YEAR);
@@ -38,7 +38,7 @@ public class CommonTimeCommandParser implements Parser<CommonTimeCommand> {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String text = argMultimap.getValue(PREFIX_NAME).get();
             if (text.equals("")) {
-                logger.warning("No keyword found after name prefix!" + text);
+                LOGGER.warning("No keyword found after name prefix!" + text);
                 checkEmptyString = true;
             } else {
                 predicates.add(new NameContainsKeywordsPredicate(getKeywordsFromString(text)));
@@ -48,14 +48,14 @@ public class CommonTimeCommandParser implements Parser<CommonTimeCommand> {
         if (argMultimap.getValue(PREFIX_ACADEMIC_YEAR).isPresent()) {
             String academicYearValue = argMultimap.getValue(PREFIX_ACADEMIC_YEAR).get();
             if (!academicYearValue.equals("")) {
-                logger.warning("No keyword found after academic year prefix!");
+                LOGGER.warning("No keyword found after academic year prefix!");
                 checkEmptyString = false;
                 predicates.add(new AcademicYearMatchesPredicate(academicYearValue));
             }
         }
 
         if (predicates.isEmpty() || checkEmptyString) {
-            logger.warning("No prefixes found in the command input!" + args);
+            LOGGER.warning("No prefixes found in the command input!" + args);
             throw new ParseException(CommonTimeCommand.MESSAGE_NO_QUERY);
         }
 
