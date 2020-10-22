@@ -1,0 +1,16 @@
+@startuml
+start
+:User executes ts-addall command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([valid training index])
+        :Add all valid students to training;
+        :Update valid students' schedules;
+        :Update training's participating students;
+else ([else])
+    :Prompt for valid input;
+endif
+stop
+@enduml
