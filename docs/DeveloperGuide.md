@@ -178,6 +178,23 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Only one panel filter required
   * Cons: Training objects are not stored directly within the student class, hence it might be difficult to retrieve trainings
 
+### Mark-attend feature
+
+#### Implementation
+
+The mark-attend mechanism extends `Command` with the ability to mark a student as having attended a particular training session.
+
+This feature makes use of the `Attend` class which each student keeps track of. As stated above, by default an `Attend` object is constructed with `hasAttended = false`. This command sets `hasAttended` to equal to `true`.
+
+The mark-attend command takes in a `Training` index and multiple `Student` ids as input. Any error in the input format will result in the whole command being discarded and the state of the canoe coach book will remain unchanged.
+A list of possible input errors are listed below:
+- `Training` index is out of range -> `Training` cannot be found
+- `Student` index is out of range -> `Student` cannot be found
+- Empty parameters. i.e. `Training` index and/or `Student` ids not input
+
+The following shows the sequence flow for the `mark-attend` command:
+
+The following activity diagram shows the flow of events when a user executes a `mark-attend` command:
 
 ### \[Proposed\] Undo/redo feature
 
