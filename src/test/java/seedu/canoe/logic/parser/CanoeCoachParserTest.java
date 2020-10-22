@@ -21,8 +21,11 @@ import seedu.canoe.logic.commands.ExitCommand;
 import seedu.canoe.logic.commands.FindCommand;
 import seedu.canoe.logic.commands.HelpCommand;
 import seedu.canoe.logic.commands.ListCommand;
+import seedu.canoe.logic.commands.MarkAttendanceCommand;
 import seedu.canoe.logic.parser.exceptions.ParseException;
 import seedu.canoe.model.student.AllMatchPredicateList;
+import seedu.canoe.model.student.AnyMatchPredicateList;
+import seedu.canoe.model.student.IdMatchesPredicate;
 import seedu.canoe.model.student.NameContainsKeywordsPredicate;
 import seedu.canoe.model.student.PhoneMatchesPredicate;
 import seedu.canoe.model.student.Student;
@@ -92,6 +95,18 @@ public class CanoeCoachParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_mark_attendance() throws Exception {
+        MarkAttendanceCommand command = (MarkAttendanceCommand) parser.parseCommand(
+                MarkAttendanceCommand.COMMAND_WORD + " 3 "
+                + "id/1,2,4");
+        assertEquals(new MarkAttendanceCommand(ParserUtil.parseIndex("3"),
+                AnyMatchPredicateList.of(
+                        new IdMatchesPredicate("1"),
+                        new IdMatchesPredicate("2"),
+                        new IdMatchesPredicate("4"))), command);
     }
 
     @Test

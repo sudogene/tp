@@ -18,6 +18,7 @@ import seedu.canoe.model.student.CommonTimeFinder;
  */
 public class CommonTimeCommand extends Command {
 
+
     public static final Logger LOGGER = LogsCenter.getLogger(CommonTimeCommand.class);
 
     public static final String COMMAND_WORD = "common-time";

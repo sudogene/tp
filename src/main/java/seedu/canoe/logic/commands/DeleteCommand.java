@@ -3,14 +3,16 @@ package seedu.canoe.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
+import seedu.canoe.model.student.Attend;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.student.Training;
 import seedu.canoe.model.util.StudentTrainingSessionUtil;
@@ -19,6 +21,8 @@ import seedu.canoe.model.util.StudentTrainingSessionUtil;
  * Deletes a student identified using it's displayed index from the canoe book.
  */
 public class DeleteCommand extends Command {
+
+    public static final Logger LOGGER = LogsCenter.getLogger(DeleteCommand.class);
 
     public static final String COMMAND_WORD = "delete";
 
@@ -37,17 +41,19 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        LOGGER.info("=============================[ Executing DeleteCommand ]===========================");
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            LOGGER.warning("Index is invalid.");
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
-        List<LocalDateTime> studentTrainingDateTimeList = new ArrayList<>(studentToDelete.getTrainingSchedule());
+        List<Attend> trainingAttendances = new ArrayList<>(studentToDelete.getTrainingAttendances());
         List<Training> studentTrainings = StudentTrainingSessionUtil
-                .getTrainingListFromDateTimeList(studentTrainingDateTimeList, model);
+                .getTrainingListFromTrainingAttendances(trainingAttendances, model);
         for (Training training: studentTrainings) {
             Training editedTraining = new Training(training.getDateTime(), training.getStudents());
             editedTraining.removeStudent(studentToDelete);
