@@ -6,7 +6,6 @@ import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -18,6 +17,7 @@ import seedu.canoe.commons.util.StringUtil;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.AcademicYear;
+import seedu.canoe.model.student.Attend;
 import seedu.canoe.model.student.Email;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Name;
@@ -162,14 +162,14 @@ public class DeleteStudentFromTrainingCommand extends Command {
         Day thursdayDismissal = studentToEdit.getThursdayDismissal();
         Day fridayDismissal = studentToEdit.getFridayDismissal();
         Set<Tag> updatedTags = studentToEdit.getTags();
-        List<LocalDateTime> trainingSchedules = studentToEdit.getTrainingSchedule().stream()
+        List<Attend> trainingAttendances = studentToEdit.getTrainingAttendances().stream()
                 .collect(Collectors.toList());
-        trainingSchedules.remove(editedTraining.getDateTime());
+        trainingAttendances.remove(editedTraining.getDateTime());
         Id id = studentToEdit.getId();
 
         Student newStudent = new Student(updatedName, updatedPhone, updatedEmail, updatedAcademicYear, updatedTags,
                 mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal, id);
-        newStudent.addAllTraining(trainingSchedules);
+        newStudent.addAllAttendances(trainingAttendances);
         return newStudent;
     }
 

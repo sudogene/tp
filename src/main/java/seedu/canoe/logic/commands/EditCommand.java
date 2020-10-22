@@ -14,7 +14,6 @@ import static seedu.canoe.logic.parser.CliSyntax.PREFIX_WEDNESDAY_DISMISSAL;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -29,6 +28,7 @@ import seedu.canoe.commons.util.CollectionUtil;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.AcademicYear;
+import seedu.canoe.model.student.Attend;
 import seedu.canoe.model.student.Email;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Name;
@@ -103,23 +103,23 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        if (!editedStudent.isAvailableForAllTrainingsScheduled()) {
-            List<LocalDateTime> dateTimesUnableToAttend = StudentTrainingSessionUtil
-                    .getConflictsInStudentTrainingSchedule(editedStudent.getTrainingSchedule(), editedStudent);
+        if (!editedStudent.isAvailableForAllAttendances()) {
+            List<Attend> dateTimesUnableToAttend = StudentTrainingSessionUtil
+                    .getConflictsInStudentTrainingAttendances(editedStudent.getTrainingAttendances(), editedStudent);
             List<Training> trainingsUnableToAttend = StudentTrainingSessionUtil
-                    .getTrainingListFromDateTimeList(dateTimesUnableToAttend, model);
+                    .getTrainingListFromTrainingAttendances(dateTimesUnableToAttend, model);
 
             for (Training training: trainingsUnableToAttend) {
                 Training editedTraining = new Training(training.getDateTime(), training.getStudents());
                 editedTraining.removeStudent(studentToEdit);
-                editedStudent.removeTraining(training.getDateTime());
+                editedStudent.removeAttendance(new Attend(training.getDateTime()));
                 model.setTraining(training, editedTraining);
             }
         }
 
-        List<LocalDateTime> studentTrainingDateTimeList = new ArrayList<>(editedStudent.getTrainingSchedule());
+        List<Attend> studentTrainingDateTimeList = new ArrayList<>(editedStudent.getTrainingAttendances());
         List<Training> studentTrainingList = StudentTrainingSessionUtil
-                .getTrainingListFromDateTimeList(studentTrainingDateTimeList, model);
+                .getTrainingListFromTrainingAttendances(studentTrainingDateTimeList, model);
 
         for (Training training: studentTrainingList) {
             Training editedTraining = new Training(training.getDateTime(), training.getStudents());
@@ -154,13 +154,13 @@ public class EditCommand extends Command {
                 editStudentDescriptor.getThursdayDismissal().orElse(studentToEdit.getThursdayDismissal());
         Day fridayDismissal = editStudentDescriptor.getFridayDismissal().orElse(studentToEdit.getFridayDismissal());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
-        List<LocalDateTime> trainingSchedules = studentToEdit.getTrainingSchedule().stream()
+        List<Attend> trainingAttendances = studentToEdit.getTrainingAttendances().stream()
                 .collect(Collectors.toList());
         Id id = studentToEdit.getId();
 
         Student newStudent = new Student(updatedName, updatedPhone, updatedEmail, updatedAcademicYear, updatedTags,
             mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal, id);
-        newStudent.addAllTraining(trainingSchedules);
+        newStudent.addAllAttendances(trainingAttendances);
         return newStudent;
     }
 
