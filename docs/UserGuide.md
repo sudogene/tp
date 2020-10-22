@@ -334,5 +334,6 @@ Action | Format, Examples
 **ts-addall** | `ts-addall TRAINING_INDEX`<br> e.g., `ts-addall 1`
 **ts-delete** | `ts-delete TRAINING_INDEX id/STUDENT_INDEX...`<br> e.g., `ts-delete 1 id/1,2,3`
 **find-training** | `find-training id/STUDENT_INDEX...`<br> e.g., `find-training id/1`
+**mark-attend** | `mark-attend TRAINING_INDEX id/STUDENT_INDEX...`<br> e.g., `mark-attend 2 id/1,4,7`
 **List** | `list`
 **Help** | `help`
