@@ -12,8 +12,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.commons.util.StringUtil;
@@ -33,6 +35,8 @@ import seedu.canoe.model.tag.Tag;
  * Adds an existing student to a training.
  */
 public class AddStudentToTrainingCommand extends Command {
+
+    public static final Logger LOGGER = LogsCenter.getLogger(AddStudentToTrainingCommand.class);
 
     public static final String COMMAND_WORD = "ts-add";
 
@@ -65,6 +69,8 @@ public class AddStudentToTrainingCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        LOGGER.info("==========================[ Executing AddStudentToTrainingCommand ]==========================");
+
         requireNonNull(model);
 
         //Added in case previous command is find
@@ -75,10 +81,12 @@ public class AddStudentToTrainingCommand extends Command {
         List<Student> studentList = model.getFilteredStudentList();
 
         if (studentsToAdd == null) {
+            LOGGER.warning("User input invalid");
             throw new CommandException(MESSAGE_NO_STUDENTS_SPECIFIED);
         }
 
         if (index.getZeroBased() >= lastShownList.size()) {
+            LOGGER.warning("User input invalid");
             throw new CommandException(Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX);
         }
 

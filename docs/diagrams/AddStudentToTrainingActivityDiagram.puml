@@ -1,0 +1,17 @@
+@startuml
+start
+:User executes ts-add command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([valid student index
+&& valid training index
+&& student not in specified training])
+    :updateFilteredStudentList;
+    :updateFilteredTrainingList;
+else ([else])
+    :prompt for valid input;
+endif
+stop
+@enduml
