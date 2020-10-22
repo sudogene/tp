@@ -209,6 +209,19 @@ The following activity diagram shows the flow of events when a user executes a `
 
 ![MarkAttendanceActivityDiagram](images/MarkAttendanceActivityDiagram.png)
 
+#### Design consideration:
+
+##### Aspect: How a student's attendance is tracked
+
+* **Alternative 1:** Create a variable in training with a key-value pair to track student and student's attendance.
+  * Pros: Each student is paired with it's own attendance upon addition to the training.
+  * Cons: A key-value pair variable makes the code more complicated than it has to be.
+
+* **Alternative 2 (current choice):** Use of a class to store attendance of a student for a scheduled training.
+  * Pros: A class is easier to maintain and access than a key-value pair. Code is simpler. 
+  * Cons: A new class has to be created and refactoring of the code base has to be done.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
