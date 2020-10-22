@@ -178,6 +178,53 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Only one panel filter required
   * Cons: Training objects are not stored directly within the student class, hence it might be difficult to retrieve trainings
 
+### Add all students to training feature
+
+#### Implementation
+
+The feature to add all students to a training extends `Command` which allows users to add all valid students, displayed on the current student list,
+to a specified training. This command is supported by methods in the `Model` interface, namely `Model#getFilteredStudentList()` and `Model#getFilteredTrainingList()`.
+
+A student is valid if they can make it for the training and if they are not already in that training. Specifically,
+* The student's dismissal time is equal to or before the training's start time for the particular date
+* The student does not already have a training scheduled at that date time
+* The training does not already have the student added
+
+These checks in the command are supported by `Student#isAvailableAtDateTime`, `Student#hasTrainingAtDateTime`, and `Training#hasStudent`.
+Students who are added to the training will have their training schedule updated to reflect this addition, and the training will also
+be updated to contain the added student.
+
+Given below is an example usage scenario and how the command's mechanism behaves at each step. 
+It is assumed that there is an existing training and students in their respective lists.
+
+Step 1. The user launches the application, then the user executes `ts-addall 1` to add all students, currently displayed, to the training at index 1.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, nothing will be changed or altered.
+</div>
+
+The following sequence diagram shows how the `ts-addall` operation works:
+
+![AddAllStudentToTrainingSequenceDiagram](images/AddAllStudentToTrainingSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAllStudentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The following activity diagram summarizes what happens when a user executes the command:
+
+![AddAllStudentToTrainingActivityDiagram](images/AddAllStudentToTrainingActivityDiagram.png)
+
+#### Design consideration:
+
+##### Aspect: How the command handles list of valid and invalid students
+
+* **Alternative 1 (current choice):** Ignore invalid students and only add valid students.
+  * Pros: Friendlier to the user
+  * Cons: Hard to implement
+
+* **Alternative 2:** Returns failed command execution if there are invalid students in the list.
+  * Pros: Easy to implement
+  * Cons: More restrictive and less friendly to the user
+
 
 ### \[Proposed\] Undo/redo feature
 
