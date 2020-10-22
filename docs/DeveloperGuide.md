@@ -191,7 +191,7 @@ A list of possible input errors are listed below:
 - `Training` index is out of range -> `Training` cannot be found
 - `Student` index is out of range -> `Student` cannot be found
 - Empty parameters. i.e. `Training` index and/or `Student` ids not input
-- `Student` does not have specified `Training` as per of it's schedule
+- `Student` does not have specified `Training` as part of its schedule
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateFilteredStudentList()`, so the GUI state will not be changed or altered.
 
