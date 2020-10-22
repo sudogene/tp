@@ -40,6 +40,8 @@ public class TrainingCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        //Make sure all trainings are displayed on training panel
+        model.updateFilteredTrainingList(Model.PREDICATE_SHOW_ALL_TRAININGS);
 
         if (getTraining().getDateTime().isBefore(LocalDateTime.now())) {
             throw new CommandException(MESSAGE_PAST_TRAINING);

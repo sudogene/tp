@@ -34,7 +34,6 @@ public class AddStudentCommandParser implements Parser<AddStudentToTrainingComma
 
         String[] studentIndexes = new String[0];
 
-
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             String text = argMultimap.getValue(PREFIX_ID).get();
             studentIndexes = text.split(",");

@@ -8,7 +8,6 @@ import java.util.TreeSet;
 
 import seedu.canoe.model.student.exceptions.DuplicateStudentException;
 
-
 public class Training {
 
     public static final String MESSAGE_CONSTRAINTS = "Must be a valid date and time.";
@@ -75,7 +74,7 @@ public class Training {
             throw new DuplicateStudentException();
         } else {
             this.students.add(student);
-            student.addTraining(getDateTime());
+            student.addAttendance(new Attend(getDateTime()));
         }
     }
 
@@ -99,7 +98,7 @@ public class Training {
      * Removes the training's date time from the student.
      */
     public void removeDateTimeFromStudent(Student student) {
-        student.removeTraining(getDateTime());
+        student.removeAttendance(new Attend(getDateTime()));
     }
 
     /**
