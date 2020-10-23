@@ -10,7 +10,7 @@ import static seedu.canoe.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.canoe.testutil.Assert.assertThrows;
-import static seedu.canoe.testutil.LocalDateTimeUtil.VALID_LOCAL_DATE_TIME_2;
+import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_ONE_DAY;
 import static seedu.canoe.testutil.TypicalStudents.ALICE;
 import static seedu.canoe.testutil.TypicalStudents.BOB;
 
@@ -110,7 +110,7 @@ public class StudentTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different trainingAttendances -> returns false
-        editedAlice = new StudentBuilder(ALICE).withTrainingAttendances(new Attend(VALID_LOCAL_DATE_TIME_2)).build();
+        editedAlice = new StudentBuilder(ALICE).withTrainingAttendances(new Attend(DATE_TIME_NOW_PLUS_ONE_DAY)).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false

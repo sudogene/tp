@@ -2,7 +2,7 @@ package seedu.canoe.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.canoe.testutil.Assert.assertThrows;
-import static seedu.canoe.testutil.TypicalStudents.ALICE;
+import static seedu.canoe.testutil.TypicalStudents.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +31,7 @@ public class AddAllStudentToTrainingCommandTest {
     @Test
     public void isAbleToAddStudent() {
         Training training = model.getFilteredTrainingList().get(0);
-        Student student = new StudentBuilder(ALICE).build();
+        Student student = new StudentBuilder(BOB).build();
         assertTrue(AddAllStudentToTrainingCommand.isAbleToAddStudent(student, training));
     }
 
