@@ -28,7 +28,7 @@ public class AddAllStudentToTrainingCommand extends Command {
             + " from the current displayed student list to the specified training session\n"
             + "Parameters: Training_Session-ID"
             + "\nExample: "
-            + COMMAND_WORD + "1";
+            + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_TRAINING_CANNOT_ADD = "No more students can be added to this training";
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "Added available students: %1$s";

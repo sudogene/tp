@@ -1,7 +1,8 @@
 package seedu.canoe.testutil;
 
-import static seedu.canoe.testutil.LocalDateTimeUtil.VALID_LOCAL_DATE_TIME_5;
-import static seedu.canoe.testutil.LocalDateTimeUtil.VALID_LOCAL_DATE_TIME_6;
+import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_ONE_DAY;
+import static seedu.canoe.testutil.LocalDateTimeUtil.PAST_LOCAL_DATE_TIME;
+import static seedu.canoe.testutil.LocalDateTimeUtil.VALID_LOCAL_DATE_TIME_3;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,18 +17,25 @@ import seedu.canoe.model.student.Training;
  */
 public class TypicalStudentsInTypicalTrainings {
     //DO NOT REUSE STATIC VARIABLES HERE AS THEIR PROPERTIES WOULD BE MODIFIED BY THE TESTS
-    public static final Training VALID_TRAINING_4 = new TrainingBuilder().withDateTime(VALID_LOCAL_DATE_TIME_5).build();
-    public static final Training VALID_TRAINING_5 = new TrainingBuilder().withDateTime(VALID_LOCAL_DATE_TIME_6).build();
 
-    //Has no training, thursday dismissal 1700
+    //Training on Current Date + 1 (Makes sure training is always valid)
+    public static final Training FUTURE_TRAINING =
+            new TrainingBuilder().withDateTime(DATE_TIME_NOW_PLUS_ONE_DAY).build();
+
+    //Training on 2021-10-23 1500 (Friday)
+    public static final Training PAST_TRAINING = new TrainingBuilder().withDateTime(PAST_LOCAL_DATE_TIME).build();
+
+    //Training on Monday 1000 (Reasonably set in the future to check dismissal time clashes)
+    public static final Training FUTURE_TRAINING_DISMISSAL_TIME_CLASH =
+            new TrainingBuilder().withDateTime(VALID_LOCAL_DATE_TIME_3).build();
+
     public static final Student JONAS = new StudentBuilder().withName("Jonas")
             .withId("1")
             .withEmail("jonas@example.com")
             .withPhone("92848294")
             .withAcademicYear("2")
-            .withThursdayDismissal("1700")
             .withTags("friends").build();
-    //Has no training, monday dismissal 1200, wednesday dismissal 1500
+
     public static final Student QINDA = new StudentBuilder().withName("Qinda Meh")
             .withId("2")
             .withEmail("qd@example.com").withPhone("96204948")
@@ -35,12 +43,16 @@ public class TypicalStudentsInTypicalTrainings {
             .withMondayDismissal("1200")
             .withWednesdayDismissal("1500")
             .withTags("owesMoney", "friends").build();
-    //Has no trainings scheduled, tuesday dismissal 1400
+
     public static final Student YANKEE = new StudentBuilder().withName("Yankee Lim").withPhone("85352563")
             .withId("3")
             .withAcademicYear("3")
             .withTuesdayDismissal("1400")
             .withEmail("yank@example.com").build();
+
+    static {
+        FUTURE_TRAINING.addStudent(JONAS);
+    }
 
     private TypicalStudentsInTypicalTrainings() {} // prevents instantiation
 
@@ -63,6 +75,6 @@ public class TypicalStudentsInTypicalTrainings {
     }
 
     public static List<Training> getTypicalTraining() {
-        return new ArrayList<>(Arrays.asList(VALID_TRAINING_4, VALID_TRAINING_5));
+        return new ArrayList<>(Arrays.asList(FUTURE_TRAINING, PAST_TRAINING, FUTURE_TRAINING_DISMISSAL_TIME_CLASH));
     }
 }
