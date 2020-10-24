@@ -178,6 +178,62 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Only one panel filter required
   * Cons: Training objects are not stored directly within the student class, hence it might be difficult to retrieve trainings
 
+### Add Student to Training feature
+
+### Implementation
+
+The mechanism to add Students to Training Sessions works by taking in the user inputs of the Index of the Training Session to be edited,
+as well as the Ids of the Students to be added, and adds the corresponding Students to the Training Session at the
+specified index.
+
+It extends `Command` with the overwritten `AddStudentToTrainingCommand#execute()` method
+that checks a number of fields as follows before adding the Student to the Training Session:
+
+- Whether the student can attend the Training using `Student#isAvalable(LocalDateTime dateTime)`
+- Whether the student is already in the Training Session using `AddStudentToTrainingCommand#uniqueChecker(Student student)`
+
+After all the checks have passed, the Student is then added to the Training Session and the model updated using `Model#setStudent(Student targetStudent, Student editedStudent)`,
+and `Model#setTraining(Training targetTraining, Training editedTraining)`.
+
+If any of the Students fail any of the checks, the command is discarded and the corresponding `CommandException`
+will be thrown to notify the user of the error.
+
+Given below is an example usage scenario and how the AddStudentToTrainingCommand behaves.
+
+Step 1. The user launches the application with one training session and 1 student with Id "1".
+
+Step 2. The user inputs `ts-add 1 id/1` and hits enter.
+
+The following sequence diagram shows how the `ts-add` operation works:
+
+![AddStudentToTrainingSequenceDiagram](images/AddStudentToTrainingSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateFilteredStudentList()` or `Model#updateFilteredTrainingList()`, so the GUI state will not be changed or altered.
+
+</div>
+
+The activity diagram below shows what happens when a new `ts-add` command is executed:
+
+![AddStudentToTrainingActivityDiagram](images/AddStudentToTrainingActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateFilteredStudentList()` or `Model#updateFilteredTrainingList()`, so the GUI state will not be changed or altered.
+
+</div>
+
+### Design Consideration:
+
+### Aspect: How Student is added to the Training Session
+
+* **Alternative 1:** Create a key-value pair with Student ID as the key and Student object as the value.
+    * Pros : Eliminates the possibility of repeat students as each Student object only corresponds to one Student ID.
+    * Cons : Need to create a new Class containing the key-value pair and refactor both Training and Student.
+            Also makes the code base more complicated.
+
+* **Alternative 2: (current choice)** Within the AddStudentToTrainingCommand implement checks to make sure that
+the student to be added is not a duplicate.
+    * Pros : This  is easier to implement than the key-value pair approach.
+    * Cons : Checks have to be done carefully in during Command execution to prevent duplicates or bugs.
+
 ### Add all students to training feature
 
 #### Implementation
