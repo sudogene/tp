@@ -24,6 +24,8 @@ public class FindStudentTrainingCommand extends Command {
             + "trainings.";
     public static final String MESSAGE_ONE_STUDENT_QUERY = "Only ONE student ID without extra characters should be "
             + "provided to find a student's trainings.";
+    public static final String MESSAGE_STUDENT_DOES_NOT_EXIST =
+            "Please provide a student index that exists in the student list!";
 
     private final IdMatchesPredicate studentPredicates;
     private final TrainingMatchesIdPredicate trainingPredicates;
@@ -44,7 +46,7 @@ public class FindStudentTrainingCommand extends Command {
         model.updateFilteredTrainingList(trainingPredicates);
 
         if (model.getFilteredStudentList().size() < 1) {
-            throw new CommandException("Please provide a student index that exists in the student list!");
+            throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);
         }
 
         //Make sure ONLY one student in the filtered student list

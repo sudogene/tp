@@ -53,11 +53,14 @@ public class CommandTestUtil {
     public static final String VALID_FRIDAY_BOB = "1500";
     public static final String VALID_ID = "1";
     public static final String VALID_ID_STRINGS = "1";
-    public static final String VALID_ID_STRINGS3 = "1 2 3";
+    public static final String VALID_ID_STRINGS_2 = "2";
+    public static final String VALID_ID_STRINGS_3 = "2 3";
+    public static final String VALID_ID_STRINGS_4 = "1 2";
     public static final String[] VALID_ID_ARRAY = new String[] {"1"};
+    public static final String[] VALID_ID_ARRAY_2 = new String[]{"2"};
+    public static final String[] VALID_ID_ARRAY_3 = new String[]{"2", "3"};
+    public static final String[] VALID_ID_ARRAY_4 = new String[]{"1", "2"};
     public static final String[] INVALID_ID_ARRAY = new String[] {"9"};
-    public static final String[] VALID_ID_ARRAY2 = new String[]{"1", "2"};
-    public static final String[] VALID_ID_ARRAY3 = new String[]{"1", "2", "3"};
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
