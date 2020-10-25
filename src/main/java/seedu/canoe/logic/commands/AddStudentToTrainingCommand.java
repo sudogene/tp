@@ -80,6 +80,7 @@ public class AddStudentToTrainingCommand extends Command {
         List<Training> lastShownList = model.getFilteredTrainingList();
         List<Student> studentList = model.getFilteredStudentList();
 
+        assert false;
         if (studentsToAdd == null) {
             LOGGER.warning("User input invalid");
             throw new CommandException(MESSAGE_NO_STUDENTS_SPECIFIED);

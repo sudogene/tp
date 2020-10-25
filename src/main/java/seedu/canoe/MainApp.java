@@ -49,6 +49,7 @@ public class MainApp extends Application {
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing CanoeCoach ]===========================");
+
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
