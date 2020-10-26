@@ -32,17 +32,20 @@ public class FindStudentTrainingCommandParser implements Parser<FindStudentTrain
 
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             String idValue = argMultimap.getValue(PREFIX_ID).get();
+            if (idValue.equals("")) {
+                logger.warning("No students specified in the command argument!" + args);
+                throw new ParseException(FindStudentTrainingCommand.MESSAGE_NO_STUDENT_QUERY);
+            }
             if (!idValue.matches("\\d+")) {
+                logger.warning("Only one student should be specified in the command argument!" + args);
                 throw new ParseException(FindStudentTrainingCommand.MESSAGE_ONE_STUDENT_QUERY);
             }
-            if (!idValue.equals("")) {
-                Id id = new Id(idValue);
-                IdMatchesPredicate studentIdMatchPredicate = new IdMatchesPredicate(idValue);
-                TrainingMatchesIdPredicate trainingMatchPredicate = new TrainingMatchesIdPredicate(id);
-                return new FindStudentTrainingCommand(studentIdMatchPredicate, trainingMatchPredicate);
-            }
-            logger.warning("No students specified in the command argument!" + args);
-            throw new ParseException(FindStudentTrainingCommand.MESSAGE_NO_STUDENT_QUERY);
+
+            Id id = new Id(idValue);
+            IdMatchesPredicate studentIdMatchPredicate = new IdMatchesPredicate(idValue);
+            TrainingMatchesIdPredicate trainingMatchPredicate = new TrainingMatchesIdPredicate(id);
+            return new FindStudentTrainingCommand(studentIdMatchPredicate, trainingMatchPredicate);
+
         }
         logger.warning("No students specified in the command!" + args);
         throw new ParseException(FindStudentTrainingCommand.MESSAGE_NO_STUDENT_QUERY);

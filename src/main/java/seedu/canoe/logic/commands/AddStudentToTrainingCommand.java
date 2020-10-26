@@ -11,8 +11,10 @@ import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.commons.util.StringUtil;
@@ -34,6 +36,8 @@ import seedu.canoe.model.tag.Tag;
  */
 public class AddStudentToTrainingCommand extends Command {
 
+    public static final Logger LOGGER = LogsCenter.getLogger(AddStudentToTrainingCommand.class);
+
     public static final String COMMAND_WORD = "ts-add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the corresponding Students "
@@ -42,7 +46,7 @@ public class AddStudentToTrainingCommand extends Command {
             + "\nExample: "
             + COMMAND_WORD + "1 " + PREFIX_ID + "3,5,7";
 
-    public static final String MESSAGE_TRAINING_CANNOT_ADD = "No more students can be added to this training";
+    public static final String MESSAGE_TRAINING_CANNOT_ADD = "No more students can be added to this past training";
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "Added Student: %1$s";
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be added must be specified.";
     public static final String MESSAGE_STUDENT_UNAVAILABLE = "This student cannot be added to the training as "
@@ -65,6 +69,8 @@ public class AddStudentToTrainingCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        LOGGER.info("==========================[ Executing AddStudentToTrainingCommand ]==========================");
+
         requireNonNull(model);
 
         //Added in case previous command is find
@@ -75,18 +81,21 @@ public class AddStudentToTrainingCommand extends Command {
         List<Student> studentList = model.getFilteredStudentList();
 
         if (studentsToAdd == null) {
+            LOGGER.warning("User input invalid");
             throw new CommandException(MESSAGE_NO_STUDENTS_SPECIFIED);
         }
 
         if (index.getZeroBased() >= lastShownList.size()) {
+            LOGGER.warning("User input invalid");
             throw new CommandException(Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX);
         }
 
         Training trainingToEdit = lastShownList.get(index.getZeroBased());
-        /* CONDITION TO CHECK IF THE CURRENT DATE TIME IS ALREADY AFTER TRAINING'S STARTING DATE TIME
+
+        // Check if training is a past-training
         if (!trainingToEdit.canAddStudent()) {
             throw new CommandException(MESSAGE_TRAINING_CANNOT_ADD);
-        }*/
+        }
 
         Training editedTraining = new Training(trainingToEdit.getDateTime(), trainingToEdit.getStudents());
 

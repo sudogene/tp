@@ -178,6 +178,62 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Only one panel filter required
   * Cons: Training objects are not stored directly within the student class, hence it might be difficult to retrieve trainings
 
+### Add Student to Training feature
+
+### Implementation
+
+The mechanism to add Students to Training Sessions works by taking in the user inputs of the Index of the Training Session to be edited,
+as well as the Ids of the Students to be added, and adds the corresponding Students to the Training Session at the
+specified index.
+
+It extends `Command` with the overwritten `AddStudentToTrainingCommand#execute()` method
+that checks a number of fields as follows before adding the Student to the Training Session:
+
+- Whether the student can attend the Training using `Student#isAvalable(LocalDateTime dateTime)`
+- Whether the student is already in the Training Session using `AddStudentToTrainingCommand#uniqueChecker(Student student)`
+
+After all the checks have passed, the Student is then added to the Training Session and the model updated using `Model#setStudent(Student targetStudent, Student editedStudent)`,
+and `Model#setTraining(Training targetTraining, Training editedTraining)`.
+
+If any of the Students fail any of the checks, the command is discarded and the corresponding `CommandException`
+will be thrown to notify the user of the error.
+
+Given below is an example usage scenario and how the AddStudentToTrainingCommand behaves.
+
+Step 1. The user launches the application with one training session and 1 student with Id "1".
+
+Step 2. The user inputs `ts-add 1 id/1` and hits enter.
+
+The following sequence diagram shows how the `ts-add` operation works:
+
+![AddStudentToTrainingSequenceDiagram](images/AddStudentToTrainingSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateFilteredStudentList()` or `Model#updateFilteredTrainingList()`, so the GUI state will not be changed or altered.
+
+</div>
+
+The activity diagram below shows what happens when a new `ts-add` command is executed:
+
+![AddStudentToTrainingActivityDiagram](images/AddStudentToTrainingActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateFilteredStudentList()` or `Model#updateFilteredTrainingList()`, so the GUI state will not be changed or altered.
+
+</div>
+
+### Design Consideration:
+
+### Aspect: How Student is added to the Training Session
+
+* **Alternative 1:** Create a key-value pair with Student ID as the key and Student object as the value.
+    * Pros : Eliminates the possibility of repeat students as each Student object only corresponds to one Student ID.
+    * Cons : Need to create a new Class containing the key-value pair and refactor both Training and Student.
+            Also makes the code base more complicated.
+
+* **Alternative 2: (current choice)** Within the AddStudentToTrainingCommand implement checks to make sure that
+the student to be added is not a duplicate.
+    * Pros : This  is easier to implement than the key-value pair approach.
+    * Cons : Checks have to be done carefully in during Command execution to prevent duplicates or bugs.
+
 ### Add all students to training feature
 
 #### Implementation
@@ -224,6 +280,38 @@ The following activity diagram summarizes what happens when a user executes the 
 * **Alternative 2:** Returns failed command execution if there are invalid students in the list.
   * Pros: Easy to implement
   * Cons: More restrictive and less friendly to the user
+
+### Attendance class
+
+#### Implementation
+
+The Attendance class represents a Student attending a Training. A list of Attendance is stored in the Student, and represents all the trainings that the Student would be attending. 
+
+The Attendance class is initialised with the LocalDateTime of a Training. Currently, it also stores information about whether the Student had attended the Training or not. By default, the Attendance is marked as unattended. 
+
+The following shows the relationship between Student, Training and Attendance.
+
+![Relationship of Attend, Training, Student](images/TrainingStudentAttendRS.png)
+
+
+#### Design considerations:
+#### Aspect: How to keep track of which trainings that a Student is attending
+
+*  **Alternative 1:** Store a list of trainings that the Student is attending in the Student.
+	* Pros: Easier implementation in the short run.
+	* Cons: This causes cyclic-dependency and is undesirable.
+
+* **Alternative 2 (Previous iteration):** Store a list of LocalDateTime in the Student, each representing the time of a Training that the Student is attending. 
+	* Pros: Relatively easy to implement
+	* Cons: It is difficult to extend features related to Attendance, and it is inflexible.
+
+* **Alternative 3:** Store a list of Attendances in a wrapper class, that could have, for example, a Hashmap that maps a Student to the list of Attendances.
+	* Pros: This will lead to higher cohesion and low coupling, and increases the maintainability of the code.
+	* Cons: It is more complex to implement. Much harder to display the attendance of a Student in the StudentCard in this current iteration.
+
+* **Alternative 4 (Current iteration):**  Store a list of Attendance in the Student.
+	* Pros: Difficulty of implementation is lower than Alternative 3. Able to support other functions easily compared to Alternative 2. 
+	* Cons: Potentially prone to bugs.
 
 ### Mark-attend feature
 
