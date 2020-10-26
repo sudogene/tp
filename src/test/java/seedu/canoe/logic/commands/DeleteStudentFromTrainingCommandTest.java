@@ -6,15 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.canoe.logic.commands.CommandTestUtil.INVALID_ID_ARRAY;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_ARRAY;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_ARRAY_2;
-import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_ARRAY_4;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_STRINGS;
-import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_STRINGS_2;
-import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_STRINGS_4;
 import static seedu.canoe.testutil.Assert.assertThrows;
 import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_ONE_DAY;
+import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIFTH_TRAINING;
 import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIRST_TRAINING;
-import static seedu.canoe.testutil.TypicalIndexes.INDEX_FOURTH_TRAINING;
 
 import org.junit.jupiter.api.Test;
 
@@ -75,18 +72,11 @@ public class DeleteStudentFromTrainingCommandTest {
 
     @Test
     public void execute_multipleStudentAcceptedByModel_deleteSuccessful() throws Exception {
-        AddStudentToTrainingCommand addStudentToTrainingCommand =
-                new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY_2);
-        CommandResult commandResult = addStudentToTrainingCommand.execute(getModel());
-        assertEquals(String.format(AddStudentToTrainingCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS_2)
-                + " to Training Session 1",
-                commandResult.getFeedbackToUser());
-
         DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
-                new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY_4);
+                new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY);
         CommandResult commandResult2 = deleteStudentFromTrainingCommand.execute(getModel());
         assertEquals(String.format(DeleteStudentFromTrainingCommand
-                        .MESSAGE_DELETE_STUDENT_SUCCESS, VALID_ID_STRINGS_4) + " from Training Session 1",
+                        .MESSAGE_DELETE_STUDENT_SUCCESS, VALID_ID_STRINGS) + " from Training Session 1",
                 commandResult2.getFeedbackToUser());
         //Student 1 should not have dateTime added to his field
         assertFalse(getModel().getFilteredStudentList().get(0)
@@ -126,7 +116,7 @@ public class DeleteStudentFromTrainingCommandTest {
     @Test
     public void execute_trainingInvalidIndex_throwsCommandException() throws Exception {
         DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
-                new DeleteStudentFromTrainingCommand(INDEX_FOURTH_TRAINING, VALID_ID_ARRAY);
+                new DeleteStudentFromTrainingCommand(INDEX_FIFTH_TRAINING, VALID_ID_ARRAY);
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX, () ->
                 deleteStudentFromTrainingCommand.execute(getModel()));
     }

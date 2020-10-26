@@ -117,6 +117,7 @@ public class DeleteStudentFromTrainingCommand extends Command {
             modifying the model.
              */
             editedTraining.removeStudent(editedStudent);
+            editedStudent.removeAttendance(new Attend(editedTraining.getDateTime()));
             targetStudentList.add(studentToEdit);
             editedStudentList.add(editedStudent);
         }
