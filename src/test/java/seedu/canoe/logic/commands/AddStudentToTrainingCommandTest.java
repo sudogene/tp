@@ -69,7 +69,8 @@ public class AddStudentToTrainingCommandTest {
         AddStudentToTrainingCommand addStudentToTrainingCommand =
                 new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY_2);
         CommandResult commandResult = addStudentToTrainingCommand.execute(getModel());
-        assertEquals(String.format(AddStudentToTrainingCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS_2),
+        assertEquals(String.format(AddStudentToTrainingCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS_2)
+                        + " to Training Session 1",
                 commandResult.getFeedbackToUser());
         //QINDA should have dateTime added to his field
         assertTrue(getModel().getFilteredStudentList().get(1)
@@ -89,7 +90,8 @@ public class AddStudentToTrainingCommandTest {
         AddStudentToTrainingCommand addStudentToTrainingCommand =
                 new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY_3);
         CommandResult commandResult = addStudentToTrainingCommand.execute(getModel());
-        assertEquals(String.format(AddStudentToTrainingCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS_3),
+        assertEquals(String.format(AddStudentToTrainingCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS_3
+                        + " to Training Session 1"),
                 commandResult.getFeedbackToUser());
         //Student 1 should already have dateTime in his field
         assertTrue(getModel().getFilteredStudentList().get(0)
@@ -117,7 +119,7 @@ public class AddStudentToTrainingCommandTest {
     public void execute_studentInvalidIndex_throwsCommandException() throws Exception {
         AddStudentToTrainingCommand addStudentToTrainingCommand =
                 new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, INVALID_ID_ARRAY);
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, () ->
+        assertThrows(CommandException.class, AddStudentToTrainingCommand.MESSAGE_STUDENT_DOES_NOT_EXIST, () ->
                 addStudentToTrainingCommand.execute(getModel()));
         //Student JONAS should still have dateTime in his field
         assertTrue(getModel().getFilteredStudentList().get(0)

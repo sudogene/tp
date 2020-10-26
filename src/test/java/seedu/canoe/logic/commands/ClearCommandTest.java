@@ -1,6 +1,5 @@
 package seedu.canoe.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.canoe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.canoe.testutil.TypicalStudents.getTypicalAddressBook;
 
@@ -28,10 +27,10 @@ public class ClearCommandTest {
         expectedModel.setCanoeCoach(new CanoeCoach());
 
         //Checks that new Canoe Coach has no students.
-        assertTrue(new CanoeCoach().getStudentList().isEmpty());
+        assert (new CanoeCoach().getStudentList().isEmpty());
 
         //Checks that new Canoe Coach has no trainings.
-        assertTrue(new CanoeCoach().getTrainingList().isEmpty());
+        assert (new CanoeCoach().getTrainingList().isEmpty());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

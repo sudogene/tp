@@ -51,7 +51,8 @@ public class DeleteStudentFromTrainingCommandTest {
         DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
                 new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY);
         CommandResult commandResult2 = deleteStudentFromTrainingCommand.execute(getModel());
-        assertEquals(String.format(DeleteStudentFromTrainingCommand.MESSAGE_DELETE_STUDENT_SUCCESS, VALID_ID_STRINGS),
+        assertEquals(String.format(DeleteStudentFromTrainingCommand.MESSAGE_DELETE_STUDENT_SUCCESS, VALID_ID_STRINGS)
+                + " from Training Session 1",
                 commandResult2.getFeedbackToUser());
         //Student JONAS should not have dateTime in his field anymore
         assertFalse(getModel().getFilteredStudentList().get(0)
@@ -77,14 +78,15 @@ public class DeleteStudentFromTrainingCommandTest {
         AddStudentToTrainingCommand addStudentToTrainingCommand =
                 new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY_2);
         CommandResult commandResult = addStudentToTrainingCommand.execute(getModel());
-        assertEquals(String.format(AddStudentToTrainingCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS_2),
+        assertEquals(String.format(AddStudentToTrainingCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS_2)
+                + " to Training Session 1",
                 commandResult.getFeedbackToUser());
 
         DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
                 new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY_4);
         CommandResult commandResult2 = deleteStudentFromTrainingCommand.execute(getModel());
         assertEquals(String.format(DeleteStudentFromTrainingCommand
-                        .MESSAGE_DELETE_STUDENT_SUCCESS, VALID_ID_STRINGS_4),
+                        .MESSAGE_DELETE_STUDENT_SUCCESS, VALID_ID_STRINGS_4) + " from Training Session 1",
                 commandResult2.getFeedbackToUser());
         //Student 1 should not have dateTime added to his field
         assertFalse(getModel().getFilteredStudentList().get(0)
@@ -109,7 +111,7 @@ public class DeleteStudentFromTrainingCommandTest {
     public void execute_studentInvalidIndex_throwsCommandException() throws Exception {
         DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
                 new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, INVALID_ID_ARRAY);
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, () ->
+        assertThrows(CommandException.class, DeleteStudentFromTrainingCommand.MESSAGE_STUDENT_DOES_NOT_EXIST, () ->
                 deleteStudentFromTrainingCommand.execute(getModel()));
         //Student should still have dateTime in his field
         assertTrue(getModel().getFilteredStudentList().get(0)
