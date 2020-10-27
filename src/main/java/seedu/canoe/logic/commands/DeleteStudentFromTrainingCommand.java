@@ -9,16 +9,26 @@ import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
+import seedu.canoe.commons.util.StringUtil;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
+import seedu.canoe.model.student.AcademicYear;
 import seedu.canoe.model.student.Attendance;
+import seedu.canoe.model.student.Email;
 import seedu.canoe.model.student.Id;
+import seedu.canoe.model.student.Name;
+import seedu.canoe.model.student.Phone;
 import seedu.canoe.model.student.Student;
+import seedu.canoe.model.student.time.Day;
+import seedu.canoe.model.tag.Tag;
 import seedu.canoe.model.training.Training;
 
 /**
@@ -63,95 +73,102 @@ public class DeleteStudentFromTrainingCommand extends Command {
                 + "===================");
         requireNonNull(model);
 
-        // Gets full unfiltered lists
+        // Show full unfiltered lists
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.updateFilteredTrainingList(PREDICATE_SHOW_ALL_TRAININGS);
 
         List<Training> trainingList = model.getFilteredTrainingList();
 
-        // Checks if valid
+        // Checks if training index is valid
         if (index.getZeroBased() >= trainingList.size()) {
             LOGGER.warning("Training index is invalid.");
             throw new CommandException(Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX);
         }
 
-        if (studentsToDelete.isEmpty()) {
-            LOGGER.warning("No students specified.");
-            throw new CommandException(MESSAGE_NO_STUDENTS_SPECIFIED);
-        }
+        Training trainingToEdit = trainingList.get(index.getZeroBased());
+        Training editedTraining = trainingToEdit.cloneTraining();
 
-        Training training = trainingList.get(index.getZeroBased());
-        Training editedTraining = training.cloneTraining();
-        List<Student> deletedStudents = new ArrayList<>();
+        List<Student> targetStudentList = new ArrayList<>();
+        List<Student> editedStudentList = new ArrayList<>();
 
         for (String str : studentsToDelete) {
 
-            // Checks if the student Id is valid.
+            // Checks if Id value input is valid
             if (!Id.isValidId(str)) {
-                LOGGER.warning("Student index is incorrect.");
+                LOGGER.warning("Student index is invalid.");
                 throw new CommandException(String
                         .format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentFromTrainingCommand.MESSAGE_USAGE));
             }
 
-            Student studentToEdit = getStudentWithId(model, str);
+            // Checks if student of the Id exists
+            if (getStudentWithId(model, str).isEmpty()) {
+                throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);
+            }
 
-            if (!containStudentChecker(editedTraining, studentToEdit)) {
+            Student studentToEdit = getStudentWithId(model, str).get();
+            Student editedStudent = createEditedStudent(studentToEdit, editedTraining);
+
+            if (!hasStudentInTraining(editedTraining, studentToEdit)) {
                 throw new CommandException(MESSAGE_INVALID_STUDENT);
             }
 
-            deleteStudentFromTraining(editedTraining, studentToEdit, model);
-            deletedStudents.add(studentToEdit);
+            // Edits training and adds valid students to corresponding student lists
+            editedTraining.removeStudent(editedStudent);
+            editedStudent.removeAttendance(new Attendance(editedTraining.getDateTime()));
+            targetStudentList.add(studentToEdit);
+            editedStudentList.add(editedStudent);
         }
 
-        model.setTraining(training, editedTraining);
+        // Updates the model's student list
+        for (int i = 0; i < targetStudentList.size(); i++) {
+            model.setStudentInUniqueStudentList(targetStudentList.get(i), editedStudentList.get(i));
+        }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS,
-                getStudentsMessage(deletedStudents))
+        // Updates the model's training list
+        model.setTraining(trainingToEdit, editedTraining);
+
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        String result = getStudentsMessage(editedStudentList);
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, result)
                 + " from Training Session " + index.getOneBased());
     }
 
     /**
      * Checks that the Training Specified contains the Student to be removed.
      */
-    public boolean containStudentChecker(Training trainingToCheck, Student check) {
+    public boolean hasStudentInTraining(Training trainingToCheck, Student check) {
         return trainingToCheck.getStudents().stream()
                 .anyMatch(student -> student.getId().equals(check.getId()));
     }
 
     /**
-     * Returns the Student object in the model with the Id same as the specified unique Id.
+     * Returns the student in the model with the specified unique Id. May not exist.
      */
-    public Student getStudentWithId(Model model, String id) throws CommandException {
-        id = id.trim();
-        Id idChecker = new Id(id);
-        for (Student student : model.getFilteredStudentList()) {
-            if (student.getId().equals(idChecker)) {
-                return student;
-            }
-        }
-        throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);
+    public Optional<Student> getStudentWithId(Model model, String id) {
+        Id idCheck = new Id(id.trim());
+        return model.getFilteredStudentList().stream()
+                .filter(student -> student.getId().equals(idCheck))
+                .findFirst();
     }
 
-    private void deleteStudentFromTraining(Training training, Student student, Model model) {
-        assert training != null && student != null && model != null;
+    private static Student createEditedStudent(Student studentToEdit, Training editedTraining) {
+        assert studentToEdit != null;
 
-        training.removeStudent(student);
-        Student editedStudent = student.cloneStudent();
-        editedStudent.removeAttendance(new Attendance(training.getDateTime()));
-        model.setStudentInUniqueStudentList(student, editedStudent);
+        Student newStudent = studentToEdit.cloneStudent();
+        newStudent.removeAttendance(new Attendance(editedTraining.getDateTime()));
+        return newStudent;
     }
 
     private String getStudentsMessage(List<Student> students) {
         return students.stream()
                 .map(Student::getId)
-                .map(Id::toString)
-                .reduce((id1, id2) -> id1 + ", " + id2)
+                .map(Id::getValue)
+                .reduce((id1, id2) -> id1 + " " + id2)
                 .get();
     }
 
     /**
-     * Return the index of the Training.
-     * @return index of Training
+     * Returns the index of the Training.
      */
     public Index getIndex() {
         return this.index;

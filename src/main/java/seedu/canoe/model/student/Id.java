@@ -1,5 +1,7 @@
 package seedu.canoe.model.student;
 
+import seedu.canoe.commons.util.StringUtil;
+
 import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
@@ -55,10 +57,14 @@ public class Id {
      * Returns true if a given string is a valid id.
      */
     public static boolean isValidId(String test) {
-        if (test.matches(VALIDATION_REGEX)) {
-            return !Id.usedIds.contains(test);
-        }
-        return false;
+        return test.matches(VALIDATION_REGEX) && StringUtil.isNonZeroUnsignedInteger(test);
+    }
+
+    /**
+     * Returns true if a given string has been used as an Id value.
+     */
+    public static boolean isUsedId(String test) {
+        return Id.usedIds.contains(test);
     }
 
     public static Id getPlaceHolderId() {

@@ -30,14 +30,16 @@ public class IdTest {
         assertTrue(Id.isValidId("234"));
         assertTrue(Id.isValidId("209"));
         assertTrue(Id.isValidId("202"));
+    }
 
+    @Test
+    public void isUsedId() {
         // NOTE: Tests on uniqueness of Id values will be trickier due to mutability
-        // unique values
         new Id("210");
-        assertTrue(Id.isValidId("300"));
+        assertFalse(Id.isUsedId("300"));
 
         // non-unique values
-        assertFalse(Id.isValidId("210"));
+        assertTrue(Id.isUsedId("210"));
     }
 
     @Test

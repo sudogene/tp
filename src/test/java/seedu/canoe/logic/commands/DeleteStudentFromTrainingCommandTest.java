@@ -104,6 +104,7 @@ public class DeleteStudentFromTrainingCommandTest {
         assertThrows(CommandException.class, DeleteStudentFromTrainingCommand.MESSAGE_STUDENT_DOES_NOT_EXIST, () ->
                 deleteStudentFromTrainingCommand.execute(getModel()));
         //Student should still have dateTime in his field
+        System.out.println(getModel().getFilteredStudentList().get(0));
         assertTrue(getModel().getFilteredStudentList().get(0)
                 .containsAttendance(new Attendance(DATE_TIME_NOW_PLUS_ONE_DAY)));
         //Student Jonas should be inside of the training container
