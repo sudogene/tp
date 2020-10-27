@@ -10,7 +10,7 @@ import seedu.canoe.model.Model;
 import seedu.canoe.model.ModelManager;
 import seedu.canoe.model.UserPrefs;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 import seedu.canoe.testutil.StudentBuilder;
 import seedu.canoe.testutil.TypicalStudentsInTypicalTrainings;
 

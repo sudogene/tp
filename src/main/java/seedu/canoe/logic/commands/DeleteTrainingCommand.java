@@ -11,10 +11,10 @@ import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
-import seedu.canoe.model.student.Attend;
+import seedu.canoe.model.student.Attendance;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 
 public class DeleteTrainingCommand extends Command {
 
@@ -76,7 +76,7 @@ public class DeleteTrainingCommand extends Command {
     private Student createEditedStudent(Student studentToEdit, Training trainingToDelete) {
         requireNonNull(studentToEdit);
         Student newStudent = studentToEdit.cloneStudent();
-        newStudent.removeAttendance(new Attend(trainingToDelete.getDateTime()));
+        newStudent.removeAttendance(new Attendance(trainingToDelete.getDateTime()));
         return newStudent;
     }
 

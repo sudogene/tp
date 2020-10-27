@@ -6,10 +6,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.canoe.commons.exceptions.IllegalValueException;
-import seedu.canoe.model.student.Attend;
+import seedu.canoe.model.student.Attendance;
 
 /**
- * Jackson-friendly version of {@link Attend}.
+ * Jackson-friendly version of {@link Attendance}.
  */
 class JsonAdaptedAttend {
 
@@ -31,7 +31,7 @@ class JsonAdaptedAttend {
     /**
      * Converts a given {@code Attend} into this class for Jackson use.
      */
-    public JsonAdaptedAttend(Attend source) {
+    public JsonAdaptedAttend(Attendance source) {
         trainingTime = source.getTrainingTime();
         hasAttended = source.getAttendance();
     }
@@ -41,16 +41,16 @@ class JsonAdaptedAttend {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted attend.
      */
-    public Attend toModelType() throws IllegalValueException {
+    public Attendance toModelType() throws IllegalValueException {
 
         if (trainingTime == null) {
             throw new IllegalValueException(String
                     .format(MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName()));
         }
-        Attend attend = new Attend(trainingTime);
+        Attendance attendance = new Attendance(trainingTime);
         if (hasAttended) {
-            attend.attendsTraining();
+            attendance.attendsTraining();
         }
-        return attend;
+        return attendance;
     }
 }

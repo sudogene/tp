@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.canoe.commons.core.GuiSettings;
 import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 
 /**
  * Represents the in-memory model of the canoe coach data.

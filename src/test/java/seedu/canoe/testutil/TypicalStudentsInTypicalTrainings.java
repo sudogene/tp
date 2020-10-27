@@ -11,7 +11,7 @@ import java.util.List;
 
 import seedu.canoe.model.CanoeCoach;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 
 /**
  * A utility class containing a list of {@code Student} objects to be used in {@code Training} tests.

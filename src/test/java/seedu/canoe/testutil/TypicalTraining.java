@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.canoe.model.CanoeCoach;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 
 public class TypicalTraining {
 

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 
 public class TrainingCommand extends Command {
 
