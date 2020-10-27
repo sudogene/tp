@@ -117,6 +117,7 @@ public class AddStudentToTrainingCommand extends Command {
             Student studentToEdit = getStudentWithID(model, str);
             Student editedStudent = createEditedStudent(studentToEdit, editedTraining);
 
+            //Ensures that Students to add are unique
             if (!uniqueChecker(editedTraining, studentToEdit)) {
                 throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
             }
