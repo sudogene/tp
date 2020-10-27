@@ -2,12 +2,12 @@ package seedu.canoe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.model.Model;
-import seedu.canoe.model.student.AnyMatchPredicateList;
 import seedu.canoe.model.student.Student;
 
 public class FindBadStudentsCommand extends Command {
@@ -23,7 +23,7 @@ public class FindBadStudentsCommand extends Command {
 
     private static final String NO_BAD_STUDENTS_MESSAGE = "No students with a bad attendance record were found!";
 
-    private List<Student> badStudents;
+    private ArrayList<Student> badStudents = new ArrayList<Student>();
 
     @Override
     public CommandResult execute(Model model) {
