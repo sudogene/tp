@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 
 public class JsonAdaptedTrainingTest {
     private static final LocalDateTime VALID_DATETIME = LocalDateTime.parse("2020-10-20T19:00:00");

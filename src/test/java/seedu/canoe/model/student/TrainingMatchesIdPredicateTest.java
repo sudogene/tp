@@ -9,6 +9,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.canoe.model.training.Training;
+import seedu.canoe.model.training.TrainingMatchesIdPredicate;
 import seedu.canoe.testutil.StudentBuilder;
 import seedu.canoe.testutil.TrainingBuilder;
 

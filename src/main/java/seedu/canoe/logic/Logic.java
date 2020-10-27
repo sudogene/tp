@@ -9,7 +9,7 @@ import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.logic.parser.exceptions.ParseException;
 import seedu.canoe.model.ReadOnlyCanoeCoach;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 
 /**
  * API of the Logic component

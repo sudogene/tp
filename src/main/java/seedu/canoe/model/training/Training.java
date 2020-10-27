@@ -1,4 +1,4 @@
-package seedu.canoe.model.student;
+package seedu.canoe.model.training;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
+import seedu.canoe.model.student.Attendance;
+import seedu.canoe.model.student.Id;
+import seedu.canoe.model.student.Student;
 import seedu.canoe.model.student.exceptions.DuplicateStudentException;
 
 public class Training {
@@ -74,7 +77,7 @@ public class Training {
             throw new DuplicateStudentException();
         } else {
             this.students.add(student);
-            student.addAttendance(new Attend(getDateTime()));
+            student.addAttendance(new Attendance(getDateTime()));
         }
     }
 
@@ -98,7 +101,7 @@ public class Training {
      * Removes the training's date time from the student.
      */
     public void removeDateTimeFromStudent(Student student) {
-        student.removeAttendance(new Attend(getDateTime()));
+        student.removeAttendance(new Attendance(getDateTime()));
     }
 
     /**

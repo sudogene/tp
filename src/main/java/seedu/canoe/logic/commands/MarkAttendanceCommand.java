@@ -13,9 +13,9 @@ import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.AnyMatchPredicateList;
-import seedu.canoe.model.student.Attend;
+import seedu.canoe.model.student.Attendance;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 
 public class MarkAttendanceCommand extends Command {
 
@@ -69,8 +69,8 @@ public class MarkAttendanceCommand extends Command {
 
         Training training = lastShownList.get(trainingIndex.getZeroBased());
 
-        Attend unattendedTrainingSession = new Attend(training.getDateTime());
-        Attend attendedTrainingSession = new Attend(training.getDateTime());
+        Attendance unattendedTrainingSession = new Attendance(training.getDateTime());
+        Attendance attendedTrainingSession = new Attendance(training.getDateTime());
         attendedTrainingSession.attendsTraining();
 
         if (!studentsHaveTrainingSession(unattendedTrainingSession, attendedStudents)) {
@@ -102,7 +102,7 @@ public class MarkAttendanceCommand extends Command {
      * @param studentsToCheck list of students to check.
      * @return true if students have training session scheduled, false if otherwise.
      */
-    public boolean studentsHaveTrainingSession(Attend trainingSession, List<Student> studentsToCheck) {
+    public boolean studentsHaveTrainingSession(Attendance trainingSession, List<Student> studentsToCheck) {
         assert trainingSession != null;
         for (Student student: studentsToCheck) {
             if (!student.containsAttendance(trainingSession)) {

@@ -10,7 +10,7 @@ import seedu.canoe.logic.commands.FindStudentTrainingCommand;
 import seedu.canoe.logic.parser.exceptions.ParseException;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.IdMatchesPredicate;
-import seedu.canoe.model.student.TrainingMatchesIdPredicate;
+import seedu.canoe.model.training.TrainingMatchesIdPredicate;
 
 /**
  * Parses input arguments and creates a new FindStudentTrainingCommand object

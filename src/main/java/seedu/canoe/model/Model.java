@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.canoe.commons.core.GuiSettings;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 
 /**
  * The API of the Model component.

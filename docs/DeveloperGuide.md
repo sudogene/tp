@@ -313,15 +313,15 @@ The following shows the relationship between Student, Training and Attendance.
 	* Pros: Difficulty of implementation is lower than Alternative 3. Able to support other functions easily compared to Alternative 2. 
 	* Cons: Potentially prone to bugs.
 
-### Mark-attend feature
+### Mark-attendance feature
 
 #### Implementation
 
-The mark-attend mechanism extends `Command` with the ability to mark a student as having attended a particular training session.
+The mark-attendance mechanism extends `Command` with the ability to mark a student as having attended a particular training session.
 
 This feature makes use of the `Attend` class which each student keeps track of. As stated above, by default an `Attend` object is constructed with `hasAttended = false`. This command sets `hasAttended` to equal to `true`.
 
-The mark-attend command takes in a `Training` index and multiple `Student` ids as input. Any error in the input format will result in the whole command being discarded and the state of the canoe coach book will remain unchanged.
+The mark-attendance command takes in a `Training` index and multiple `Student` ids as input. Any error in the input format will result in the whole command being discarded and the state of the canoe coach book will remain unchanged.
 A list of possible input errors are listed below:
 - `Training` index is out of range -> `Training` cannot be found
 - `Student` index is out of range -> `Student` cannot be found
@@ -332,7 +332,7 @@ A list of possible input errors are listed below:
 
 </div>
 
-The following shows the sequence flow for the `mark-attend` command:
+The following shows the sequence flow for the `mark-attendance` command:
 
 ![MarkAttendanceSequenceDiagram](images/MarkAttendanceSequenceDiagram.png)
 
@@ -340,7 +340,7 @@ The following shows the sequence flow for the `mark-attend` command:
 
 </div>
 
-The following activity diagram shows the flow of events when a user executes a `mark-attend` command:
+The following activity diagram shows the flow of events when a user executes a `mark-attendance` command:
 
 ![MarkAttendanceActivityDiagram](images/MarkAttendanceActivityDiagram.png)
 

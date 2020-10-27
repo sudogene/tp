@@ -16,7 +16,6 @@ import seedu.canoe.model.student.AcademicYear;
 import seedu.canoe.model.student.Email;
 import seedu.canoe.model.student.Name;
 import seedu.canoe.model.student.Phone;
-import seedu.canoe.model.student.Training;
 import seedu.canoe.model.student.time.Day;
 import seedu.canoe.model.student.time.Friday;
 import seedu.canoe.model.student.time.Monday;
@@ -24,6 +23,7 @@ import seedu.canoe.model.student.time.Thursday;
 import seedu.canoe.model.student.time.Tuesday;
 import seedu.canoe.model.student.time.Wednesday;
 import seedu.canoe.model.tag.Tag;
+import seedu.canoe.model.training.Training;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

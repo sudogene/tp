@@ -16,10 +16,10 @@ import seedu.canoe.model.Model;
 import seedu.canoe.model.ModelManager;
 import seedu.canoe.model.UserPrefs;
 import seedu.canoe.model.student.AnyMatchPredicateList;
-import seedu.canoe.model.student.Attend;
+import seedu.canoe.model.student.Attendance;
 import seedu.canoe.model.student.IdMatchesPredicate;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 import seedu.canoe.testutil.TypicalStudents;
 import seedu.canoe.testutil.TypicalTraining;
 
@@ -101,9 +101,9 @@ class MarkAttendanceCommandTest {
 
         Student firstStudent = TypicalStudents.BENSON;
         Student secondStudent = TypicalStudents.ELLE;
-        Attend attend = new Attend(firstTraining.getDateTime());
-        firstStudent.addAttendance(attend);
-        secondStudent.addAttendance(attend);
+        Attendance attendance = new Attendance(firstTraining.getDateTime());
+        firstStudent.addAttendance(attendance);
+        secondStudent.addAttendance(attendance);
         expectedModel.setStudentInUniqueStudentList(studentList.get(0), firstStudent);
         expectedModel.setStudentInUniqueStudentList(studentList.get(1), secondStudent);
         expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);

@@ -24,7 +24,7 @@ import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.ModelManager;
 import seedu.canoe.model.UserPrefs;
-import seedu.canoe.model.student.Attend;
+import seedu.canoe.model.student.Attendance;
 import seedu.canoe.testutil.TypicalStudentsInTypicalTrainings;
 
 public class AddStudentToTrainingCommandTest {
@@ -73,7 +73,7 @@ public class AddStudentToTrainingCommandTest {
                 commandResult.getFeedbackToUser());
         //QINDA should have dateTime added to his field
         assertTrue(getModel().getFilteredStudentList().get(1)
-                .containsAttendance(new Attend(DATE_TIME_NOW_PLUS_ONE_DAY)));
+                .containsAttendance(new Attendance(DATE_TIME_NOW_PLUS_ONE_DAY)));
         //Two students JONAS and QINDA now inside of the training container
         assertTrue(getModel().getFilteredTrainingList().get(0).getStudents().size() == 2);
         //Training class should contain QINDA too
@@ -93,13 +93,13 @@ public class AddStudentToTrainingCommandTest {
                 commandResult.getFeedbackToUser());
         //Student 1 should already have dateTime in his field
         assertTrue(getModel().getFilteredStudentList().get(0)
-                .containsAttendance(new Attend(DATE_TIME_NOW_PLUS_ONE_DAY)));
+                .containsAttendance(new Attendance(DATE_TIME_NOW_PLUS_ONE_DAY)));
         //Student 2 should have dateTime added to his field
         assertTrue(getModel().getFilteredStudentList().get(1)
-                .containsAttendance(new Attend(DATE_TIME_NOW_PLUS_ONE_DAY)));
+                .containsAttendance(new Attendance(DATE_TIME_NOW_PLUS_ONE_DAY)));
         //Student 3 should have dateTime added to his field
         assertTrue(getModel().getFilteredStudentList().get(2)
-                .containsAttendance(new Attend(DATE_TIME_NOW_PLUS_ONE_DAY)));
+                .containsAttendance(new Attendance(DATE_TIME_NOW_PLUS_ONE_DAY)));
         //Three students inside of the training container
         assertTrue(getModel().getFilteredTrainingList().get(0).getStudents().size() == 3);
         //Training class should contain student1 too
@@ -121,7 +121,7 @@ public class AddStudentToTrainingCommandTest {
                 addStudentToTrainingCommand.execute(getModel()));
         //Student JONAS should still have dateTime in his field
         assertTrue(getModel().getFilteredStudentList().get(0)
-                .containsAttendance(new Attend(DATE_TIME_NOW_PLUS_ONE_DAY)));
+                .containsAttendance(new Attendance(DATE_TIME_NOW_PLUS_ONE_DAY)));
         //Training container should still only contain Jonas
         assertTrue(getModel().getFilteredTrainingList().get(0).getStudents().size() == 1);
         //Training class should still contain JONAS too
@@ -144,7 +144,8 @@ public class AddStudentToTrainingCommandTest {
         assertThrows(CommandException.class, AddStudentToTrainingCommand.MESSAGE_STUDENT_UNAVAILABLE, () ->
                 addStudentToTrainingCommand.execute(getModel()));
         //Student JONAS should not have dateTime added to his field
-        assertFalse(getModel().getFilteredStudentList().get(0).containsAttendance(new Attend(VALID_LOCAL_DATE_TIME_3)));
+        assertFalse(getModel().getFilteredStudentList().get(0).containsAttendance(
+            new Attendance(VALID_LOCAL_DATE_TIME_3)));
         //Student JONAS should not be inside of the training container
         assertTrue(getModel().getFilteredTrainingList().get(1).getStudents().size() == 0);
         //Training class should not contain JONAS too
