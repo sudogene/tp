@@ -54,7 +54,7 @@ public class AddStudentToTrainingCommand extends Command {
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "Added Student: %1$s";
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student "
             + "to be added must be specified.";
-    public static final String MESSAGE_STUDENT_UNAVAILABLE = "This student cannot be added to the training as "
+    public static final String MESSAGE_STUDENT_UNAVAILABLE = "One of the students cannot be added to the training as "
             + "either his dismissal time on the specified day falls after the training's start time or he has a "
             + "training scheduled on the same date already!";
     private final Index index;

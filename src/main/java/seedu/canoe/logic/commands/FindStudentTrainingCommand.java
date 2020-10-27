@@ -2,39 +2,47 @@ package seedu.canoe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.function.Predicate;
+
 import seedu.canoe.commons.core.Messages;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
-import seedu.canoe.model.student.IdMatchesPredicate;
-import seedu.canoe.model.training.TrainingMatchesIdPredicate;
+import seedu.canoe.model.student.Student;
+import seedu.canoe.model.training.Training;
 
 /**
- * Finds and lists all trainings in canoe book which match the student id specified.
+ * Finds and lists all trainings in canoe book which match the student id and/or datetime specified.
  */
 public class FindStudentTrainingCommand extends Command {
 
     public static final String COMMAND_WORD = "find-training";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all trainings whose ID matches "
-            + "the specified ID and displays them as a list.\n"
-            + "Parameters: STUDENT_INDEX \n"
-            + "Example: " + COMMAND_WORD + " id/1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students or trainings whose ID matches "
+            + "the specified ID and/or training datetime matches the specified datetime and displays them as a list.\n"
+            + "Parameters: [STUDENT_INDEX] [TRAINING_DATETIME] \n"
+            + "Example: " + COMMAND_WORD + " id/1 dt/2021-08-26 1800";
 
     public static final String MESSAGE_NO_STUDENT_QUERY = "A student ID is required to find a student's "
             + "trainings.";
+    public static final String MESSAGE_NO_DATETIME_QUERY = "Please input the training date-time!";
+    public static final String MESSAGE_WRONG_DATETIME_FORMAT_QUERY = "Training datetime must be in yyyy-mm-dd HHmm "
+            + "format! Only one datetime is allowed!";
+    public static final String MESSAGE_NO_PARAM_QUERY = "A student ID and/or a training date time is required to find "
+            + "trainings.";
     public static final String MESSAGE_ONE_STUDENT_QUERY = "Only ONE student ID without extra characters should be "
             + "provided to find a student's trainings.";
-    public static final String MESSAGE_STUDENT_DOES_NOT_EXIST =
-            "Please provide a student index that exists in the student list!";
+    public static final String MESSAGE_NO_MATCH =
+            "There are no matches returned! Check your student index or datetime and make sure they both exist.";
 
-    private final IdMatchesPredicate studentPredicates;
-    private final TrainingMatchesIdPredicate trainingPredicates;
+
+    private final Predicate<Student> studentPredicates;
+    private final Predicate<Training> trainingPredicates;
 
     /**
      * Creates an FindStudentTrainingCommand to find all the specified {@code Student}'s trainings.
      */
-    public FindStudentTrainingCommand(IdMatchesPredicate studentPredicates,
-                                      TrainingMatchesIdPredicate trainingPredicates) {
+    public FindStudentTrainingCommand(Predicate<Student> studentPredicates,
+                                      Predicate<Training> trainingPredicates) {
         this.studentPredicates = studentPredicates;
         this.trainingPredicates = trainingPredicates;
     }
@@ -45,12 +53,9 @@ public class FindStudentTrainingCommand extends Command {
         model.updateFilteredStudentList(studentPredicates);
         model.updateFilteredTrainingList(trainingPredicates);
 
-        if (model.getFilteredStudentList().size() < 1) {
-            throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);
+        if (model.getFilteredStudentList().size() < 1 && model.getFilteredTrainingList().size() < 1) {
+            throw new CommandException(MESSAGE_NO_MATCH);
         }
-
-        //Make sure ONLY one student in the filtered student list
-        assert model.getFilteredStudentList().size() <= 1;
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW,
