@@ -84,11 +84,14 @@ public class AddStudentToTrainingCommand extends Command {
 
         List<Training> lastShownList = model.getFilteredTrainingList();
         List<Student> studentList = model.getFilteredStudentList();
+
+        //Checks if the user specified any students to add
         if (studentsToAdd == null) {
             LOGGER.warning("User input invalid");
             throw new CommandException(MESSAGE_NO_STUDENTS_SPECIFIED);
         }
 
+        //Checks if the Index of Training provided is greater than number of Trainings.
         if (index.getZeroBased() >= lastShownList.size()) {
             LOGGER.warning("User input invalid");
             throw new CommandException(Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX);
