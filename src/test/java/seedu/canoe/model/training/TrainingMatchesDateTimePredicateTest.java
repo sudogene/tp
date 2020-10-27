@@ -2,33 +2,31 @@ package seedu.canoe.model.training;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_ONE_DAY;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.canoe.model.student.Id;
-import seedu.canoe.model.student.Student;
-import seedu.canoe.testutil.StudentBuilder;
 import seedu.canoe.testutil.TrainingBuilder;
 
-public class TrainingMatchesIdPredicateTest {
+public class TrainingMatchesDateTimePredicateTest {
 
     @Test
     public void equals() {
-        Id firstIdValue = new Id("001");
-        Id secondIdValue = new Id("002");
+        LocalDateTime firstDateTime = LocalDateTime.parse("2021-08-26 1800",
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        LocalDateTime secondDateTime = LocalDateTime.parse("2022-08-26 1800",
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
 
-        TrainingMatchesIdPredicate firstPredicate = new TrainingMatchesIdPredicate(firstIdValue);
-        TrainingMatchesIdPredicate secondPredicate = new TrainingMatchesIdPredicate(secondIdValue);
+        TrainingMatchesDateTimePredicate firstPredicate = new TrainingMatchesDateTimePredicate(firstDateTime);
+        TrainingMatchesDateTimePredicate secondPredicate = new TrainingMatchesDateTimePredicate(secondDateTime);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        TrainingMatchesIdPredicate firstPredicateCopy = new TrainingMatchesIdPredicate(firstIdValue);
+        TrainingMatchesDateTimePredicate firstPredicateCopy = new TrainingMatchesDateTimePredicate(firstDateTime);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,41 +40,25 @@ public class TrainingMatchesIdPredicateTest {
     }
 
     @Test
-    public void test_trainingAddStudentContainsStudents_returnsTrue() {
-        Student testStudent = new StudentBuilder().withPhone("123456").withId("001").build();
-        Set<Student> studentSet = new HashSet<>();
-        studentSet.add(testStudent);
-        Training testTraining = new TrainingBuilder().withDateTime(DATE_TIME_NOW_PLUS_ONE_DAY).build();
-        testTraining.addStudent(testStudent);
-        TrainingMatchesIdPredicate predicate = new TrainingMatchesIdPredicate(new Id("001"));
+    public void test_trainingMatchesDateTime_returnsTrue() {
+        LocalDateTime firstDateTime = LocalDateTime.parse("2021-08-26 1800",
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        Training testTraining = new TrainingBuilder().withDateTime(firstDateTime).build();
+        TrainingMatchesDateTimePredicate predicate = new TrainingMatchesDateTimePredicate(firstDateTime);
         assertTrue(predicate.test(testTraining));
     }
 
     @Test
-    public void test_trainingContainsStudents_returnsTrue() {
-        Student testStudent = new StudentBuilder().withPhone("123456").withId("001").build();
-        Set<Student> studentSet = new HashSet<>();
-        studentSet.add(testStudent);
-        TrainingMatchesIdPredicate predicate = new TrainingMatchesIdPredicate(new Id("001"));
-        assertTrue(predicate.test(new TrainingBuilder().withDateTime(DATE_TIME_NOW_PLUS_ONE_DAY)
-                .withStudents(studentSet).build()));
-    }
+    public void test_trainingDoesNotMatchDateTime_returnsFalse() {
+        LocalDateTime firstDateTime = LocalDateTime.parse("2021-08-26 1800",
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        LocalDateTime secondDateTime = LocalDateTime.parse("2022-08-26 1800",
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
 
-    @Test
-    public void test_trainingDoesNotContainStudents_returnsFalse() {
-        Student testStudent = new StudentBuilder().withPhone("123456").withId("001").build();
-        Set<Student> studentSet = new HashSet<>();
-        studentSet.add(testStudent);
-
-        //null argument
-        TrainingMatchesIdPredicate predicate = new TrainingMatchesIdPredicate(null);
-        assertFalse(predicate.test(new TrainingBuilder().withDateTime(DATE_TIME_NOW_PLUS_ONE_DAY)
-                .withStudents(studentSet).build()));
-
-        //non-matching keywords
-        TrainingMatchesIdPredicate nonMatchingPredicate = new TrainingMatchesIdPredicate(new Id("002"));
-        assertFalse(nonMatchingPredicate.test(new TrainingBuilder().withDateTime(DATE_TIME_NOW_PLUS_ONE_DAY)
-                .withStudents(studentSet).build()));
+        //non-matching dateTime
+        TrainingMatchesDateTimePredicate predicate = new TrainingMatchesDateTimePredicate(firstDateTime);
+        assertFalse(predicate.test(new TrainingBuilder().withDateTime(secondDateTime)
+                .build()));
     }
 
 }
