@@ -6,7 +6,7 @@ import seedu.canoe.commons.core.Messages;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.IdMatchesPredicate;
-import seedu.canoe.model.student.TrainingMatchesIdPredicate;
+import seedu.canoe.model.training.TrainingMatchesIdPredicate;
 
 /**
  * Finds and lists all trainings in canoe book which match the student id specified.

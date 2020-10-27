@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.canoe.model.student.AcademicYear;
-import seedu.canoe.model.student.Attend;
+import seedu.canoe.model.student.Attendance;
 import seedu.canoe.model.student.Email;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Name;
@@ -43,7 +43,7 @@ public class StudentBuilder {
     private Email email;
     private AcademicYear academicYear;
     private Set<Tag> tags;
-    private List<Attend> trainingAttendances;
+    private List<Attendance> trainingAttendances;
     private Monday mondayDismissal;
     private Tuesday tuesdayDismissal;
     private Wednesday wednesdayDismissal;
@@ -107,7 +107,7 @@ public class StudentBuilder {
      * Parses the {@code trainingAttendances} into a {@code TreeSet<Attend>} and set it to the {@code Student}
      * that we are building.
      */
-    public StudentBuilder withTrainingAttendances(Attend ... trainingAttendances) {
+    public StudentBuilder withTrainingAttendances(Attendance... trainingAttendances) {
         this.trainingAttendances = SampleDataUtil.getTrainingAttendances(trainingAttendances);
         return this;
     }

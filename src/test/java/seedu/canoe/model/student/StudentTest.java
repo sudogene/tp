@@ -110,7 +110,8 @@ public class StudentTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different trainingAttendances -> returns false
-        editedAlice = new StudentBuilder(ALICE).withTrainingAttendances(new Attend(DATE_TIME_NOW_PLUS_ONE_DAY)).build();
+        editedAlice = new StudentBuilder(ALICE).withTrainingAttendances(
+            new Attendance(DATE_TIME_NOW_PLUS_ONE_DAY)).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false

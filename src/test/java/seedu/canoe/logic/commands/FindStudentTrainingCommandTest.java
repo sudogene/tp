@@ -15,7 +15,7 @@ import seedu.canoe.model.ModelManager;
 import seedu.canoe.model.UserPrefs;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.IdMatchesPredicate;
-import seedu.canoe.model.student.TrainingMatchesIdPredicate;
+import seedu.canoe.model.training.TrainingMatchesIdPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindStudentTrainingCommand}.
@@ -82,7 +82,7 @@ public class FindStudentTrainingCommandTest {
     @Test
     public void execute_studentIndexInvalid_studentNotFound() {
         TrainingMatchesIdPredicate idPredicate = new TrainingMatchesIdPredicate(new Id("4"));
-        IdMatchesPredicate studentIdPredicate = new IdMatchesPredicate("4");
+        IdMatchesPredicate studentIdPredicate = new IdMatchesPredicate("5");
         FindStudentTrainingCommand command = new FindStudentTrainingCommand(studentIdPredicate, idPredicate);
         assertThrows(CommandException.class, FindStudentTrainingCommand.MESSAGE_STUDENT_DOES_NOT_EXIST, () ->
                 command.execute(model));

@@ -1,6 +1,6 @@
 @startuml
 start
-:User executes mark-attend command;
+:User executes mark-attendance command;
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.

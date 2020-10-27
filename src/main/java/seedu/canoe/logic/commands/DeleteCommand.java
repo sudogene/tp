@@ -12,9 +12,9 @@ import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
-import seedu.canoe.model.student.Attend;
+import seedu.canoe.model.student.Attendance;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 import seedu.canoe.model.util.StudentTrainingSessionUtil;
 
 /**
@@ -51,7 +51,7 @@ public class DeleteCommand extends Command {
         }
 
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
-        List<Attend> trainingAttendances = new ArrayList<>(studentToDelete.getTrainingAttendances());
+        List<Attendance> trainingAttendances = new ArrayList<>(studentToDelete.getTrainingAttendances());
         List<Training> studentTrainings = StudentTrainingSessionUtil
                 .getTrainingListFromTrainingAttendances(trainingAttendances, model);
         for (Training training: studentTrainings) {

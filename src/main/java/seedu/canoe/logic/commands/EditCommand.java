@@ -30,15 +30,15 @@ import seedu.canoe.commons.util.CollectionUtil;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.AcademicYear;
-import seedu.canoe.model.student.Attend;
+import seedu.canoe.model.student.Attendance;
 import seedu.canoe.model.student.Email;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Name;
 import seedu.canoe.model.student.Phone;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
 import seedu.canoe.model.student.time.Day;
 import seedu.canoe.model.tag.Tag;
+import seedu.canoe.model.training.Training;
 import seedu.canoe.model.util.StudentTrainingSessionUtil;
 
 /**
@@ -111,20 +111,20 @@ public class EditCommand extends Command {
         }
 
         if (!editedStudent.isAvailableForAllAttendances()) {
-            List<Attend> dateTimesUnableToAttend = StudentTrainingSessionUtil
+            List<Attendance> dateTimesUnableToAttendance = StudentTrainingSessionUtil
                     .getConflictsInStudentTrainingAttendances(editedStudent.getTrainingAttendances(), editedStudent);
             List<Training> trainingsUnableToAttend = StudentTrainingSessionUtil
-                    .getTrainingListFromTrainingAttendances(dateTimesUnableToAttend, model);
+                    .getTrainingListFromTrainingAttendances(dateTimesUnableToAttendance, model);
 
             for (Training training: trainingsUnableToAttend) {
                 Training editedTraining = new Training(training.getDateTime(), training.getStudents());
                 editedTraining.removeStudent(studentToEdit);
-                editedStudent.removeAttendance(new Attend(training.getDateTime()));
+                editedStudent.removeAttendance(new Attendance(training.getDateTime()));
                 model.setTraining(training, editedTraining);
             }
         }
 
-        List<Attend> studentTrainingDateTimeList = new ArrayList<>(editedStudent.getTrainingAttendances());
+        List<Attendance> studentTrainingDateTimeList = new ArrayList<>(editedStudent.getTrainingAttendances());
         List<Training> studentTrainingList = StudentTrainingSessionUtil
                 .getTrainingListFromTrainingAttendances(studentTrainingDateTimeList, model);
 
@@ -161,7 +161,7 @@ public class EditCommand extends Command {
                 editStudentDescriptor.getThursdayDismissal().orElse(studentToEdit.getThursdayDismissal());
         Day fridayDismissal = editStudentDescriptor.getFridayDismissal().orElse(studentToEdit.getFridayDismissal());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
-        List<Attend> trainingAttendances = studentToEdit.getTrainingAttendances().stream()
+        List<Attendance> trainingAttendances = studentToEdit.getTrainingAttendances().stream()
                 .collect(Collectors.toList());
         Id id = studentToEdit.getId();
 

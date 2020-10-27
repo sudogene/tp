@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 
 public class TrainingBuilder {
     public static final Set<Student> DEFAULT_STUDENTS = new HashSet<>();

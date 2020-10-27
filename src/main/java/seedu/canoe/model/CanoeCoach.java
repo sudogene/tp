@@ -6,9 +6,10 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
 import seedu.canoe.model.student.UniqueStudentList;
-import seedu.canoe.model.student.UniqueTrainingList;
+import seedu.canoe.model.training.Training;
+import seedu.canoe.model.training.UniqueTrainingList;
+
 
 /**
  * Wraps all data at the canoe coach book level

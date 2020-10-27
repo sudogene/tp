@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.canoe.commons.core.LogsCenter;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 
 /**
  * Panel containing the list of trainings.

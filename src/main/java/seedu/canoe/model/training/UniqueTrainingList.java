@@ -1,4 +1,4 @@
-package seedu.canoe.model.student;
+package seedu.canoe.model.training;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.canoe.commons.util.CollectionUtil.requireAllNonNull;

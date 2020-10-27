@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents an attendance for a training session.
  */
-public class Attend implements Comparable<Attend> {
+public class Attendance implements Comparable<Attendance> {
 
     private final LocalDateTime trainingTime;
 
@@ -18,7 +18,7 @@ public class Attend implements Comparable<Attend> {
      * @param trainingTime time that the training is held.
      */
 
-    public Attend(LocalDateTime trainingTime) {
+    public Attendance(LocalDateTime trainingTime) {
         this.trainingTime = trainingTime;
     }
 
@@ -52,7 +52,7 @@ public class Attend implements Comparable<Attend> {
      * @return The result of comparing the training time of this instance to the training time of the other instance.
      */
     @Override
-    public int compareTo(Attend other) {
+    public int compareTo(Attendance other) {
         return trainingTime.compareTo(other.getTrainingTime());
     }
 
@@ -63,8 +63,8 @@ public class Attend implements Comparable<Attend> {
     @Override
     public boolean equals(Object other) {
 
-        if (other instanceof Attend) {
-            return trainingTime.equals(((Attend) other).getTrainingTime());
+        if (other instanceof Attendance) {
+            return trainingTime.equals(((Attendance) other).getTrainingTime());
         } else {
             return false;
         }

@@ -11,7 +11,7 @@ import javafx.scene.control.Separator;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 
 /**
  * An UI component that displays information of a {@code Student}.
