@@ -43,7 +43,23 @@ public class FindBadStudentsCommand extends Command {
             LOGGER.info("No students with a bad attendance record were found!");
             return new CommandResult(NO_BAD_STUDENTS_MESSAGE);
         }
+        String result = getStudentNamesAndIdsAsString(badStudents);
 
-        return new CommandResult(badStudents.toString());
+        return new CommandResult(result);
+    }
+
+    /**
+     * Returns a String with the names and IDs of the students.
+     *
+     * @return String with names and IDs of Students.
+     */
+    public String getStudentNamesAndIdsAsString(List<Student> students) {
+        String result = "";
+        for (Student student : students) {
+            result += student.getName() + "(";
+            result += student.getId() + ") ";
+        }
+        result = result.trim();
+        return result;
     }
 }
