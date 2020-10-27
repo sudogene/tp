@@ -2,13 +2,21 @@ package seedu.canoe.ui;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
+import javafx.beans.binding.When;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import seedu.canoe.model.student.Attendance;
 import seedu.canoe.model.student.Student;
 
 /**
@@ -49,9 +57,13 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label trainingTag;
+    private Label pastTrainingTag;
     @FXML
-    private FlowPane trainingAttendances;
+    private FlowPane pastTrainingAttendances;
+    @FXML
+    private Label upcomingTrainingTag;
+    @FXML
+    private FlowPane upcomingTrainingAttendances;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -59,6 +71,10 @@ public class StudentCard extends UiPart<Region> {
     public StudentCard(Student student, int displayedIndex) {
         super(FXML);
         this.student = student;
+        Background markedAttendance = new Background(new BackgroundFill(Color.RED,
+                null, null));
+        Background unmarkedAttendance = new Background(new BackgroundFill(Color.GREEN,
+                null, null));
         id.setText(displayedIndex + ". ");
         studentId.setText("ID: " + student.getId());
         name.setText(student.getName().fullName);
@@ -86,11 +102,31 @@ public class StudentCard extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        trainingTag.setText("Trainings Scheduled (Most recent upcoming 3): ");
-        student.getTrainingAttendances().stream()
-                .filter(training -> training.getTrainingTime().isAfter(LocalDateTime.now())).limit(3)
-                .forEach(trainingAttendance -> trainingAttendances.getChildren()
-                        .add(new Label(trainingAttendance.toString())));
+        pastTrainingTag.setText("Past Trainings Scheduled : ");
+        // Pulls out the trainings which have been past by at least 3 hours from training start time
+        for (Attendance attendance
+                : student.getTrainingAttendances().stream().filter(training -> training.getTrainingTime().plusHours(3)
+                        .isBefore(LocalDateTime.now())).collect(Collectors.toList())) {
+            Label pastAttendanceLabel = new Label(attendance.toString());
+            pastAttendanceLabel.backgroundProperty().bind(
+                    new When(isMarked(attendance.getAttendance())).then(unmarkedAttendance)
+                            .otherwise(markedAttendance));
+            pastTrainingAttendances.getChildren().add(pastAttendanceLabel);
+        }
+        upcomingTrainingTag.setText("Upcoming Trainings Scheduled : ");
+        // Pulls out the upcoming trainings which have not passed yet
+        for (Attendance attendance
+                : student.getTrainingAttendances().stream().filter(training -> training.getTrainingTime().plusHours(3)
+                        .isAfter(LocalDateTime.now())).collect(Collectors.toList())) {
+            Label upcomingAttendanceLabel = new Label(attendance.toString());
+            upcomingAttendanceLabel.backgroundProperty().bind(
+                    new When(isMarked(attendance.getAttendance())).then(unmarkedAttendance)
+                            .otherwise(markedAttendance));
+            upcomingTrainingAttendances.getChildren().add(upcomingAttendanceLabel);
+        }
+    }
+    private BooleanProperty isMarked(boolean attendance) {
+        return new SimpleBooleanProperty(attendance);
     }
 
     @Override
