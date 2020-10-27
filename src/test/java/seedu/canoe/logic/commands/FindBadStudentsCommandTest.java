@@ -1,10 +1,10 @@
 package seedu.canoe.logic.commands;
 
 import static seedu.canoe.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_MINUS_ONE_DAY;
-import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_MINUS_TWO_DAYS;
-import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_MINUS_THREE_DAYS;
 import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_MINUS_FOUR_DAYS;
+import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_MINUS_ONE_DAY;
+import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_MINUS_THREE_DAYS;
+import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_MINUS_TWO_DAYS;
 import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_ONE_DAY;
 import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_TWO_DAYS;
 import static seedu.canoe.testutil.TypicalStudentsInTypicalTrainings.JONAS;
@@ -12,14 +12,14 @@ import static seedu.canoe.testutil.TypicalStudentsInTypicalTrainings.QINDA;
 import static seedu.canoe.testutil.TypicalStudentsInTypicalTrainings.YANKEE;
 import static seedu.canoe.testutil.TypicalStudentsInTypicalTrainings.getTypicalAddressBook;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.canoe.model.Model;
 import seedu.canoe.model.ModelManager;
 import seedu.canoe.model.UserPrefs;
 import seedu.canoe.model.student.Attendance;
-
-import java.util.Arrays;
 
 class FindBadStudentsCommandTest {
 
