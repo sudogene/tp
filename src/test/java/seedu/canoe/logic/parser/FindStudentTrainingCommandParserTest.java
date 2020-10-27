@@ -3,11 +3,16 @@ package seedu.canoe.logic.parser;
 import static seedu.canoe.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.canoe.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.canoe.logic.commands.FindStudentTrainingCommand;
+import seedu.canoe.model.student.DateTimeMatchesPredicate;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.IdMatchesPredicate;
+import seedu.canoe.model.training.TrainingMatchesDateTimePredicate;
 import seedu.canoe.model.training.TrainingMatchesIdPredicate;
 
 public class FindStudentTrainingCommandParserTest {
@@ -15,7 +20,7 @@ public class FindStudentTrainingCommandParserTest {
     private FindStudentTrainingCommandParser parser = new FindStudentTrainingCommandParser();
 
     @Test
-    public void parse_validArgs_returnsFindStudentTrainingCommand() {
+    public void parse_validIdWithoutDateTime_returnsFindStudentTrainingCommand() {
         Id firstIdValue = new Id("1");
         IdMatchesPredicate firstStudentPredicate = new IdMatchesPredicate("1");
         TrainingMatchesIdPredicate firstTrainingPredicate = new TrainingMatchesIdPredicate(firstIdValue);
@@ -32,13 +37,69 @@ public class FindStudentTrainingCommandParserTest {
     }
 
     @Test
+    public void parse_validIdWithDateTime_returnsFindStudentTrainingCommand() {
+        Id firstIdValue = new Id("1");
+        LocalDateTime dateTime = LocalDateTime.parse("2021-08-26 1800",
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        IdMatchesPredicate firstStudentPredicate = new IdMatchesPredicate("1");
+        TrainingMatchesDateTimePredicate firstTrainingPredicate = new TrainingMatchesDateTimePredicate(dateTime);
+
+        // no leading and trailing whitespaces
+        FindStudentTrainingCommand firstExpectedFindStudentTrainingCommand =
+                new FindStudentTrainingCommand(firstStudentPredicate, firstTrainingPredicate);
+        assertParseSuccess(parser, " id/1 dt/2021-08-26 1800", firstExpectedFindStudentTrainingCommand);
+
+        // multiple whitespaces between keywords
+        FindStudentTrainingCommand secondExpectedFindStudentTrainingCommand =
+                new FindStudentTrainingCommand(firstStudentPredicate, firstTrainingPredicate);
+        assertParseSuccess(parser, "  \n  \t id/1 \t \n \n dt/2021-08-26 1800 \t ",
+                secondExpectedFindStudentTrainingCommand);
+    }
+
+    @Test
+    public void parse_validDateTimeWithoutId_returnsFindStudentTrainingCommand() {
+        LocalDateTime dateTime = LocalDateTime.parse("2021-08-26 1800",
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        DateTimeMatchesPredicate firstStudentPredicate = new DateTimeMatchesPredicate(dateTime);
+        TrainingMatchesDateTimePredicate firstTrainingPredicate = new TrainingMatchesDateTimePredicate(dateTime);
+
+        // no leading and trailing whitespaces
+        FindStudentTrainingCommand firstExpectedFindStudentTrainingCommand =
+                new FindStudentTrainingCommand(firstStudentPredicate, firstTrainingPredicate);
+        assertParseSuccess(parser, " dt/2021-08-26 1800", firstExpectedFindStudentTrainingCommand);
+
+        // multiple whitespaces between keywords
+        FindStudentTrainingCommand secondExpectedFindStudentTrainingCommand =
+                new FindStudentTrainingCommand(firstStudentPredicate, firstTrainingPredicate);
+        assertParseSuccess(parser, "  \n  \t \t \n \n dt/2021-08-26 1800 \t ",
+                secondExpectedFindStudentTrainingCommand);
+    }
+
+    @Test
     public void parse_noStudent_failure() {
-        assertParseFailure(parser, " ", FindStudentTrainingCommand.MESSAGE_NO_STUDENT_QUERY);
+        assertParseFailure(parser, " ", FindStudentTrainingCommand.MESSAGE_NO_PARAM_QUERY);
     }
 
     @Test
     public void parse_noStudent2_failure() {
         assertParseFailure(parser, " id/", FindStudentTrainingCommand.MESSAGE_NO_STUDENT_QUERY);
+    }
+
+    @Test
+    public void parse_noDateTime_failure() {
+        assertParseFailure(parser, " dt/", FindStudentTrainingCommand.MESSAGE_NO_DATETIME_QUERY);
+    }
+
+    @Test
+    public void parse_wrongDateFormat_failure() {
+        assertParseFailure(parser, " dt/2021-26-08",
+                FindStudentTrainingCommand.MESSAGE_WRONG_DATETIME_FORMAT_QUERY);
+    }
+
+    @Test
+    public void parse_wrongTimeFormat_failure() {
+        assertParseFailure(parser, " dt/2021-26-08 18:00",
+                FindStudentTrainingCommand.MESSAGE_WRONG_DATETIME_FORMAT_QUERY);
     }
 
     @Test
