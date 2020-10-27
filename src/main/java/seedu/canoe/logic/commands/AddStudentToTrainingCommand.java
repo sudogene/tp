@@ -47,9 +47,13 @@ public class AddStudentToTrainingCommand extends Command {
             + "\nExample: "
             + COMMAND_WORD + "1 " + PREFIX_ID + "3,5,7";
 
-    public static final String MESSAGE_TRAINING_CANNOT_ADD = "No more students can be added to this past training";
+    public static final String MESSAGE_TRAINING_CANNOT_ADD = "No more students "
+            + "can be added to this past training";
+    public static final String MESSAGE_STUDENT_DOES_NOT_EXIST = "One of "
+            + "the Ids specified do not correspond to an existing Student!";
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "Added Student: %1$s";
-    public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be added must be specified.";
+    public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student "
+            + "to be added must be specified.";
     public static final String MESSAGE_STUDENT_UNAVAILABLE = "This student cannot be added to the training as "
             + "either his dismissal time on the specified day falls after the training's start time or he has a "
             + "training scheduled on the same date already!";
@@ -80,7 +84,6 @@ public class AddStudentToTrainingCommand extends Command {
 
         List<Training> lastShownList = model.getFilteredTrainingList();
         List<Student> studentList = model.getFilteredStudentList();
-
         if (studentsToAdd == null) {
             LOGGER.warning("User input invalid");
             throw new CommandException(MESSAGE_NO_STUDENTS_SPECIFIED);
@@ -104,21 +107,15 @@ public class AddStudentToTrainingCommand extends Command {
         List<Student> targetStudentList = new ArrayList<>();
         List<Student> editedStudentList = new ArrayList<>();
         for (String str : studentsToAdd) {
-            if (str.length() != 1) {
-                throw new CommandException(String
-                        .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE));
-            }
 
+            // Throws a CommandException if the Student ID is zero or negative.
             if (!StringUtil.isNonZeroUnsignedInteger(str)) {
+                LOGGER.warning("Student index is incorrect.");
                 throw new CommandException(String
                         .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE));
             }
 
-            if (Integer.parseInt(str) > studentList.size() || Integer.parseInt(str) <= 0) {
-                throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-            }
-
-            Student studentToEdit = studentList.get(Integer.parseInt(str) - 1);
+            Student studentToEdit = getStudentWithID(model, str);
             Student editedStudent = createEditedStudent(studentToEdit, editedTraining);
 
             if (!uniqueChecker(editedTraining, studentToEdit)) {
@@ -150,7 +147,8 @@ public class AddStudentToTrainingCommand extends Command {
 
         String result = this.getStudentsAdded();
 
-        return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, result));
+        return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, result)
+                + " to Training Session " + index.getOneBased());
     }
 
     /**
@@ -167,6 +165,23 @@ public class AddStudentToTrainingCommand extends Command {
             }
         }
         return true;
+    }
+
+    /**
+     * Returns the Student object in the model with the Id same as the specified Unique Id.
+     * @param model
+     * @param id
+     * @return
+     */
+    public Student getStudentWithID(Model model, String id) throws CommandException {
+        id.trim();
+        Id idChecker = new Id(id);
+        for (Student student : model.getFilteredStudentList()) {
+            if (student.getId().equals(idChecker)) {
+                return student;
+            }
+        }
+        throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);
     }
 
     private static Student createEditedStudent(Student studentToEdit, Training editedTraining) {

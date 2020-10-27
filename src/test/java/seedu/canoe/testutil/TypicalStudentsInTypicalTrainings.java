@@ -2,6 +2,7 @@ package seedu.canoe.testutil;
 
 import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_ONE_DAY;
 import static seedu.canoe.testutil.LocalDateTimeUtil.PAST_LOCAL_DATE_TIME;
+import static seedu.canoe.testutil.LocalDateTimeUtil.VALID_LOCAL_DATE_TIME_2;
 import static seedu.canoe.testutil.LocalDateTimeUtil.VALID_LOCAL_DATE_TIME_3;
 
 import java.util.ArrayList;
@@ -22,6 +23,9 @@ public class TypicalStudentsInTypicalTrainings {
     public static final Training FUTURE_TRAINING =
             new TrainingBuilder().withDateTime(DATE_TIME_NOW_PLUS_ONE_DAY).build();
 
+    //Training with very late time to make sure students can always attend
+    public static final Training LATE_TRAINING = new TrainingBuilder().withDateTime(VALID_LOCAL_DATE_TIME_2).build();
+
     //Training on 2021-10-23 1500 (Friday)
     public static final Training PAST_TRAINING = new TrainingBuilder().withDateTime(PAST_LOCAL_DATE_TIME).build();
 
@@ -41,7 +45,7 @@ public class TypicalStudentsInTypicalTrainings {
             .withEmail("qd@example.com").withPhone("96204948")
             .withAcademicYear("2")
             .withMondayDismissal("1200")
-            .withWednesdayDismissal("1500")
+            .withWednesdayDismissal("1300")
             .withTags("owesMoney", "friends").build();
 
     public static final Student YANKEE = new StudentBuilder().withName("Yankee Lim").withPhone("85352563")
@@ -49,6 +53,13 @@ public class TypicalStudentsInTypicalTrainings {
             .withAcademicYear("3")
             .withTuesdayDismissal("1400")
             .withEmail("yank@example.com").build();
+
+    public static final Student JOCK = new StudentBuilder().withName("Jock Kee").withPhone("87346395")
+            .withId("4")
+            .withAcademicYear("3")
+            .withTuesdayDismissal("1600")
+            .withWednesdayDismissal("0100")
+            .withEmail("jock@example.com").build();
 
     static {
         FUTURE_TRAINING.addStudent(JONAS);
@@ -71,10 +82,11 @@ public class TypicalStudentsInTypicalTrainings {
     }
 
     public static List<Student> getTypicalStudents() {
-        return new ArrayList<>(Arrays.asList(JONAS, QINDA, YANKEE));
+        return new ArrayList<>(Arrays.asList(JONAS, QINDA, YANKEE, JOCK));
     }
 
     public static List<Training> getTypicalTraining() {
-        return new ArrayList<>(Arrays.asList(FUTURE_TRAINING, PAST_TRAINING, FUTURE_TRAINING_DISMISSAL_TIME_CLASH));
+        return new ArrayList<>(Arrays.asList(FUTURE_TRAINING, PAST_TRAINING,
+                FUTURE_TRAINING_DISMISSAL_TIME_CLASH, LATE_TRAINING));
     }
 }

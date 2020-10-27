@@ -30,7 +30,7 @@ public class AddAllStudentToTrainingCommandTest {
 
     @Test
     public void isAbleToAddStudent() {
-        Training training = model.getFilteredTrainingList().get(0);
+        Training training = model.getFilteredTrainingList().get(3);
         Student student = new StudentBuilder(BOB).build();
         assertTrue(AddAllStudentToTrainingCommand.isAbleToAddStudent(student, training));
     }
