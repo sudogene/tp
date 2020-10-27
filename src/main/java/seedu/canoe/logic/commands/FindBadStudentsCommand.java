@@ -57,7 +57,7 @@ public class FindBadStudentsCommand extends Command {
         String result = "";
         for (Student student : students) {
             result += student.getName() + "(";
-            result += student.getId() + ") ";
+            result += "ID: " + student.getId() + ") ";
         }
         result = result.trim();
         return result;
