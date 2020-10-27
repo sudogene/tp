@@ -12,7 +12,7 @@ import seedu.canoe.commons.exceptions.IllegalValueException;
 import seedu.canoe.model.CanoeCoach;
 import seedu.canoe.model.ReadOnlyCanoeCoach;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 
 /**
  * An Immutable CanoeCoach that is serializable to JSON format.

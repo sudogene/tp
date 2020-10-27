@@ -21,7 +21,7 @@ import seedu.canoe.model.Model;
 import seedu.canoe.model.ReadOnlyCanoeCoach;
 import seedu.canoe.model.ReadOnlyUserPrefs;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 import seedu.canoe.testutil.StudentBuilder;
 
 public class AddCommandTest {

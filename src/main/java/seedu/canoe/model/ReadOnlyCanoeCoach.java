@@ -2,7 +2,7 @@ package seedu.canoe.model;
 
 import javafx.collections.ObservableList;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 
 /**
  * Unmodifiable view of a canoe coach book

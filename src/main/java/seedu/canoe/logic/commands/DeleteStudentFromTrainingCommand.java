@@ -19,15 +19,15 @@ import seedu.canoe.commons.util.StringUtil;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.AcademicYear;
-import seedu.canoe.model.student.Attend;
+import seedu.canoe.model.student.Attendance;
 import seedu.canoe.model.student.Email;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Name;
 import seedu.canoe.model.student.Phone;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
 import seedu.canoe.model.student.time.Day;
 import seedu.canoe.model.tag.Tag;
+import seedu.canoe.model.training.Training;
 
 /**
  * Deletes an existing student from a training.
@@ -117,7 +117,7 @@ public class DeleteStudentFromTrainingCommand extends Command {
             modifying the model.
              */
             editedTraining.removeStudent(editedStudent);
-            editedStudent.removeAttendance(new Attend(editedTraining.getDateTime()));
+            editedStudent.removeAttendance(new Attendance(editedTraining.getDateTime()));
             targetStudentList.add(studentToEdit);
             editedStudentList.add(editedStudent);
         }
@@ -184,7 +184,7 @@ public class DeleteStudentFromTrainingCommand extends Command {
         Day thursdayDismissal = studentToEdit.getThursdayDismissal();
         Day fridayDismissal = studentToEdit.getFridayDismissal();
         Set<Tag> updatedTags = studentToEdit.getTags();
-        List<Attend> trainingAttendances = studentToEdit.getTrainingAttendances().stream()
+        List<Attendance> trainingAttendances = studentToEdit.getTrainingAttendances().stream()
                 .collect(Collectors.toList());
         trainingAttendances.remove(editedTraining.getDateTime());
         Id id = studentToEdit.getId();

@@ -1,15 +1,17 @@
-package seedu.canoe.model.student;
+package seedu.canoe.model.training;
 
 import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.canoe.model.student.Attendance;
 
 /**
  * Tests that a {@code Training}'s {@code dateTime} matches any of the keywords given.
  */
 public class TrainingMatchesPredicate implements Predicate<Training> {
-    private final List<Attend> trainingAttendances;
+    private final List<Attendance> trainingAttendances;
 
-    public TrainingMatchesPredicate(List<Attend> trainingAttendances) {
+    public TrainingMatchesPredicate(List<Attendance> trainingAttendances) {
         this.trainingAttendances = trainingAttendances;
     }
 

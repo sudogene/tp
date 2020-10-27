@@ -12,7 +12,7 @@ import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.ModelManager;
 import seedu.canoe.model.UserPrefs;
-import seedu.canoe.model.student.Training;
+import seedu.canoe.model.training.Training;
 
 public class DeleteTrainingCommandTest {
 

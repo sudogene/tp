@@ -40,14 +40,14 @@ public class Student {
 
     private final Set<Tag> tags = new HashSet<>();
 
-    class TreeSetComparator implements Comparator<Attend> {
-        public int compare(Attend attend1, Attend attend2) {
-            return attend1.compareTo(attend2);
+    class TreeSetComparator implements Comparator<Attendance> {
+        public int compare(Attendance attendance1, Attendance attendance2) {
+            return attendance1.compareTo(attendance2);
         }
     }
 
     //Collection of scheduled training dates tagged to the particular student
-    private final TreeSet<Attend> trainingAttendances = new TreeSet<>(new TreeSetComparator());
+    private final TreeSet<Attendance> trainingAttendances = new TreeSet<>(new TreeSetComparator());
 
     /**
      * Constructs the {@code Student} with a given id.
@@ -77,7 +77,7 @@ public class Student {
      */
     public Student(Name name, Phone phone, Email email, AcademicYear academicYear, Set<Tag> tags, Day mondayDismissal,
                    Day tuesdayDismissal, Day wednesdayDismissal, Day thursdayDismissal,
-                   Day fridayDismissal, List<Attend> trainingAttendances, Id id) {
+                   Day fridayDismissal, List<Attendance> trainingAttendances, Id id) {
         requireAllNonNull(name, phone, email, tags, academicYear, mondayDismissal, tuesdayDismissal, wednesdayDismissal,
                 thursdayDismissal, fridayDismissal, trainingAttendances, id);
         this.name = name;
@@ -123,7 +123,7 @@ public class Student {
      * @param trainingAttendance Attendance representing the training that the student is attending.
      * Duplicates are not allowed and will not be added.
      */
-    public void addAttendance(Attend trainingAttendance) {
+    public void addAttendance(Attendance trainingAttendance) {
         trainingAttendances.add(trainingAttendance);
     }
 
@@ -134,29 +134,29 @@ public class Student {
      * @param attendingTrainings List of Trainings that the student is going to be attending.
      * Duplicates are not allowed and will not be added.
      */
-    public void addAllAttendances(List<Attend> attendingTrainings) {
+    public void addAllAttendances(List<Attendance> attendingTrainings) {
         trainingAttendances.addAll(attendingTrainings);
     }
 
     /**
      * Checks if student is to attend a training scheduled
      *
-     * @param attend Attendance corresponding to the training that the student is supposed to attend.
+     * @param attendance Attendance corresponding to the training that the student is supposed to attend.
      * Specified Attendance must exist in the student's training schedule.
      * @return true If Attendance is scheduled for the Student.
      */
-    public boolean containsAttendance(Attend attend) {
-        return trainingAttendances.contains(attend);
+    public boolean containsAttendance(Attendance attendance) {
+        return trainingAttendances.contains(attendance);
     }
 
     /**
      * Removes an Attendance from the Student
      *
-     * @param attend Attendance to remove
+     * @param attendance Attendance to remove
      */
-    public void removeAttendance(Attend attend) {
-        if (containsAttendance(attend)) {
-            trainingAttendances.remove(attend);
+    public void removeAttendance(Attendance attendance) {
+        if (containsAttendance(attendance)) {
+            trainingAttendances.remove(attendance);
         }
     }
 
@@ -219,7 +219,7 @@ public class Student {
      * Returns an immutable Attendance set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Attend> getTrainingAttendances() {
+    public Set<Attendance> getTrainingAttendances() {
         return Collections.unmodifiableSet(trainingAttendances);
     }
 
@@ -326,7 +326,7 @@ public class Student {
      */
     public boolean hasAttendanceAtDateTime(LocalDateTime dateTime) {
         //Has a training scheduled on the same date already
-        for (Attend attendance: trainingAttendances) {
+        for (Attendance attendance: trainingAttendances) {
             if (LocalDate.from(attendance.getTrainingTime()).isEqual(LocalDate.from(dateTime))) {
                 return true;
             }
@@ -375,7 +375,7 @@ public class Student {
         }
 
         boolean isAvailable = true;
-        for (Attend trainingSession: trainingAttendances) {
+        for (Attendance trainingSession: trainingAttendances) {
             if (!isAvailableAtDateTime(trainingSession.getTrainingTime())) {
                 isAvailable = false;
             }
@@ -387,12 +387,12 @@ public class Student {
     /**
      * Mark student's attendance for a training session as attended.
      *
-     * @param trainingSessionToAttend training session to mark as attended.
+     * @param trainingSessionToAttendance training session to mark as attended.
      */
-    public void attendTrainingSession(Attend trainingSessionToAttend, Attend trainingSessionAttended) {
-        assert(containsAttendance(trainingSessionToAttend));
+    public void attendTrainingSession(Attendance trainingSessionToAttendance, Attendance trainingSessionAttended) {
+        assert(containsAttendance(trainingSessionToAttendance));
 
-        trainingAttendances.remove(trainingSessionToAttend);
+        trainingAttendances.remove(trainingSessionToAttendance);
         trainingAttendances.add(trainingSessionAttended);
     }
 }

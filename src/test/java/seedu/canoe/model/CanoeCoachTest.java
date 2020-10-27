@@ -18,8 +18,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.Training;
 import seedu.canoe.model.student.exceptions.DuplicateStudentException;
+import seedu.canoe.model.training.Training;
 import seedu.canoe.testutil.StudentBuilder;
 
 public class CanoeCoachTest {

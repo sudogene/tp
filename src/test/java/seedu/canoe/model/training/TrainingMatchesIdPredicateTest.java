@@ -1,4 +1,4 @@
-package seedu.canoe.model.student;
+package seedu.canoe.model.training;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -9,6 +9,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.canoe.model.student.Id;
+import seedu.canoe.model.student.Student;
 import seedu.canoe.testutil.StudentBuilder;
 import seedu.canoe.testutil.TrainingBuilder;
 
