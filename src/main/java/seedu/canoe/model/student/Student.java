@@ -395,4 +395,25 @@ public class Student {
         trainingAttendances.remove(trainingSessionToAttendance);
         trainingAttendances.add(trainingSessionAttended);
     }
+
+    /**
+     * Checks student's attendance record and returns whether the student
+     * has a bad attendance record.
+     *
+     * @return whether student has a bad attendance record.
+     */
+    public boolean hasBadAttendanceRecord() {
+        int numOfAbsences = 0;
+        int threshold = 3;
+
+        for (Attendance attendance : trainingAttendances) {
+            if (attendance.getTrainingTime().isAfter(LocalDateTime.now())) {
+                continue;
+            }
+            if (!attendance.getAttendance()) {
+                numOfAbsences += 1;
+            }
+        }
+        return numOfAbsences > threshold;
+    }
 }
