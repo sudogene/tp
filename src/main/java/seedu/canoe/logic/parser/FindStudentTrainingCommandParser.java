@@ -1,15 +1,24 @@
 package seedu.canoe.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.canoe.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.logic.commands.FindStudentTrainingCommand;
 import seedu.canoe.logic.parser.exceptions.ParseException;
+import seedu.canoe.model.student.DateTimeMatchesPredicate;
 import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.IdMatchesPredicate;
+import seedu.canoe.model.student.Student;
+import seedu.canoe.model.training.Training;
+import seedu.canoe.model.training.TrainingMatchesDateTimePredicate;
 import seedu.canoe.model.training.TrainingMatchesIdPredicate;
 
 /**
@@ -28,7 +37,14 @@ public class FindStudentTrainingCommandParser implements Parser<FindStudentTrain
         logger.info("=============================[ Parsing FindStudentTrainingCommand ]===========================");
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ID);
+                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_DATETIME);
+
+        if (!(argMultimap.getValue(PREFIX_ID).isPresent() || argMultimap.getValue(PREFIX_DATETIME).isPresent())) {
+            logger.warning("No params specified in arguments!" + args);
+            throw new ParseException(FindStudentTrainingCommand.MESSAGE_NO_PARAM_QUERY);
+        }
+        Predicate<Student> studentPredicate = null;
+        Predicate<Training> trainingPredicate = null;
 
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             String idValue = argMultimap.getValue(PREFIX_ID).get();
@@ -42,12 +58,38 @@ public class FindStudentTrainingCommandParser implements Parser<FindStudentTrain
             }
 
             Id id = new Id(idValue);
-            IdMatchesPredicate studentIdMatchPredicate = new IdMatchesPredicate(idValue);
-            TrainingMatchesIdPredicate trainingMatchPredicate = new TrainingMatchesIdPredicate(id);
-            return new FindStudentTrainingCommand(studentIdMatchPredicate, trainingMatchPredicate);
-
+            studentPredicate = new IdMatchesPredicate(idValue);
+            trainingPredicate = new TrainingMatchesIdPredicate(id);
         }
-        logger.warning("No students specified in the command!" + args);
-        throw new ParseException(FindStudentTrainingCommand.MESSAGE_NO_STUDENT_QUERY);
+
+        if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
+            String dateTimeValue = argMultimap.getValue(PREFIX_DATETIME).get();
+            if (dateTimeValue.equals("")) {
+                logger.warning("Training datetime specified in the command argument is empty!" + args);
+                throw new ParseException(FindStudentTrainingCommand.MESSAGE_NO_DATETIME_QUERY);
+            }
+            try {
+                LocalDateTime dateTime = LocalDateTime.parse(dateTimeValue,
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                studentPredicate = new DateTimeMatchesPredicate(dateTime);
+                trainingPredicate = new TrainingMatchesDateTimePredicate(dateTime);
+            } catch (DateTimeParseException e) {
+                throw new ParseException(FindStudentTrainingCommand.MESSAGE_WRONG_DATETIME_FORMAT_QUERY);
+            }
+        }
+
+        if (argMultimap.getValue(PREFIX_ID).isPresent() && argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
+            String idValue = argMultimap.getValue(PREFIX_ID).get();
+            String dateTimeValue = argMultimap.getValue(PREFIX_DATETIME).get();
+            try {
+                LocalDateTime dateTime = LocalDateTime.parse(dateTimeValue,
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                studentPredicate = new IdMatchesPredicate(idValue);
+                trainingPredicate = new TrainingMatchesDateTimePredicate(dateTime);
+            } catch (DateTimeParseException e) {
+                throw new ParseException(FindStudentTrainingCommand.MESSAGE_WRONG_DATETIME_FORMAT_QUERY);
+            }
+        }
+        return new FindStudentTrainingCommand(studentPredicate, trainingPredicate);
     }
 }
