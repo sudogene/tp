@@ -6,12 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.canoe.logic.commands.CommandTestUtil.INVALID_ID_ARRAY;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_ARRAY;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_ARRAY_2;
-import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_ARRAY_3;
-import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_STRINGS_2;
-import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_STRINGS_3;
+import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_ARRAY_5;
+import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_ARRAY_6;
+import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_STRINGS_5;
+import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_STRINGS_6;
 import static seedu.canoe.testutil.Assert.assertThrows;
 import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_ONE_DAY;
+import static seedu.canoe.testutil.LocalDateTimeUtil.VALID_LOCAL_DATE_TIME_2;
 import static seedu.canoe.testutil.LocalDateTimeUtil.VALID_LOCAL_DATE_TIME_3;
+import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIFTH_TRAINING;
 import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIRST_TRAINING;
 import static seedu.canoe.testutil.TypicalIndexes.INDEX_FOURTH_TRAINING;
 import static seedu.canoe.testutil.TypicalIndexes.INDEX_SECOND_TRAINING;
@@ -67,49 +70,48 @@ public class AddStudentToTrainingCommandTest {
     @Test
     public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
         AddStudentToTrainingCommand addStudentToTrainingCommand =
-                new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY_2);
+                new AddStudentToTrainingCommand(INDEX_FOURTH_TRAINING, VALID_ID_ARRAY_5);
         CommandResult commandResult = addStudentToTrainingCommand.execute(getModel());
-        assertEquals(String.format(AddStudentToTrainingCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS_2),
+        assertEquals(String.format(AddStudentToTrainingCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS_5)
+                        + " to Training Session 4",
                 commandResult.getFeedbackToUser());
-        //QINDA should have dateTime added to his field
-        assertTrue(getModel().getFilteredStudentList().get(1)
-                .containsAttendance(new Attend(DATE_TIME_NOW_PLUS_ONE_DAY)));
-        //Two students JONAS and QINDA now inside of the training container
-        assertTrue(getModel().getFilteredTrainingList().get(0).getStudents().size() == 2);
-        //Training class should contain QINDA too
-        assertTrue(getModel().getFilteredTrainingList().get(0).getStudents().contains(getModel()
-                .getFilteredStudentList().get(1)));
+        //JOCK should have dateTime added to his field
+        assertTrue(getModel().getFilteredStudentList().get(3)
+                .containsAttendance(new Attend(VALID_LOCAL_DATE_TIME_2)));
+        //One student JONAS now inside of the training container
+        assertTrue(getModel().getFilteredTrainingList().get(3).getStudents().size() == 1);
         //Training class should still contain JONAS too
-        assertTrue(getModel().getFilteredTrainingList().get(0).getStudents().contains(getModel()
-                .getFilteredStudentList().get(0)));
+        assertTrue(getModel().getFilteredTrainingList().get(3).getStudents().contains(getModel()
+                .getFilteredStudentList().get(3)));
     }
 
     @Test
     public void execute_multipleStudentAcceptedByModel_addSuccessful() throws Exception {
         AddStudentToTrainingCommand addStudentToTrainingCommand =
-                new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY_3);
+                new AddStudentToTrainingCommand(INDEX_FOURTH_TRAINING, VALID_ID_ARRAY_6);
         CommandResult commandResult = addStudentToTrainingCommand.execute(getModel());
-        assertEquals(String.format(AddStudentToTrainingCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS_3),
+        assertEquals(String.format(AddStudentToTrainingCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS_6
+                        + " to Training Session 4"),
                 commandResult.getFeedbackToUser());
         //Student 1 should already have dateTime in his field
         assertTrue(getModel().getFilteredStudentList().get(0)
-                .containsAttendance(new Attend(DATE_TIME_NOW_PLUS_ONE_DAY)));
+                .containsAttendance(new Attend(VALID_LOCAL_DATE_TIME_2)));
         //Student 2 should have dateTime added to his field
         assertTrue(getModel().getFilteredStudentList().get(1)
-                .containsAttendance(new Attend(DATE_TIME_NOW_PLUS_ONE_DAY)));
+                .containsAttendance(new Attend(VALID_LOCAL_DATE_TIME_2)));
         //Student 3 should have dateTime added to his field
         assertTrue(getModel().getFilteredStudentList().get(2)
-                .containsAttendance(new Attend(DATE_TIME_NOW_PLUS_ONE_DAY)));
+                .containsAttendance(new Attend(VALID_LOCAL_DATE_TIME_2)));
         //Three students inside of the training container
-        assertTrue(getModel().getFilteredTrainingList().get(0).getStudents().size() == 3);
+        assertTrue(getModel().getFilteredTrainingList().get(3).getStudents().size() == 3);
         //Training class should contain student1 too
-        assertTrue(getModel().getFilteredTrainingList().get(0).getStudents().contains(getModel()
+        assertTrue(getModel().getFilteredTrainingList().get(3).getStudents().contains(getModel()
                 .getFilteredStudentList().get(0)));
         //Training class should contain student2 too
-        assertTrue(getModel().getFilteredTrainingList().get(0).getStudents().contains(getModel()
+        assertTrue(getModel().getFilteredTrainingList().get(3).getStudents().contains(getModel()
                 .getFilteredStudentList().get(1)));
         //Training class should contain student3 too
-        assertTrue(getModel().getFilteredTrainingList().get(0).getStudents().contains(getModel()
+        assertTrue(getModel().getFilteredTrainingList().get(3).getStudents().contains(getModel()
                 .getFilteredStudentList().get(2)));
     }
 
@@ -117,7 +119,7 @@ public class AddStudentToTrainingCommandTest {
     public void execute_studentInvalidIndex_throwsCommandException() throws Exception {
         AddStudentToTrainingCommand addStudentToTrainingCommand =
                 new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, INVALID_ID_ARRAY);
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, () ->
+        assertThrows(CommandException.class, AddStudentToTrainingCommand.MESSAGE_STUDENT_DOES_NOT_EXIST, () ->
                 addStudentToTrainingCommand.execute(getModel()));
         //Student JONAS should still have dateTime in his field
         assertTrue(getModel().getFilteredStudentList().get(0)
@@ -132,7 +134,7 @@ public class AddStudentToTrainingCommandTest {
     @Test
     public void execute_trainingInvalidIndex_throwsCommandException() throws Exception {
         AddStudentToTrainingCommand addStudentToTrainingCommand =
-                new AddStudentToTrainingCommand(INDEX_FOURTH_TRAINING, VALID_ID_ARRAY);
+                new AddStudentToTrainingCommand(INDEX_FIFTH_TRAINING, VALID_ID_ARRAY);
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX, () ->
                 addStudentToTrainingCommand.execute(getModel()));
     }

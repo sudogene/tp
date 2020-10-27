@@ -46,6 +46,8 @@ public class DeleteStudentFromTrainingCommand extends Command {
     public static final String MESSAGE_INVALID_STUDENT = "One of the"
             + " Students provided is not inside of the training specified!";
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
+    public static final String MESSAGE_STUDENT_DOES_NOT_EXIST = "One of the Ids "
+            + "specified do not correspond to an existing Student!";
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be deleted must be specified.";
 
     private final Index index;
@@ -95,22 +97,15 @@ public class DeleteStudentFromTrainingCommand extends Command {
         List<Student> targetStudentList = new ArrayList<>();
         List<Student> editedStudentList = new ArrayList<>();
         for (String str : studentsToDelete) {
-            if (str.length() != 1) {
-                throw new CommandException(String
-                        .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE));
-            }
 
+            // Throws a CommandException if the Student ID is zero or negative.
             if (!StringUtil.isNonZeroUnsignedInteger(str)) {
-                LOGGER.warning("Training index is incorrect.");
+                LOGGER.warning("Student index is incorrect.");
                 throw new CommandException(String
                         .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE));
             }
 
-            if (Integer.parseInt(str) > studentList.size() || Integer.parseInt(str) <= 0) {
-                throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-            }
-
-            Student studentToEdit = studentList.get(Integer.parseInt(str) - 1);
+            Student studentToEdit = getStudentWithID(model, str);
             Student editedStudent = createEditedStudent(studentToEdit, editedTraining);
 
             if (!containStudentChecker(editedTraining, studentToEdit)) {
@@ -122,6 +117,7 @@ public class DeleteStudentFromTrainingCommand extends Command {
             modifying the model.
              */
             editedTraining.removeStudent(editedStudent);
+            editedStudent.removeAttendance(new Attend(editedTraining.getDateTime()));
             targetStudentList.add(studentToEdit);
             editedStudentList.add(editedStudent);
         }
@@ -136,7 +132,8 @@ public class DeleteStudentFromTrainingCommand extends Command {
 
         String result = getStudentsDeleted();
 
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, result));
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, result)
+                + " from Training Session " + index.getOneBased());
     }
 
     /**
@@ -155,6 +152,23 @@ public class DeleteStudentFromTrainingCommand extends Command {
             }
         }
         return containsStudent;
+    }
+
+    /**
+     * Returns the Student object in the model with the Id same as the specified Unique Id.
+     * @param model
+     * @param id
+     * @return
+     */
+    public Student getStudentWithID(Model model, String id) throws CommandException {
+        id.trim();
+        Id idChecker = new Id(id);
+        for (Student student : model.getFilteredStudentList()) {
+            if (student.getId().equals(idChecker)) {
+                return student;
+            }
+        }
+        throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);
     }
 
     private static Student createEditedStudent(Student studentToEdit, Training editedTraining) {
