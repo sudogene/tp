@@ -71,9 +71,9 @@ public class StudentCard extends UiPart<Region> {
     public StudentCard(Student student, int displayedIndex) {
         super(FXML);
         this.student = student;
-        Background markedAttendance = new Background(new BackgroundFill(Color.RED,
+        Background unmarkedAttendance = new Background(new BackgroundFill(Color.RED,
                 null, null));
-        Background unmarkedAttendance = new Background(new BackgroundFill(Color.GREEN,
+        Background markedAttendance = new Background(new BackgroundFill(Color.GREEN,
                 null, null));
         id.setText(displayedIndex + ". ");
         studentId.setText("ID: " + student.getId());
@@ -109,8 +109,8 @@ public class StudentCard extends UiPart<Region> {
                         .isBefore(LocalDateTime.now())).collect(Collectors.toList())) {
             Label pastAttendanceLabel = new Label(attendance.toString());
             pastAttendanceLabel.backgroundProperty().bind(
-                    new When(isMarked(attendance.getAttendance())).then(unmarkedAttendance)
-                            .otherwise(markedAttendance));
+                    new When(isMarked(attendance.getAttendance())).then(markedAttendance)
+                            .otherwise(unmarkedAttendance));
             pastTrainingAttendances.getChildren().add(pastAttendanceLabel);
         }
         upcomingTrainingTag.setText("Upcoming Trainings Scheduled : ");
@@ -120,8 +120,8 @@ public class StudentCard extends UiPart<Region> {
                         .isAfter(LocalDateTime.now())).collect(Collectors.toList())) {
             Label upcomingAttendanceLabel = new Label(attendance.toString());
             upcomingAttendanceLabel.backgroundProperty().bind(
-                    new When(isMarked(attendance.getAttendance())).then(unmarkedAttendance)
-                            .otherwise(markedAttendance));
+                    new When(isMarked(attendance.getAttendance())).then(markedAttendance)
+                            .otherwise(unmarkedAttendance));
             upcomingTrainingAttendances.getChildren().add(upcomingAttendanceLabel);
         }
     }
