@@ -35,8 +35,10 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="academicYear" styleClass="cell_small_label" text="\$academicYear" />
       <Separator fx:id="trainingSeparator" />
-      <Label fx:id="trainingTag" styleClass="cell_small_label" text="\$trainingTag" />
-      <FlowPane fx:id="trainingAttendances" />
+      <Label fx:id="pastTrainingTag" styleClass="cell_small_label" text="\$pastTrainingTag" />
+      <FlowPane fx:id="pastTrainingAttendances" />
+      <Label fx:id="upcomingTrainingTag" styleClass="cell_small_label" text="\$upcomingTrainingTag" />
+      <FlowPane fx:id="upcomingTrainingAttendances" />
       <Separator fx:id="dismissalTimeSeparator" />
       <Label fx:id="dismissalTime" styleClass="cell_small_label" text="\$dismissalTime" />
       <FlowPane fx:id="dismissalTimes" />
