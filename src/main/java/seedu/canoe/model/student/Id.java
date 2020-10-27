@@ -1,11 +1,11 @@
 package seedu.canoe.model.student;
 
-import seedu.canoe.commons.util.StringUtil;
-
 import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import seedu.canoe.commons.util.StringUtil;
 
 /**
  * Represents a Student's id in the canoe coach book.

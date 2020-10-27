@@ -10,25 +10,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
-import seedu.canoe.commons.util.StringUtil;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
-import seedu.canoe.model.student.AcademicYear;
 import seedu.canoe.model.student.Attendance;
-import seedu.canoe.model.student.Email;
 import seedu.canoe.model.student.Id;
-import seedu.canoe.model.student.Name;
-import seedu.canoe.model.student.Phone;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.time.Day;
-import seedu.canoe.model.tag.Tag;
 import seedu.canoe.model.training.Training;
 
 /**
