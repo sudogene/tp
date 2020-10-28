@@ -422,7 +422,7 @@ public class Student {
             if (attendance.getTrainingTime().isAfter(LocalDateTime.now())) {
                 continue;
             }
-            if (!attendance.getAttendance()) {
+            if (!attendance.isMarked()) {
                 numOfAbsences += 1;
             }
         }
