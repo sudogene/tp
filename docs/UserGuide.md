@@ -86,7 +86,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL ay/ACADEMIC_YEAR [d1/HHmm d2/HHmm d3/
 * The default dismissal time is 1500. If the user inputs `d1/1700 d5/1200`, then the record will be equivalent to `d1/1700 d2/1500 d3/1500 d4/1500 d5/1200`
 
 > Be careful of adding duplicates:
-> * Student names can be the same, but they should not share the same contact number **AND** email address
+> * Student names can be the same, but they should not share the same contact number **AND** email address **AND** academic year
 
 Examples:
 - `add n/Benjamin p/12345678 e/littleicemaiden@rocket.com ay/3 d1/1330 d2/1730 d3/1600 d4/1200 d5/1100`
@@ -127,7 +127,7 @@ Examples:
 ### Find : `find`
 Find students based on specified fields.
 
-Format: `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [id/ID]`
+Format: `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [id/STUDENT_ID]`
 
 - At least one field needs to be filled
 - Name
@@ -202,14 +202,14 @@ Examples:
 - `training 2020-10-10 1800`
 
 ### Delete Training : `delete-training`
-Deletes an existing training based on the training index.
+Deletes an existing training from the training list.
 
 Format: `delete-training TRAINING_INDEX`
 
+* Deletes the training at the specified `TRAINING_INDEX`.
 * Training index refers to the index of the training in the displayed training list.
-* All students inside of the training to be deleted will be cleared.
-* Only one training index can be specified at a time.
-
+* The index must be an unsigned integer 1, 2, 3, …
+* All students inside of the training to be deleted will have the training removed from their training schedules.
 
 Examples:
 - `delete-training 2` removes the training with index 2 in the displayed training list.
@@ -217,10 +217,9 @@ Examples:
 ### Add Student to Training : `ts-add`
 Adds students to a training.
 
-Format: `ts-add TRAINING_INDEX id/STUDENT_INDEX...`
+Format: `ts-add TRAINING_INDEX id/STUDENT_ID...`
 
 * Training index refers to the index of the training in the displayed training list.
-* Student index refers to the index of the student in the entire student list (can be viewed with `list` command).
 * Multiple students can be added with the same command by inputing multiple student indexes separated with a comma.
 * Only one training index can be specified at a time.
 * Each student can only be added to a **SINGLE** training on the same date regardless of time.
@@ -254,11 +253,10 @@ Examples:
 ### Delete Student from Training : `ts-delete`
 Deletes students from a training.
 
-Format: `ts-delete TRAINING_INDEX id/STUDENT_INDEX...`
+Format: `ts-delete TRAINING_INDEX id/STUDENT_ID...`
 
 * Training index refers to the index of the training in the displayed training list.
-* Student index refers to the index of the student in the entire student list (can be viewed with `list` command).
-* Multiple students can be deleted with the same command by inputing multiple student indexes separated with a comma.
+* Multiple students can be deleted with the same command by listing multiple student Ids separated with a comma.
 * Only one training index can be specified at a time.
 
 > Note: Training schedules can also be viewed on the student list panel and it will update as you delete students from
@@ -270,9 +268,8 @@ Examples:
 ### Find all of a student's training : `find-training`
 Finds all of a student's trainings.
 
-Format: `find-training id/STUDENT_INDEX`
+Format: `find-training id/STUDENT_ID`
 
-* Student index refers to the unique index of the student in the entire student list (can be viewed with `list` command).
 * Only ONE student id can be specified in the same command
 * Both the student and training panels will be filtered should the command be successfully executed
 
@@ -284,11 +281,10 @@ Examples:
 ### Mark student as having attended a training : `mark-attendance`
 Marks student or students as attended for a specified training.
 
-Format: `mark-attendance TRAINING_INDEX id/STUDENT_INDEX...`
+Format: `mark-attendance TRAINING_INDEX id/STUDENT_ID...`
 
 * Training index refers to the index of the training in the displayed training list.
 * Only ONE training index can be specified in the same command. 
-* Student index refers to the unique index of the student in the entire student list (can be viewed with `list` command).
 * Multiple student ids can be specified in the same command.
 * Student card will reflect student as having attended the specified training should the command be successfully executed.
 
@@ -330,10 +326,10 @@ Action | Format, Examples
 **commonTime** | `commonTime [n/KEYWORDS] [ay/ACADEMIC_YEAR]`<br> e.g., `commonTime n/alex ay/1`
 **training** | `training yyyy-MM-dd HHmm`<br> e.g., `training 2021-01-20 1800`
 **delete-training** | `delete-training TRAINING_INDEX`<br> e.g., `delete-training 1`
-**ts-add** | `ts-add TRAINING_INDEX id/STUDENT_INDEX...`<br> e.g., `ts-add 1 id/1,2,3`
+**ts-add** | `ts-add TRAINING_INDEX id/STUDENT_ID...`<br> e.g., `ts-add 1 id/1,2,3`
 **ts-addall** | `ts-addall TRAINING_INDEX`<br> e.g., `ts-addall 1`
-**ts-delete** | `ts-delete TRAINING_INDEX id/STUDENT_INDEX...`<br> e.g., `ts-delete 1 id/1,2,3`
-**find-training** | `find-training id/STUDENT_INDEX...`<br> e.g., `find-training id/1`
-**mark-attendance** | `mark-attendance TRAINING_INDEX id/STUDENT_INDEX...`<br> e.g., `mark-attendance 2 id/1,4,7`
+**ts-delete** | `ts-delete TRAINING_INDEX id/STUDENT_ID...`<br> e.g., `ts-delete 1 id/1,2,3`
+**find-training** | `find-training id/STUDENT_ID...`<br> e.g., `find-training id/1`
+**mark-attendance** | `mark-attendance TRAINING_INDEX id/STUDENT_ID...`<br> e.g., `mark-attendance 2 id/1,4,7`
 **List** | `list`
 **Help** | `help`
