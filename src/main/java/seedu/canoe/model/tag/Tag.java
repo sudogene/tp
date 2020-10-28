@@ -9,8 +9,8 @@ import static seedu.canoe.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Valid tag names can be alphanumeric with spaces and hyphens";
+    public static final String VALIDATION_REGEX = "^[A-Za-z0-9- ]+$";
 
     public final String tagName;
 
