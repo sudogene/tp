@@ -135,7 +135,15 @@ public class Training {
         this.students.clear();
     }
 
+    /**
+     * Returns true is they are the same training
+     * @param training Other training that we are comparing with
+     * @return true if they are the same training.
+     */
     public boolean isSameTraining(Training training) {
+        if (training == null) {
+            return false;
+        }
         return dateTime.equals(training.getDateTime());
     }
 
@@ -146,6 +154,10 @@ public class Training {
         }
 
         if (!(other instanceof Training)) {
+            return false;
+        }
+
+        if (other == null) {
             return false;
         }
 
