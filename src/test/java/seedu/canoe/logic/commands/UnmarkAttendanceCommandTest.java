@@ -23,7 +23,7 @@ import seedu.canoe.model.training.Training;
 import seedu.canoe.testutil.TypicalStudents;
 import seedu.canoe.testutil.TypicalTraining;
 
-class MarkAttendanceCommandTest {
+class UnmarkAttendanceCommandTest {
     private Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
 
@@ -33,7 +33,7 @@ class MarkAttendanceCommandTest {
         Index trainingIndex = INDEX_FIRST_TRAINING;
         IdMatchesPredicate firstIdPredicate = new IdMatchesPredicate("1");
         IdMatchesPredicate secondIdPredicate = new IdMatchesPredicate("6");
-        MarkAttendanceCommand command = new MarkAttendanceCommand(
+        UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(
                 trainingIndex, AnyMatchPredicateList.of(firstIdPredicate, secondIdPredicate));
         assertCommandFailure(command, model, expectedMessage);
     }
@@ -48,7 +48,7 @@ class MarkAttendanceCommandTest {
         Index trainingIndex = INDEX_SECOND_TRAINING;
         IdMatchesPredicate firstIdPredicate = new IdMatchesPredicate("45");
         IdMatchesPredicate secondIdPredicate = new IdMatchesPredicate("67");
-        MarkAttendanceCommand command = new MarkAttendanceCommand(
+        UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(
                 trainingIndex, AnyMatchPredicateList.of(firstIdPredicate, secondIdPredicate));
         assertCommandFailure(command, model, expectedMessage);
     }
@@ -74,14 +74,14 @@ class MarkAttendanceCommandTest {
         expectedModel.updateFilteredStudentList(predicateList);
 
         Index trainingIndex = INDEX_THIRD_TRAINING;
-        MarkAttendanceCommand command = new MarkAttendanceCommand(
+        UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(
                 trainingIndex, AnyMatchPredicateList.of(firstIdPredicate, secondIdPredicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
     void execute_validParams_commandSuccess() {
-        String expectedMessage = "Marked these students for their attendance: 002 005!";
+        String expectedMessage = "Unmarked these students for their attendance: 002 005!";
         IdMatchesPredicate firstIdPredicate = new IdMatchesPredicate("2");
         IdMatchesPredicate secondIdPredicate = new IdMatchesPredicate("5");
 
@@ -102,6 +102,7 @@ class MarkAttendanceCommandTest {
         Student firstStudent = TypicalStudents.BENSON;
         Student secondStudent = TypicalStudents.ELLE;
         Attendance attendance = new Attendance(firstTraining.getDateTime());
+        attendance.marks();
         firstStudent.addAttendance(attendance);
         secondStudent.addAttendance(attendance);
         expectedModel.setStudentInUniqueStudentList(studentList.get(0), firstStudent);
@@ -109,7 +110,7 @@ class MarkAttendanceCommandTest {
         expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
         Index trainingIndex = INDEX_FIRST_TRAINING;
-        MarkAttendanceCommand command = new MarkAttendanceCommand(
+        UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(
                 trainingIndex, AnyMatchPredicateList.of(firstIdPredicate, secondIdPredicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 

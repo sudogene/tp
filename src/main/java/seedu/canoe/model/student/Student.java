@@ -375,8 +375,8 @@ public class Student {
         }
 
         boolean isAvailable = true;
-        for (Attendance trainingSession: trainingAttendances) {
-            if (!isAvailableAtDateTime(trainingSession.getTrainingTime())) {
+        for (Attendance attendance: trainingAttendances) {
+            if (!isAvailableAtDateTime(attendance.getTrainingTime())) {
                 isAvailable = false;
             }
         }
@@ -385,14 +385,26 @@ public class Student {
     }
 
     /**
-     * Mark student's attendance for a training session as attended.
+     * Mark a student's attendance.
      *
-     * @param trainingSessionToAttendance training session to mark as attended.
+     * @param originalAttendance Attendance to be marked.
      */
-    public void attendTrainingSession(Attendance trainingSessionToAttendance, Attendance trainingSessionAttended) {
-        assert(containsAttendance(trainingSessionToAttendance));
+    public void markAttendance(Attendance originalAttendance, Attendance markedAttendance) {
+        assert(containsAttendance(originalAttendance));
 
-        trainingAttendances.remove(trainingSessionToAttendance);
-        trainingAttendances.add(trainingSessionAttended);
+        trainingAttendances.remove(originalAttendance);
+        trainingAttendances.add(markedAttendance);
+    }
+
+    /**
+     * Unmark a student's attendance.
+     *
+     * @param originalAttendance Attendance to be unmarked.
+     */
+    public void unmarkAttendance(Attendance originalAttendance, Attendance unmarkedAttendance) {
+        assert(containsAttendance(originalAttendance));
+
+        trainingAttendances.remove(originalAttendance);
+        trainingAttendances.add(unmarkedAttendance);
     }
 }
