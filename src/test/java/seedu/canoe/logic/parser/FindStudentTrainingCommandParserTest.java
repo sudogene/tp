@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.canoe.logic.commands.FindStudentTrainingCommand;
 import seedu.canoe.model.student.DateTimeMatchesPredicate;
-import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.IdMatchesPredicate;
 import seedu.canoe.model.training.TrainingMatchesDateTimePredicate;
 import seedu.canoe.model.training.TrainingMatchesIdPredicate;
@@ -21,7 +20,7 @@ public class FindStudentTrainingCommandParserTest {
 
     @Test
     public void parse_validIdWithoutDateTime_returnsFindStudentTrainingCommand() {
-        Id firstIdValue = new Id("1");
+        String firstIdValue = "1";
         IdMatchesPredicate firstStudentPredicate = new IdMatchesPredicate("1");
         TrainingMatchesIdPredicate firstTrainingPredicate = new TrainingMatchesIdPredicate(firstIdValue);
 
@@ -38,7 +37,6 @@ public class FindStudentTrainingCommandParserTest {
 
     @Test
     public void parse_validIdWithDateTime_returnsFindStudentTrainingCommand() {
-        Id firstIdValue = new Id("1");
         LocalDateTime dateTime = LocalDateTime.parse("2021-08-26 1800",
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         IdMatchesPredicate firstStudentPredicate = new IdMatchesPredicate("1");

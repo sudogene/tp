@@ -136,9 +136,10 @@ public class DeleteStudentFromTrainingCommand extends Command {
      * Returns the student in the model with the specified unique Id. May not exist.
      */
     public Optional<Student> getStudentWithId(Model model, String id) {
-        Id idCheck = new Id(id.trim());
+        id = id.trim();
+        String finalId = id;
         return model.getFilteredStudentList().stream()
-                .filter(student -> student.getId().equals(idCheck))
+                .filter(student -> student.getId().getValue().equals(finalId))
                 .findFirst();
     }
 

@@ -14,7 +14,7 @@ public class IdMatchesPredicate implements Predicate<Student> {
 
     @Override
     public boolean test(Student student) {
-        return student.getId().value.equals(idValue);
+        return student.getId().getValue().equals(idValue);
     }
 
     @Override
