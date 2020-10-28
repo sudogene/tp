@@ -230,7 +230,7 @@ Format: `ts-add TRAINING_INDEX id/STUDENT_ID...`
 > Note: Training schedules can also be viewed on the student list panel and they will update as you add students to trainings.
 
 Examples:
-- `ts-add 2 id/1,2,3` adds students with indexes 1,2,3 to training 1.
+- `ts-add 2 id/1,2,3` adds students with id values 1,2,3 to training 1.
 
 ### Add All Student to Training : `ts-addall`
 Adds all students to a training.
