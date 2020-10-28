@@ -263,7 +263,7 @@ Format: `ts-delete TRAINING_INDEX id/STUDENT_ID...`
 > trainings.
 
 Examples:
-- `ts-delete 2 id/1,2,3` deletes students with indexes 1,2,3 from training 1.
+- `ts-delete 2 id/1,2,3` deletes students with id values 1,2,3 from training 1.
 
 ### Find all of a student's training : `find-training`
 Finds all of a student's trainings.
@@ -276,7 +276,7 @@ Format: `find-training id/STUDENT_ID`
 > Note: Only the most recent upcoming 3 Training dates are displayed on the student panel. Hence, this function is handy for displaying the full training history (past and present)
 
 Examples:
-- `find-training id/1` filters the student and training panel to show only the student with index 1 and all of his past and present trainings on the training panel.
+- `find-training id/1` filters the student and training panel to show only the student with id value 1 and all of his past and present trainings on the training panel.
 
 ### Mark student as having attended a training : `mark-attendance`
 Marks student or students as attended for a specified training.
@@ -291,7 +291,7 @@ Format: `mark-attendance TRAINING_INDEX id/STUDENT_ID...`
 > Note: This command will not filter the student list nor the training list in both panels.
 
 Examples:
-- `mark-attendance 2 id/1,4,7` marks students with unique ids of 1, 4 and 7 as having attended training session 2.
+- `mark-attendance 2 id/1,4,7` marks students with id values of 1, 4 and 7 as having attended training session 2.
 
 ### Clearing all entries: `clear`
 Clears the student and training list of all existing students and trainings.
