@@ -3,6 +3,7 @@ package seedu.canoe.model.student;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
 /**
  * Represents an attendance for a training session.
  */
