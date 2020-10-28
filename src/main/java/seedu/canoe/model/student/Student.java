@@ -12,11 +12,13 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
 import seedu.canoe.model.student.time.Day;
 import seedu.canoe.model.tag.Tag;
+import seedu.canoe.model.training.Training;
 
 /**
  * Represents a Student in the canoe coach book.
@@ -382,6 +384,25 @@ public class Student {
         }
 
         return isAvailable;
+    }
+
+    /**
+     * Mark a student's attendance based on training dateTime
+     *
+     * @param training Training to be marked attendance.
+     */
+    public void markAttendanceFromTraining(Training training) {
+        Attendance markedAttendance = new Attendance(training.getDateTime());
+        markedAttendance.marks();
+        Optional<Attendance> attendanceToRemove =
+                trainingAttendances.stream()
+                        .filter(attendance -> attendance.getTrainingTime()
+                                .isEqual(training.getDateTime())).findFirst();
+
+        assert(attendanceToRemove.get() != null);
+
+        trainingAttendances.remove(attendanceToRemove.get());
+        trainingAttendances.add(markedAttendance);
     }
 
     /**

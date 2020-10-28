@@ -1,5 +1,7 @@
 package seedu.canoe.model.util;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -20,11 +22,40 @@ import seedu.canoe.model.student.time.Thursday;
 import seedu.canoe.model.student.time.Tuesday;
 import seedu.canoe.model.student.time.Wednesday;
 import seedu.canoe.model.tag.Tag;
+import seedu.canoe.model.training.Training;
 
 /**
  * Contains utility methods for populating {@code CanoeCoach} with sample data.
  */
 public class SampleDataUtil {
+
+    public static Training[] getPastSampleTraining() {
+        LocalDateTime pastDateTime = LocalDateTime.parse("2020-08-26 1500",
+                DateTimeFormatter.ofPattern("yyyy-MM-dd " + "HHmm"));
+        LocalDateTime secondPastDateTime = LocalDateTime.parse("2020-09-15 1400",
+                DateTimeFormatter.ofPattern("yyyy-MM-dd " + "HHmm"));
+        Training firstTraining = new Training(pastDateTime);
+        Training secondTraining = new Training(secondPastDateTime);
+
+
+        return new Training[] {
+            firstTraining, secondTraining
+        };
+    }
+
+    public static Training[] getFutureSampleTraining() {
+        LocalDateTime nearFutureDateTime = LocalDateTime.parse("2021-01-26 1400",
+                DateTimeFormatter.ofPattern("yyyy-MM-dd " + "HHmm"));
+        LocalDateTime secondNearFutureDateTime = LocalDateTime.parse("2021-02-12 1500",
+                DateTimeFormatter.ofPattern("yyyy-MM-dd " + "HHmm"));
+
+        Training firstTraining = new Training(nearFutureDateTime);
+        Training secondTraining = new Training(secondNearFutureDateTime);
+
+        return new Training[] {
+            firstTraining, secondTraining
+        };
+    }
     public static Student[] getSampleStudents() {
         Student alex = new Student(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new AcademicYear("2"), getTagSet("fast swimmer"), new Monday("1500"),
@@ -62,6 +93,22 @@ public class SampleDataUtil {
         for (Student sampleStudent : getSampleStudents()) {
             sampleAb.addStudent(sampleStudent);
         }
+
+        for (Training sampleTraining : getPastSampleTraining()) {
+            sampleAb.addTraining(sampleTraining);
+            for (Student sampleStudent : sampleAb.getStudentList()) {
+                sampleTraining.addStudent(sampleStudent);
+                sampleStudent.markAttendanceFromTraining(sampleTraining);
+            }
+        }
+
+        for (Training sampleTraining : getFutureSampleTraining()) {
+            sampleAb.addTraining(sampleTraining);
+            for (Student sampleStudent : sampleAb.getStudentList()) {
+                sampleTraining.addStudent(sampleStudent);
+            }
+        }
+
         return sampleAb;
     }
 
