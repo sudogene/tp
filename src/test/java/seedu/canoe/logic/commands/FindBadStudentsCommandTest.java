@@ -7,10 +7,10 @@ import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_MINUS_THREE_D
 import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_MINUS_TWO_DAYS;
 import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_ONE_DAY;
 import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_TWO_DAYS;
-import static seedu.canoe.testutil.TypicalStudentsInTypicalTrainings.JONAS;
-import static seedu.canoe.testutil.TypicalStudentsInTypicalTrainings.QINDA;
-import static seedu.canoe.testutil.TypicalStudentsInTypicalTrainings.YANKEE;
-import static seedu.canoe.testutil.TypicalStudentsInTypicalTrainings.getTypicalAddressBook;
+import static seedu.canoe.testutil.TypicalStudents.ALICE;
+import static seedu.canoe.testutil.TypicalStudents.CARL;
+import static seedu.canoe.testutil.TypicalStudents.FIONA;
+import static seedu.canoe.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.util.Arrays;
 
@@ -31,17 +31,17 @@ class FindBadStudentsCommandTest {
         Attendance futureTraining1 = new Attendance(DATE_TIME_NOW_PLUS_ONE_DAY);
         Attendance futureTraining2 = new Attendance(DATE_TIME_NOW_PLUS_TWO_DAYS);
 
-        JONAS.addAllAttendances(Arrays.asList(futureTraining1, futureTraining2));
-        QINDA.addAllAttendances(Arrays.asList(futureTraining1, futureTraining2));
-        YANKEE.addAllAttendances(Arrays.asList(futureTraining1, futureTraining2));
+        ALICE.addAllAttendances(Arrays.asList(futureTraining1, futureTraining2));
+        CARL.addAllAttendances(Arrays.asList(futureTraining1, futureTraining2));
+        FIONA.addAllAttendances(Arrays.asList(futureTraining1, futureTraining2));
 
         String expectedMessage = "No students with a bad attendance record were found!";
         FindBadStudentsCommand command = new FindBadStudentsCommand();
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        JONAS.removeAllAttendances();
-        QINDA.removeAllAttendances();
-        YANKEE.removeAllAttendances();
+        ALICE.removeAllAttendances();
+        CARL.removeAllAttendances();
+        FIONA.removeAllAttendances();
     }
 
     @Test
@@ -50,17 +50,17 @@ class FindBadStudentsCommandTest {
         Attendance pastTraining2 = new Attendance(DATE_TIME_NOW_MINUS_TWO_DAYS);
         pastTraining1.attendsTraining();
         pastTraining2.attendsTraining();
-        JONAS.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2));
-        QINDA.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2));
-        YANKEE.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2));
+        ALICE.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2));
+        CARL.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2));
+        FIONA.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2));
 
         String expectedMessage = "No students with a bad attendance record were found!";
         FindBadStudentsCommand command = new FindBadStudentsCommand();
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        JONAS.removeAllAttendances();
-        QINDA.removeAllAttendances();
-        YANKEE.removeAllAttendances();
+        ALICE.removeAllAttendances();
+        CARL.removeAllAttendances();
+        FIONA.removeAllAttendances();
     }
 
     @Test
@@ -68,17 +68,17 @@ class FindBadStudentsCommandTest {
         Attendance pastTraining1 = new Attendance(DATE_TIME_NOW_MINUS_ONE_DAY);
         Attendance pastTraining2 = new Attendance(DATE_TIME_NOW_MINUS_TWO_DAYS);
         Attendance pastTraining3 = new Attendance(DATE_TIME_NOW_MINUS_THREE_DAYS);
-        JONAS.addAllAttendances(Arrays.asList(pastTraining1));
-        QINDA.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2, pastTraining3));
-        YANKEE.addAllAttendances(Arrays.asList(pastTraining2, pastTraining3));
+        ALICE.addAllAttendances(Arrays.asList(pastTraining1));
+        CARL.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2, pastTraining3));
+        FIONA.addAllAttendances(Arrays.asList(pastTraining2, pastTraining3));
 
         String expectedMessage = "No students with a bad attendance record were found!";
         FindBadStudentsCommand command = new FindBadStudentsCommand();
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        JONAS.removeAllAttendances();
-        QINDA.removeAllAttendances();
-        YANKEE.removeAllAttendances();
+        ALICE.removeAllAttendances();
+        CARL.removeAllAttendances();
+        FIONA.removeAllAttendances();
     }
 
     @Test
@@ -87,16 +87,16 @@ class FindBadStudentsCommandTest {
         Attendance pastTraining2 = new Attendance(DATE_TIME_NOW_MINUS_TWO_DAYS);
         Attendance pastTraining3 = new Attendance(DATE_TIME_NOW_MINUS_THREE_DAYS);
         Attendance pastTraining4 = new Attendance(DATE_TIME_NOW_MINUS_FOUR_DAYS);
-        JONAS.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2, pastTraining3, pastTraining4));
-        QINDA.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2, pastTraining3));
-        YANKEE.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2, pastTraining3));
+        ALICE.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2, pastTraining3, pastTraining4));
+        CARL.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2, pastTraining3));
+        FIONA.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2, pastTraining3));
 
-        String expectedMessage = "Jonas(ID: 001)";
+        String expectedMessage = "Alice Pauline(ID: 001)";
         FindBadStudentsCommand command = new FindBadStudentsCommand();
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        JONAS.removeAllAttendances();
-        QINDA.removeAllAttendances();
-        YANKEE.removeAllAttendances();
+        ALICE.removeAllAttendances();
+        CARL.removeAllAttendances();
+        FIONA.removeAllAttendances();
     }
 }
