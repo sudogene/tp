@@ -17,12 +17,14 @@ import seedu.canoe.logic.commands.DeleteStudentFromTrainingCommand;
 import seedu.canoe.logic.commands.DeleteTrainingCommand;
 import seedu.canoe.logic.commands.EditCommand;
 import seedu.canoe.logic.commands.ExitCommand;
+import seedu.canoe.logic.commands.FindBadStudentsCommand;
 import seedu.canoe.logic.commands.FindCommand;
 import seedu.canoe.logic.commands.FindStudentTrainingCommand;
 import seedu.canoe.logic.commands.HelpCommand;
 import seedu.canoe.logic.commands.ListCommand;
 import seedu.canoe.logic.commands.MarkAttendanceCommand;
 import seedu.canoe.logic.commands.TrainingCommand;
+import seedu.canoe.logic.commands.UnmarkAttendanceCommand;
 import seedu.canoe.logic.parser.exceptions.ParseException;
 
 /**
@@ -97,8 +99,14 @@ public class CanoeCoachParser {
         case MarkAttendanceCommand.COMMAND_WORD:
             return new MarkAttendanceCommandParser().parse(arguments);
 
+        case UnmarkAttendanceCommand.COMMAND_WORD:
+            return new UnmarkAttendanceCommandParser().parse(arguments);
+
         case AddAllStudentToTrainingCommand.COMMAND_WORD:
             return new AddAllStudentCommandParser().parse(arguments);
+
+        case FindBadStudentsCommand.COMMAND_WORD:
+            return new FindBadStudentsCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

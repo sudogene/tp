@@ -278,20 +278,25 @@ Format: `find-training id/STUDENT_ID`
 Examples:
 - `find-training id/1` filters the student and training panel to show only the student with id value 1 and all of his past and present trainings on the training panel.
 
-### Mark student as having attended a training : `mark-attendance`
-Marks student or students as attended for a specified training.
+### Mark/Unmark a student's attendance for a training : `mark-attendance`, `unmark-attendance`
+Marks/Unmarks a student's attendance for a training.
 
 Format: `mark-attendance TRAINING_INDEX id/STUDENT_ID...`
 
 * Training index refers to the index of the training in the displayed training list.
 * Only ONE training index can be specified in the same command. 
 * Multiple student ids can be specified in the same command.
-* Student card will reflect student as having attended the specified training should the command be successfully executed.
+* Should the student have been marked for their attendance, `mark-attendance` would still execute successfully, but there will be no changes reflected. The converse is true as well for `unmark-attendance`.
+* Student card will reflect the specified attendance as marked should the `mark-attendance` command be successfully executed.
+* Student card will reflect the specified attendance as unmarked should the `unmark-attendance` command be successfully executed.
+
+Format: `mark-attendance TRAINING_INDEX id/STUDENT_ID...`, `unmark-attendance TRAINING_INDEX id/STUDENT_ID...`
 
 > Note: This command will not filter the student list nor the training list in both panels.
 
 Examples:
-- `mark-attendance 2 id/1,4,7` marks students with id values of 1, 4 and 7 as having attended training session 2.
+- `mark-attendance 2 id/1,4,7` will indicate that students with unique ids of 1, 4 and 7 have the attendance associated with training session marked.
+- `unmark-attendance 2 id/1,4,7` will indicate that students with unique ids of 1, 4 and 7 have the attendance associated with training session unmarked.
 
 ### Clearing all entries: `clear`
 Clears the student and training list of all existing students and trainings.

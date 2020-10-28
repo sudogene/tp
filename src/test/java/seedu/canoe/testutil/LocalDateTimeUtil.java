@@ -16,5 +16,9 @@ public class LocalDateTimeUtil {
     public static final LocalDateTime DATE_TIME_NOW_PLUS_TWO_DAYS = LocalDateTime.now().plusDays(2);
     public static final LocalDateTime DATE_TIME_NOW_PLUS_THREE_DAYS = LocalDateTime.now().plusDays(3);
     public static final LocalDateTime DATE_TIME_NOW_PLUS_FOUR_DAYS = LocalDateTime.now().plusDays(4);
+    public static final LocalDateTime DATE_TIME_NOW_MINUS_ONE_DAY = LocalDateTime.now().minusDays(1);
+    public static final LocalDateTime DATE_TIME_NOW_MINUS_TWO_DAYS = LocalDateTime.now().minusDays(2);
+    public static final LocalDateTime DATE_TIME_NOW_MINUS_THREE_DAYS = LocalDateTime.now().minusDays(3);
+    public static final LocalDateTime DATE_TIME_NOW_MINUS_FOUR_DAYS = LocalDateTime.now().minusDays(4);
 
 }
