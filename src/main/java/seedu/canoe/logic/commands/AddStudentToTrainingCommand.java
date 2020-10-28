@@ -19,7 +19,6 @@ import seedu.canoe.commons.util.StringUtil;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.Attendance;
-import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.training.Training;
 
