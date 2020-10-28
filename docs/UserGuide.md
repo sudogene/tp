@@ -58,7 +58,10 @@ CanoE-COACH is a **desktop app for managing training schedules for secondary sch
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
+  
+* Take note of the difference between `STUDENT_INDEX` and `STUDENT_ID`
+	* `STUDENT_INDEX` refers to the index displayed on the GUI (this will change depending on how the GUI is filtered)
+	* `STUDENT_ID` refers to the unique index given to each student, as reflected in the GUI by **ID: 001** (This will not change even if the GUI is filtered.)
 </div>
 
 ### Viewing help: `help`
