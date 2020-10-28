@@ -48,8 +48,8 @@ class FindBadStudentsCommandTest {
     void execute_allPastTrainingsAttended_noBadStudents() {
         Attendance pastTraining1 = new Attendance(DATE_TIME_NOW_MINUS_ONE_DAY);
         Attendance pastTraining2 = new Attendance(DATE_TIME_NOW_MINUS_TWO_DAYS);
-        pastTraining1.attendsTraining();
-        pastTraining2.attendsTraining();
+        pastTraining1.marks();
+        pastTraining2.marks();
         ALICE.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2));
         CARL.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2));
         FIONA.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2));
