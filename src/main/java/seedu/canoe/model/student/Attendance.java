@@ -1,5 +1,7 @@
 package seedu.canoe.model.student;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -20,14 +22,22 @@ public class Attendance implements Comparable<Attendance> {
      */
 
     public Attendance(LocalDateTime trainingTime) {
+        requireNonNull(trainingTime);
         this.trainingTime = trainingTime;
     }
 
     /**
      * Marks the Attend class as attended.
      */
-    public void attendsTraining() {
+    public void attends() {
         hasAttended = true;
+    }
+
+    /**
+     * Marks the Attend class as unattended.
+     */
+    public void unattends() {
+        hasAttended = false;
     }
 
     /**

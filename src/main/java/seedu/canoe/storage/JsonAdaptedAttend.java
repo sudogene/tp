@@ -49,7 +49,7 @@ class JsonAdaptedAttend {
         }
         Attendance attendance = new Attendance(trainingTime);
         if (hasAttended) {
-            attendance.attendsTraining();
+            attendance.attends();
         }
         return attendance;
     }

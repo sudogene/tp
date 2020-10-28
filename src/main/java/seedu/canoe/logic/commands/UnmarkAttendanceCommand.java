@@ -17,39 +17,39 @@ import seedu.canoe.model.student.Attendance;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.training.Training;
 
-public class MarkAttendanceCommand extends Command {
+public class UnmarkAttendanceCommand extends Command {
 
-    public static final Logger LOGGER = LogsCenter.getLogger(MarkAttendanceCommand.class);
+    public static final Logger LOGGER = LogsCenter.getLogger(UnmarkAttendanceCommand.class);
 
-    public static final String COMMAND_WORD = "mark-attendance";
+    public static final String COMMAND_WORD = "unmark-attendance";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gets all students in the training session"
-            + " whose Ids corresponds to the specified Ids and marks them as attended the training session.\n"
+            + " whose Ids corresponds to the specified Ids and unmark them as attended the training session.\n"
             + "Parameters: ID [MORE_IDS]...\n"
             + "Example: " + COMMAND_WORD + " 2 id/1,4,19";
 
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be added must be specified.";
     public static final String MESSAGE_INVALID_STUDENT_MARKED = "Some students do not have specified"
             + " training session scheduled!";
-    public static final String MESSAGE_MARK_AS_ATTENDED_SUCCESS = "Marked these students as attended: %1$s!";
+    public static final String MESSAGE_MARK_AS_ATTENDED_SUCCESS = "Unmarked these students as attended: %1$s!";
 
     private final Index trainingIndex;
     private final AnyMatchPredicateList predicates;
 
     /**
-     * Constructs a new MarkAttendanceCommand object.
+     * Constructs a new UnmarkAttendanceCommand object.
      *
      * @param trainingIndex index of training.
      * @param predicates list of predicates.
      */
-    public MarkAttendanceCommand(Index trainingIndex, AnyMatchPredicateList predicates) {
+    public UnmarkAttendanceCommand(Index trainingIndex, AnyMatchPredicateList predicates) {
         this.trainingIndex = trainingIndex;
         this.predicates = predicates;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        LOGGER.info("=============================[ Executing MarkAttendanceCommand ]===========================");
+        LOGGER.info("=============================[ Executing UnmarkAttendanceCommand ]===========================");
         requireNonNull(model);
         List<Training> lastShownList = model.getFilteredTrainingList();
 
@@ -71,7 +71,7 @@ public class MarkAttendanceCommand extends Command {
 
         Attendance unattendedAttendance = new Attendance(training.getDateTime());
         Attendance attendedAttendance = new Attendance(training.getDateTime());
-        attendedAttendance.attends();
+        attendedAttendance.unattends();
 
         if (!studentsHaveAttendance(unattendedAttendance, attendedStudents)) {
             LOGGER.warning("Some students do not contain training session");
@@ -90,8 +90,8 @@ public class MarkAttendanceCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof MarkAttendanceCommand // instanceof handles nulls
-                && predicates.equals(((MarkAttendanceCommand) other).predicates)); // state check
+                || (other instanceof UnmarkAttendanceCommand // instanceof handles nulls
+                && predicates.equals(((UnmarkAttendanceCommand) other).predicates)); // state check
     }
 
     /**
