@@ -12,11 +12,13 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
 import seedu.canoe.model.student.time.Day;
 import seedu.canoe.model.tag.Tag;
+import seedu.canoe.model.training.Training;
 
 /**
  * Represents a Student in the canoe coach book.
@@ -375,8 +377,8 @@ public class Student {
         }
 
         boolean isAvailable = true;
-        for (Attendance trainingSession: trainingAttendances) {
-            if (!isAvailableAtDateTime(trainingSession.getTrainingTime())) {
+        for (Attendance attendance: trainingAttendances) {
+            if (!isAvailableAtDateTime(attendance.getTrainingTime())) {
                 isAvailable = false;
             }
         }
@@ -385,14 +387,66 @@ public class Student {
     }
 
     /**
-     * Mark student's attendance for a training session as attended.
+     * Mark a student's attendance based on training dateTime
      *
-     * @param trainingSessionToAttendance training session to mark as attended.
+     * @param training Training to be marked attendance.
      */
-    public void attendTrainingSession(Attendance trainingSessionToAttendance, Attendance trainingSessionAttended) {
-        assert(containsAttendance(trainingSessionToAttendance));
+    public void markAttendanceFromTraining(Training training) {
+        Attendance markedAttendance = new Attendance(training.getDateTime());
+        markedAttendance.marks();
+        Optional<Attendance> attendanceToRemove =
+                trainingAttendances.stream()
+                        .filter(attendance -> attendance.getTrainingTime()
+                                .isEqual(training.getDateTime())).findFirst();
 
-        trainingAttendances.remove(trainingSessionToAttendance);
-        trainingAttendances.add(trainingSessionAttended);
+        assert(attendanceToRemove.get() != null);
+
+        trainingAttendances.remove(attendanceToRemove.get());
+        trainingAttendances.add(markedAttendance);
+    }
+
+    /**
+     * Mark a student's attendance.
+     *
+     * @param originalAttendance Attendance to be marked.
+     */
+    public void markAttendance(Attendance originalAttendance, Attendance markedAttendance) {
+        assert(containsAttendance(originalAttendance));
+
+        trainingAttendances.remove(originalAttendance);
+        trainingAttendances.add(markedAttendance);
+    }
+
+    /**
+     * Unmark a student's attendance.
+     *
+     * @param originalAttendance Attendance to be unmarked.
+     */
+    public void unmarkAttendance(Attendance originalAttendance, Attendance unmarkedAttendance) {
+        assert(containsAttendance(originalAttendance));
+
+        trainingAttendances.remove(originalAttendance);
+        trainingAttendances.add(unmarkedAttendance);
+    }
+
+    /**
+     * Checks student's attendance record and returns whether the student
+     * has a bad attendance record.
+     *
+     * @return whether student has a bad attendance record.
+     */
+    public boolean hasBadAttendanceRecord() {
+        int numOfAbsences = 0;
+        int threshold = 3;
+
+        for (Attendance attendance : trainingAttendances) {
+            if (attendance.getTrainingTime().isAfter(LocalDateTime.now())) {
+                continue;
+            }
+            if (!attendance.isMarked()) {
+                numOfAbsences += 1;
+            }
+        }
+        return numOfAbsences > threshold;
     }
 }

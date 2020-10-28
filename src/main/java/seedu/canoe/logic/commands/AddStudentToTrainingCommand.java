@@ -190,10 +190,9 @@ public class AddStudentToTrainingCommand extends Command {
      * @return the Student Object that corresponds to the specified Id.
      */
     public Student getStudentWithID(Model model, String id) throws CommandException {
-        id.trim();
-        Id idChecker = new Id(id);
+        id = id.trim();
         for (Student student : model.getFilteredStudentList()) {
-            if (student.getId().equals(idChecker)) {
+            if (student.getId().getValue().equals(id)) {
                 return student;
             }
         }

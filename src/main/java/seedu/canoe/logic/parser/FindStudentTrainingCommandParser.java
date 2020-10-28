@@ -14,7 +14,6 @@ import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.logic.commands.FindStudentTrainingCommand;
 import seedu.canoe.logic.parser.exceptions.ParseException;
 import seedu.canoe.model.student.DateTimeMatchesPredicate;
-import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.IdMatchesPredicate;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.training.Training;
@@ -57,9 +56,8 @@ public class FindStudentTrainingCommandParser implements Parser<FindStudentTrain
                 throw new ParseException(FindStudentTrainingCommand.MESSAGE_ONE_STUDENT_QUERY);
             }
 
-            Id id = new Id(idValue);
             studentPredicate = new IdMatchesPredicate(idValue);
-            trainingPredicate = new TrainingMatchesIdPredicate(id);
+            trainingPredicate = new TrainingMatchesIdPredicate(idValue);
         }
 
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {

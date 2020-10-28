@@ -17,7 +17,6 @@ import seedu.canoe.model.Model;
 import seedu.canoe.model.ModelManager;
 import seedu.canoe.model.UserPrefs;
 import seedu.canoe.model.student.DateTimeMatchesPredicate;
-import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.IdMatchesPredicate;
 import seedu.canoe.model.training.TrainingMatchesDateTimePredicate;
 import seedu.canoe.model.training.TrainingMatchesIdPredicate;
@@ -31,8 +30,8 @@ public class FindStudentTrainingCommandTest {
 
     @Test
     public void equals() {
-        Id firstIdValue = new Id("001");
-        Id secondIdValue = new Id("002");
+        String firstIdValue = "001";
+        String secondIdValue = "002";
         LocalDateTime firstDateTime = LocalDateTime.parse("2021-08-26 1800",
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         LocalDateTime secondDateTime = LocalDateTime.parse("2022-08-26 1800",
@@ -93,7 +92,7 @@ public class FindStudentTrainingCommandTest {
 
     @Test
     public void execute_studentIndexValid_findSuccessful() {
-        TrainingMatchesIdPredicate idPredicate = new TrainingMatchesIdPredicate(new Id("1"));
+        TrainingMatchesIdPredicate idPredicate = new TrainingMatchesIdPredicate("1");
         IdMatchesPredicate studentIdPredicate = new IdMatchesPredicate("1");
         FindStudentTrainingCommand command = new FindStudentTrainingCommand(studentIdPredicate, idPredicate);
         expectedModel.updateFilteredStudentList(studentIdPredicate);
@@ -123,7 +122,7 @@ public class FindStudentTrainingCommandTest {
 
     @Test
     public void execute_studentIndexInvalid_studentNotFound() {
-        TrainingMatchesIdPredicate idPredicate = new TrainingMatchesIdPredicate(new Id("4"));
+        TrainingMatchesIdPredicate idPredicate = new TrainingMatchesIdPredicate("4");
         IdMatchesPredicate studentIdPredicate = new IdMatchesPredicate("5");
         FindStudentTrainingCommand command = new FindStudentTrainingCommand(studentIdPredicate, idPredicate);
         assertThrows(CommandException.class, FindStudentTrainingCommand.MESSAGE_NO_MATCH, () ->
@@ -141,7 +140,7 @@ public class FindStudentTrainingCommandTest {
 
     @Test
     public void execute_studentIndexEmpty_studentNotFound() {
-        TrainingMatchesIdPredicate idPredicate = new TrainingMatchesIdPredicate(new Id("001"));
+        TrainingMatchesIdPredicate idPredicate = new TrainingMatchesIdPredicate("001");
         IdMatchesPredicate studentIdPredicate = new IdMatchesPredicate("");
         FindStudentTrainingCommand command = new FindStudentTrainingCommand(studentIdPredicate, idPredicate);
         assertThrows(CommandException.class, FindStudentTrainingCommand.MESSAGE_NO_MATCH, () ->
