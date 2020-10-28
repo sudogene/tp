@@ -10,9 +10,7 @@ import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.commons.core.Messages;
@@ -20,17 +18,10 @@ import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.commons.util.StringUtil;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
-import seedu.canoe.model.student.AcademicYear;
 import seedu.canoe.model.student.Attendance;
-import seedu.canoe.model.student.Email;
 import seedu.canoe.model.student.Id;
-import seedu.canoe.model.student.Name;
-import seedu.canoe.model.student.Phone;
 import seedu.canoe.model.student.Student;
-import seedu.canoe.model.student.time.Day;
-import seedu.canoe.model.tag.Tag;
 import seedu.canoe.model.training.Training;
-
 
 /**
  * Adds an existing student to a training.
@@ -54,6 +45,7 @@ public class AddStudentToTrainingCommand extends Command {
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "Added Student: %1$s";
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student "
             + "to be added must be specified.";
+    public static final String MESSAGE_NO_STUDENTS = "There are no Students to add!";
     public static final String MESSAGE_STUDENT_UNAVAILABLE = "One of the students cannot be added to the training as "
             + "either his dismissal time on the specified day falls after the training's start time or he has a "
             + "training scheduled on the same date already!";
@@ -85,8 +77,13 @@ public class AddStudentToTrainingCommand extends Command {
         List<Training> lastShownList = model.getFilteredTrainingList();
         List<Student> studentList = model.getFilteredStudentList();
 
+        //Throws a CommandException if there are no Students in studentList
+        if (studentList.isEmpty()) {
+            throw new CommandException(MESSAGE_NO_STUDENTS);
+        }
+
         //Checks if the user specified any students to add
-        if (studentsToAdd == null) {
+        if (studentsToAdd.length == 0) {
             LOGGER.warning("User input invalid");
             throw new CommandException(MESSAGE_NO_STUDENTS_SPECIFIED);
         }
@@ -127,8 +124,7 @@ public class AddStudentToTrainingCommand extends Command {
             }
 
             //Ensures student is available to attend training based on dismissal time
-            if (!studentToEdit.isAvailableAtDateTime(editedTraining.getDateTime())
-                    || studentToEdit.hasAttendanceAtDateTime(editedTraining.getDateTime())) {
+            if (!isStudentAvailable(editedTraining, studentToEdit)) {
                 throw new CommandException(MESSAGE_STUDENT_UNAVAILABLE);
             }
 
@@ -158,7 +154,7 @@ public class AddStudentToTrainingCommand extends Command {
     /**
      * Checks that the Training Specified does not contain the Student to Add.
      * @param trainingToCheck
-     * @param check Student to check.
+     * @param check Student to check
      * @return boolean that indicates whether Student to be added is unique.
      * @throws CommandException
      */
@@ -172,10 +168,26 @@ public class AddStudentToTrainingCommand extends Command {
     }
 
     /**
+     * Checks if the whether the specified Student is available at the Date
+     * and Time of the specified Training
+     * and whether the Student already has an Attendance at that Date and Time
+     * @param training Training to be attended
+     * @param student Student to check
+     * @return boolean that indicates whether Student to be added is available.
+     */
+    public boolean isStudentAvailable(Training training, Student student) {
+        if (!student.isAvailableAtDateTime(training.getDateTime())
+                || student.hasAttendanceAtDateTime(training.getDateTime())) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Returns the Student object in the model with the Id same as the specified Unique Id.
      * @param model
      * @param id
-     * @return
+     * @return the Student Object that corresponds to the specified Id.
      */
     public Student getStudentWithID(Model model, String id) throws CommandException {
         id = id.trim();
@@ -187,27 +199,17 @@ public class AddStudentToTrainingCommand extends Command {
         throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);
     }
 
+    /**
+     * Adds the specified Attendance of the specified Training to the specified Student
+     * @param studentToEdit the Student to be added to Training
+     * @param editedTraining Training to be attended by student
+     * @return the Student with a new Training Attendance added
+     */
     private static Student createEditedStudent(Student studentToEdit, Training editedTraining) {
         assert studentToEdit != null;
 
-        Name updatedName = studentToEdit.getName();
-        Phone updatedPhone = studentToEdit.getPhone();
-        Email updatedEmail = studentToEdit.getEmail();
-        AcademicYear updatedAcademicYear = studentToEdit.getAcademicYear();
-        Day mondayDismissal = studentToEdit.getMondayDismissal();
-        Day tuesdayDismissal = studentToEdit.getTuesdayDismissal();
-        Day wednesdayDismissal = studentToEdit.getWednesdayDismissal();
-        Day thursdayDismissal = studentToEdit.getThursdayDismissal();
-        Day fridayDismissal = studentToEdit.getFridayDismissal();
-        Set<Tag> updatedTags = studentToEdit.getTags();
-        List<Attendance> trainingAttendances = studentToEdit.getTrainingAttendances().stream()
-                .collect(Collectors.toList());
-        trainingAttendances.add(new Attendance(editedTraining.getDateTime()));
-        Id id = studentToEdit.getId();
-
-        Student newStudent = new Student(updatedName, updatedPhone, updatedEmail, updatedAcademicYear, updatedTags,
-                mondayDismissal, tuesdayDismissal, wednesdayDismissal, thursdayDismissal, fridayDismissal, id);
-        newStudent.addAllAttendances(trainingAttendances);
+        Student newStudent = studentToEdit.cloneStudent();
+        newStudent.addAttendance(new Attendance(editedTraining.getDateTime()));
         return newStudent;
     }
 
