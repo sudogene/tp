@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import seedu.canoe.model.student.Attendance;
-import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.student.exceptions.DuplicateStudentException;
 
@@ -120,8 +119,8 @@ public class Training {
      * @param studentId to be checked
      * @return true if student id is present inside of training schedule.
      */
-    public boolean hasStudentId(Id studentId) {
-        return getStudents().stream().map(student -> student.getId()).anyMatch(id -> id.equals(studentId));
+    public boolean hasStudentId(String studentId) {
+        return getStudents().stream().map(student -> student.getId()).anyMatch(id -> id.getValue().equals(studentId));
     }
 
     /**

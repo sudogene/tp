@@ -2,15 +2,14 @@ package seedu.canoe.model.training;
 
 import java.util.function.Predicate;
 
-import seedu.canoe.model.student.Id;
 
 /**
  * Tests that a {@code Training} {@code Student}'s {@code Id} matches the value given.
  */
 public class TrainingMatchesIdPredicate implements Predicate<Training> {
-    private final Id idValue;
+    private final String idValue;
 
-    public TrainingMatchesIdPredicate(Id idValue) {
+    public TrainingMatchesIdPredicate(String idValue) {
         this.idValue = idValue;
     }
 
