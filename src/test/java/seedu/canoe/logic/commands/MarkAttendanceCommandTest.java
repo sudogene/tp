@@ -81,7 +81,7 @@ class MarkAttendanceCommandTest {
 
     @Test
     void execute_validParams_commandSuccess() {
-        String expectedMessage = "Marked these students as attended: 002 005!";
+        String expectedMessage = "Marked these students for their attendance: 002 005!";
         IdMatchesPredicate firstIdPredicate = new IdMatchesPredicate("2");
         IdMatchesPredicate secondIdPredicate = new IdMatchesPredicate("5");
 

@@ -109,7 +109,7 @@ public class StudentCard extends UiPart<Region> {
                         .isBefore(LocalDateTime.now())).collect(Collectors.toList())) {
             Label pastAttendanceLabel = new Label(attendance.toString());
             pastAttendanceLabel.backgroundProperty().bind(
-                    new When(isMarked(attendance.getAttendance())).then(markedAttendance)
+                    new When(isMarked(attendance.isMarked())).then(markedAttendance)
                             .otherwise(unmarkedAttendance));
             pastTrainingAttendances.getChildren().add(pastAttendanceLabel);
         }
@@ -120,7 +120,7 @@ public class StudentCard extends UiPart<Region> {
                         .isAfter(LocalDateTime.now())).collect(Collectors.toList())) {
             Label upcomingAttendanceLabel = new Label(attendance.toString());
             upcomingAttendanceLabel.backgroundProperty().bind(
-                    new When(isMarked(attendance.getAttendance())).then(markedAttendance)
+                    new When(isMarked(attendance.isMarked())).then(markedAttendance)
                             .otherwise(unmarkedAttendance));
             upcomingTrainingAttendances.getChildren().add(upcomingAttendanceLabel);
         }

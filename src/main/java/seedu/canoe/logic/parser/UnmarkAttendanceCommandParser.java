@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 
 import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.commons.core.index.Index;
-import seedu.canoe.logic.commands.MarkAttendanceCommand;
 import seedu.canoe.logic.commands.UnmarkAttendanceCommand;
 import seedu.canoe.logic.parser.exceptions.ParseException;
 import seedu.canoe.model.student.AnyMatchPredicateList;
@@ -56,7 +55,7 @@ public class UnmarkAttendanceCommandParser implements Parser<UnmarkAttendanceCom
 
         if (predicates.isEmpty() || isEmptyString) {
             LOGGER.warning("No prefixes found in the command input!" + args);
-            throw new ParseException(MarkAttendanceCommand.MESSAGE_NO_STUDENTS_SPECIFIED);
+            throw new ParseException(UnmarkAttendanceCommand.MESSAGE_NO_STUDENTS_SPECIFIED);
         }
 
         return new UnmarkAttendanceCommand(trainingIndex, predicates);

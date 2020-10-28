@@ -28,10 +28,11 @@ public class UnmarkAttendanceCommand extends Command {
             + "Parameters: ID [MORE_IDS]...\n"
             + "Example: " + COMMAND_WORD + " 2 id/1,4,19";
 
-    public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be added must be specified.";
-    public static final String MESSAGE_INVALID_STUDENT_MARKED = "Some students do not have specified"
+    public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be unmarked must be specified.";
+    public static final String MESSAGE_INVALID_STUDENT_UNMARKED = "Some students do not have specified"
             + " training session scheduled!";
-    public static final String MESSAGE_MARK_AS_ATTENDED_SUCCESS = "Unmarked these students as attended: %1$s!";
+    public static final String MESSAGE_UNMARK_ATTENDANCE_SUCCESS = "Unmarked these students for "
+        + "their attendance: %1$s!";
 
     private final Index trainingIndex;
     private final AnyMatchPredicateList predicates;
@@ -69,22 +70,22 @@ public class UnmarkAttendanceCommand extends Command {
 
         Training training = lastShownList.get(trainingIndex.getZeroBased());
 
-        Attendance unattendedAttendance = new Attendance(training.getDateTime());
-        Attendance attendedAttendance = new Attendance(training.getDateTime());
-        attendedAttendance.unattends();
+        Attendance unmarkedAttendance = new Attendance(training.getDateTime());
+        Attendance markedAttendance = new Attendance(training.getDateTime());
+        markedAttendance.marks();
 
-        if (!studentsHaveAttendance(unattendedAttendance, attendedStudents)) {
+        if (!studentsHaveAttendance(unmarkedAttendance, attendedStudents)) {
             LOGGER.warning("Some students do not contain training session");
-            return new CommandResult(MESSAGE_INVALID_STUDENT_MARKED);
+            return new CommandResult(MESSAGE_INVALID_STUDENT_UNMARKED);
         }
 
         for (Student student : attendedStudents) {
-            student.attendTrainingSession(unattendedAttendance, attendedAttendance);
+            student.unmarkAttendance(markedAttendance, unmarkedAttendance);
         }
         String result = getStudentIdsAsString(attendedStudents);
 
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(String.format(MESSAGE_MARK_AS_ATTENDED_SUCCESS, result));
+        return new CommandResult(String.format(MESSAGE_UNMARK_ATTENDANCE_SUCCESS, result));
     }
 
     @Override

@@ -81,7 +81,7 @@ class UnmarkAttendanceCommandTest {
 
     @Test
     void execute_validParams_commandSuccess() {
-        String expectedMessage = "Unmarked these students as attended: 002 005!";
+        String expectedMessage = "Unmarked these students for their attendance: 002 005!";
         IdMatchesPredicate firstIdPredicate = new IdMatchesPredicate("2");
         IdMatchesPredicate secondIdPredicate = new IdMatchesPredicate("5");
 
@@ -102,7 +102,7 @@ class UnmarkAttendanceCommandTest {
         Student firstStudent = TypicalStudents.BENSON;
         Student secondStudent = TypicalStudents.ELLE;
         Attendance attendance = new Attendance(firstTraining.getDateTime());
-        attendance.attends();
+        attendance.marks();
         firstStudent.addAttendance(attendance);
         secondStudent.addAttendance(attendance);
         expectedModel.setStudentInUniqueStudentList(studentList.get(0), firstStudent);

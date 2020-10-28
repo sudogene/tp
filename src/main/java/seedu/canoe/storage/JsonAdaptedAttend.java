@@ -16,16 +16,16 @@ class JsonAdaptedAttend {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Attend's %s field is missing!";
 
     private final LocalDateTime trainingTime;
-    private boolean hasAttended = false;
+    private boolean isMarked = false;
 
     /**
      * Constructs a {@code JsonAdaptedAttend} with the given {@code trainingTime}.
      */
     @JsonCreator
     public JsonAdaptedAttend(@JsonProperty("trainingTime") LocalDateTime trainingTime,
-                             @JsonProperty("hasAttended") boolean hasAttended) {
+                             @JsonProperty("isMarked") boolean isMarked) {
         this.trainingTime = trainingTime;
-        this.hasAttended = hasAttended;
+        this.isMarked = isMarked;
     }
 
     /**
@@ -33,7 +33,7 @@ class JsonAdaptedAttend {
      */
     public JsonAdaptedAttend(Attendance source) {
         trainingTime = source.getTrainingTime();
-        hasAttended = source.getAttendance();
+        isMarked = source.isMarked();
     }
 
     /**
@@ -48,8 +48,8 @@ class JsonAdaptedAttend {
                     .format(MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName()));
         }
         Attendance attendance = new Attendance(trainingTime);
-        if (hasAttended) {
-            attendance.attends();
+        if (isMarked) {
+            attendance.marks();
         }
         return attendance;
     }

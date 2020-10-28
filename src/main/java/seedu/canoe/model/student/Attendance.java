@@ -13,8 +13,8 @@ public class Attendance implements Comparable<Attendance> {
 
     private final LocalDateTime trainingTime;
 
-    //By default, hasAttended is false when initialised.
-    private boolean hasAttended = false;
+    //By default, isMarked is false when initialised.
+    private boolean isMarked = false;
 
     /**
      * Constructs an Attend class from the time of that the training is conducted.
@@ -27,17 +27,17 @@ public class Attendance implements Comparable<Attendance> {
     }
 
     /**
-     * Marks the Attend class as attended.
+     * Marks the Attendance.
      */
-    public void attends() {
-        hasAttended = true;
+    public void marks() {
+        isMarked = true;
     }
 
     /**
-     * Marks the Attend class as unattended.
+     * Unarks the Attendance.
      */
-    public void unattends() {
-        hasAttended = false;
+    public void unmarks() {
+        isMarked = false;
     }
 
     /**
@@ -50,16 +50,16 @@ public class Attendance implements Comparable<Attendance> {
     }
 
     /**
-     * Getter method for whether the training has been attended or not.
-     * @return hasAttended
+     * Getter method for whether the Attendance is marked or not.
+     * @return isMarked
      */
-    public boolean getAttendance() {
-        return hasAttended;
+    public boolean isMarked() {
+        return isMarked;
     }
 
     /**
-     * Compares this to other Attend.
-     * @param other The other instance of Attend we are comparing to.
+     * Compares this to other Attendance.
+     * @param other The other instance of Attendance we are comparing to.
      * @return The result of comparing the training time of this instance to the training time of the other instance.
      */
     @Override
@@ -68,8 +68,9 @@ public class Attendance implements Comparable<Attendance> {
     }
 
     /**
-     * Returns true if the training time of this instance of Attend, and the other instance of Attend are the same.
-     * @param other The other instance of Attend we are comparing to.
+     * Returns true if the training time of this instance of Attendance, and the other instance of Attendance
+     * are the same.
+     * @param other The other instance of Attendance we are comparing to.
      */
     @Override
     public boolean equals(Object other) {
@@ -84,7 +85,7 @@ public class Attendance implements Comparable<Attendance> {
     @Override
     public String toString() {
         String result = getTrainingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-        if (hasAttended) {
+        if (isMarked) {
             result += " [\u2713]";
         } else {
             result += " [\u2717]";
