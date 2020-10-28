@@ -202,9 +202,9 @@ public class AddStudentToTrainingCommand extends Command {
 
     /**
      * Adds the specified Attendance of the specified Training to the specified Student
-     * @param studentToEdit
-     * @param editedTraining
-     * @return
+     * @param studentToEdit the Student to be added to Training
+     * @param editedTraining Training to be attended by student
+     * @return the Student with a new Training Attendance added
      */
     private static Student createEditedStudent(Student studentToEdit, Training editedTraining) {
         assert studentToEdit != null;
