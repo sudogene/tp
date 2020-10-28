@@ -39,7 +39,7 @@ public class SampleDataUtil {
 
 
         return new Training[] {
-                firstTraining, secondTraining
+            firstTraining, secondTraining
         };
     }
 
@@ -53,7 +53,7 @@ public class SampleDataUtil {
         Training secondTraining = new Training(secondNearFutureDateTime);
 
         return new Training[] {
-                firstTraining, secondTraining
+            firstTraining, secondTraining
         };
     }
     public static Student[] getSampleStudents() {
