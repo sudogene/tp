@@ -118,7 +118,6 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com d1/1600` Edits the phone number and email address of the 1st student in the displayed student list to be `91234567` and `johndoe@example.com` respectively. This also changes his Monday's dismissal time to 1600.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
-
 ### Delete student: `delete`
 Deletes the specified student from the student list.
 
@@ -161,7 +160,7 @@ Format: `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm
 
 - Id
     - Student with the same `id` value will be matched.
-    - Due to the nature of id being unique, a maximum of one student should be matched.
+    - Due to the nature of id being unique, only one student will be matched.
 
 - Searching by more than one field
     - Find command will return student(s) that matches exactly with all the fields provided. e.g. `n/Alex p/123` will return `Alex Yeoh` only if his phone number matches `123`
@@ -174,10 +173,10 @@ Examples:
 - `find n/Alex d2/1600` returns `Alex Yeoh`, provided his dismissal time on Tuesday falls at or before `1600`
 - `find e/alexyeoh@example.com p/456` returns an empty list, if such an email **AND** contact number is not present in the student list
 
-### Common Time : `commonTime`
+### Common Time : `common-time`
 Returns the latest dismissal times on all days for all of the students in the specified subgroup. This would be the earliest time to schedule a training for all students in the sub group.
 
-Format: `commonTime [n/KEYWORDS] [ay/ACADEMIC_YEAR]`
+Format: `common-time [n/KEYWORDS] [ay/ACADEMIC_YEAR]`
 
 - At least one field needs to be filled
 - Name
@@ -195,9 +194,9 @@ Format: `commonTime [n/KEYWORDS] [ay/ACADEMIC_YEAR]`
 - If no student matches the search criteria, an error message will display. 
 
 Examples:
-- `commonTime n/alex ay/1` returns the latest dismissal times for any student with names containing the whole word `alex`, **OR** who are in Academic Year 1.
-- `commonTime ay/1` returns the latest dismissal times for all the students in the student list who are in Academic Year 1.
-- `commonTime n/Alex Jane Mary` returns the latest dismissal times for any student with names Alex, Jane or Mary. Take note the rules above for matching applies.
+- `common-time n/alex ay/1` returns the latest dismissal times for any student with names containing the whole word `alex`, **OR** who are in Academic Year 1.
+- `common-time ay/1` returns the latest dismissal times for all the students in the student list who are in Academic Year 1.
+- `common-time n/Alex Jane Mary` returns the latest dismissal times for any student with names Alex, Jane or Mary. Take note the rules above for matching applies.
 
 ### Create Training : `training`
 Creates a new training at the specified date and time.
@@ -306,6 +305,14 @@ Examples:
 - `mark-attendance 2 id/1,4,7` will indicate that students with unique ids of 1, 4 and 7 have their attendance associated with training session 2 marked.
 - `unmark-attendance 2 id/1,4,7` will indicate that students with unique ids of 1, 4 and 7 have their attendance associated with training session 2 unmarked.
 
+### Find all students with a bad attendance record: `find-bad-students`
+Finds all students that have missed more than 3 training sessions.
+
+* No parameters required for this command.
+* Displays a list of students that have missed more than 3 prior training sessions.
+
+Format: `find-bad-students`
+ 
 ### Clearing all entries: `clear`
 Clears the student and training list of all existing students and trainings.
 
@@ -313,12 +320,10 @@ Format: `clear`
 
 > Note: Be careful, this deletes all data stored inside of the program, including student and training records. All sample data will be cleared too.
 
-
 ### Exiting the program: `exit`
 Exits the program.
 
 Format: `exit`
-
 
 ## FAQ
 
@@ -336,7 +341,7 @@ Action | Format, Examples
 **Delete** | `delete STUDENT_INDEX`<br> e.g., `delete 3`
 **Edit** | `edit STUDENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]… [d1/MONDAY] [d2/TUESDAY] [d3/WEDNESDAY] [d4/THURSDAY] [d5/FRIDAY] ​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find [n/KEYWORDS] [p/PHONE_NUMBER] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [id/ID]`<br> e.g., `find n/James Jake ay/2`
-**commonTime** | `commonTime [n/KEYWORDS] [ay/ACADEMIC_YEAR]`<br> e.g., `commonTime n/alex ay/1`
+**common-time** | `common-time [n/KEYWORDS] [ay/ACADEMIC_YEAR]`<br> e.g., `common-time n/alex ay/1`
 **training** | `training yyyy-MM-dd HHmm`<br> e.g., `training 2021-01-20 1800`
 **delete-training** | `delete-training TRAINING_INDEX`<br> e.g., `delete-training 1`
 **ts-add** | `ts-add TRAINING_INDEX id/STUDENT_ID...`<br> e.g., `ts-add 1 id/1,2,3`
@@ -345,5 +350,6 @@ Action | Format, Examples
 **find-training** | `find-training [id/STUDENT_ID] [dt/DATETIME]`<br> e.g., `find-training id/1`
 **mark-attendance** | `mark-attendance TRAINING_INDEX id/STUDENT_ID...`<br> e.g., `mark-attendance 2 id/1,4,7`
 **unmark-attendance** | `unmark-attendance TRAINING_INDEX id/STUDENT_ID...`<br> e.g., `unmark-attendance 2 id/1,4,7`
+**find-bad-students** | `find-bad-students`
 **List** | `list`
 **Help** | `help`
