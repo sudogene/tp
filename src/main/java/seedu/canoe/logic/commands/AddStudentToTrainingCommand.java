@@ -6,7 +6,6 @@ import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
-import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,10 +67,6 @@ public class AddStudentToTrainingCommand extends Command {
         LOGGER.info("==========================[ Executing AddStudentToTrainingCommand ]==========================");
 
         requireNonNull(model);
-
-        //Added in case previous command is find
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        model.updateFilteredTrainingList(PREDICATE_SHOW_ALL_TRAININGS);
 
         List<Training> lastShownList = model.getFilteredTrainingList();
         List<Student> studentList = model.getFilteredStudentList();
