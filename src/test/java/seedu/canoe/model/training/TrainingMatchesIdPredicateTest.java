@@ -9,7 +9,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.testutil.StudentBuilder;
 import seedu.canoe.testutil.TrainingBuilder;
@@ -18,8 +17,8 @@ public class TrainingMatchesIdPredicateTest {
 
     @Test
     public void equals() {
-        Id firstIdValue = new Id("001");
-        Id secondIdValue = new Id("002");
+        String firstIdValue = "001";
+        String secondIdValue = "002";
 
         TrainingMatchesIdPredicate firstPredicate = new TrainingMatchesIdPredicate(firstIdValue);
         TrainingMatchesIdPredicate secondPredicate = new TrainingMatchesIdPredicate(secondIdValue);
@@ -48,7 +47,7 @@ public class TrainingMatchesIdPredicateTest {
         studentSet.add(testStudent);
         Training testTraining = new TrainingBuilder().withDateTime(DATE_TIME_NOW_PLUS_ONE_DAY).build();
         testTraining.addStudent(testStudent);
-        TrainingMatchesIdPredicate predicate = new TrainingMatchesIdPredicate(new Id("001"));
+        TrainingMatchesIdPredicate predicate = new TrainingMatchesIdPredicate("001");
         assertTrue(predicate.test(testTraining));
     }
 
@@ -57,7 +56,7 @@ public class TrainingMatchesIdPredicateTest {
         Student testStudent = new StudentBuilder().withPhone("123456").withId("001").build();
         Set<Student> studentSet = new HashSet<>();
         studentSet.add(testStudent);
-        TrainingMatchesIdPredicate predicate = new TrainingMatchesIdPredicate(new Id("001"));
+        TrainingMatchesIdPredicate predicate = new TrainingMatchesIdPredicate("001");
         assertTrue(predicate.test(new TrainingBuilder().withDateTime(DATE_TIME_NOW_PLUS_ONE_DAY)
                 .withStudents(studentSet).build()));
     }
@@ -74,7 +73,7 @@ public class TrainingMatchesIdPredicateTest {
                 .withStudents(studentSet).build()));
 
         //non-matching keywords
-        TrainingMatchesIdPredicate nonMatchingPredicate = new TrainingMatchesIdPredicate(new Id("002"));
+        TrainingMatchesIdPredicate nonMatchingPredicate = new TrainingMatchesIdPredicate("002");
         assertFalse(nonMatchingPredicate.test(new TrainingBuilder().withDateTime(DATE_TIME_NOW_PLUS_ONE_DAY)
                 .withStudents(studentSet).build()));
     }

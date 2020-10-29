@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
-import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,10 +62,6 @@ public class DeleteStudentFromTrainingCommand extends Command {
         LOGGER.info("=============================[ Executing DeleteStudentFromTrainingCommand ]========"
                 + "===================");
         requireNonNull(model);
-
-        // Show full unfiltered lists
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        model.updateFilteredTrainingList(PREDICATE_SHOW_ALL_TRAININGS);
 
         List<Training> trainingList = model.getFilteredTrainingList();
 
@@ -136,9 +131,10 @@ public class DeleteStudentFromTrainingCommand extends Command {
      * Returns the student in the model with the specified unique Id. May not exist.
      */
     public Optional<Student> getStudentWithId(Model model, String id) {
-        Id idCheck = new Id(id.trim());
+        id = id.trim();
+        String finalId = id;
         return model.getFilteredStudentList().stream()
-                .filter(student -> student.getId().equals(idCheck))
+                .filter(student -> student.getId().getValue().equals(finalId))
                 .findFirst();
     }
 
