@@ -110,7 +110,9 @@ Format: `edit STUDENT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [ay/ACADEMIC_YEAR] [d1/
 * You can remove all of the student’s tags by typing `t/` without specifying any tags after it.
 * Take note that editing the details of a student will also propagate the changes on the training panel.
 * Be careful when editing dismissal times, as this might automatically remove students from scheduled trainings if
- the updated dismissal time on the same day of the week is now later than the start time of any of the student's scheduled trainings.
+ the updated dismissal time on the same day of the week is now later than the start time of any of the student's upcoming scheduled trainings. Past trainings will not be affected.
+ 
+> All trainings are given a buffer of 3 hours from their start times before they are classified as "past training" (i.e. A training scheduled on 29 October 2021 1500 will be classified as a "past training" on 29 October 2021, 1800).
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com d1/1600` Edits the phone number and email address of the 1st student in the displayed student list to be `91234567` and `johndoe@example.com` respectively. This also changes his Monday's dismissal time to 1600.
@@ -122,9 +124,9 @@ Deletes the specified student from the student list.
 
 Format: `delete STUDENT_INDEX`
 - Deletes the student at the specified `STUDENT_INDEX`.
-- The student index refers to the index number shown in the displayed student list.
+- The student index refers to the index number shown in the displayed student list. (This is different from the unique ID of each student.)
 - The index must be an unsigned integer 1, 2, 3, …
-- This will remove the student from all of his/her scheduled training sessions.
+- This will remove the student from all of his/her scheduled training sessions (both past and present).
 
 Examples:
 - `delete 2` deletes the 2nd student in the displayed student list.
@@ -173,8 +175,7 @@ Examples:
 - `find e/alexyeoh@example.com p/456` returns an empty list, if such an email **AND** contact number is not present in the student list
 
 ### Common Time : `commonTime`
-Returns the latest dismissal times on all days for all of the students in the specified subgroup. This would be the earliest
-time to schedule a training for all students in the sub group.
+Returns the latest dismissal times on all days for all of the students in the specified subgroup. This would be the earliest time to schedule a training for all students in the sub group.
 
 Format: `commonTime [n/KEYWORDS] [ay/ACADEMIC_YEAR]`
 
@@ -215,7 +216,7 @@ Deletes an existing training from the training list.
 Format: `delete-training TRAINING_INDEX`
 
 * Deletes the training at the specified `TRAINING_INDEX`.
-* Training index refers to the index of the training in the displayed training list.
+* Training index refers to the index of the training in the **displayed** training list.
 * The index must be an unsigned integer 1, 2, 3, …
 * All students inside of the training to be deleted will have the training removed from their training schedules.
 
@@ -227,7 +228,7 @@ Adds students to a training.
 
 Format: `ts-add TRAINING_INDEX id/STUDENT_ID...`
 
-* Training index refers to the index of the training in the displayed training list.
+* Training index refers to the index of the training in the **displayed** training list.
 * Multiple students can be added with the same command by inputing multiple student indexes separated with a comma.
 * Only one training index can be specified at a time.
 * Each student can only be added to a **SINGLE** training on the same date regardless of time.
@@ -243,7 +244,7 @@ Adds all available students to a training.
 
 Format: `ts-addall TRAINING_INDEX`
 
-* Training index refers to the index of the training in the displayed training list.
+* Training index refers to the index of the training in the **displayed** training list.
 * All students displayed in the student list will be added to the training if they can be added.
 * A student can be added to the training if and only if:
    * They are available for the training's date time based on their dismissal times
@@ -261,7 +262,7 @@ Deletes students from a training.
 
 Format: `ts-delete TRAINING_INDEX id/STUDENT_ID...`
 
-* Training index refers to the index of the training in the displayed training list.
+* Training index refers to the index of the training in the **displayed** training list.
 * Multiple students can be deleted with the same command by listing multiple student Ids separated with a comma.
 * Only one training index can be specified at a time.
 
@@ -292,7 +293,7 @@ Marks/Unmarks a student's attendance for a training.
 
 Format: `mark-attendance TRAINING_INDEX id/STUDENT_ID...`
 
-* Training index refers to the index of the training in the displayed training list.
+* Training index refers to the index of the training in the **displayed** training list.
 * Only ONE training index can be specified in the same command. 
 * Multiple student ids can be specified in the same command.
 * If the student's attendance has already been marked, `mark-attendance` would still execute successfully, but there will be no changes reflected. The converse is true as well for `unmark-attendance`.
