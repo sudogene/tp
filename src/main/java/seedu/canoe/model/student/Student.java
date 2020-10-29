@@ -440,6 +440,11 @@ public class Student {
         int numOfAbsences = 0;
         int threshold = 3;
 
+        if (trainingAttendances.isEmpty()) {
+            return false;
+        }
+
+        assert !trainingAttendances.isEmpty();
         for (Attendance attendance : trainingAttendances) {
             if (attendance.getTrainingTime().isAfter(LocalDateTime.now())) {
                 continue;
