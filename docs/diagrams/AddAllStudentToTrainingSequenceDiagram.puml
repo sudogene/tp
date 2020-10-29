@@ -4,7 +4,7 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":CanoeCoachParser" as CanoeCoachParser LOGIC_COLOR
-participant "AddAllStudentCommandParser" as AddAllStudentCommandParser LOGIC_COLOR
+participant ":AddAllStudentCommandParser" as AddAllStudentCommandParser LOGIC_COLOR
 participant "c:AddAllStudentToTrainingCommand" as AddAllStudentToTrainingCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
