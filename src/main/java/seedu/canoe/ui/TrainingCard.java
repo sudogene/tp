@@ -8,9 +8,9 @@ import java.util.Locale;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.canoe.model.training.Training;
 
 /**
@@ -31,13 +31,13 @@ public class TrainingCard extends UiPart<Region> {
     public final Training training;
 
     @FXML
-    private HBox cardPane2;
+    private HBox trainingCardPane;
     @FXML
     private Label id;
     @FXML
     private Label name;
     @FXML
-    private FlowPane students;
+    private VBox students;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.

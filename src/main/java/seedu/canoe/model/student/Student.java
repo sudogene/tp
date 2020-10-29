@@ -378,7 +378,8 @@ public class Student {
 
         boolean isAvailable = true;
         for (Attendance attendance: trainingAttendances) {
-            if (!isAvailableAtDateTime(attendance.getTrainingTime())) {
+            if (attendance.getTrainingTime().plusHours(3).isAfter(LocalDateTime.now())
+                    && !isAvailableAtDateTime(attendance.getTrainingTime())) {
                 isAvailable = false;
             }
         }

@@ -1,5 +1,6 @@
 package seedu.canoe.model.util;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,7 +16,8 @@ public class StudentTrainingSessionUtil {
         Set<Attendance> trainingSchedules, Student student) {
         List<Attendance> conflicts = trainingSchedules
                 .stream()
-                .filter(attend -> !student.isAvailableAtDateTime(attend.getTrainingTime()))
+                .filter(attend -> attend.getTrainingTime().plusHours(3).isAfter(LocalDateTime.now())
+                        && !student.isAvailableAtDateTime(attend.getTrainingTime()))
                 .collect(Collectors.toList());
         return conflicts;
     }

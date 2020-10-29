@@ -32,7 +32,7 @@ public class SampleDataUtil {
     public static Training[] getPastSampleTraining() {
         LocalDateTime pastDateTime = LocalDateTime.parse("2020-08-26 1500",
                 DateTimeFormatter.ofPattern("yyyy-MM-dd " + "HHmm"));
-        LocalDateTime secondPastDateTime = LocalDateTime.parse("2020-09-15 1400",
+        LocalDateTime secondPastDateTime = LocalDateTime.parse("2020-09-15 1500",
                 DateTimeFormatter.ofPattern("yyyy-MM-dd " + "HHmm"));
         Training firstTraining = new Training(pastDateTime);
         Training secondTraining = new Training(secondPastDateTime);
@@ -44,7 +44,7 @@ public class SampleDataUtil {
     }
 
     public static Training[] getFutureSampleTraining() {
-        LocalDateTime nearFutureDateTime = LocalDateTime.parse("2021-01-26 1400",
+        LocalDateTime nearFutureDateTime = LocalDateTime.parse("2021-01-26 1500",
                 DateTimeFormatter.ofPattern("yyyy-MM-dd " + "HHmm"));
         LocalDateTime secondNearFutureDateTime = LocalDateTime.parse("2021-02-12 1500",
                 DateTimeFormatter.ofPattern("yyyy-MM-dd " + "HHmm"));

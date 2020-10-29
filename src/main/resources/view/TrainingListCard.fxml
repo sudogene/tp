@@ -10,7 +10,8 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Separator?>
-<HBox id="cardPane2" fx:id="cardPane2" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="trainingCardPane" fx:id="trainingCardPane" xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
@@ -29,7 +30,7 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <Separator fx:id="trainingCardSeparator" />
-      <FlowPane fx:id="students" />
+      <VBox fx:id="students" />
     </VBox>
   </GridPane>
 </HBox>
