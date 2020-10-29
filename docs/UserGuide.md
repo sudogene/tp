@@ -216,8 +216,7 @@ Deletes an existing training from the training list.
 Format: `delete-training TRAINING_INDEX`
 
 * Deletes the training at the specified `TRAINING_INDEX`.
-* Training index refers to the index of the training in the unfiltered training list.
-* Take note that even if training list is filtered, the ids of the entire unfiltered training list is utilised, hence, always do a `list` command before deleting the correct training. 
+* Training index refers to the index of the training in the **displayed** training list.
 * The index must be an unsigned integer 1, 2, 3, …
 * All students inside of the training to be deleted will have the training removed from their training schedules.
 
@@ -229,8 +228,7 @@ Adds students to a training.
 
 Format: `ts-add TRAINING_INDEX id/STUDENT_ID...`
 
-* Training index refers to the index of the training in the unfiltered training list.
-* Take note that even if training list is filtered, the ids of the entire unfiltered training list is utilised, hence, always do a `list` command before adding the student. 
+* Training index refers to the index of the training in the **displayed** training list.
 * Multiple students can be added with the same command by inputing multiple student indexes separated with a comma.
 * Only one training index can be specified at a time.
 * Each student can only be added to a **SINGLE** training on the same date regardless of time.
@@ -247,8 +245,6 @@ Adds all available students to a training.
 Format: `ts-addall TRAINING_INDEX`
 
 * Training index refers to the index of the training in the **displayed** training list.
-* Take note that even if training list is filtered, the ids of the entire unfiltered training list is utilised, hence, always do a `list` command before adding the students. 
-* Take note that this command only looks at students and trainings based on the displayed training list, and not the entire unfiltered training list.
 * All students displayed in the student list will be added to the training if they can be added.
 * A student can be added to the training if and only if:
    * They are available for the training's date time based on their dismissal times
@@ -266,8 +262,7 @@ Deletes students from a training.
 
 Format: `ts-delete TRAINING_INDEX id/STUDENT_ID...`
 
-* Training index refers to the index of the training in the unfiltered training list.
-* Take note that even if training list is filtered, the ids of the entire unfiltered training list is utilised, hence, always do a `list` command before deleting the student from the training. 
+* Training index refers to the index of the training in the **displayed** training list.
 * Multiple students can be deleted with the same command by listing multiple student Ids separated with a comma.
 * Only one training index can be specified at a time.
 
@@ -298,7 +293,7 @@ Marks/Unmarks a student's attendance for a training.
 
 Format: `mark-attendance TRAINING_INDEX id/STUDENT_ID...`
 
-* Training index refers to the index of the training in the displayed training list.
+* Training index refers to the index of the training in the **displayed** training list.
 * Only ONE training index can be specified in the same command. 
 * Multiple student ids can be specified in the same command.
 * If the student's attendance has already been marked, `mark-attendance` would still execute successfully, but there will be no changes reflected. The converse is true as well for `unmark-attendance`.

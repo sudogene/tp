@@ -2,7 +2,6 @@ package seedu.canoe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
-import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,9 +40,7 @@ public class DeleteTrainingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        //Added in case previous command is find
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        model.updateFilteredTrainingList(PREDICATE_SHOW_ALL_TRAININGS);
 
         List<Training> lastShownList = model.getFilteredTrainingList();
 

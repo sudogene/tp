@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
-import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,10 +62,6 @@ public class DeleteStudentFromTrainingCommand extends Command {
         LOGGER.info("=============================[ Executing DeleteStudentFromTrainingCommand ]========"
                 + "===================");
         requireNonNull(model);
-
-        // Show full unfiltered lists
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        model.updateFilteredTrainingList(PREDICATE_SHOW_ALL_TRAININGS);
 
         List<Training> trainingList = model.getFilteredTrainingList();
 
