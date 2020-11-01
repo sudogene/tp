@@ -102,10 +102,10 @@ public class StudentCard extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        pastTrainingTag.setText("Past Trainings Scheduled : ");
-        // Pulls out the trainings which have been past by at least 3 hours from training start time
+        pastTrainingTag.setText("Past and Ongoing Trainings : ");
+        // Pulls out the trainings which have been past from training start time
         for (Attendance attendance
-                : student.getTrainingAttendances().stream().filter(training -> training.getTrainingTime().plusHours(3)
+                : student.getTrainingAttendances().stream().filter(training -> training.getTrainingTime()
                         .isBefore(LocalDateTime.now())).collect(Collectors.toList())) {
             Label pastAttendanceLabel = new Label(attendance.toString());
             pastAttendanceLabel.backgroundProperty().bind(
@@ -113,10 +113,10 @@ public class StudentCard extends UiPart<Region> {
                             .otherwise(unmarkedAttendance));
             pastTrainingAttendances.getChildren().add(pastAttendanceLabel);
         }
-        upcomingTrainingTag.setText("Upcoming Trainings Scheduled : ");
+        upcomingTrainingTag.setText("Upcoming Trainings : ");
         // Pulls out the upcoming trainings which have not passed yet
         for (Attendance attendance
-                : student.getTrainingAttendances().stream().filter(training -> training.getTrainingTime().plusHours(3)
+                : student.getTrainingAttendances().stream().filter(training -> training.getTrainingTime()
                         .isAfter(LocalDateTime.now())).collect(Collectors.toList())) {
             Label upcomingAttendanceLabel = new Label(attendance.toString());
             upcomingAttendanceLabel.backgroundProperty().bind(

@@ -147,7 +147,7 @@ public class ParserUtil {
             LocalDateTime dateTime = LocalDateTime.parse(trimmedTraining, formatter);
             return new Training(dateTime);
         } catch (DateTimeException e) {
-            throw new ParseException(Training.MESSAGE_CONSTRAINTS + "DateTime has to be valid as well.");
+            throw new ParseException(Training.MESSAGE_CONSTRAINTS);
         }
     }
 
