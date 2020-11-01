@@ -51,7 +51,7 @@ public class FindStudentTrainingCommandParser implements Parser<FindStudentTrain
                 throw new ParseException(FindStudentTrainingCommand.MESSAGE_NO_STUDENT_QUERY);
             }
             if (!idValue.matches("\\d+")) {
-                logger.warning("Only one student should be specified in the command argument!" + args);
+                logger.warning("Formatting of ID is wrong!" + args);
                 throw new ParseException(FindStudentTrainingCommand.MESSAGE_ONE_STUDENT_QUERY);
             }
 
