@@ -7,6 +7,7 @@ import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -68,7 +69,7 @@ public class FindStudentTrainingCommandParser implements Parser<FindStudentTrain
             }
             try {
                 LocalDateTime dateTime = LocalDateTime.parse(dateTimeValue,
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                        DateTimeFormatter.ofPattern("uuuu-MM-dd HHmm").withResolverStyle(ResolverStyle.STRICT));
                 studentPredicate = new DateTimeMatchesPredicate(dateTime);
                 trainingPredicate = new TrainingMatchesDateTimePredicate(dateTime);
             } catch (DateTimeParseException e) {
@@ -81,7 +82,7 @@ public class FindStudentTrainingCommandParser implements Parser<FindStudentTrain
             String dateTimeValue = argMultimap.getValue(PREFIX_DATETIME).get();
             try {
                 LocalDateTime dateTime = LocalDateTime.parse(dateTimeValue,
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                        DateTimeFormatter.ofPattern("uuuu-MM-dd HHmm").withResolverStyle(ResolverStyle.STRICT));
                 studentPredicate = new IdMatchesPredicate(idValue);
                 trainingPredicate = new TrainingMatchesDateTimePredicate(dateTime);
             } catch (DateTimeParseException e) {

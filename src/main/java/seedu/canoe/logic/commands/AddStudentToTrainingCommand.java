@@ -67,11 +67,11 @@ public class AddStudentToTrainingCommand extends Command {
         LOGGER.info("==========================[ Executing AddStudentToTrainingCommand ]==========================");
 
         requireNonNull(model);
+        assert (model != null);
 
         List<Training> lastShownList = model.getFilteredTrainingList();
         List<Student> studentList = model.getFilteredStudentList();
 
-        //Throws a CommandException if there are no Students in studentList
         if (studentList.isEmpty()) {
             throw new CommandException(MESSAGE_NO_STUDENTS);
         }
