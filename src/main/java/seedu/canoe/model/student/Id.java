@@ -13,9 +13,6 @@ import seedu.canoe.commons.util.StringUtil;
 public class Id {
     public static final String MESSAGE_CONSTRAINTS = "Id must be numeric and unique.";
 
-    /** pads the Id value with leading spaces to be converted to zeroes */
-    public static final String PADDING_FORMAT = "%1$3s";
-
     /** validates if the string is numeric */
     public static final String VALIDATION_REGEX = "-?\\d+(\\.\\d+)?";
 
