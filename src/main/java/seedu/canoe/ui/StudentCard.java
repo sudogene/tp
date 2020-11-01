@@ -76,7 +76,7 @@ public class StudentCard extends UiPart<Region> {
         Background markedAttendance = new Background(new BackgroundFill(Color.GREEN,
                 null, null));
         id.setText(displayedIndex + ". ");
-        studentId.setText("ID: " + student.getId());
+        studentId.setText("Id: " + student.getId());
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);
         email.setText(student.getEmail().value);

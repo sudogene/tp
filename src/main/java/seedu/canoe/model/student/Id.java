@@ -88,7 +88,6 @@ public class Id {
 
     @Override
     public String toString() {
-        return String.format(PADDING_FORMAT, value)
-                .replace(' ', '0');
+        return String.valueOf(value);
     }
 }
