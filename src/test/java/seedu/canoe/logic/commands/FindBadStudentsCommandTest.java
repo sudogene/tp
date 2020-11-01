@@ -91,7 +91,7 @@ class FindBadStudentsCommandTest {
         CARL.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2, pastTraining3));
         FIONA.addAllAttendances(Arrays.asList(pastTraining1, pastTraining2, pastTraining3));
 
-        String expectedMessage = "Alice Pauline(ID: 001)";
+        String expectedMessage = "Alice Pauline(Id: 1)";
         FindBadStudentsCommand command = new FindBadStudentsCommand();
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 

@@ -81,7 +81,7 @@ class UnmarkAttendanceCommandTest {
 
     @Test
     void execute_validParams_commandSuccess() {
-        String expectedMessage = "Unmarked these students for their attendance: 002 005!";
+        String expectedMessage = "Unmarked these students for their attendance: 2 5!";
         IdMatchesPredicate firstIdPredicate = new IdMatchesPredicate("2");
         IdMatchesPredicate secondIdPredicate = new IdMatchesPredicate("5");
 
