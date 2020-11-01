@@ -30,7 +30,7 @@ public class Id {
      */
     public Id(String value) {
         requireNonNull(value);
-        if (!value.equals(PLACEHOLDER_VALUE)) {
+        if (!value.equals(PLACEHOLDER_VALUE) && !isUsedId(value)) {
             Id.usedIds.add(value);
             Id.lastUsedId = Integer.parseInt(value);
         }
@@ -51,7 +51,7 @@ public class Id {
     }
 
     /**
-     * Returns true if a given string is a valid id.
+     * Returns true if a given string is a valid value for Id.
      */
     public static boolean isValidId(String test) {
         return test.matches(VALIDATION_REGEX) && StringUtil.isNonZeroUnsignedInteger(test);
