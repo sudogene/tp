@@ -14,14 +14,14 @@ class AcademicYearMatchesPredicateTest {
         String firstYear = "1";
         String secondYear = "2";
 
-        AcademicYearMatchesPredicate firstPredicate = new AcademicYearMatchesPredicate(firstYear);
-        AcademicYearMatchesPredicate secondPredicate = new AcademicYearMatchesPredicate(secondYear);
+        AcademicYearMatchesPredicate firstPredicate = new AcademicYearMatchesPredicate(new AcademicYear(firstYear));
+        AcademicYearMatchesPredicate secondPredicate = new AcademicYearMatchesPredicate(new AcademicYear(secondYear));
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        AcademicYearMatchesPredicate firstPredicateCopy = new AcademicYearMatchesPredicate(firstYear);
+        AcademicYearMatchesPredicate firstPredicateCopy = new AcademicYearMatchesPredicate(new AcademicYear(firstYear));
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -36,13 +36,13 @@ class AcademicYearMatchesPredicateTest {
 
     @Test
     void test_yearMatches_returnsTrue() {
-        AcademicYearMatchesPredicate predicate = new AcademicYearMatchesPredicate("3");
+        AcademicYearMatchesPredicate predicate = new AcademicYearMatchesPredicate(new AcademicYear("3"));
         assertTrue(predicate.test(new StudentBuilder().withAcademicYear("3").build()));
     }
 
     @Test
     void test_yearDoesNotMatch_returnsFalse() {
-        AcademicYearMatchesPredicate predicate = new AcademicYearMatchesPredicate("3");
+        AcademicYearMatchesPredicate predicate = new AcademicYearMatchesPredicate(new AcademicYear("3"));
         assertFalse(predicate.test(new StudentBuilder().withAcademicYear("1").build()));
         assertFalse(predicate.test(new StudentBuilder().withAcademicYear("2").build()));
     }

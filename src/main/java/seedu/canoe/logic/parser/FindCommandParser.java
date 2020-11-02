@@ -18,6 +18,7 @@ import java.util.List;
 
 import seedu.canoe.logic.commands.FindCommand;
 import seedu.canoe.logic.parser.exceptions.ParseException;
+import seedu.canoe.model.student.AcademicYear;
 import seedu.canoe.model.student.AcademicYearMatchesPredicate;
 import seedu.canoe.model.student.AllMatchPredicateList;
 import seedu.canoe.model.student.EmailContainsKeywordPredicate;
@@ -80,7 +81,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             String academicYearValue = argMultimap.getValue(PREFIX_ACADEMIC_YEAR).get();
             if (!academicYearValue.isEmpty()) {
                 checkEmptyString = false;
-                predicates.add(new AcademicYearMatchesPredicate(academicYearValue));
+                AcademicYear year = ParserUtil.parseAcademicYear(academicYearValue);
+                predicates.add(new AcademicYearMatchesPredicate(year));
             }
         }
 

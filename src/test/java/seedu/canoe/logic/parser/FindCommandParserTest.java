@@ -8,6 +8,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.canoe.logic.commands.FindCommand;
+import seedu.canoe.model.student.AcademicYear;
 import seedu.canoe.model.student.AcademicYearMatchesPredicate;
 import seedu.canoe.model.student.AllMatchPredicateList;
 import seedu.canoe.model.student.EmailContainsKeywordPredicate;
@@ -43,7 +44,7 @@ public class FindCommandParserTest {
         FindCommand thirdExpectedFindCommand =
                 new FindCommand(AllMatchPredicateList.of(
                         new EmailContainsKeywordPredicate("meow"),
-                        new AcademicYearMatchesPredicate("2"),
+                        new AcademicYearMatchesPredicate(new AcademicYear("2")),
                         new IdMatchesPredicate("1")
                 ));
         assertParseSuccess(parser, " e/meow ay/2 id/1", thirdExpectedFindCommand);
