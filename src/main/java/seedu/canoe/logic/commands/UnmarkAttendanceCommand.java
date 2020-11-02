@@ -76,7 +76,8 @@ public class UnmarkAttendanceCommand extends Command {
 
         if (!studentsHaveAttendance(unmarkedAttendance, attendedStudents)) {
             LOGGER.warning("Some students do not contain training session");
-            return new CommandResult(MESSAGE_INVALID_STUDENT_UNMARKED);
+            model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_UNMARKED);
         }
 
         for (Student student : attendedStudents) {

@@ -54,7 +54,7 @@ class MarkAttendanceCommandTest {
     }
 
     @Test
-    void execute_validParams_studentsNotInTrainingMessage() {
+    void execute_validParams_commandFailure() {
         String expectedMessage = "Some students do not have specified"
                 + " training session scheduled!";
         IdMatchesPredicate firstIdPredicate = new IdMatchesPredicate("1");
@@ -66,17 +66,11 @@ class MarkAttendanceCommandTest {
         model.addTraining(firstTraining);
         model.addTraining(secondTraining);
         model.addTraining(thirdTraining);
-        expectedModel.addTraining(firstTraining);
-        expectedModel.addTraining(secondTraining);
-        expectedModel.addTraining(thirdTraining);
-
-        AnyMatchPredicateList predicateList = AnyMatchPredicateList.of(firstIdPredicate, secondIdPredicate);
-        expectedModel.updateFilteredStudentList(predicateList);
 
         Index trainingIndex = INDEX_THIRD_TRAINING;
         MarkAttendanceCommand command = new MarkAttendanceCommand(
                 trainingIndex, AnyMatchPredicateList.of(firstIdPredicate, secondIdPredicate));
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test
