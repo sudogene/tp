@@ -120,7 +120,7 @@ public class Training {
      * @return true if student id is present inside of training schedule.
      */
     public boolean hasStudentId(String studentId) {
-        return getStudents().stream().map(student -> student.getId()).anyMatch(id -> id.getValue().equals(studentId));
+        return getStudents().stream().map(Student::getId).anyMatch(id -> id.getValue().equals(studentId));
     }
 
     /**
