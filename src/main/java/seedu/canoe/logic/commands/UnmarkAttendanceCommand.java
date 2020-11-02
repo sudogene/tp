@@ -7,6 +7,7 @@ import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.commons.core.index.Index;
@@ -29,8 +30,8 @@ public class UnmarkAttendanceCommand extends Command {
             + "Example: " + COMMAND_WORD + " 2 id/1,4,19";
 
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be unmarked must be specified.";
-    public static final String MESSAGE_INVALID_STUDENT_UNMARKED = "Some students do not have specified"
-            + " training session scheduled!";
+    public static final String MESSAGE_INVALID_STUDENT_UNMARKED = "These students do not have the specified"
+            + " training session scheduled: %1$s!";
     public static final String MESSAGE_UNMARK_ATTENDANCE_SUCCESS = "Unmarked these students for "
         + "their attendance: %1$s!";
 
@@ -74,10 +75,11 @@ public class UnmarkAttendanceCommand extends Command {
         Attendance markedAttendance = new Attendance(training.getDateTime());
         markedAttendance.marks();
 
-        if (!studentsHaveAttendance(unmarkedAttendance, attendedStudents)) {
+        List<Student> studentsNoAttendance = studentsWithNoAttendance(unmarkedAttendance, attendedStudents);
+        if (!studentsNoAttendance.isEmpty()) {
             LOGGER.warning("Some students do not contain training session");
             model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-            throw new CommandException(MESSAGE_INVALID_STUDENT_UNMARKED);
+            throw new CommandException(String.format(MESSAGE_INVALID_STUDENT_UNMARKED, getStudentIdsAsString(studentsNoAttendance)));
         }
 
         for (Student student : attendedStudents) {
@@ -97,20 +99,19 @@ public class UnmarkAttendanceCommand extends Command {
     }
 
     /**
-     * Checks the list of students and returns whether all the students have the attendance.
+     * Checks the list of students and returns a list of students who do not have the attendance.
      *
      * @param attendance to be checked for.
      * @param studentsToCheck list of students to check.
-     * @return true if students have training session scheduled, false if otherwise.
+     * @return list of students who do not have training session scheduled.
      */
-    public boolean studentsHaveAttendance(Attendance attendance, List<Student> studentsToCheck) {
+    public List<Student> studentsWithNoAttendance(Attendance attendance, List<Student> studentsToCheck) {
         assert attendance != null;
-        for (Student student: studentsToCheck) {
-            if (!student.containsAttendance(attendance)) {
-                return false;
-            }
-        }
-        return true;
+        List<Student> studentsNoAttendance = studentsToCheck.stream()
+                .filter(student -> !student.containsAttendance(attendance))
+                .collect(Collectors.toList());
+
+        return studentsNoAttendance;
     }
 
     /**
