@@ -23,6 +23,7 @@ import seedu.canoe.model.student.AllMatchPredicateList;
 import seedu.canoe.model.student.EmailContainsKeywordPredicate;
 import seedu.canoe.model.student.IdMatchesPredicate;
 import seedu.canoe.model.student.NameContainsKeywordsPredicate;
+import seedu.canoe.model.student.Phone;
 import seedu.canoe.model.student.PhoneMatchesPredicate;
 import seedu.canoe.model.student.time.Day;
 import seedu.canoe.model.student.time.FridayDismissalPredicate;
@@ -40,7 +41,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
      */
-    public FindCommand parse(String args) throws ParseException {
+    public FindCommand parse(String args) throws ParseException, IllegalArgumentException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ACADEMIC_YEAR,
@@ -51,7 +52,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         AllMatchPredicateList predicates = new AllMatchPredicateList();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String text = argMultimap.getValue(PREFIX_NAME).get();
-            if (text.equals("")) {
+            if (text.isEmpty()) {
                 checkEmptyString = true;
             } else {
                 predicates.add(new NameContainsKeywordsPredicate(getKeywordsFromString(text)));
@@ -60,15 +61,16 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             String phoneValue = argMultimap.getValue(PREFIX_PHONE).get();
-            if (!phoneValue.equals("")) {
+            if (!phoneValue.isEmpty()) {
                 checkEmptyString = false;
-                predicates.add(new PhoneMatchesPredicate(phoneValue));
+                Phone phone = ParserUtil.parsePhone(phoneValue);
+                predicates.add(new PhoneMatchesPredicate(phone));
             }
         }
 
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             String keyword = argMultimap.getValue(PREFIX_EMAIL).get();
-            if (!keyword.equals("")) {
+            if (!keyword.isEmpty()) {
                 checkEmptyString = false;
                 predicates.add(new EmailContainsKeywordPredicate(keyword));
             }
@@ -76,7 +78,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (argMultimap.getValue(PREFIX_ACADEMIC_YEAR).isPresent()) {
             String academicYearValue = argMultimap.getValue(PREFIX_ACADEMIC_YEAR).get();
-            if (!academicYearValue.equals("")) {
+            if (!academicYearValue.isEmpty()) {
                 checkEmptyString = false;
                 predicates.add(new AcademicYearMatchesPredicate(academicYearValue));
             }
@@ -84,7 +86,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (argMultimap.getValue(PREFIX_MONDAY_DISMISSAL).isPresent()) {
             String timeString = argMultimap.getValue(PREFIX_MONDAY_DISMISSAL).get();
-            if (!timeString.equals("")) {
+            if (!timeString.isEmpty()) {
                 checkEmptyString = false;
                 predicates.add(new MondayDismissalPredicate(getTimeFromString(timeString)));
             }
@@ -92,7 +94,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (argMultimap.getValue(PREFIX_TUESDAY_DISMISSAL).isPresent()) {
             String timeString = argMultimap.getValue(PREFIX_TUESDAY_DISMISSAL).get();
-            if (!timeString.equals("")) {
+            if (!timeString.isEmpty()) {
                 checkEmptyString = false;
                 predicates.add(new TuesdayDismissalPredicate(getTimeFromString(timeString)));
             }
@@ -100,7 +102,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (argMultimap.getValue(PREFIX_WEDNESDAY_DISMISSAL).isPresent()) {
             String timeString = argMultimap.getValue(PREFIX_WEDNESDAY_DISMISSAL).get();
-            if (!timeString.equals("")) {
+            if (!timeString.isEmpty()) {
                 checkEmptyString = false;
                 predicates.add(new WednesdayDismissalPredicate(getTimeFromString(timeString)));
             }
@@ -108,7 +110,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (argMultimap.getValue(PREFIX_THURSDAY_DISMISSAL).isPresent()) {
             String timeString = argMultimap.getValue(PREFIX_THURSDAY_DISMISSAL).get();
-            if (!timeString.equals("")) {
+            if (!timeString.isEmpty()) {
                 checkEmptyString = false;
                 predicates.add(new ThursdayDismissalPredicate(getTimeFromString(timeString)));
             }
@@ -116,7 +118,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (argMultimap.getValue(PREFIX_FRIDAY_DISMISSAL).isPresent()) {
             String timeString = argMultimap.getValue(PREFIX_FRIDAY_DISMISSAL).get();
-            if (!timeString.equals("")) {
+            if (!timeString.isEmpty()) {
                 checkEmptyString = false;
                 predicates.add(new FridayDismissalPredicate(getTimeFromString(timeString)));
             }
@@ -124,7 +126,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             String idValue = argMultimap.getValue(PREFIX_ID).get();
-            if (!idValue.equals("")) {
+            if (!idValue.isEmpty()) {
                 checkEmptyString = false;
                 predicates.add(new IdMatchesPredicate(idValue));
             }
