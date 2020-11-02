@@ -1,7 +1,5 @@
 package seedu.canoe.logic.parser;
 
-import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import java.time.LocalDateTime;
 
 import seedu.canoe.logic.commands.TrainingCommand;
@@ -15,12 +13,11 @@ public class TrainingCommandParser implements Parser<TrainingCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public TrainingCommand parse(String args) throws ParseException {
-        try {
-            LocalDateTime trainingTime = ParserUtil.parseTraining(args).getDateTime();
-            return new TrainingCommand(trainingTime);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TrainingCommand.MESSAGE_USAGE), pe);
+        if (args.trim().isEmpty()) {
+            throw new ParseException("Datetime cannot be empty!");
         }
+
+        LocalDateTime trainingTime = ParserUtil.parseTraining(args).getDateTime();
+        return new TrainingCommand(trainingTime);
     }
 }

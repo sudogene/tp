@@ -4,13 +4,14 @@ import static seedu.canoe.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.canoe.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.canoe.logic.commands.FindStudentTrainingCommand;
+import seedu.canoe.logic.parser.exceptions.ParseException;
 import seedu.canoe.model.student.DateTimeMatchesPredicate;
 import seedu.canoe.model.student.IdMatchesPredicate;
+import seedu.canoe.model.training.Training;
 import seedu.canoe.model.training.TrainingMatchesDateTimePredicate;
 import seedu.canoe.model.training.TrainingMatchesIdPredicate;
 
@@ -36,9 +37,9 @@ public class FindStudentTrainingCommandParserTest {
     }
 
     @Test
-    public void parse_validIdWithDateTime_returnsFindStudentTrainingCommand() {
-        LocalDateTime dateTime = LocalDateTime.parse("2021-08-26 1800",
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+    public void parse_validIdWithDateTime_returnsFindStudentTrainingCommand() throws ParseException {
+        LocalDateTime dateTime = ParserUtil.parseTraining("2021-08-26 1800").getDateTime();
+
         IdMatchesPredicate firstStudentPredicate = new IdMatchesPredicate("1");
         TrainingMatchesDateTimePredicate firstTrainingPredicate = new TrainingMatchesDateTimePredicate(dateTime);
 
@@ -55,9 +56,9 @@ public class FindStudentTrainingCommandParserTest {
     }
 
     @Test
-    public void parse_validDateTimeWithoutId_returnsFindStudentTrainingCommand() {
-        LocalDateTime dateTime = LocalDateTime.parse("2021-08-26 1800",
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+    public void parse_validDateTimeWithoutId_returnsFindStudentTrainingCommand() throws ParseException {
+        LocalDateTime dateTime = ParserUtil.parseTraining("2021-08-26 1800").getDateTime();
+
         DateTimeMatchesPredicate firstStudentPredicate = new DateTimeMatchesPredicate(dateTime);
         TrainingMatchesDateTimePredicate firstTrainingPredicate = new TrainingMatchesDateTimePredicate(dateTime);
 
@@ -91,13 +92,13 @@ public class FindStudentTrainingCommandParserTest {
     @Test
     public void parse_wrongDateFormat_failure() {
         assertParseFailure(parser, " dt/2021-26-08",
-                FindStudentTrainingCommand.MESSAGE_WRONG_DATETIME_FORMAT_QUERY);
+                Training.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_wrongTimeFormat_failure() {
         assertParseFailure(parser, " dt/2021-26-08 18:00",
-                FindStudentTrainingCommand.MESSAGE_WRONG_DATETIME_FORMAT_QUERY);
+                Training.MESSAGE_CONSTRAINTS);
     }
 
     @Test
