@@ -41,8 +41,8 @@ class MarkAttendanceCommandTest {
     @Test
     void execute_studentIndexOutOfRange_commandFailure() {
         String expectedMessage = "Search result matches no students!";
-        Training firstTraining = TypicalTraining.VALID_TRAINING1;
-        Training secondTraining = TypicalTraining.VALID_TRAINING2;
+        Training firstTraining = TypicalTraining.VALID_PAST_TRAINING;
+        Training secondTraining = TypicalTraining.VALID_PAST_TRAINING1;
         model.addTraining(firstTraining);
         model.addTraining(secondTraining);
         Index trainingIndex = INDEX_SECOND_TRAINING;
@@ -60,9 +60,9 @@ class MarkAttendanceCommandTest {
         IdMatchesPredicate firstIdPredicate = new IdMatchesPredicate("1");
         IdMatchesPredicate secondIdPredicate = new IdMatchesPredicate("4");
 
-        Training firstTraining = TypicalTraining.VALID_TRAINING1;
-        Training secondTraining = TypicalTraining.VALID_TRAINING2;
-        Training thirdTraining = TypicalTraining.VALID_TRAINING3;
+        Training firstTraining = TypicalTraining.VALID_PAST_TRAINING;
+        Training secondTraining = TypicalTraining.VALID_PAST_TRAINING1;
+        Training thirdTraining = TypicalTraining.VALID_PAST_TRAINING2;
         model.addTraining(firstTraining);
         model.addTraining(secondTraining);
         model.addTraining(thirdTraining);
@@ -79,9 +79,9 @@ class MarkAttendanceCommandTest {
         IdMatchesPredicate firstIdPredicate = new IdMatchesPredicate("2");
         IdMatchesPredicate secondIdPredicate = new IdMatchesPredicate("5");
 
-        Training firstTraining = TypicalTraining.VALID_TRAINING1;
-        Training secondTraining = TypicalTraining.VALID_TRAINING2;
-        Training thirdTraining = TypicalTraining.VALID_TRAINING3;
+        Training firstTraining = TypicalTraining.VALID_PAST_TRAINING;
+        Training secondTraining = TypicalTraining.VALID_PAST_TRAINING1;
+        Training thirdTraining = TypicalTraining.VALID_PAST_TRAINING2;
         model.addTraining(firstTraining);
         model.addTraining(secondTraining);
         model.addTraining(thirdTraining);
