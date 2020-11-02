@@ -13,7 +13,7 @@ public class TrainingCommandParser implements Parser<TrainingCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public TrainingCommand parse(String args) throws ParseException {
-        if (args.trim().equals("")) {
+        if (args.trim().isEmpty()) {
             throw new ParseException("Datetime cannot be empty!");
         }
 
