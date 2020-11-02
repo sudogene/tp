@@ -13,9 +13,6 @@ import seedu.canoe.commons.util.StringUtil;
 public class Id {
     public static final String MESSAGE_CONSTRAINTS = "Id must be numeric and unique.";
 
-    /** pads the Id value with leading spaces to be converted to zeroes */
-    public static final String PADDING_FORMAT = "%1$3s";
-
     /** validates if the string is numeric */
     public static final String VALIDATION_REGEX = "-?\\d+(\\.\\d+)?";
 
@@ -33,7 +30,7 @@ public class Id {
      */
     public Id(String value) {
         requireNonNull(value);
-        if (!value.equals(PLACEHOLDER_VALUE)) {
+        if (!value.equals(PLACEHOLDER_VALUE) && !isUsedId(value)) {
             Id.usedIds.add(value);
             Id.lastUsedId = Integer.parseInt(value);
         }
@@ -54,7 +51,7 @@ public class Id {
     }
 
     /**
-     * Returns true if a given string is a valid id.
+     * Returns true if a given string is a valid value for Id.
      */
     public static boolean isValidId(String test) {
         return test.matches(VALIDATION_REGEX) && StringUtil.isNonZeroUnsignedInteger(test);
@@ -88,7 +85,6 @@ public class Id {
 
     @Override
     public String toString() {
-        return String.format(PADDING_FORMAT, value)
-                .replace(' ', '0');
+        return String.valueOf(value);
     }
 }

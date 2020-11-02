@@ -12,7 +12,7 @@ import seedu.canoe.model.student.exceptions.DuplicateStudentException;
 
 public class Training {
 
-    public static final String MESSAGE_CONSTRAINTS = "Must be a valid date and time.";
+    public static final String MESSAGE_CONSTRAINTS = "Datetime provided must be a valid date and time.";
     private final LocalDateTime dateTime;
 
     //Used a TreeSet with Comparator to sort Students by increasing Unique ID values.
