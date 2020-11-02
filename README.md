@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b47e09f47a4347e4a2e0c89f1bc65e8b)](https://app.codacy.com/gh/AY2021S1-CS2103-F10-1/tp?utm_source=github.com&utm_medium=referral&utm_content=AY2021S1-CS2103-F10-1/tp&utm_campaign=Badge_Grade_Settings)
 [![CI Status](https://github.com/AY2021S1-CS2103-F10-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2021S1-CS2103-F10-1/tp/actions)
 
 # CanoE-COACH
