@@ -78,7 +78,9 @@ public class MarkAttendanceCommand extends Command {
         if (!studentsNoAttendance.isEmpty()) {
             LOGGER.warning("Some students do not contain training session");
             model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-            throw new CommandException(String.format(MESSAGE_INVALID_STUDENT_MARKED, getStudentIdsAsString(studentsNoAttendance)));
+            throw new CommandException(String.format(
+                    MESSAGE_INVALID_STUDENT_MARKED, getStudentIdsAsString(studentsNoAttendance))
+            );
         }
 
         for (Student student : attendedStudents) {
