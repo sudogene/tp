@@ -54,7 +54,7 @@ class UnmarkAttendanceCommandTest {
     }
 
     @Test
-    void execute_validParams_studentsNotInTrainingMessage() {
+    void execute_validParams_commandFailure() {
         String expectedMessage = "Some students do not have specified"
                 + " training session scheduled!";
         IdMatchesPredicate firstIdPredicate = new IdMatchesPredicate("1");
