@@ -27,6 +27,7 @@ import seedu.canoe.model.student.AllMatchPredicateList;
 import seedu.canoe.model.student.AnyMatchPredicateList;
 import seedu.canoe.model.student.IdMatchesPredicate;
 import seedu.canoe.model.student.NameContainsKeywordsPredicate;
+import seedu.canoe.model.student.Phone;
 import seedu.canoe.model.student.PhoneMatchesPredicate;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.testutil.EditStudentDescriptorBuilder;
@@ -82,7 +83,7 @@ public class CanoeCoachParserTest {
                         + " p/123456");
         assertEquals(new FindCommand(new AllMatchPredicateList(Arrays.asList(
                 new NameContainsKeywordsPredicate(Arrays.asList("foo", "bar", "baz")),
-                new PhoneMatchesPredicate("123456")))), command);
+                new PhoneMatchesPredicate(new Phone("123456"))))), command);
     }
 
     @Test

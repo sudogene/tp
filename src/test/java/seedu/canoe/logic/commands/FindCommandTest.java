@@ -21,6 +21,7 @@ import seedu.canoe.model.ModelManager;
 import seedu.canoe.model.UserPrefs;
 import seedu.canoe.model.student.AllMatchPredicateList;
 import seedu.canoe.model.student.NameContainsKeywordsPredicate;
+import seedu.canoe.model.student.Phone;
 import seedu.canoe.model.student.PhoneMatchesPredicate;
 
 /**
@@ -37,9 +38,9 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate secondNamePredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
         PhoneMatchesPredicate firstPhonePredicate =
-                new PhoneMatchesPredicate("12345678");
+                new PhoneMatchesPredicate(new Phone("12345678"));
         PhoneMatchesPredicate secondPhonePredicate =
-                new PhoneMatchesPredicate("87654321");
+                new PhoneMatchesPredicate(new Phone("87654321"));
         AllMatchPredicateList firstAllMatchPredicateList =
                 new AllMatchPredicateList(Arrays.asList(firstNamePredicate, firstPhonePredicate));
         AllMatchPredicateList secondAllMatchPredicateList =
@@ -69,9 +70,8 @@ public class FindCommandTest {
     public void execute_zeroKeywords_noStudentFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate namePredicate = preparePredicate(" ");
-        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate(" ");
         AllMatchPredicateList allMatchPredicateList = new AllMatchPredicateList(
-                Arrays.asList(namePredicate, phonePredicate)
+                Arrays.asList(namePredicate)
         );
         FindCommand command = new FindCommand(allMatchPredicateList);
         expectedModel.updateFilteredStudentList(allMatchPredicateList);
@@ -93,7 +93,7 @@ public class FindCommandTest {
     @Test
     public void execute_phoneKeyword_oneStudentFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
-        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate("9482224");
+        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate(new Phone("9482224"));
         AllMatchPredicateList allMatchPredicateList = new AllMatchPredicateList(Arrays.asList(phonePredicate));
         FindCommand command = new FindCommand(allMatchPredicateList);
         expectedModel.updateFilteredStudentList(allMatchPredicateList);
@@ -105,7 +105,7 @@ public class FindCommandTest {
     public void execute_multipleKeywords_oneStudentFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
         NameContainsKeywordsPredicate namePredicate = preparePredicate("Kurz Elle Kunz");
-        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate("9482427");
+        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate(new Phone("9482427"));
         AllMatchPredicateList allMatchPredicateList = new AllMatchPredicateList(
                 Arrays.asList(namePredicate, phonePredicate)
         );
@@ -119,7 +119,7 @@ public class FindCommandTest {
     public void execute_multipleKeywords_noStudentFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate namePredicate = preparePredicate("Kurz Elle Kunz");
-        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate("1234567");
+        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate(new Phone("1234567"));
         AllMatchPredicateList allMatchPredicateList = new AllMatchPredicateList(
                 Arrays.asList(namePredicate, phonePredicate)
         );

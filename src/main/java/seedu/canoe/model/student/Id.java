@@ -11,10 +11,10 @@ import seedu.canoe.commons.util.StringUtil;
  * Represents a Student's id in the canoe coach book.
  */
 public class Id {
-    public static final String MESSAGE_CONSTRAINTS = "Id must be numeric and unique.";
+    public static final String MESSAGE_CONSTRAINTS = "Id must be numeric with no leading zero, and greater than zero.";
 
     /** validates if the string is numeric */
-    public static final String VALIDATION_REGEX = "-?\\d+(\\.\\d+)?";
+    public static final String VALIDATION_REGEX = "^[1-9][0-9]*$";
 
     /** placeholder value */
     public static final String PLACEHOLDER_VALUE = "0";
