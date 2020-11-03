@@ -144,34 +144,41 @@ Format: `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm
 
 - Phone Number
     - Value will match exactly. e.g. `98765432` will not match `987654` but will match `98765432`
+    - The phone value query must be a valid phone number. e.g. `p/1` is invalid, `p/111` is valid
     - Only one phone number can be searched for at any one time
 
 - Email
-    - Students with emails containing the search word will be returned. e.g. `meow` will match `meow@domain.com`, `emailer@meow.com`
+    - Emails containing the search word will be returned. e.g. `meow` will match `meow@domain.com`, `emailer@meow.com`
     - Only one email address can be searched for at any one time
 
 - Academic Year
     - Value will match exactly. e.g. `2` will match `2` but not `1`
+    - The academic year value query must be a valid academic year. e.g. `ay/6` is invalid, `ay/4` is valid
 
 - Dismissal Time (`d1` to `d5`)
     - Students with dismissal times equal OR before the query time will be matched
 
       e.g. `d1/1500` will match `1500` and `1200`, but not `1530` on Monday
+    
+    - The dismissal time value query must be a valid dismissal time
 
 - Id
     - Student with the same `id` value will be matched.
+    - The id value query must be a valid id. e.g. `id/abc` is invalid, `id/2` is valid
     - Due to the nature of id being unique, only one student will be matched.
 
-- Searching by more than one field
-    - Find command will return student(s) that matches exactly with all the fields provided. e.g. `n/Alex p/123` will return `Alex Yeoh` only if his phone number matches `123`
+- **Searching by more than one field**
+    - Find command will return student(s) that matches all the fields provided. e.g. `n/Alex p/123` will return `Alex Yeoh` only if his phone number matches `123`
     - Order in which fields are written does not matter. e.g. `find n/alex e/meow@gmail.com` is the same as `find e/meow@gmail.com n/alex`
 
 Examples:
 - `find n/alex david` returns `Alex Yeoh`, `David Li`
-- `find n/alex david p/123` returns `Alex Yeoh`
-- `find e/alexyeoh@example.com p/123` returns `Alex Yeoh`
+- `find n/alex david p/123` returns `Alex Yeoh` since his phone number is `123`
 - `find n/Alex d2/1600` returns `Alex Yeoh`, provided his dismissal time on Tuesday falls at or before `1600`
-- `find e/alexyeoh@example.com p/456` returns an empty list, if such an email **AND** contact number is not present in the student list
+- `find ay/1` returns all students who are of Academic Year 1
+- `find id/3` returns the student with the student Id 3
+- `find d4/1700` returns all students who have their Thursday dismissal time equal to or before 1700
+- `find d2/1500 ay/2` returns all Academic Year 2 students with Tuesday dismissal time equal to or before 1500
 
 ### Common Time : `common-time`
 Returns the latest dismissal times on all days for all of the students in the specified subgroup. This would be the earliest time to schedule a training for all students in the sub group.
@@ -187,8 +194,9 @@ Format: `common-time [n/KEYWORDS] [ay/ACADEMIC_YEAR]`
 
 - Academic Year
     - Value will match exactly. e.g. `2` will match `2` but not `1`
+    - The academic year value query must be a valid academic year. e.g. `ay/6` is invalid, `ay/4` is valid
 
-- Searching by more than one field
+- **Searching by more than one field**
     - Common Time command will return student(s) that matches any of the fields provided.
 
 - If no student matches the search criteria, an error message will display. 

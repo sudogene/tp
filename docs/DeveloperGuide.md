@@ -271,15 +271,15 @@ The following activity diagram summarizes what happens when a user executes the 
 
 #### Design consideration:
 
-##### Aspect: How the command handles list of valid and invalid students
+#### Aspect: How the command handles a list containing valid and invalid students
 
 * **Alternative 1 (current choice):** Ignore invalid students and only add valid students.
-  * Pros: Friendlier to the user
-  * Cons: Hard to implement
+  * Pros: Friendlier to the user since the feature is for convenient mass adding of students.
+  * Cons: Hard to implement because of different handling behaviour of different students.
 
 * **Alternative 2:** Returns failed command execution if there are invalid students in the list.
-  * Pros: Easy to implement
-  * Cons: More restrictive and less friendly to the user
+  * Pros: Easy to implement, either all students can be added or no student will be added.
+  * Cons: More restrictive and less user-friendly, use case will be almost similar to `ts-add` command.
 
 ### Attendance class
 
@@ -697,8 +697,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. CanoE-COACH shows an error message.
       Use case resumes at step 1.
 
-*{More to be added}*
-
 **UC12: Mark student as having attended training session**
 
 **MSS**
@@ -724,6 +722,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. Specified student does not have specified training scheduled.
   * 2a1. CanoE-COACH shows an error message.
     Use case resumes at step 1.
+
+*{More to be added}*
 
 ### Non-Functional Requirements
 

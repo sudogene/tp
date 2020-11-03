@@ -42,7 +42,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
      */
-    public FindCommand parse(String args) throws ParseException, IllegalArgumentException {
+    public FindCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ACADEMIC_YEAR,

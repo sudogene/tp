@@ -51,8 +51,8 @@ public class CommonTimeCommandParser implements Parser<CommonTimeCommand> {
             if (!academicYearValue.equals("")) {
                 LOGGER.warning("No keyword found after academic year prefix!");
                 checkEmptyString = false;
-                predicates.add(new AcademicYearMatchesPredicate(
-                        new AcademicYear(academicYearValue)));
+                AcademicYear year = ParserUtil.parseAcademicYear(academicYearValue);
+                predicates.add(new AcademicYearMatchesPredicate(year));
             }
         }
 
