@@ -5,6 +5,7 @@ import static seedu.canoe.commons.core.Messages.MESSAGE_STUDENTS_NOT_FOUND;
 import static seedu.canoe.commons.core.Messages.MESSAGE_TRAININGS_NOT_FOUND;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -33,6 +34,8 @@ public class MarkAttendanceCommand extends Command {
     public static final String MESSAGE_INVALID_STUDENT_MARKED = "These students do not have the specified"
             + " training session scheduled: %1$s!";
     public static final String MESSAGE_MARK_ATTENDANCE_SUCCESS = "Marked these students for their attendance: %1$s!";
+    public static final String MESSAGE_TRAINING_NOT_OVER = "The training is yet to be conducted, and attendance cannot "
+        + "be marked yet!";
 
     private final Index trainingIndex;
     private final AnyMatchPredicateList predicates;
@@ -52,10 +55,17 @@ public class MarkAttendanceCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         LOGGER.info("=============================[ Executing MarkAttendanceCommand ]===========================");
         requireNonNull(model);
+
         List<Training> lastShownList = model.getFilteredTrainingList();
 
         if (trainingIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_TRAININGS_NOT_FOUND);
+        }
+
+        Training training = lastShownList.get(trainingIndex.getZeroBased());
+
+        if (training.getDateTime().isAfter(LocalDateTime.now())) {
+            throw new CommandException(MESSAGE_TRAINING_NOT_OVER);
         }
 
         model.updateFilteredStudentList(predicates);
@@ -66,9 +76,11 @@ public class MarkAttendanceCommand extends Command {
             throw new CommandException(MESSAGE_STUDENTS_NOT_FOUND);
         }
 
-        List<Student> attendedStudents = model.getFilteredStudentList();
+        if (training.getDateTime().isAfter(LocalDateTime.now())) {
+            throw new CommandException(MESSAGE_TRAINING_NOT_OVER);
+        }
 
-        Training training = lastShownList.get(trainingIndex.getZeroBased());
+        List<Student> attendedStudents = model.getFilteredStudentList();
 
         Attendance unmarkedAttendance = new Attendance(training.getDateTime());
         Attendance markedAttendance = new Attendance(training.getDateTime());

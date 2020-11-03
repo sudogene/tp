@@ -5,6 +5,7 @@ import static seedu.canoe.commons.core.Messages.MESSAGE_STUDENTS_NOT_FOUND;
 import static seedu.canoe.commons.core.Messages.MESSAGE_TRAININGS_NOT_FOUND;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -34,6 +35,8 @@ public class UnmarkAttendanceCommand extends Command {
             + " training session scheduled: %1$s!";
     public static final String MESSAGE_UNMARK_ATTENDANCE_SUCCESS = "Unmarked these students for "
         + "their attendance: %1$s!";
+    public static final String MESSAGE_TRAINING_NOT_OVER = "The training is yet to be conducted, and attendance cannot "
+        + "be marked yet!";
 
     private final Index trainingIndex;
     private final AnyMatchPredicateList predicates;
@@ -59,6 +62,12 @@ public class UnmarkAttendanceCommand extends Command {
             throw new CommandException(MESSAGE_TRAININGS_NOT_FOUND);
         }
 
+        Training training = lastShownList.get(trainingIndex.getZeroBased());
+
+        if (training.getDateTime().isAfter(LocalDateTime.now())) {
+            throw new CommandException(MESSAGE_TRAINING_NOT_OVER);
+        }
+
         model.updateFilteredStudentList(predicates);
 
         if (model.getFilteredStudentList().isEmpty()) {
@@ -68,8 +77,6 @@ public class UnmarkAttendanceCommand extends Command {
         }
 
         List<Student> attendedStudents = model.getFilteredStudentList();
-
-        Training training = lastShownList.get(trainingIndex.getZeroBased());
 
         Attendance unmarkedAttendance = new Attendance(training.getDateTime());
         Attendance markedAttendance = new Attendance(training.getDateTime());
