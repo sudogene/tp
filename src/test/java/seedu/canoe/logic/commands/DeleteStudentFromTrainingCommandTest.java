@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.canoe.logic.commands.CommandTestUtil.INVALID_ID_ARRAY;
+import static seedu.canoe.logic.commands.CommandTestUtil.INVALID_ID_ARRAY_REPEATED;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_ARRAY;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_ARRAY_2;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_STRINGS;
@@ -12,6 +13,9 @@ import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_ONE_DAY;
 import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIFTH_TRAINING;
 import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIRST_TRAINING;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -60,6 +64,23 @@ public class DeleteStudentFromTrainingCommandTest {
         assertFalse(getModel().getFilteredTrainingList().get(0).getStudents().contains(getModel()
                 .getFilteredStudentList().get(0)));
 
+    }
+
+    @Test
+    public void hasUniqueStudentsToDelete() {
+        List<String> uniqueList = Arrays.asList("1", "2", "3");
+        List<String> nonUniqueList = Arrays.asList("1", "2", "2", "3");
+
+        assertTrue(DeleteStudentFromTrainingCommand.hasUniqueStudentsToDelete(uniqueList));
+        assertFalse(DeleteStudentFromTrainingCommand.hasUniqueStudentsToDelete(nonUniqueList));
+    }
+
+    @Test
+    public void execute_repeatedStudent_removeFail() {
+        DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
+                new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, INVALID_ID_ARRAY_REPEATED);
+        assertThrows(CommandException.class, DeleteStudentFromTrainingCommand.MESSAGE_REPEATED_STUDENT, () ->
+                deleteStudentFromTrainingCommand.execute(getModel()));
     }
 
     @Test
