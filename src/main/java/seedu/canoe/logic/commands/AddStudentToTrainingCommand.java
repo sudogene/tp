@@ -140,6 +140,7 @@ public class AddStudentToTrainingCommand extends Command {
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
         String result = this.getStudentsAdded();
+        assert (!result.isEmpty());
 
         return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, result)
                 + " to Training Session " + index.getOneBased());
