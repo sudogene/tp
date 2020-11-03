@@ -194,8 +194,9 @@ Format: `common-time [n/KEYWORDS] [ay/ACADEMIC_YEAR]`
 
 - Academic Year
     - Value will match exactly. e.g. `2` will match `2` but not `1`
+    - The academic year value query must be a valid academic year. e.g. `ay/6` is invalid, `ay/4` is valid
 
-- Searching by more than one field
+- **Searching by more than one field**
     - Common Time command will return student(s) that matches any of the fields provided.
 
 - If no student matches the search criteria, an error message will display. 
