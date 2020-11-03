@@ -15,6 +15,7 @@ import seedu.canoe.commons.util.StringUtil;
 import seedu.canoe.logic.parser.exceptions.ParseException;
 import seedu.canoe.model.student.AcademicYear;
 import seedu.canoe.model.student.Email;
+import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Name;
 import seedu.canoe.model.student.Phone;
 import seedu.canoe.model.student.time.Day;
@@ -149,7 +150,7 @@ public class ParserUtil {
             LocalDateTime dateTime = LocalDateTime.parse(trimmedTraining, formatter);
             return new Training(dateTime);
         } catch (DateTimeException e) {
-            throw new ParseException(Training.MESSAGE_CONSTRAINTS + "DateTime has to be valid as well.");
+            throw new ParseException(Training.MESSAGE_CONSTRAINTS);
         }
     }
 
@@ -178,5 +179,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String id} into an {@code Id}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * * @throws ParseException if the given {@code id} is invalid.
+     */
+    public static Id parseId(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        if (!Id.isValidId(trimmedId)) {
+            throw new ParseException(Id.MESSAGE_CONSTRAINTS);
+        }
+        return new Id(trimmedId);
     }
 }

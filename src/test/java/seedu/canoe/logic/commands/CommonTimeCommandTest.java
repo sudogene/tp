@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.ModelManager;
 import seedu.canoe.model.UserPrefs;
+import seedu.canoe.model.student.AcademicYear;
 import seedu.canoe.model.student.AcademicYearMatchesPredicate;
 import seedu.canoe.model.student.AnyMatchPredicateList;
 import seedu.canoe.model.student.NameContainsKeywordsPredicate;
@@ -34,9 +35,8 @@ class CommonTimeCommandTest {
     public void execute_zeroKeywords_defaultDismissalTimes() {
         String expectedMessage = "Search result matches no students!";
         NameContainsKeywordsPredicate namePredicate = preparePredicate(" ");
-        AcademicYearMatchesPredicate academicYearPredicate = new AcademicYearMatchesPredicate(" ");
         AnyMatchPredicateList predicateList = new AnyMatchPredicateList(
-                Arrays.asList(namePredicate, academicYearPredicate)
+                Arrays.asList(namePredicate)
         );
         CommonTimeCommand command = new CommonTimeCommand(predicateList);
         expectedModel.updateFilteredStudentList(predicateList);
@@ -72,7 +72,8 @@ class CommonTimeCommandTest {
     public void execute_oneAcademicYearKeyword_matchedAcademicYearLatestDismissalTimes() {
         String expectedMessage = "Monday: 15:00\n"
                 + "Tuesday: 16:23\n" + "Wednesday: 15:00\n" + "Thursday: 17:00\n" + "Friday: 15:00";
-        AcademicYearMatchesPredicate academicYearPredicate = new AcademicYearMatchesPredicate("1");
+        AcademicYearMatchesPredicate academicYearPredicate = new AcademicYearMatchesPredicate(
+                new AcademicYear("1"));
         AnyMatchPredicateList predicateList = new AnyMatchPredicateList(Arrays.asList(academicYearPredicate));
         CommonTimeCommand command = new CommonTimeCommand(predicateList);
         expectedModel.updateFilteredStudentList(predicateList);
@@ -85,7 +86,8 @@ class CommonTimeCommandTest {
         String expectedMessage = "Monday: 15:00\n"
                 + "Tuesday: 16:23\n" + "Wednesday: 15:00\n" + "Thursday: 17:00\n" + "Friday: 15:00";
         NameContainsKeywordsPredicate namePredicate = preparePredicate("Alice Kunz");
-        AcademicYearMatchesPredicate academicYearPredicate = new AcademicYearMatchesPredicate("1");
+        AcademicYearMatchesPredicate academicYearPredicate = new AcademicYearMatchesPredicate(
+                new AcademicYear("1"));
         AnyMatchPredicateList predicateList = new AnyMatchPredicateList(
                 Arrays.asList(namePredicate, academicYearPredicate)
         );
@@ -100,7 +102,8 @@ class CommonTimeCommandTest {
         String expectedMessage = "Monday: 15:00\n"
                 + "Tuesday: 16:23\n" + "Wednesday: 17:45\n" + "Thursday: 17:00\n" + "Friday: 17:12";
         NameContainsKeywordsPredicate namePredicate = preparePredicate("Daniel Best");
-        AcademicYearMatchesPredicate academicYearPredicate = new AcademicYearMatchesPredicate("1");
+        AcademicYearMatchesPredicate academicYearPredicate = new AcademicYearMatchesPredicate(
+                new AcademicYear("1"));
         AnyMatchPredicateList predicateList = new AnyMatchPredicateList(
                 Arrays.asList(namePredicate, academicYearPredicate)
         );

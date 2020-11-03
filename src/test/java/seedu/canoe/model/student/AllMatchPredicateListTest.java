@@ -18,10 +18,10 @@ class AllMatchPredicateListTest {
     public void equals() {
         NameContainsKeywordsPredicate firstNamePredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        PhoneMatchesPredicate firstPhonePredicate = new PhoneMatchesPredicate("123");
+        PhoneMatchesPredicate firstPhonePredicate = new PhoneMatchesPredicate(new Phone("123"));
         NameContainsKeywordsPredicate secondNamePredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
-        PhoneMatchesPredicate secondPhonePredicate = new PhoneMatchesPredicate("321");
+        PhoneMatchesPredicate secondPhonePredicate = new PhoneMatchesPredicate(new Phone("321"));
         List<Predicate<Student>> firstListOfPredicates = Arrays.asList(firstNamePredicate, firstPhonePredicate);
         List<Predicate<Student>> secondListOfPredicates = Arrays.asList(secondNamePredicate, secondPhonePredicate);
         AllMatchPredicateList firstAllMatchPredicateList = new AllMatchPredicateList(firstListOfPredicates);
@@ -89,21 +89,16 @@ class AllMatchPredicateListTest {
 
     @Test
     public void test_studentContainsPhoneValue_returnsTrue() {
-        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate("123");
+        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate(new Phone("123"));
         AllMatchPredicateList allMatchPredicateList = new AllMatchPredicateList(Arrays.asList(phonePredicate));
         assertTrue(allMatchPredicateList.test(new StudentBuilder().withPhone("123").build()));
     }
 
     @Test
     public void test_studentDoesNotContainPhoneValue_returnsFalse() {
-        // No value
-        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate("");
-        AllMatchPredicateList allMatchPredicateList = new AllMatchPredicateList(Arrays.asList(phonePredicate));
-        assertFalse(allMatchPredicateList.test(new StudentBuilder().withName("Alice").build()));
-
         // Non-matching value
-        phonePredicate = new PhoneMatchesPredicate("123");
-        allMatchPredicateList = new AllMatchPredicateList(Arrays.asList(phonePredicate));
+        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate(new Phone("123"));
+        AllMatchPredicateList allMatchPredicateList = new AllMatchPredicateList(Arrays.asList(phonePredicate));
         assertFalse(allMatchPredicateList.test(new StudentBuilder().withPhone("321").build()));
     }
 
@@ -112,7 +107,7 @@ class AllMatchPredicateListTest {
         // One name keyword one phone value
         NameContainsKeywordsPredicate namePredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
-        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate("123");
+        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate(new Phone("123"));
         AllMatchPredicateList allMatchPredicateList = new AllMatchPredicateList(
                 Arrays.asList(namePredicate, phonePredicate)
         );
@@ -120,7 +115,7 @@ class AllMatchPredicateListTest {
 
         // Multiple name keywords one phone value
         namePredicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-        phonePredicate = new PhoneMatchesPredicate("456789");
+        phonePredicate = new PhoneMatchesPredicate(new Phone("456789"));
         allMatchPredicateList = new AllMatchPredicateList(Arrays.asList(namePredicate, phonePredicate));
         assertTrue(allMatchPredicateList.test(new StudentBuilder().withName("Bob").withPhone("456789").build()));
     }
@@ -130,7 +125,7 @@ class AllMatchPredicateListTest {
         // Does not contain one name keyword, contains one phone value
         NameContainsKeywordsPredicate namePredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
-        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate("123");
+        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate(new Phone("123"));
         AllMatchPredicateList allMatchPredicateList = new AllMatchPredicateList(
                 Arrays.asList(namePredicate, phonePredicate)
         );
@@ -138,19 +133,19 @@ class AllMatchPredicateListTest {
 
         // Does not contain multiple name keywords, contains one phone value
         namePredicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-        phonePredicate = new PhoneMatchesPredicate("456789");
+        phonePredicate = new PhoneMatchesPredicate(new Phone("456789"));
         allMatchPredicateList = new AllMatchPredicateList(Arrays.asList(namePredicate, phonePredicate));
         assertFalse(allMatchPredicateList.test(new StudentBuilder().withName("Alice").withPhone("456789").build()));
 
         // Contains one name keyword, does not contain phone value
         namePredicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
-        phonePredicate = new PhoneMatchesPredicate("123");
+        phonePredicate = new PhoneMatchesPredicate(new Phone("123"));
         allMatchPredicateList = new AllMatchPredicateList(Arrays.asList(namePredicate, phonePredicate));
         assertFalse(allMatchPredicateList.test(new StudentBuilder().withName("Alice").withPhone("456").build()));
 
         // Contains multiple name keywords, does not contain phone value
         namePredicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-        phonePredicate = new PhoneMatchesPredicate("456789");
+        phonePredicate = new PhoneMatchesPredicate(new Phone("456789"));
         allMatchPredicateList = new AllMatchPredicateList(Arrays.asList(namePredicate, phonePredicate));
         assertFalse(allMatchPredicateList.test(new StudentBuilder().withName("Carol").withPhone("123").build()));
     }
@@ -160,7 +155,7 @@ class AllMatchPredicateListTest {
         // One name keyword one phone value
         NameContainsKeywordsPredicate namePredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
-        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate("123");
+        PhoneMatchesPredicate phonePredicate = new PhoneMatchesPredicate(new Phone("123"));
         AllMatchPredicateList allMatchPredicateList = new AllMatchPredicateList(
                 Arrays.asList(namePredicate, phonePredicate)
         );
@@ -168,7 +163,7 @@ class AllMatchPredicateListTest {
 
         // Multiple name keywords one phone value
         namePredicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-        phonePredicate = new PhoneMatchesPredicate("456789");
+        phonePredicate = new PhoneMatchesPredicate(new Phone("456789"));
         allMatchPredicateList = new AllMatchPredicateList(Arrays.asList(namePredicate, phonePredicate));
         assertFalse(allMatchPredicateList.test(new StudentBuilder().withName("Boo").withPhone("123").build()));
     }

@@ -5,7 +5,6 @@ import static seedu.canoe.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.function.Predicate;
@@ -53,7 +52,7 @@ public class FindStudentTrainingCommandParser implements Parser<FindStudentTrain
                 throw new ParseException(FindStudentTrainingCommand.MESSAGE_NO_STUDENT_QUERY);
             }
             if (!idValue.matches("\\d+")) {
-                logger.warning("Only one student should be specified in the command argument!" + args);
+                logger.warning("Formatting of ID is wrong!" + args);
                 throw new ParseException(FindStudentTrainingCommand.MESSAGE_ONE_STUDENT_QUERY);
             }
 
@@ -68,10 +67,9 @@ public class FindStudentTrainingCommandParser implements Parser<FindStudentTrain
                 throw new ParseException(FindStudentTrainingCommand.MESSAGE_NO_DATETIME_QUERY);
             }
             try {
-                LocalDateTime dateTime = LocalDateTime.parse(dateTimeValue,
-                        DateTimeFormatter.ofPattern("uuuu-MM-dd HHmm").withResolverStyle(ResolverStyle.STRICT));
-                studentPredicate = new DateTimeMatchesPredicate(dateTime);
-                trainingPredicate = new TrainingMatchesDateTimePredicate(dateTime);
+                LocalDateTime trainingTime = ParserUtil.parseTraining(dateTimeValue).getDateTime();
+                studentPredicate = new DateTimeMatchesPredicate(trainingTime);
+                trainingPredicate = new TrainingMatchesDateTimePredicate(trainingTime);
             } catch (DateTimeParseException e) {
                 throw new ParseException(FindStudentTrainingCommand.MESSAGE_WRONG_DATETIME_FORMAT_QUERY);
             }
@@ -81,14 +79,16 @@ public class FindStudentTrainingCommandParser implements Parser<FindStudentTrain
             String idValue = argMultimap.getValue(PREFIX_ID).get();
             String dateTimeValue = argMultimap.getValue(PREFIX_DATETIME).get();
             try {
-                LocalDateTime dateTime = LocalDateTime.parse(dateTimeValue,
-                        DateTimeFormatter.ofPattern("uuuu-MM-dd HHmm").withResolverStyle(ResolverStyle.STRICT));
+                LocalDateTime trainingTime = ParserUtil.parseTraining(dateTimeValue).getDateTime();
                 studentPredicate = new IdMatchesPredicate(idValue);
-                trainingPredicate = new TrainingMatchesDateTimePredicate(dateTime);
+                trainingPredicate = new TrainingMatchesDateTimePredicate(trainingTime);
             } catch (DateTimeParseException e) {
                 throw new ParseException(FindStudentTrainingCommand.MESSAGE_WRONG_DATETIME_FORMAT_QUERY);
             }
         }
+
+        assert(studentPredicate != null && trainingPredicate != null);
+
         return new FindStudentTrainingCommand(studentPredicate, trainingPredicate);
     }
 }

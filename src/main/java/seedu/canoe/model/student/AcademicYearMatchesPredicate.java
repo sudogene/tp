@@ -6,23 +6,23 @@ import java.util.function.Predicate;
  * Tests that a {@code Student}'s {@code AcademicYear} value matches the value given.
  */
 public class AcademicYearMatchesPredicate implements Predicate<Student> {
-    private final String academicYearValue;
+    private final AcademicYear year;
 
-    public AcademicYearMatchesPredicate(String academicYearValue) {
-        this.academicYearValue = academicYearValue;
+    public AcademicYearMatchesPredicate(AcademicYear year) {
+        this.year = year;
     }
 
 
     @Override
     public boolean test(Student student) {
-        return student.getAcademicYear().value.equals(academicYearValue);
+        return student.getAcademicYear().equals(year);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AcademicYearMatchesPredicate // instanceof handles nulls
-                && academicYearValue.equals(((AcademicYearMatchesPredicate) other).academicYearValue)); // state check
+                && year.equals(((AcademicYearMatchesPredicate) other).year)); // state check
     }
 
 }

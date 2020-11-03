@@ -54,9 +54,9 @@ class UnmarkAttendanceCommandTest {
     }
 
     @Test
-    void execute_validParams_studentsNotInTrainingMessage() {
-        String expectedMessage = "Some students do not have specified"
-                + " training session scheduled!";
+    void execute_validParams_commandFailure() {
+        String expectedMessage = "These students do not have the specified"
+                + " training session scheduled: 1 4!";
         IdMatchesPredicate firstIdPredicate = new IdMatchesPredicate("1");
         IdMatchesPredicate secondIdPredicate = new IdMatchesPredicate("4");
 
@@ -66,17 +66,11 @@ class UnmarkAttendanceCommandTest {
         model.addTraining(firstTraining);
         model.addTraining(secondTraining);
         model.addTraining(thirdTraining);
-        expectedModel.addTraining(firstTraining);
-        expectedModel.addTraining(secondTraining);
-        expectedModel.addTraining(thirdTraining);
-
-        AnyMatchPredicateList predicateList = AnyMatchPredicateList.of(firstIdPredicate, secondIdPredicate);
-        expectedModel.updateFilteredStudentList(predicateList);
 
         Index trainingIndex = INDEX_THIRD_TRAINING;
         UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(
                 trainingIndex, AnyMatchPredicateList.of(firstIdPredicate, secondIdPredicate));
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test
