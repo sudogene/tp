@@ -76,13 +76,13 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL ay/ACADEMIC_YEAR [d1/HHmm d2/HHmm d3/
 
 <center>
 
-| Prefix   |      Representation      |
-|:----------:|:-------------:|
-| `d1/` |  **Monday's** Dismissal Time|
-| `d2/` |    **Tuesday's** Dismissal Time   |
-| `d3/` | **Wednesday's** Dismissal Time |
-| `d4/` | **Thursday's** Dismissal Time |
-| `d5/` | **Friday's** Dismissal Time |
+Prefix   |      Representation      
+----------|-------------
+`d1/` |  **Monday's** Dismissal Time
+`d2/` |    **Tuesday's** Dismissal Time
+`d3/` | **Wednesday's** Dismissal Time
+`d4/` | **Thursday's** Dismissal Time
+`d5/` | **Friday's** Dismissal Time
 
 </center>
 
