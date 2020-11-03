@@ -14,6 +14,9 @@ import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIFTH_TRAINING;
 import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIRST_TRAINING;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.canoe.commons.core.Messages;
@@ -23,9 +26,6 @@ import seedu.canoe.model.ModelManager;
 import seedu.canoe.model.UserPrefs;
 import seedu.canoe.model.student.Attendance;
 import seedu.canoe.testutil.TypicalStudentsInTypicalTrainings;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class DeleteStudentFromTrainingCommandTest {
 
@@ -79,8 +79,8 @@ public class DeleteStudentFromTrainingCommandTest {
     public void execute_repeatedStudent_removeFail() {
         DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
                 new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, INVALID_ID_ARRAY_REPEATED);
-        assertThrows(CommandException.class, DeleteStudentFromTrainingCommand.MESSAGE_REPEATED_STUDENT,
-                () -> deleteStudentFromTrainingCommand.execute(getModel()));
+        assertThrows(CommandException.class, DeleteStudentFromTrainingCommand.MESSAGE_REPEATED_STUDENT, () ->
+                deleteStudentFromTrainingCommand.execute(getModel()));
     }
 
     @Test
