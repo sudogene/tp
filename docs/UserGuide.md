@@ -74,17 +74,13 @@ Adds a student to the student list. The student will be auto-assigned a unique `
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL ay/ACADEMIC_YEAR [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [t/TAG]`
 
-<center>
-
-Prefix   |      Representation      
+Prefix | Representation      
 ----------|-------------
-`d1/` |  **Monday's** Dismissal Time
-`d2/` |    **Tuesday's** Dismissal Time
-`d3/` | **Wednesday's** Dismissal Time
-`d4/` | **Thursday's** Dismissal Time
-`d5/` | **Friday's** Dismissal Time
-
-</center>
+**d1/** | `Monday's Dismissal Time`
+**d2/** | `Tuesday's Dismissal Time`
+**d3/** | `Wednesday's Dismissal Time`
+**d4/** | `Thursday's Dismissal Time`
+**d5/** | `Friday's Dismissal Time`
 
 * Academic year ranges from `1` to `5` and represents Secondary 1 to 5.
 * `d1/ d2/ d3/ d4/ d5/` corresponds to the dismissal times on different days. They are optional fields.
