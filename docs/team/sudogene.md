@@ -44,26 +44,17 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=sudogene&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=sudogene&tabRepo=AY2021S1-CS2103-F10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code)
 
 * **Project management**:
-  * Managed issues
-
+  * Managed 18 issues ranging from user stories for implementation to bug fixes and code quality. [Link to issues](https://github.com/AY2021S1-CS2103-F10-1/tp/issues?q=is%3Aissue+is%3Aclosed+assignee%3Asudogene).
+  
 * **Enhancements to existing features**:
   * Enhanced the Find command to find Students by Name, Phone, Email, Academic Year, Dismissal Time, Id. ([#26](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/26), [#32](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/32), [#38](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/38), [#52](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/52), [#68](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/68))
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Added documentation for the features `find`, Student Id, and `ts-addall`: [#80](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/80), [#120](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/120), [#153](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/153), [#210](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/210)
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
+    * Added implementation details of the `ts-addall` feature: [#127](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/127)
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+  * PRs reviewed: [Link to list of PRs](https://github.com/AY2021S1-CS2103-F10-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Asudogene)
+  * Reported bugs and suggestions for other teams in the class: [Link to issues](https://github.com/sudogene/ped/issues)
