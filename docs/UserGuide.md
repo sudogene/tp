@@ -291,7 +291,7 @@ Examples:
 Marks/Unmarks a student's attendance for a training.
 
 Format: `mark-attendance TRAINING_INDEX id/STUDENT_ID...`
-
+* You will only be able to mark/unmark the attendance of a training that has already passed.
 * Training index refers to the index of the training in the **displayed** training list.
 * Only ONE training index can be specified in the same command. 
 * Multiple student ids can be specified in the same command.
