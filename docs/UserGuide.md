@@ -61,7 +61,7 @@ CanoE-COACH is a **desktop app for managing training schedules for secondary sch
   
 * Take note of the difference between `STUDENT_INDEX` and `STUDENT_ID`
 	* `STUDENT_INDEX` refers to the index displayed on the GUI (this will change depending on how the GUI is filtered)
-	* `STUDENT_ID` refers to the unique index given to each student, as reflected in the GUI by **ID: 001** (This will not change even if the GUI is filtered.)
+	* `STUDENT_ID` refers to the unique index given to each student, as reflected in the GUI by **Id: 1** (This will not change even if the GUI is filtered.)
 </div>
 
 ### Viewing help: `help`
@@ -87,7 +87,7 @@ Prefix | Representation
 * The default dismissal time is 1500. If the user inputs `d1/1700 d5/1200`, then the record will be equivalent to `d1/1700 d2/1500 d3/1500 d4/1500 d5/1200`
 
 > Be careful of adding duplicates:
-> * Student names can be the same, but they should not share the same contact number **AND** email address **AND** academic year
+> * We allow for duplicate details in our student list, but two students should not share the same name **AND** academic year **AND** (phone number **OR** email address).
 
 Examples:
 - `add n/Benjamin p/12345678 e/littleicemaiden@rocket.com ay/3 d1/1330 d2/1730 d3/1600 d4/1200 d5/1100`
@@ -105,10 +105,7 @@ Format: `edit STUDENT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [ay/ACADEMIC_YEAR] [d1/
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
 * You can remove all of the student’s tags by typing `t/` without specifying any tags after it.
 * Take note that editing the details of a student will also propagate the changes on the training panel.
-* Be careful when editing dismissal times, as this might automatically remove students from scheduled trainings if
- the updated dismissal time on the same day of the week is now later than the start time of any of the student's upcoming scheduled trainings. Past trainings will not be affected.
- 
-> All trainings are given a buffer of 3 hours from their start times before they are classified as "past training" (i.e. A training scheduled on 29 October 2021 1500 will be classified as a "past training" on 29 October 2021, 1800).
+* Be careful when editing dismissal times, as this might automatically remove students from scheduled trainings if the updated dismissal time on the same day of the week is now later than the start time of any of the student's upcoming scheduled trainings. Past trainings will not be affected.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com d1/1600` Edits the phone number and email address of the 1st student in the displayed student list to be `91234567` and `johndoe@example.com` respectively. This also changes his Monday's dismissal time to 1600.
@@ -283,8 +280,8 @@ Format: `find-training [id/STUDENT_ID] [dt/DATETIME]`
 * At least one field must be specified.
 * Only ONE student id can be specified in the same command
 * Only ONE date time can be specified in the same command
-* If only the student id is specified, the command will return all of the trainings (past, present and future) of the matching student on the training panel.
-* If only the datetime is specified, the command will return all of the students scheduled for that matching training on the student panel. 
+* If only the student id is specified, the command will return all of the trainings (past, present and future) of the matching student.
+* If only the datetime is specified, the command will return all of the students scheduled for that matching training on the student panel.
 * If both parameters are specified, the command will return only the single matching training on the training panel and the matching student on the student panel.
 
 Examples:
@@ -330,6 +327,9 @@ Exits the program.
 Format: `exit`
 
 ## FAQ
+
+**Q**: When does a training get classified as "past" ?<br>
+**A**: A training will be classified as "past" once the time tagged to it (start time) has passed.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CanoE-COACH home folder.
