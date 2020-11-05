@@ -5,8 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.model.CanoeCoach;
 import seedu.canoe.model.ReadOnlyCanoeCoach;
 import seedu.canoe.model.student.AcademicYear;
@@ -103,7 +105,11 @@ public class SampleDataUtil {
             sampleAb.addTraining(sampleTraining);
             for (Student sampleStudent : sampleAb.getStudentList()) {
                 sampleTraining.addStudent(sampleStudent);
-                sampleStudent.markAttendanceFromTraining(sampleTraining);
+                Student alex = sampleAb.getStudentList().get(0);
+                Student bernice = sampleAb.getStudentList().get(1);
+                if (!(sampleStudent == alex || sampleStudent == bernice)) {
+                    sampleStudent.markAttendanceFromTraining(sampleTraining);
+                }
             }
         }
 
