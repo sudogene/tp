@@ -11,6 +11,12 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=whleee&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=Whleee&tabRepo=AY2021S1-CS2103-F10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code)
 
+* **New Feature**: Created the Training Class.
+  * What it does: Allows Students to interact with this Training class so that various scheduling features such as adding or deleting students, or marking of student attendances can be implemented in the future.
+  * Justification: This is a key class in the CanoE-Coach application as many future scheduling features depend on this class to be well implemented and extensible without bugs.
+  * Highlights: This class is the cornerstone for most of the other features of the Canoe-Coach application, hence much consideration and excellent understanding of the entire application is required to implement the class well for future use.
+  * Credits: The other team members all gave input for the implementation of this class, and assisted with bugfixes when bugs were found.
+
 * **New Feature**: Added the command to add and delete Training Sessions.
   * What it does: Allows the user to add and delete Training Sessions at a user specified date and time.
   * Justification: This is a core feature in the CanoE-Coach application that allows users to schedule training sessions.
@@ -33,7 +39,7 @@ Given below are my contributions to the project.
   * Fixed the bug where invalid user input DateTimes were being rounded off to the nearest valid DateTime [\#209](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/209). (Code combined with Pull Request of another team member)
 
 * **Project Management**:
-  * Managed issues [\#24](https://github.com/AY2021S1-CS2103-F10-1/tp/issues/24), [\#30](https://github.com/AY2021S1-CS2103-F10-1/tp/issues/30) on github.
+  * Managed issues 14 issues which includes feature implementation, documentation, and bug fixes: [Link to Issues](https://github.com/AY2021S1-CS2103-F10-1/tp/issues?q=is%3Aissue+assignee%3AWhleee+is%3Aclosed).
   
 * **Documentation**:
   * User Guide:
@@ -43,4 +49,5 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#23](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/23), [\#73](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/73), [\#123](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/123)
+  * Reported bugs and gave non-trivial suggestions to other teams in the class: [Link to Issues](https://github.com/Whleee/ped/issues).
  
