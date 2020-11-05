@@ -5,10 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.model.CanoeCoach;
 import seedu.canoe.model.ReadOnlyCanoeCoach;
 import seedu.canoe.model.student.AcademicYear;
