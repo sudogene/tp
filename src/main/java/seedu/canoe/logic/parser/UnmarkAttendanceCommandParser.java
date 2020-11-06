@@ -11,6 +11,7 @@ import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.UnmarkAttendanceCommand;
 import seedu.canoe.logic.parser.exceptions.ParseException;
 import seedu.canoe.model.student.AnyMatchPredicateList;
+import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.IdMatchesPredicate;
 
 public class UnmarkAttendanceCommandParser implements Parser<UnmarkAttendanceCommand> {
@@ -51,6 +52,9 @@ public class UnmarkAttendanceCommandParser implements Parser<UnmarkAttendanceCom
                     throw new ParseException(ParserUtil.MESSAGE_REPEATED_ID);
                 }
                 for (String id : studentIds) {
+                    if (!Id.isValidId(id)) {
+                        throw new ParseException(Id.MESSAGE_CONSTRAINTS);
+                    }
                     predicates.add(new IdMatchesPredicate(id));
                 }
             }

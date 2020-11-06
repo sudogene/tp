@@ -7,7 +7,6 @@ import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 import seedu.canoe.commons.core.LogsCenter;
@@ -37,8 +36,6 @@ public class DeleteStudentFromTrainingCommand extends Command {
     public static final String MESSAGE_INVALID_STUDENT = "One of the"
             + " Students provided is not inside of the training specified!";
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
-    public static final String MESSAGE_STUDENT_DOES_NOT_EXIST = "One of the Ids "
-            + "specified do not correspond to an existing Student!";
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be deleted must be specified.";
     public static final String MESSAGE_REPEATED_STUDENT = "One of the Ids is repeated!";
 
@@ -85,12 +82,7 @@ public class DeleteStudentFromTrainingCommand extends Command {
 
         for (Id id : studentsToDelete) {
 
-            // Checks if student of the Id exists
-            if (getStudentWithId(model, id).isEmpty()) {
-                throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);
-            }
-
-            Student studentToEdit = getStudentWithId(model, id).get();
+            Student studentToEdit = CommandUtil.getStudentFromId(model, id);
             Student editedStudent = createEditedStudent(studentToEdit, editedTraining);
 
             if (!hasStudentInTraining(editedTraining, studentToEdit)) {
@@ -124,15 +116,6 @@ public class DeleteStudentFromTrainingCommand extends Command {
     public boolean hasStudentInTraining(Training trainingToCheck, Student check) {
         return trainingToCheck.getStudents().stream()
                 .anyMatch(student -> student.getId().equals(check.getId()));
-    }
-
-    /**
-     * Returns the student in the model with the specified unique Id. May not exist.
-     */
-    public Optional<Student> getStudentWithId(Model model, Id id) {
-        return model.getFilteredStudentList().stream()
-                .filter(student -> student.getId().equals(id))
-                .findFirst();
     }
 
     private static Student createEditedStudent(Student studentToEdit, Training editedTraining) {

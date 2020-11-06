@@ -13,6 +13,7 @@ import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.logic.commands.FindStudentTrainingCommand;
 import seedu.canoe.logic.parser.exceptions.ParseException;
 import seedu.canoe.model.student.DateTimeMatchesPredicate;
+import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.IdMatchesPredicate;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.training.Training;
@@ -50,8 +51,8 @@ public class FindStudentTrainingCommandParser implements Parser<FindStudentTrain
                 logger.warning("No students specified in the command argument!" + args);
                 throw new ParseException(FindStudentTrainingCommand.MESSAGE_NO_STUDENT_QUERY);
             }
-            if (!idValue.matches("\\d+")) {
-                logger.warning("Formatting of ID is wrong!" + args);
+            if (!Id.isValidId(idValue)) {
+                logger.warning("Formatting of Id is wrong!" + args);
                 throw new ParseException(FindStudentTrainingCommand.MESSAGE_ONE_STUDENT_QUERY);
             }
 

@@ -37,8 +37,6 @@ public class AddStudentToTrainingCommand extends Command {
 
     public static final String MESSAGE_TRAINING_CANNOT_ADD = "No more students "
             + "can be added to this past training";
-    public static final String MESSAGE_STUDENT_DOES_NOT_EXIST = "One of "
-            + "the Ids specified do not correspond to an existing Student!";
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "Added Student: %1$s";
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student "
             + "to be added must be specified.";
@@ -101,7 +99,7 @@ public class AddStudentToTrainingCommand extends Command {
         List<Student> editedStudentList = new ArrayList<>();
         for (Id id : studentsToAdd) {
 
-            Student studentToEdit = getStudentWithID(model, id);
+            Student studentToEdit = CommandUtil.getStudentFromId(model, id);
             Student editedStudent = createEditedStudent(studentToEdit, editedTraining);
 
             //Ensures that Students to add are unique
@@ -168,21 +166,6 @@ public class AddStudentToTrainingCommand extends Command {
             return false;
         }
         return true;
-    }
-
-    /**
-     * Returns the Student object in the model with the Id same as the specified Unique Id.
-     * @param model
-     * @param id
-     * @return the Student Object that corresponds to the specified Id.
-     */
-    public Student getStudentWithID(Model model, Id id) throws CommandException {
-        for (Student student : model.getFilteredStudentList()) {
-            if (student.getId().equals(id)) {
-                return student;
-            }
-        }
-        throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);
     }
 
     /**

@@ -123,7 +123,7 @@ public class DeleteStudentFromTrainingCommandTest {
     public void execute_studentInvalidIndex_throwsCommandException() throws Exception {
         DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
                 new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, INVALID_ID_LIST);
-        assertThrows(CommandException.class, DeleteStudentFromTrainingCommand.MESSAGE_STUDENT_DOES_NOT_EXIST, () ->
+        assertThrows(CommandException.class, CommandUtil.MESSAGE_STUDENT_DOES_NOT_EXIST, () ->
                 deleteStudentFromTrainingCommand.execute(getModel()));
         //Student should still have dateTime in his field
         assertTrue(getModel().getFilteredStudentList().get(0)
