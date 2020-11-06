@@ -8,6 +8,8 @@ import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -47,6 +49,7 @@ public class AddStudentToTrainingCommand extends Command {
     public static final String MESSAGE_STUDENT_UNAVAILABLE = "One of the students cannot be added to the training as "
             + "either his dismissal time on the specified day falls after the training's start time or he has a "
             + "training scheduled on the same date already!";
+    private static final String MESSAGE_REPEATED_STUDENT = "One of the Ids is repeated!";
     private final Index index;
     private final String[] studentsToAdd;
 
@@ -68,6 +71,12 @@ public class AddStudentToTrainingCommand extends Command {
 
         requireNonNull(model);
         assert (model != null);
+
+        // Checks if students to delete are repeated
+        if (!hasUniqueStudentsToAdd(Arrays.asList(studentsToAdd))) {
+            LOGGER.warning("Repeated Id input detected.");
+            throw new CommandException(MESSAGE_REPEATED_STUDENT);
+        }
 
         List<Training> lastShownList = model.getFilteredTrainingList();
         List<Student> studentList = model.getFilteredStudentList();
@@ -160,6 +169,13 @@ public class AddStudentToTrainingCommand extends Command {
             }
         }
         return true;
+    }
+
+    /**
+     * Checks if a given list of student Id strings contains repeating values.
+     */
+    public static boolean hasUniqueStudentsToAdd(List<String> studentsToAdd) {
+        return new HashSet<>(studentsToAdd).size() == studentsToAdd.size();
     }
 
     /**
