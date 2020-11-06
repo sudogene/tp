@@ -2,7 +2,6 @@ package seedu.canoe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.canoe.commons.core.Messages.MESSAGE_DUPLICATE_STUDENTS_IN_TRAINING;
-import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
@@ -14,10 +13,10 @@ import java.util.logging.Logger;
 import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
-import seedu.canoe.commons.util.StringUtil;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.Attendance;
+import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.training.Training;
 
@@ -48,13 +47,13 @@ public class AddStudentToTrainingCommand extends Command {
             + "either his dismissal time on the specified day falls after the training's start time or he has a "
             + "training scheduled on the same date already!";
     private final Index index;
-    private final String[] studentsToAdd;
+    private final List<Id> studentsToAdd;
 
     /**
      * @param index of the Training Session to add Students to.
      * @param studentsToAdd corresponding Id of Students to add.
      */
-    public AddStudentToTrainingCommand(Index index, String[] studentsToAdd) {
+    public AddStudentToTrainingCommand(Index index, List<Id> studentsToAdd) {
         requireNonNull(index);
         requireNonNull(studentsToAdd);
 
@@ -77,14 +76,14 @@ public class AddStudentToTrainingCommand extends Command {
         }
 
         //Checks if the user specified any students to add
-        if (studentsToAdd.length == 0) {
-            LOGGER.warning("User input invalid");
+        if (studentsToAdd.isEmpty()) {
+            LOGGER.warning("User input invalid: No students to add");
             throw new CommandException(MESSAGE_NO_STUDENTS_SPECIFIED);
         }
 
         //Checks if the Index of Training provided is greater than number of Trainings.
         if (index.getZeroBased() >= lastShownList.size()) {
-            LOGGER.warning("User input invalid");
+            LOGGER.warning("User input invalid: Invalid training index");
             throw new CommandException(Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX);
         }
 
@@ -100,16 +99,9 @@ public class AddStudentToTrainingCommand extends Command {
         //Student ID Checks - not invalid index, numbered index and exists in student list and not duplicated
         List<Student> targetStudentList = new ArrayList<>();
         List<Student> editedStudentList = new ArrayList<>();
-        for (String str : studentsToAdd) {
+        for (Id id : studentsToAdd) {
 
-            // Throws a CommandException if the Student ID is zero or negative.
-            if (!StringUtil.isNonZeroUnsignedInteger(str)) {
-                LOGGER.warning("Student index is incorrect.");
-                throw new CommandException(String
-                        .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE));
-            }
-
-            Student studentToEdit = getStudentWithID(model, str);
+            Student studentToEdit = getStudentWithID(model, id);
             Student editedStudent = createEditedStudent(studentToEdit, editedTraining);
 
             //Ensures that Students to add are unique
@@ -184,10 +176,9 @@ public class AddStudentToTrainingCommand extends Command {
      * @param id
      * @return the Student Object that corresponds to the specified Id.
      */
-    public Student getStudentWithID(Model model, String id) throws CommandException {
-        id = id.trim();
+    public Student getStudentWithID(Model model, Id id) throws CommandException {
         for (Student student : model.getFilteredStudentList()) {
-            if (student.getId().getValue().equals(id)) {
+            if (student.getId().equals(id)) {
                 return student;
             }
         }
@@ -214,11 +205,11 @@ public class AddStudentToTrainingCommand extends Command {
      */
     public String getStudentsAdded() {
         String result = "";
-        for (String str : studentsToAdd) {
-            if (result.contains(str)) {
+        for (Id id : studentsToAdd) {
+            if (result.contains(id.toString())) {
                 continue;
             }
-            result += str + " ";
+            result += id.toString() + " ";
         }
         result = result.trim();
         return result;

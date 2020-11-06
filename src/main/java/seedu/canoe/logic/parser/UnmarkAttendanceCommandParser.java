@@ -47,6 +47,9 @@ public class UnmarkAttendanceCommandParser implements Parser<UnmarkAttendanceCom
                 isEmptyString = true;
             } else {
                 String[] studentIds = ids.split(",");
+                if (!ParserUtil.isUniqueList(studentIds)) {
+                    throw new ParseException(ParserUtil.MESSAGE_REPEATED_ID);
+                }
                 for (String id : studentIds) {
                     predicates.add(new IdMatchesPredicate(id));
                 }

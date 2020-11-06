@@ -3,11 +3,11 @@ package seedu.canoe.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.canoe.logic.commands.CommandTestUtil.INVALID_ID_ARRAY;
-import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_ARRAY;
-import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_ARRAY_2;
-import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_ARRAY_5;
-import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_ARRAY_6;
+import static seedu.canoe.logic.commands.CommandTestUtil.INVALID_ID_LIST;
+import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_LIST;
+import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_LIST_2;
+import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_LIST_5;
+import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_LIST_6;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_STRINGS_5;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_STRINGS_6;
 import static seedu.canoe.testutil.Assert.assertThrows;
@@ -47,14 +47,14 @@ public class AddStudentToTrainingCommandTest {
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-                new AddStudentToTrainingCommand(null, VALID_ID_ARRAY));
+                new AddStudentToTrainingCommand(null, VALID_ID_LIST));
     }
 
     @Test
     public void execute_studentDuplicateInTraining_addFail() throws Exception {
         //JONAS is already in the first training
         AddStudentToTrainingCommand addStudentToTrainingCommand =
-                new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY);
+                new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_LIST);
         assertThrows(CommandException.class, Messages.MESSAGE_DUPLICATE_STUDENTS_IN_TRAINING, () ->
                 addStudentToTrainingCommand.execute(getModel()));
     }
@@ -62,7 +62,7 @@ public class AddStudentToTrainingCommandTest {
     @Test
     public void execute_studentAddToPastTraining_addFail() throws Exception {
         AddStudentToTrainingCommand addStudentToTrainingCommand =
-                new AddStudentToTrainingCommand(INDEX_SECOND_TRAINING, VALID_ID_ARRAY_2);
+                new AddStudentToTrainingCommand(INDEX_SECOND_TRAINING, VALID_ID_LIST_2);
         assertThrows(CommandException.class, AddStudentToTrainingCommand.MESSAGE_TRAINING_CANNOT_ADD, () ->
                 addStudentToTrainingCommand.execute(getModel()));
     }
@@ -70,7 +70,7 @@ public class AddStudentToTrainingCommandTest {
     @Test
     public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
         AddStudentToTrainingCommand addStudentToTrainingCommand =
-                new AddStudentToTrainingCommand(INDEX_FOURTH_TRAINING, VALID_ID_ARRAY_5);
+                new AddStudentToTrainingCommand(INDEX_FOURTH_TRAINING, VALID_ID_LIST_5);
         CommandResult commandResult = addStudentToTrainingCommand.execute(getModel());
         assertEquals(String.format(AddStudentToTrainingCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS_5)
                         + " to Training Session 4",
@@ -90,7 +90,7 @@ public class AddStudentToTrainingCommandTest {
     @Test
     public void execute_multipleStudentAcceptedByModel_addSuccessful() throws Exception {
         AddStudentToTrainingCommand addStudentToTrainingCommand =
-                new AddStudentToTrainingCommand(INDEX_FOURTH_TRAINING, VALID_ID_ARRAY_6);
+                new AddStudentToTrainingCommand(INDEX_FOURTH_TRAINING, VALID_ID_LIST_6);
         CommandResult commandResult = addStudentToTrainingCommand.execute(getModel());
         assertEquals(String.format(AddStudentToTrainingCommand.MESSAGE_ADD_STUDENT_SUCCESS, VALID_ID_STRINGS_6
                         + " to Training Session 4"),
@@ -121,7 +121,7 @@ public class AddStudentToTrainingCommandTest {
     @Test
     public void execute_studentInvalidIndex_throwsCommandException() throws Exception {
         AddStudentToTrainingCommand addStudentToTrainingCommand =
-                new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, INVALID_ID_ARRAY);
+                new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, INVALID_ID_LIST);
         assertThrows(CommandException.class, AddStudentToTrainingCommand.MESSAGE_STUDENT_DOES_NOT_EXIST, () ->
                 addStudentToTrainingCommand.execute(getModel()));
         //Student JONAS should still have dateTime in his field
@@ -137,7 +137,7 @@ public class AddStudentToTrainingCommandTest {
     @Test
     public void execute_trainingInvalidIndex_throwsCommandException() throws Exception {
         AddStudentToTrainingCommand addStudentToTrainingCommand =
-                new AddStudentToTrainingCommand(INDEX_FIFTH_TRAINING, VALID_ID_ARRAY);
+                new AddStudentToTrainingCommand(INDEX_FIFTH_TRAINING, VALID_ID_LIST);
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX, () ->
                 addStudentToTrainingCommand.execute(getModel()));
     }
@@ -145,7 +145,7 @@ public class AddStudentToTrainingCommandTest {
     @Test
     public void execute_studentDismissalTimeOver_throwsCommandException() throws Exception {
         AddStudentToTrainingCommand addStudentToTrainingCommand =
-                new AddStudentToTrainingCommand(INDEX_THIRD_TRAINING, VALID_ID_ARRAY);
+                new AddStudentToTrainingCommand(INDEX_THIRD_TRAINING, VALID_ID_LIST);
         assertThrows(CommandException.class, AddStudentToTrainingCommand.MESSAGE_STUDENT_UNAVAILABLE, () ->
                 addStudentToTrainingCommand.execute(getModel()));
         //Student JONAS should not have dateTime added to his field
@@ -161,16 +161,16 @@ public class AddStudentToTrainingCommandTest {
     @Test
     public void equals() {
         AddStudentToTrainingCommand addStudent1Command =
-                new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY);
+                new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_LIST);
         AddStudentToTrainingCommand addStudent12Command =
-                new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY_2);
+                new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_LIST_2);
 
         // same object -> returns true
         assertTrue(addStudent1Command.equals(addStudent1Command));
 
         // same values -> returns true
         AddStudentToTrainingCommand addStudentToTrainingCommandCopy =
-                new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY);
+                new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_LIST);
         assertTrue(addStudent1Command.equals(addStudentToTrainingCommandCopy));
 
         // different types -> returns false
