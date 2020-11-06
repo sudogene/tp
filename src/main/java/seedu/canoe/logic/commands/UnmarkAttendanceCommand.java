@@ -7,6 +7,7 @@ import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -87,17 +88,17 @@ public class UnmarkAttendanceCommand extends Command {
             LOGGER.warning("Some students do not contain training session");
             model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
             throw new CommandException(String.format(
-                    MESSAGE_INVALID_STUDENT_UNMARKED, getStudentIdsAsString(studentsNoAttendance))
+                    MESSAGE_INVALID_STUDENT_UNMARKED, CommandUtil.getStudentsMessage(studentsNoAttendance).get())
             );
         }
 
         for (Student student : attendedStudents) {
             student.unmarkAttendance(markedAttendance, unmarkedAttendance);
         }
-        String result = getStudentIdsAsString(attendedStudents);
+        Optional<String> result = CommandUtil.getStudentsMessage(attendedStudents);
 
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(String.format(MESSAGE_UNMARK_ATTENDANCE_SUCCESS, result));
+        return new CommandResult(String.format(MESSAGE_UNMARK_ATTENDANCE_SUCCESS, result.get()));
     }
 
     @Override
@@ -121,19 +122,5 @@ public class UnmarkAttendanceCommand extends Command {
                 .collect(Collectors.toList());
 
         return studentsNoAttendance;
-    }
-
-    /**
-     * Returns a String with the IDs of the students.
-     *
-     * @return String with Unique Ids of Students.
-     */
-    public String getStudentIdsAsString(List<Student> students) {
-        String result = "";
-        for (Student student : students) {
-            result += student.getId() + " ";
-        }
-        result = result.trim();
-        return result;
     }
 }

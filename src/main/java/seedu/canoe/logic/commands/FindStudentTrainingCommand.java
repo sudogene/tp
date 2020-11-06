@@ -29,8 +29,8 @@ public class FindStudentTrainingCommand extends Command {
             + "format! Only one datetime is allowed!";
     public static final String MESSAGE_NO_PARAM_QUERY = "A student ID and/or a training date time is required to find "
             + "trainings.";
-    public static final String MESSAGE_ONE_STUDENT_QUERY = "The input format for student ID is wrong. Please specify "
-            + "only one numerical student ID.";
+    public static final String MESSAGE_ONE_STUDENT_QUERY = "The input format for student Id is wrong. Please specify "
+            + "only one numerical student Id.";
     public static final String MESSAGE_NO_MATCH =
             "There are no matches returned! Check your student index or datetime and make sure they both exist.";
 
