@@ -2,7 +2,6 @@ package seedu.canoe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.canoe.commons.core.Messages.MESSAGE_DUPLICATE_STUDENTS_IN_TRAINING;
-import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
@@ -11,15 +10,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.commons.core.Messages;
 import seedu.canoe.commons.core.index.Index;
-import seedu.canoe.commons.util.StringUtil;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.Attendance;
+import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.training.Training;
 
@@ -40,8 +40,6 @@ public class AddStudentToTrainingCommand extends Command {
 
     public static final String MESSAGE_TRAINING_CANNOT_ADD = "No more students "
             + "can be added to this past training";
-    public static final String MESSAGE_STUDENT_DOES_NOT_EXIST = "One of "
-            + "the Ids specified do not correspond to an existing Student!";
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "Added Student: %1$s";
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student "
             + "to be added must be specified.";
@@ -51,13 +49,13 @@ public class AddStudentToTrainingCommand extends Command {
             + "training scheduled on the same date already!";
     private static final String MESSAGE_REPEATED_STUDENT = "One of the Ids is repeated!";
     private final Index index;
-    private final String[] studentsToAdd;
+    private final List<Id> studentsToAdd;
 
     /**
      * @param index of the Training Session to add Students to.
      * @param studentsToAdd corresponding Id of Students to add.
      */
-    public AddStudentToTrainingCommand(Index index, String[] studentsToAdd) {
+    public AddStudentToTrainingCommand(Index index, List<Id> studentsToAdd) {
         requireNonNull(index);
         requireNonNull(studentsToAdd);
 
@@ -86,14 +84,14 @@ public class AddStudentToTrainingCommand extends Command {
         }
 
         //Checks if the user specified any students to add
-        if (studentsToAdd.length == 0) {
-            LOGGER.warning("User input invalid");
+        if (studentsToAdd.isEmpty()) {
+            LOGGER.warning("User input invalid: No students to add");
             throw new CommandException(MESSAGE_NO_STUDENTS_SPECIFIED);
         }
 
         //Checks if the Index of Training provided is greater than number of Trainings.
         if (index.getZeroBased() >= lastShownList.size()) {
-            LOGGER.warning("User input invalid");
+            LOGGER.warning("User input invalid: Invalid training index");
             throw new CommandException(Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX);
         }
 
@@ -109,16 +107,9 @@ public class AddStudentToTrainingCommand extends Command {
         //Student ID Checks - not invalid index, numbered index and exists in student list and not duplicated
         List<Student> targetStudentList = new ArrayList<>();
         List<Student> editedStudentList = new ArrayList<>();
-        for (String str : studentsToAdd) {
+        for (Id id : studentsToAdd) {
 
-            // Throws a CommandException if the Student ID is zero or negative.
-            if (!StringUtil.isNonZeroUnsignedInteger(str)) {
-                LOGGER.warning("Student index is incorrect.");
-                throw new CommandException(String
-                        .format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentToTrainingCommand.MESSAGE_USAGE));
-            }
-
-            Student studentToEdit = getStudentWithID(model, str);
+            Student studentToEdit = CommandUtil.getStudentFromId(model, id);
             Student editedStudent = createEditedStudent(studentToEdit, editedTraining);
 
             //Ensures that Students to add are unique
@@ -148,10 +139,13 @@ public class AddStudentToTrainingCommand extends Command {
         model.setTraining(trainingToEdit, editedTraining);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
-        String result = this.getStudentsAdded();
+        Optional<String> result = CommandUtil.getStudentsMessage(editedStudentList);
         assert (!result.isEmpty());
+        if (result.isEmpty()) {
+            throw new CommandException(MESSAGE_NO_STUDENTS);
+        }
 
-        return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, result)
+        return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, result.get())
                 + " to Training Session " + index.getOneBased());
     }
 
@@ -195,22 +189,6 @@ public class AddStudentToTrainingCommand extends Command {
     }
 
     /**
-     * Returns the Student object in the model with the Id same as the specified Unique Id.
-     * @param model
-     * @param id
-     * @return the Student Object that corresponds to the specified Id.
-     */
-    public Student getStudentWithID(Model model, String id) throws CommandException {
-        id = id.trim();
-        for (Student student : model.getFilteredStudentList()) {
-            if (student.getId().getValue().equals(id)) {
-                return student;
-            }
-        }
-        throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);
-    }
-
-    /**
      * Adds the specified Attendance of the specified Training to the specified Student
      * @param studentToEdit the Student to be added to Training
      * @param editedTraining Training to be attended by student
@@ -222,22 +200,6 @@ public class AddStudentToTrainingCommand extends Command {
         Student newStudent = studentToEdit.cloneStudent();
         newStudent.addAttendance(new Attendance(editedTraining.getDateTime()));
         return newStudent;
-    }
-
-    /**
-     * Returns a String with the IDs of the students added, removing duplicate IDs.
-     * @return String with Unique Ids of Students added.
-     */
-    public String getStudentsAdded() {
-        String result = "";
-        for (String str : studentsToAdd) {
-            if (result.contains(str)) {
-                continue;
-            }
-            result += str + " ";
-        }
-        result = result.trim();
-        return result;
     }
 
     @Override

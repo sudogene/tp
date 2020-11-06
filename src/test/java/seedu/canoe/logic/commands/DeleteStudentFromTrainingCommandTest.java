@@ -3,10 +3,9 @@ package seedu.canoe.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.canoe.logic.commands.CommandTestUtil.INVALID_ID_ARRAY;
-import static seedu.canoe.logic.commands.CommandTestUtil.INVALID_ID_ARRAY_REPEATED;
-import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_ARRAY;
-import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_ARRAY_2;
+import static seedu.canoe.logic.commands.CommandTestUtil.INVALID_ID_LIST;
+import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_LIST;
+import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_LIST_2;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_STRINGS;
 import static seedu.canoe.testutil.Assert.assertThrows;
 import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_ONE_DAY;
@@ -14,7 +13,6 @@ import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIFTH_TRAINING;
 import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIRST_TRAINING;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +23,7 @@ import seedu.canoe.model.Model;
 import seedu.canoe.model.ModelManager;
 import seedu.canoe.model.UserPrefs;
 import seedu.canoe.model.student.Attendance;
+import seedu.canoe.model.student.Id;
 import seedu.canoe.testutil.TypicalStudentsInTypicalTrainings;
 
 public class DeleteStudentFromTrainingCommandTest {
@@ -44,13 +43,13 @@ public class DeleteStudentFromTrainingCommandTest {
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-                new DeleteStudentFromTrainingCommand(null, VALID_ID_ARRAY));
+                new DeleteStudentFromTrainingCommand(null, VALID_ID_LIST));
     }
 
     @Test
     public void execute_studentAcceptedByModel_removeSuccessful() throws Exception {
         DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
-                new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY);
+                new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_LIST);
         CommandResult commandResult2 = deleteStudentFromTrainingCommand.execute(getModel());
         assertEquals(String.format(DeleteStudentFromTrainingCommand.MESSAGE_DELETE_STUDENT_SUCCESS, VALID_ID_STRINGS)
                 + " from Training Session 1",
@@ -68,25 +67,18 @@ public class DeleteStudentFromTrainingCommandTest {
 
     @Test
     public void hasUniqueStudentsToDelete() {
-        List<String> uniqueList = Arrays.asList("1", "2", "3");
-        List<String> nonUniqueList = Arrays.asList("1", "2", "2", "3");
+        List<Id> uniqueList = List.of(new Id("1"), new Id("2"), new Id("3"));
+        Id idRepeated = new Id("2");
+        List<Id> nonUniqueList = List.of(new Id("1"), idRepeated, idRepeated);
 
         assertTrue(DeleteStudentFromTrainingCommand.hasUniqueStudentsToDelete(uniqueList));
         assertFalse(DeleteStudentFromTrainingCommand.hasUniqueStudentsToDelete(nonUniqueList));
     }
 
     @Test
-    public void execute_repeatedStudent_removeFail() {
-        DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
-                new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, INVALID_ID_ARRAY_REPEATED);
-        assertThrows(CommandException.class, DeleteStudentFromTrainingCommand.MESSAGE_REPEATED_STUDENT, () ->
-                deleteStudentFromTrainingCommand.execute(getModel()));
-    }
-
-    @Test
     public void execute_studentNotInTraining_removeFail() {
         DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
-                new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY_2);
+                new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_LIST_2);
         assertThrows(CommandException.class, DeleteStudentFromTrainingCommand.MESSAGE_INVALID_STUDENT, () ->
                 deleteStudentFromTrainingCommand.execute(getModel()));
     }
@@ -94,7 +86,7 @@ public class DeleteStudentFromTrainingCommandTest {
     @Test
     public void execute_multipleStudentAcceptedByModel_deleteSuccessful() throws Exception {
         DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
-                new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_ARRAY);
+                new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_LIST);
         CommandResult commandResult2 = deleteStudentFromTrainingCommand.execute(getModel());
         assertEquals(String.format(DeleteStudentFromTrainingCommand
                         .MESSAGE_DELETE_STUDENT_SUCCESS, VALID_ID_STRINGS) + " from Training Session 1",
@@ -121,8 +113,8 @@ public class DeleteStudentFromTrainingCommandTest {
     @Test
     public void execute_studentInvalidIndex_throwsCommandException() throws Exception {
         DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
-                new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, INVALID_ID_ARRAY);
-        assertThrows(CommandException.class, DeleteStudentFromTrainingCommand.MESSAGE_STUDENT_DOES_NOT_EXIST, () ->
+                new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, INVALID_ID_LIST);
+        assertThrows(CommandException.class, CommandUtil.MESSAGE_STUDENT_DOES_NOT_EXIST, () ->
                 deleteStudentFromTrainingCommand.execute(getModel()));
         //Student should still have dateTime in his field
         assertTrue(getModel().getFilteredStudentList().get(0)
@@ -137,7 +129,7 @@ public class DeleteStudentFromTrainingCommandTest {
     @Test
     public void execute_trainingInvalidIndex_throwsCommandException() throws Exception {
         DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
-                new DeleteStudentFromTrainingCommand(INDEX_FIFTH_TRAINING, VALID_ID_ARRAY);
+                new DeleteStudentFromTrainingCommand(INDEX_FIFTH_TRAINING, VALID_ID_LIST);
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX, () ->
                 deleteStudentFromTrainingCommand.execute(getModel()));
     }
@@ -145,16 +137,16 @@ public class DeleteStudentFromTrainingCommandTest {
     @Test
     public void equals() {
         DeleteStudentFromTrainingCommand deleteStudent1Command =
-                new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
+                new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, VALID_ID_LIST);
         DeleteStudentFromTrainingCommand deleteStudent12Command =
-                new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY_2);
+                new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, VALID_ID_LIST_2);
 
         // same object -> returns true
         assertTrue(deleteStudent1Command.equals(deleteStudent1Command));
 
         // same values -> returns true
         DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommandCopy =
-                new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, VALID_ID_ARRAY);
+                new DeleteStudentFromTrainingCommand(INDEX_FIRST_STUDENT, VALID_ID_LIST);
         assertTrue(deleteStudent1Command.equals(deleteStudentFromTrainingCommandCopy));
 
         // different types -> returns false
