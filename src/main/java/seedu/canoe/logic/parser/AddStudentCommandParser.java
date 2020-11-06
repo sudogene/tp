@@ -39,11 +39,14 @@ public class AddStudentCommandParser implements Parser<AddStudentToTrainingComma
 
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             String text = argMultimap.getValue(PREFIX_ID).get();
+            if (text.isEmpty()) {
+                throw new ParseException(ParserUtil.MESSAGE_NO_ID_PROVIDED);
+            }
             studentIndexes = text.split(",");
         }
 
         if (studentIndexes.length == 0) {
-            throw new ParseException(AddStudentToTrainingCommand.MESSAGE_NO_STUDENTS_SPECIFIED);
+            throw new ParseException(ParserUtil.MESSAGE_NO_ID_PROVIDED);
         }
 
         List<Id> studentIds = ParserUtil.parseMultipleIds(studentIndexes);

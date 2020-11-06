@@ -30,7 +30,7 @@ You can reach us at the email `e0406790@comp.nus.edu.sg`
 
 <img src="images/whleee.png" width="200px">
 
-[[github](https://github.com/Whleee)][[portfolio](team/Whleee.md)]
+[[github](https://github.com/Whleee)][[portfolio](team/whleee.md)]
 
 * Role: Developer
 * Responsibilities: Testing, Documentation
