@@ -84,6 +84,11 @@ public class Id {
     }
 
     @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
+
+    @Override
     public String toString() {
         return String.valueOf(value);
     }

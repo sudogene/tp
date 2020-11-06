@@ -6,8 +6,11 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.canoe.commons.core.index.Index;
@@ -33,6 +36,7 @@ import seedu.canoe.model.training.Training;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_REPEATED_ID = "Id cannot be repeated.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -185,7 +189,7 @@ public class ParserUtil {
      * Parses {@code String id} into an {@code Id}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * * @throws ParseException if the given {@code id} is invalid.
+     * @throws ParseException if the given {@code id} is invalid.
      */
     public static Id parseId(String id) throws ParseException {
         requireNonNull(id);
@@ -194,5 +198,32 @@ public class ParserUtil {
             throw new ParseException(Id.MESSAGE_CONSTRAINTS);
         }
         return new Id(trimmedId);
+    }
+
+    /**
+     * Parses a {@code String[] id} array into a list of {@code Id}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given array contains invalid {@code id}.
+     */
+    public static List<Id> parseMultipleIds(String[] ids) throws ParseException {
+        requireNonNull(ids);
+        if (!isUniqueList(ids)) {
+            throw new ParseException(MESSAGE_REPEATED_ID);
+        }
+
+        List<Id> idList = new ArrayList<>();
+
+        for (String id : ids) {
+            Id parsedId = parseId(id);
+            idList.add(parsedId);
+        }
+
+        return idList;
+    }
+
+    private static boolean isUniqueList(String[] toCheck) {
+        List<String> toCheckList = Arrays.asList(toCheck);
+        return new HashSet<>(toCheckList).size() == toCheckList.size();
     }
 }
