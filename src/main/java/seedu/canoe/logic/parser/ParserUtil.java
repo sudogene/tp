@@ -31,7 +31,7 @@ import seedu.canoe.model.tag.Tag;
 import seedu.canoe.model.training.Training;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing strings in the various *Parser classes and doing checks.
  */
 public class ParserUtil {
 
@@ -222,7 +222,10 @@ public class ParserUtil {
         return idList;
     }
 
-    private static boolean isUniqueList(String[] toCheck) {
+    /**
+     * Checks if a given array of strings is unique.
+     */
+    public static boolean isUniqueList(String[] toCheck) {
         List<String> toCheckList = Arrays.asList(toCheck);
         return new HashSet<>(toCheckList).size() == toCheckList.size();
     }
