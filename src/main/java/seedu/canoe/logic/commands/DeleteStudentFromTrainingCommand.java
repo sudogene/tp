@@ -7,6 +7,7 @@ import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -41,6 +42,7 @@ public class DeleteStudentFromTrainingCommand extends Command {
     public static final String MESSAGE_STUDENT_DOES_NOT_EXIST = "One of the Ids "
             + "specified do not correspond to an existing Student!";
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be deleted must be specified.";
+    public static final String MESSAGE_REPEATED_STUDENT = "One of the Ids is repeated!";
 
     private final Index index;
     private final List<String> studentsToDelete;
@@ -63,6 +65,12 @@ public class DeleteStudentFromTrainingCommand extends Command {
                 + "===================");
         requireNonNull(model);
 
+        // Checks if students to delete are repeated
+        if (!hasUniqueStudentsToDelete(studentsToDelete)) {
+            LOGGER.warning("Repeated Id input detected.");
+            throw new CommandException(MESSAGE_REPEATED_STUDENT);
+        }
+
         List<Training> trainingList = model.getFilteredTrainingList();
 
         // Checks if training index is valid
@@ -81,7 +89,7 @@ public class DeleteStudentFromTrainingCommand extends Command {
 
             // Checks if Id value input is valid
             if (!Id.isValidId(str)) {
-                LOGGER.warning("Student index is invalid.");
+                LOGGER.warning("Student Id is invalid.");
                 throw new CommandException(String
                         .format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentFromTrainingCommand.MESSAGE_USAGE));
             }
@@ -152,6 +160,13 @@ public class DeleteStudentFromTrainingCommand extends Command {
                 .map(Id::getValue)
                 .reduce((id1, id2) -> id1 + " " + id2)
                 .get();
+    }
+
+    /**
+     * Checks if a given list of student Id strings contains repeating values.
+     */
+    public static boolean hasUniqueStudentsToDelete(List<String> studentsToDelete) {
+        return new HashSet<>(studentsToDelete).size() == studentsToDelete.size();
     }
 
     /**

@@ -5,8 +5,10 @@ import static seedu.canoe.commons.core.Messages.MESSAGE_STUDENTS_NOT_FOUND;
 import static seedu.canoe.commons.core.Messages.MESSAGE_TRAININGS_NOT_FOUND;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.commons.core.index.Index;
@@ -29,9 +31,11 @@ public class MarkAttendanceCommand extends Command {
             + "Example: " + COMMAND_WORD + " 2 id/1,4,19";
 
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be marked must be specified.";
-    public static final String MESSAGE_INVALID_STUDENT_MARKED = "Some students do not have specified"
-            + " training session scheduled!";
+    public static final String MESSAGE_INVALID_STUDENT_MARKED = "These students do not have the specified"
+            + " training session scheduled: %1$s!";
     public static final String MESSAGE_MARK_ATTENDANCE_SUCCESS = "Marked these students for their attendance: %1$s!";
+    public static final String MESSAGE_TRAINING_NOT_OVER = "The training is yet to be conducted, and attendance cannot "
+        + "be marked yet!";
 
     private final Index trainingIndex;
     private final AnyMatchPredicateList predicates;
@@ -51,10 +55,17 @@ public class MarkAttendanceCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         LOGGER.info("=============================[ Executing MarkAttendanceCommand ]===========================");
         requireNonNull(model);
+
         List<Training> lastShownList = model.getFilteredTrainingList();
 
         if (trainingIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_TRAININGS_NOT_FOUND);
+        }
+
+        Training training = lastShownList.get(trainingIndex.getZeroBased());
+
+        if (training.getDateTime().isAfter(LocalDateTime.now())) {
+            throw new CommandException(MESSAGE_TRAINING_NOT_OVER);
         }
 
         model.updateFilteredStudentList(predicates);
@@ -65,17 +76,23 @@ public class MarkAttendanceCommand extends Command {
             throw new CommandException(MESSAGE_STUDENTS_NOT_FOUND);
         }
 
-        List<Student> attendedStudents = model.getFilteredStudentList();
+        if (training.getDateTime().isAfter(LocalDateTime.now())) {
+            throw new CommandException(MESSAGE_TRAINING_NOT_OVER);
+        }
 
-        Training training = lastShownList.get(trainingIndex.getZeroBased());
+        List<Student> attendedStudents = model.getFilteredStudentList();
 
         Attendance unmarkedAttendance = new Attendance(training.getDateTime());
         Attendance markedAttendance = new Attendance(training.getDateTime());
         markedAttendance.marks();
 
-        if (!studentsHaveAttendance(unmarkedAttendance, attendedStudents)) {
+        List<Student> studentsNoAttendance = studentsWithNoAttendance(unmarkedAttendance, attendedStudents);
+        if (!studentsNoAttendance.isEmpty()) {
             LOGGER.warning("Some students do not contain training session");
-            return new CommandResult(MESSAGE_INVALID_STUDENT_MARKED);
+            model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+            throw new CommandException(String.format(
+                    MESSAGE_INVALID_STUDENT_MARKED, getStudentIdsAsString(studentsNoAttendance))
+            );
         }
 
         for (Student student : attendedStudents) {
@@ -95,20 +112,19 @@ public class MarkAttendanceCommand extends Command {
     }
 
     /**
-     * Checks the list of students and returns whether all the students have the attendance.
+     * Checks the list of students and returns a list of students who do not have the attendance.
      *
      * @param attendance to be checked for.
      * @param studentsToCheck list of students to check.
-     * @return true if students have training session scheduled, false if otherwise.
+     * @return list of students who do not have training session scheduled.
      */
-    public boolean studentsHaveAttendance(Attendance attendance, List<Student> studentsToCheck) {
+    public List<Student> studentsWithNoAttendance(Attendance attendance, List<Student> studentsToCheck) {
         assert attendance != null;
-        for (Student student: studentsToCheck) {
-            if (!student.containsAttendance(attendance)) {
-                return false;
-            }
-        }
-        return true;
+        List<Student> studentsNoAttendance = studentsToCheck.stream()
+                .filter(student -> !student.containsAttendance(attendance))
+                .collect(Collectors.toList());
+
+        return studentsNoAttendance;
     }
 
     /**

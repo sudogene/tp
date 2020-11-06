@@ -34,12 +34,17 @@ public class SampleDataUtil {
                 DateTimeFormatter.ofPattern("yyyy-MM-dd " + "HHmm"));
         LocalDateTime secondPastDateTime = LocalDateTime.parse("2020-09-15 1500",
                 DateTimeFormatter.ofPattern("yyyy-MM-dd " + "HHmm"));
+        LocalDateTime thirdPastDateTime = LocalDateTime.parse("2020-06-15 1500",
+                DateTimeFormatter.ofPattern("yyyy-MM-dd " + "HHmm"));
+        LocalDateTime fourthPastDateTime = LocalDateTime.parse("2020-03-15 1500",
+                DateTimeFormatter.ofPattern("yyyy-MM-dd " + "HHmm"));
         Training firstTraining = new Training(pastDateTime);
         Training secondTraining = new Training(secondPastDateTime);
-
+        Training thirdTraining = new Training(thirdPastDateTime);
+        Training fourthTraining = new Training(fourthPastDateTime);
 
         return new Training[] {
-            firstTraining, secondTraining
+            firstTraining, secondTraining, thirdTraining, fourthTraining
         };
     }
 
@@ -98,7 +103,11 @@ public class SampleDataUtil {
             sampleAb.addTraining(sampleTraining);
             for (Student sampleStudent : sampleAb.getStudentList()) {
                 sampleTraining.addStudent(sampleStudent);
-                sampleStudent.markAttendanceFromTraining(sampleTraining);
+                Student alex = sampleAb.getStudentList().get(0);
+                Student bernice = sampleAb.getStudentList().get(1);
+                if (!(sampleStudent == alex || sampleStudent == bernice)) {
+                    sampleStudent.markAttendanceFromTraining(sampleTraining);
+                }
             }
         }
 

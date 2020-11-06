@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import seedu.canoe.commons.core.LogsCenter;
 import seedu.canoe.logic.commands.CommonTimeCommand;
 import seedu.canoe.logic.parser.exceptions.ParseException;
+import seedu.canoe.model.student.AcademicYear;
 import seedu.canoe.model.student.AcademicYearMatchesPredicate;
 import seedu.canoe.model.student.AnyMatchPredicateList;
 import seedu.canoe.model.student.NameContainsKeywordsPredicate;
@@ -50,7 +51,8 @@ public class CommonTimeCommandParser implements Parser<CommonTimeCommand> {
             if (!academicYearValue.equals("")) {
                 LOGGER.warning("No keyword found after academic year prefix!");
                 checkEmptyString = false;
-                predicates.add(new AcademicYearMatchesPredicate(academicYearValue));
+                AcademicYear year = ParserUtil.parseAcademicYear(academicYearValue);
+                predicates.add(new AcademicYearMatchesPredicate(year));
             }
         }
 

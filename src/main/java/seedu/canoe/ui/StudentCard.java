@@ -78,8 +78,8 @@ public class StudentCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         studentId.setText("Id: " + student.getId());
         name.setText(student.getName().fullName);
-        phone.setText(student.getPhone().value);
-        email.setText(student.getEmail().value);
+        phone.setText("Phone number:" + student.getPhone().value);
+        email.setText("Email: " + student.getEmail().value);
         academicYear.setText("Academic Year: " + student.getAcademicYear().value);
         dismissalTime.setText("Dismissal Times: ");
         Label mondayDismissal = new Label();

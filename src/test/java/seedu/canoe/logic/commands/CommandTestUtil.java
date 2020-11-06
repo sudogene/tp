@@ -65,6 +65,7 @@ public class CommandTestUtil {
     public static final String[] VALID_ID_ARRAY_5 = new String[]{"4"};
     public static final String[] VALID_ID_ARRAY_6 = new String[]{"1", "2", "3"};
     public static final String[] INVALID_ID_ARRAY = new String[] {"9"};
+    public static final String[] INVALID_ID_ARRAY_REPEATED = new String[] {"1", "2", "2"};
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

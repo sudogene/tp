@@ -8,6 +8,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.canoe.logic.commands.CommonTimeCommand;
+import seedu.canoe.model.student.AcademicYear;
 import seedu.canoe.model.student.AcademicYearMatchesPredicate;
 import seedu.canoe.model.student.AnyMatchPredicateList;
 import seedu.canoe.model.student.NameContainsKeywordsPredicate;
@@ -22,17 +23,17 @@ class CommonTimeCommandParserTest {
         CommonTimeCommand firstExpectedCommonTimeCommand =
                 new CommonTimeCommand(AnyMatchPredicateList.of(
                         new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")),
-                        new AcademicYearMatchesPredicate("123456")
+                        new AcademicYearMatchesPredicate(new AcademicYear("3"))
                 ));
-        assertParseSuccess(parser, " n/Alice Bob ay/123456", firstExpectedCommonTimeCommand);
+        assertParseSuccess(parser, " n/Alice Bob ay/3", firstExpectedCommonTimeCommand);
 
         // multiple whitespaces between keywords
         CommonTimeCommand secondExpectedCommonTimeCommand =
                 new CommonTimeCommand(AnyMatchPredicateList.of(
                         new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")),
-                        new AcademicYearMatchesPredicate("85355255")
+                        new AcademicYearMatchesPredicate(new AcademicYear("3"))
                 ));
-        assertParseSuccess(parser, "  \n  \t n/Alice Bob \t \n \n ay/85355255", secondExpectedCommonTimeCommand);
+        assertParseSuccess(parser, "  \n  \t n/Alice Bob \t \n \n ay/3", secondExpectedCommonTimeCommand);
     }
 
     @Test
@@ -43,8 +44,8 @@ class CommonTimeCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         CommonTimeCommand expectedCommonTimeCommand = new CommonTimeCommand(AnyMatchPredicateList.of(
-                new AcademicYearMatchesPredicate("3")
+                new AcademicYearMatchesPredicate(new AcademicYear("3"))
         ));
-        assertParseSuccess(parser, " ay/11111111 ay/22222222 ay/3", expectedCommonTimeCommand);
+        assertParseSuccess(parser, " ay/1 ay/2 ay/3", expectedCommonTimeCommand);
     }
 }
