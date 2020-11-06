@@ -7,6 +7,7 @@ import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import seedu.canoe.commons.core.LogsCenter;
@@ -60,12 +61,6 @@ public class DeleteStudentFromTrainingCommand extends Command {
                 + "===================");
         requireNonNull(model);
 
-        // Checks if students to delete are repeated
-        if (!hasUniqueStudentsToDelete(studentsToDelete)) {
-            LOGGER.warning("Repeated Id input detected.");
-            throw new CommandException(MESSAGE_REPEATED_STUDENT);
-        }
-
         List<Training> trainingList = model.getFilteredTrainingList();
 
         // Checks if training index is valid
@@ -105,8 +100,11 @@ public class DeleteStudentFromTrainingCommand extends Command {
         model.setTraining(trainingToEdit, editedTraining);
 
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        String result = getStudentsMessage(editedStudentList);
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, result)
+        Optional<String> result = CommandUtil.getStudentsMessage(editedStudentList);
+        if (result.isEmpty()) {
+            throw new CommandException(MESSAGE_NO_STUDENTS_SPECIFIED);
+        }
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, result.get())
                 + " from Training Session " + index.getOneBased());
     }
 
@@ -124,14 +122,6 @@ public class DeleteStudentFromTrainingCommand extends Command {
         Student newStudent = studentToEdit.cloneStudent();
         newStudent.removeAttendance(new Attendance(editedTraining.getDateTime()));
         return newStudent;
-    }
-
-    private String getStudentsMessage(List<Student> students) {
-        return students.stream()
-                .map(Student::getId)
-                .map(Id::getValue)
-                .reduce((id1, id2) -> id1 + " " + id2)
-                .get();
     }
 
     /**

@@ -55,10 +55,10 @@ public class CommandTestUtil {
     public static final String VALID_ID = "1";
     public static final String VALID_ID_STRINGS = "1";
     public static final String VALID_ID_STRINGS_2 = "2";
-    public static final String VALID_ID_STRINGS_3 = "2 3";
-    public static final String VALID_ID_STRINGS_4 = "1 2";
+    public static final String VALID_ID_STRINGS_3 = "2, 3";
+    public static final String VALID_ID_STRINGS_4 = "1, 2";
     public static final String VALID_ID_STRINGS_5 = "4";
-    public static final String VALID_ID_STRINGS_6 = "1 2 3";
+    public static final String VALID_ID_STRINGS_6 = "1, 2, 3";
     public static final List<Id> VALID_ID_LIST = List.of(new Id("1"));
     public static final List<Id> VALID_ID_LIST_2 = List.of(new Id("2"));
     public static final List<Id> VALID_ID_LIST_3 = List.of(new Id("2"), new Id("3"));

@@ -14,7 +14,6 @@ import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.Attendance;
-import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.training.Training;
 
@@ -79,7 +78,7 @@ public class AddAllStudentToTrainingCommand extends Command {
                     addedStudents.add(student);
                 });
 
-        Optional<String> addedStudentsMessage = getStudentsMessage(addedStudents);
+        Optional<String> addedStudentsMessage = CommandUtil.getStudentsMessage(addedStudents);
         if (addedStudentsMessage.isEmpty()) {
             throw new CommandException(MESSAGE_NO_STUDENTS);
         }
@@ -106,12 +105,5 @@ public class AddAllStudentToTrainingCommand extends Command {
         Student editedStudent = student.cloneStudent();
         editedStudent.addAttendance(new Attendance(training.getDateTime()));
         model.setStudentInUniqueStudentList(student, editedStudent);
-    }
-
-    private Optional<String> getStudentsMessage(List<Student> students) {
-        return students.stream()
-                .map(Student::getId)
-                .map(Id::toString)
-                .reduce((id1, id2) -> id1 + ", " + id2);
     }
 }

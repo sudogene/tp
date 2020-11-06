@@ -8,6 +8,7 @@ import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import seedu.canoe.commons.core.LogsCenter;
@@ -129,10 +130,13 @@ public class AddStudentToTrainingCommand extends Command {
         model.setTraining(trainingToEdit, editedTraining);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
-        String result = this.getStudentsAdded();
+        Optional<String> result = CommandUtil.getStudentsMessage(editedStudentList);
         assert (!result.isEmpty());
+        if (result.isEmpty()) {
+            throw new CommandException(MESSAGE_NO_STUDENTS);
+        }
 
-        return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, result)
+        return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, result.get())
                 + " to Training Session " + index.getOneBased());
     }
 
@@ -180,22 +184,6 @@ public class AddStudentToTrainingCommand extends Command {
         Student newStudent = studentToEdit.cloneStudent();
         newStudent.addAttendance(new Attendance(editedTraining.getDateTime()));
         return newStudent;
-    }
-
-    /**
-     * Returns a String with the IDs of the students added, removing duplicate IDs.
-     * @return String with Unique Ids of Students added.
-     */
-    public String getStudentsAdded() {
-        String result = "";
-        for (Id id : studentsToAdd) {
-            if (result.contains(id.toString())) {
-                continue;
-            }
-            result += id.toString() + " ";
-        }
-        result = result.trim();
-        return result;
     }
 
     @Override

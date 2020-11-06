@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.canoe.logic.commands.CommandTestUtil.INVALID_ID_LIST;
-import static seedu.canoe.logic.commands.CommandTestUtil.INVALID_ID_LIST_REPEATED;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_LIST;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_LIST_2;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_STRINGS;
@@ -74,14 +73,6 @@ public class DeleteStudentFromTrainingCommandTest {
 
         assertTrue(DeleteStudentFromTrainingCommand.hasUniqueStudentsToDelete(uniqueList));
         assertFalse(DeleteStudentFromTrainingCommand.hasUniqueStudentsToDelete(nonUniqueList));
-    }
-
-    @Test
-    public void execute_repeatedStudent_removeFail() {
-        DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
-                new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, INVALID_ID_LIST_REPEATED);
-        assertThrows(CommandException.class, DeleteStudentFromTrainingCommand.MESSAGE_REPEATED_STUDENT, () ->
-                deleteStudentFromTrainingCommand.execute(getModel()));
     }
 
     @Test
