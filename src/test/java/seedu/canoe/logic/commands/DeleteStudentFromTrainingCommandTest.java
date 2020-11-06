@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.canoe.logic.commands.CommandTestUtil.INVALID_ID_LIST;
-import static seedu.canoe.logic.commands.CommandTestUtil.INVALID_ID_LIST_REPEATED;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_LIST;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_LIST_2;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_ID_STRINGS;
@@ -77,14 +76,6 @@ public class DeleteStudentFromTrainingCommandTest {
     }
 
     @Test
-    public void execute_repeatedStudent_removeFail() {
-        DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
-                new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, INVALID_ID_LIST_REPEATED);
-        assertThrows(CommandException.class, DeleteStudentFromTrainingCommand.MESSAGE_REPEATED_STUDENT, () ->
-                deleteStudentFromTrainingCommand.execute(getModel()));
-    }
-
-    @Test
     public void execute_studentNotInTraining_removeFail() {
         DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
                 new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_LIST_2);
@@ -123,7 +114,7 @@ public class DeleteStudentFromTrainingCommandTest {
     public void execute_studentInvalidIndex_throwsCommandException() throws Exception {
         DeleteStudentFromTrainingCommand deleteStudentFromTrainingCommand =
                 new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, INVALID_ID_LIST);
-        assertThrows(CommandException.class, DeleteStudentFromTrainingCommand.MESSAGE_STUDENT_DOES_NOT_EXIST, () ->
+        assertThrows(CommandException.class, CommandUtil.MESSAGE_STUDENT_DOES_NOT_EXIST, () ->
                 deleteStudentFromTrainingCommand.execute(getModel()));
         //Student should still have dateTime in his field
         assertTrue(getModel().getFilteredStudentList().get(0)

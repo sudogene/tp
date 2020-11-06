@@ -122,7 +122,7 @@ public class AddStudentToTrainingCommandTest {
     public void execute_studentInvalidIndex_throwsCommandException() throws Exception {
         AddStudentToTrainingCommand addStudentToTrainingCommand =
                 new AddStudentToTrainingCommand(INDEX_FIRST_TRAINING, INVALID_ID_LIST);
-        assertThrows(CommandException.class, AddStudentToTrainingCommand.MESSAGE_STUDENT_DOES_NOT_EXIST, () ->
+        assertThrows(CommandException.class, CommandUtil.MESSAGE_STUDENT_DOES_NOT_EXIST, () ->
                 addStudentToTrainingCommand.execute(getModel()));
         //Student JONAS should still have dateTime in his field
         assertTrue(getModel().getFilteredStudentList().get(0)
