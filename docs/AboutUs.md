@@ -30,7 +30,7 @@ You can reach us at the email `e0406790@comp.nus.edu.sg`
 
 <img src="images/whleee.png" width="200px">
 
-[[github](https://github.com/Whleee)]
+[[github](https://github.com/Whleee)][[portfolio](team/Whleee.md)]
 
 * Role: Developer
 * Responsibilities: Testing, Documentation
@@ -48,7 +48,7 @@ You can reach us at the email `e0406790@comp.nus.edu.sg`
 
 <img src="images/sudogene.png" width="200px">
 
-[[github](https://github.com/sudogene)]
+[[github](https://github.com/sudogene)][[portfolio](team/sudogene.md)]
 
 * Role: Developer
 * Responsibilities: Testing, Documentation

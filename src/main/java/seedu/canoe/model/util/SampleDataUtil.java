@@ -103,7 +103,11 @@ public class SampleDataUtil {
             sampleAb.addTraining(sampleTraining);
             for (Student sampleStudent : sampleAb.getStudentList()) {
                 sampleTraining.addStudent(sampleStudent);
-                sampleStudent.markAttendanceFromTraining(sampleTraining);
+                Student alex = sampleAb.getStudentList().get(0);
+                Student bernice = sampleAb.getStudentList().get(1);
+                if (!(sampleStudent == alex || sampleStudent == bernice)) {
+                    sampleStudent.markAttendanceFromTraining(sampleTraining);
+                }
             }
         }
 
