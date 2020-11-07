@@ -234,7 +234,7 @@ Format: `ts-add TRAINING_INDEX id/STUDENT_ID...`
 * Each student can only be added to a **SINGLE** training on the same date regardless of time.
 * Student's dismissal time for the same day should also be equal or earlier than the time of the training. (i.e. Student's dismissal time for Monday should be equal or earlier than the time of a training that falls on a Monday for him/her to be successfully added.)
 
-> Note: Training schedules can also be viewed on the student list panel and they will update as you add students to trainings.
+> Note: Training schedules can also be viewed on the student list panel and they will update as you add students to trainings. Students will be displayed in lexicographic order in each Training Session.
 
 Examples:
 - `ts-add 2 id/1,2,3` adds students with id values 1,2,3 to training 1.
