@@ -9,12 +9,14 @@ import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.canoe.logic.parser.exceptions.ParseException;
 import seedu.canoe.model.student.Email;
+import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Name;
 import seedu.canoe.model.student.Phone;
 import seedu.canoe.model.tag.Tag;
@@ -24,12 +26,18 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_ID_LEADING_ZERO = "001";
+    private static final String INVALID_ID_ALPHABET = "1a";
+    private static final String INVALID_ID_NEGATIVE = "-1";
+    private static final String[] INVALID_MULTIPLE_IDS = {"4", "b"};
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_ID = "1";
+    private static final String[] VALID_MULTIPLE_IDS = {"2", "3"};
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -166,5 +174,54 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseId_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseId((String) null));
+    }
+
+    @Test
+    public void parseId_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_ID_LEADING_ZERO));
+        assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_ID_ALPHABET));
+        assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_ID_NEGATIVE));
+    }
+
+    @Test
+    public void parseId_validValueWithoutWhitespace_returnsName() throws Exception {
+        Id expectedId = new Id(VALID_ID);
+        assertEquals(expectedId, ParserUtil.parseId(VALID_ID));
+    }
+
+    @Test
+    public void parseId_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String idWithWhitespace = WHITESPACE + VALID_ID + WHITESPACE;
+        Id expectedId = new Id(VALID_ID);
+        assertEquals(expectedId, ParserUtil.parseId(idWithWhitespace));
+    }
+
+    @Test
+    public void parseMultipleIds_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseMultipleIds(null));
+    }
+
+    @Test
+    public void parseMultipleIds_containsInvalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMultipleIds(INVALID_MULTIPLE_IDS));
+    }
+
+    @Test
+    public void parseMultipleIds_validValuesWithoutWhitespace_returnsName() throws Exception {
+        List<Id> expectedIdList = List.of(new Id("2"), new Id("3"));
+        assertEquals(expectedIdList, ParserUtil.parseMultipleIds(VALID_MULTIPLE_IDS));
+    }
+
+    @Test
+    public void parseMultipleIds_validValuesWithWhitespace_returnsTrimmedName() throws Exception {
+        String idWithWhitespace = WHITESPACE + VALID_ID + WHITESPACE;
+        String[] validIdListWithWhitespace = {idWithWhitespace, "2"};
+        List<Id> expectedIdList = List.of(new Id("1"), new Id("2"));
+        assertEquals(expectedIdList, ParserUtil.parseMultipleIds(validIdListWithWhitespace));
     }
 }
