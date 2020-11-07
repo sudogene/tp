@@ -16,23 +16,28 @@ public class DeleteStudentFromTrainingCommandParserTest {
     private DeleteStudentFromTrainingCommandParser parser = new DeleteStudentFromTrainingCommandParser();
 
     @Test
-    public void parse_nonNumericStudentId_failure() {
+    public void parseNoStudentsFailure() {
+        assertParseFailure(parser, "1 id/", ParserUtil.MESSAGE_NO_ID_PROVIDED);
+    }
+
+    @Test
+    public void parseNonNumericStudentIdFailure() {
         assertParseFailure(parser, "1 id/abc", Id.MESSAGE_CONSTRAINTS);
     }
 
     @Test
-    public void parse_repeatedId_failure() {
+    public void parseRepeatedIdFailure() {
         assertParseFailure(parser, "1 id/1,1,1,1,1,2", ParserUtil.MESSAGE_REPEATED_ID);
     }
 
     @Test
-    public void parse_singleValidId_success() {
+    public void parseSingleValidIdSuccess() {
         assertParseSuccess(parser, "1 id/2",
                 new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_LIST_2));
     }
 
     @Test
-    public void parse_multipleValidId_success() {
+    public void parseMultipleValidIdSuccess() {
         assertParseSuccess(parser, "1 id/1,2,3",
                 new DeleteStudentFromTrainingCommand(INDEX_FIRST_TRAINING, VALID_ID_LIST_6));
     }
