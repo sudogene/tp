@@ -26,24 +26,24 @@ public class CommandUtilTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void getStudentFromId_null_throwsNullPointerException() {
+    public void getStudentFromIdNullThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> CommandUtil.getStudentFromId(null, ID_ALICE));
         assertThrows(NullPointerException.class, () -> CommandUtil.getStudentFromId(model, null));
         assertThrows(NullPointerException.class, () -> CommandUtil.getStudentFromId(null, null));
     }
 
     @Test
-    public void getStudentFromId_idExists_success() throws CommandException {
+    public void getStudentFromIdExistsSuccess() throws CommandException {
         assertEquals(ALICE, CommandUtil.getStudentFromId(model, ID_ALICE));
     }
 
     @Test
-    public void getStudentFromId_idNotExists_throwsCommandException() {
+    public void getStudentFromIdNotExistsThrowsCommandException() {
         assertThrows(CommandException.class, () -> CommandUtil.getStudentFromId(model, ID_NOT_EXISTS));
     }
 
     @Test
-    public void getStudentsMessage_null_throwsNullPointerException() {
+    public void getStudentsMessageNullThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> CommandUtil.getStudentsMessage(null));
     }
 

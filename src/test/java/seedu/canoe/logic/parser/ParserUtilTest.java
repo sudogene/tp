@@ -177,48 +177,48 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseId_null_throwsNullPointerException() {
+    public void parseIdNullThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseId((String) null));
     }
 
     @Test
-    public void parseId_invalidValue_throwsParseException() {
+    public void parseIdInvalidValueThrowsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_ID_LEADING_ZERO));
         assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_ID_ALPHABET));
         assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_ID_NEGATIVE));
     }
 
     @Test
-    public void parseId_validValueWithoutWhitespace_returnsName() throws Exception {
+    public void parseIdValidValueWithoutWhitespaceReturnsId() throws Exception {
         Id expectedId = new Id(VALID_ID);
         assertEquals(expectedId, ParserUtil.parseId(VALID_ID));
     }
 
     @Test
-    public void parseId_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+    public void parseIdValidValueWithWhitespaceReturnsTrimmedId() throws Exception {
         String idWithWhitespace = WHITESPACE + VALID_ID + WHITESPACE;
         Id expectedId = new Id(VALID_ID);
         assertEquals(expectedId, ParserUtil.parseId(idWithWhitespace));
     }
 
     @Test
-    public void parseMultipleIds_null_throwsNullPointerException() {
+    public void parseMultipleIdsNullThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseMultipleIds(null));
     }
 
     @Test
-    public void parseMultipleIds_containsInvalidValue_throwsParseException() {
+    public void parseMultipleIdsContainsInvalidValueThrowsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseMultipleIds(INVALID_MULTIPLE_IDS));
     }
 
     @Test
-    public void parseMultipleIds_validValuesWithoutWhitespace_returnsName() throws Exception {
+    public void parseMultipleIdsValidValuesWithoutWhitespaceReturnsIds() throws Exception {
         List<Id> expectedIdList = List.of(new Id("2"), new Id("3"));
         assertEquals(expectedIdList, ParserUtil.parseMultipleIds(VALID_MULTIPLE_IDS));
     }
 
     @Test
-    public void parseMultipleIds_validValuesWithWhitespace_returnsTrimmedName() throws Exception {
+    public void parseMultipleIdsValidValuesWithWhitespaceReturnsTrimmedIds() throws Exception {
         String idWithWhitespace = WHITESPACE + VALID_ID + WHITESPACE;
         String[] validIdListWithWhitespace = {idWithWhitespace, "2"};
         List<Id> expectedIdList = List.of(new Id("1"), new Id("2"));
