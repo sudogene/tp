@@ -67,6 +67,12 @@ public class AddStudentToTrainingCommand extends Command {
         requireNonNull(model);
         assert (model != null);
 
+        // Checks if training index is valid
+        if (index.getZeroBased() >= model.getFilteredTrainingList().size()) {
+            LOGGER.warning("Training index is invalid.");
+            throw new CommandException(Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX);
+        }
+
         List<Training> lastShownList = model.getFilteredTrainingList();
         List<Student> studentList = model.getFilteredStudentList();
 
