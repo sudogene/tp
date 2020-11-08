@@ -1,6 +1,5 @@
 ﻿---
 layout: page
-style: guide
 title: User Guide
 ---
 
