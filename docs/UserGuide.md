@@ -303,7 +303,8 @@ Format: `find-training [id/STUDENT_ID] [dt/DATETIME]`
 * Only ONE student id can be specified in the same command
 * Only ONE date-time can be specified in the same command
 * Date-time must be in the form `yyyy-MM-dd HHmm` (i.e. 2021-08-26 1800)
-* If only the student id is specified, the command will return all of the scheduled trainings (past, present and future) of the matching student.
+* Date-time specified will be matched with the date-time (start time) of trainings in order to return matched trainings. 
+* If only the student id is specified, the command will return all of the scheduled trainings (past, ongoing and upcoming) of the matching student.
 * If only the date-time is specified, the command will return all of the students scheduled for that matching training on the student panel.
 * If both parameters are specified, the command will return only the single matching training on the training panel and the matching student on the student panel.
 
