@@ -31,15 +31,15 @@ public class FindStudentTrainingCommandTest {
 
     @Test
     public void equals() {
-        String firstIdValue = "001";
-        String secondIdValue = "002";
+        String firstIdValue = "1";
+        String secondIdValue = "2";
         LocalDateTime firstDateTime = LocalDateTime.parse("2021-08-26 1800",
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         LocalDateTime secondDateTime = LocalDateTime.parse("2022-08-26 1800",
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
 
-        IdMatchesPredicate firstStudentPredicate = new IdMatchesPredicate("001");
-        IdMatchesPredicate secondStudentPredicate = new IdMatchesPredicate("002");
+        IdMatchesPredicate firstStudentPredicate = new IdMatchesPredicate("1");
+        IdMatchesPredicate secondStudentPredicate = new IdMatchesPredicate("2");
         DateTimeMatchesPredicate thirdStudentPredicate = new DateTimeMatchesPredicate(firstDateTime);
         DateTimeMatchesPredicate fourthStudentPredicate = new DateTimeMatchesPredicate(secondDateTime);
         TrainingMatchesIdPredicate firstTrainingPredicate = new TrainingMatchesIdPredicate(firstIdValue);

@@ -56,7 +56,7 @@ class MarkAttendanceCommandTest {
     @Test
     void execute_validParams_commandFailure() {
         String expectedMessage = "These students do not have the specified"
-                + " training session scheduled: 1 4!";
+                + " training session scheduled: 1, 4!";
         IdMatchesPredicate firstIdPredicate = new IdMatchesPredicate("1");
         IdMatchesPredicate secondIdPredicate = new IdMatchesPredicate("4");
 
@@ -75,7 +75,7 @@ class MarkAttendanceCommandTest {
 
     @Test
     void execute_validParams_commandSuccess() {
-        String expectedMessage = "Marked these students for their attendance: 2 5!";
+        String expectedMessage = "Marked these students for their attendance: 2, 5!";
         IdMatchesPredicate firstIdPredicate = new IdMatchesPredicate("2");
         IdMatchesPredicate secondIdPredicate = new IdMatchesPredicate("5");
 

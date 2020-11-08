@@ -37,8 +37,6 @@ public class DeleteStudentFromTrainingCommand extends Command {
     public static final String MESSAGE_INVALID_STUDENT = "One of the"
             + " Students provided is not inside of the training specified!";
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
-    public static final String MESSAGE_STUDENT_DOES_NOT_EXIST = "One of the Ids "
-            + "specified do not correspond to an existing Student!";
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student to be deleted must be specified.";
     public static final String MESSAGE_REPEATED_STUDENT = "One of the Ids is repeated!";
 
@@ -63,12 +61,6 @@ public class DeleteStudentFromTrainingCommand extends Command {
                 + "===================");
         requireNonNull(model);
 
-        // Checks if students to delete are repeated
-        if (!hasUniqueStudentsToDelete(studentsToDelete)) {
-            LOGGER.warning("Repeated Id input detected.");
-            throw new CommandException(MESSAGE_REPEATED_STUDENT);
-        }
-
         List<Training> trainingList = model.getFilteredTrainingList();
 
         // Checks if training index is valid
@@ -85,12 +77,7 @@ public class DeleteStudentFromTrainingCommand extends Command {
 
         for (Id id : studentsToDelete) {
 
-            // Checks if student of the Id exists
-            if (getStudentWithId(model, id).isEmpty()) {
-                throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);
-            }
-
-            Student studentToEdit = getStudentWithId(model, id).get();
+            Student studentToEdit = CommandUtil.getStudentFromId(model, id);
             Student editedStudent = createEditedStudent(studentToEdit, editedTraining);
 
             if (!hasStudentInTraining(editedTraining, studentToEdit)) {
@@ -113,8 +100,11 @@ public class DeleteStudentFromTrainingCommand extends Command {
         model.setTraining(trainingToEdit, editedTraining);
 
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        String result = getStudentsMessage(editedStudentList);
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, result)
+        Optional<String> result = CommandUtil.getStudentsMessage(editedStudentList);
+        if (result.isEmpty()) {
+            throw new CommandException(MESSAGE_NO_STUDENTS_SPECIFIED);
+        }
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, result.get())
                 + " from Training Session " + index.getOneBased());
     }
 
@@ -126,29 +116,12 @@ public class DeleteStudentFromTrainingCommand extends Command {
                 .anyMatch(student -> student.getId().equals(check.getId()));
     }
 
-    /**
-     * Returns the student in the model with the specified unique Id. May not exist.
-     */
-    public Optional<Student> getStudentWithId(Model model, Id id) {
-        return model.getFilteredStudentList().stream()
-                .filter(student -> student.getId().equals(id))
-                .findFirst();
-    }
-
     private static Student createEditedStudent(Student studentToEdit, Training editedTraining) {
         assert studentToEdit != null;
 
         Student newStudent = studentToEdit.cloneStudent();
         newStudent.removeAttendance(new Attendance(editedTraining.getDateTime()));
         return newStudent;
-    }
-
-    private String getStudentsMessage(List<Student> students) {
-        return students.stream()
-                .map(Student::getId)
-                .map(Id::getValue)
-                .reduce((id1, id2) -> id1 + " " + id2)
-                .get();
     }
 
     /**

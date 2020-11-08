@@ -8,6 +8,7 @@ import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import seedu.canoe.commons.core.LogsCenter;
@@ -37,8 +38,6 @@ public class AddStudentToTrainingCommand extends Command {
 
     public static final String MESSAGE_TRAINING_CANNOT_ADD = "No more students "
             + "can be added to this past training";
-    public static final String MESSAGE_STUDENT_DOES_NOT_EXIST = "One of "
-            + "the Ids specified do not correspond to an existing Student!";
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "Added Student: %1$s";
     public static final String MESSAGE_NO_STUDENTS_SPECIFIED = "At least one student "
             + "to be added must be specified.";
@@ -67,6 +66,12 @@ public class AddStudentToTrainingCommand extends Command {
 
         requireNonNull(model);
         assert (model != null);
+
+        // Checks if training index is valid
+        if (index.getZeroBased() >= model.getFilteredTrainingList().size()) {
+            LOGGER.warning("Training index is invalid.");
+            throw new CommandException(Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX);
+        }
 
         List<Training> lastShownList = model.getFilteredTrainingList();
         List<Student> studentList = model.getFilteredStudentList();
@@ -101,7 +106,7 @@ public class AddStudentToTrainingCommand extends Command {
         List<Student> editedStudentList = new ArrayList<>();
         for (Id id : studentsToAdd) {
 
-            Student studentToEdit = getStudentWithID(model, id);
+            Student studentToEdit = CommandUtil.getStudentFromId(model, id);
             Student editedStudent = createEditedStudent(studentToEdit, editedTraining);
 
             //Ensures that Students to add are unique
@@ -131,10 +136,13 @@ public class AddStudentToTrainingCommand extends Command {
         model.setTraining(trainingToEdit, editedTraining);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
-        String result = this.getStudentsAdded();
+        Optional<String> result = CommandUtil.getStudentsMessage(editedStudentList);
         assert (!result.isEmpty());
+        if (result.isEmpty()) {
+            throw new CommandException(MESSAGE_NO_STUDENTS);
+        }
 
-        return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, result)
+        return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, result.get())
                 + " to Training Session " + index.getOneBased());
     }
 
@@ -171,21 +179,6 @@ public class AddStudentToTrainingCommand extends Command {
     }
 
     /**
-     * Returns the Student object in the model with the Id same as the specified Unique Id.
-     * @param model
-     * @param id
-     * @return the Student Object that corresponds to the specified Id.
-     */
-    public Student getStudentWithID(Model model, Id id) throws CommandException {
-        for (Student student : model.getFilteredStudentList()) {
-            if (student.getId().equals(id)) {
-                return student;
-            }
-        }
-        throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);
-    }
-
-    /**
      * Adds the specified Attendance of the specified Training to the specified Student
      * @param studentToEdit the Student to be added to Training
      * @param editedTraining Training to be attended by student
@@ -197,22 +190,6 @@ public class AddStudentToTrainingCommand extends Command {
         Student newStudent = studentToEdit.cloneStudent();
         newStudent.addAttendance(new Attendance(editedTraining.getDateTime()));
         return newStudent;
-    }
-
-    /**
-     * Returns a String with the IDs of the students added, removing duplicate IDs.
-     * @return String with Unique Ids of Students added.
-     */
-    public String getStudentsAdded() {
-        String result = "";
-        for (Id id : studentsToAdd) {
-            if (result.contains(id.toString())) {
-                continue;
-            }
-            result += id.toString() + " ";
-        }
-        result = result.trim();
-        return result;
     }
 
     @Override

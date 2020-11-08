@@ -3,6 +3,8 @@ layout: page
 title: User Guide
 ---
 
+![Logo](images/canoe-coach-logo.png)
+
 CanoE-COACH is a **desktop app for managing training schedules for secondary school canoe teams, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical Interface (GUI). If you can type fast, CanoE-COACH can get your training scheduling done faster than traditional GUI apps.
 
 * Table of Contents
@@ -40,6 +42,36 @@ CanoE-COACH is a **desktop app for managing training schedules for secondary sch
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* Dismissal Time: The time when a student is dismissed from his classes. He would be able to attend training after the dismissal time.
+
+* Training: A training session organised by the coach (the user), and attended by the students.
+
+* Available Student: A student who is available to attend the training. A student is available to attend a training if his dismissal time 
+is equal to or before training start time, and if he is not already attending a training on the same day.
+
+* Attendance: Indicates the training session that a particular student is going to attend.
+
+* "Mark" Attendance: A marked attendance indicates that a particular student had attended the training session, and it is only possible to mark attendance for a training that has already passed. A marked attendance can be 
+unmarked to indicate absence/ yet to attend.
+
+* "Bad" student: A bad student is a student who has many unmarked attendances for trainings that have already passed. 
+(However, this is only in the context of this application. In the real world, even if you do miss many trainings, you could be a perfectly fine and good student.)
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+### Adding a student: `add`
+Adds a student to the student list. The student will be auto-assigned a unique `id`.
+
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL ay/ACADEMIC_YEAR [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [t/TAG]`
+
+<center>
+
+
 
 ## Features
 
@@ -234,7 +266,7 @@ Format: `ts-add TRAINING_INDEX id/STUDENT_ID...`
 * Each student can only be added to a **SINGLE** training on the same date regardless of time.
 * Student's dismissal time for the same day should also be equal or earlier than the time of the training. (i.e. Student's dismissal time for Monday should be equal or earlier than the time of a training that falls on a Monday for him/her to be successfully added.)
 
-> Note: Training schedules can also be viewed on the student list panel and they will update as you add students to trainings.
+> Note: Training schedules can also be viewed on the student list panel and they will update as you add students to trainings. Students will be displayed in lexicographic order in each Training Session.
 
 Examples:
 - `ts-add 2 id/1,2,3` adds students with id values 1,2,3 to training 1.

@@ -35,8 +35,9 @@ import seedu.canoe.model.training.Training;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_REPEATED_ID = "Id cannot be repeated.";
+    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer!";
+    public static final String MESSAGE_REPEATED_ID = "Id cannot be repeated!";
+    public static final String MESSAGE_NO_ID_PROVIDED = "At least one valid Id must be provided!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -208,6 +209,11 @@ public class ParserUtil {
      */
     public static List<Id> parseMultipleIds(String[] ids) throws ParseException {
         requireNonNull(ids);
+
+        if (ids.length == 0) {
+            throw new ParseException(MESSAGE_NO_ID_PROVIDED);
+        }
+
         if (!isUniqueList(ids)) {
             throw new ParseException(MESSAGE_REPEATED_ID);
         }
