@@ -136,7 +136,7 @@ public class AddAllStudentToTrainingCommandTest {
         assertFalse(addAllStudent1Command.equals(1));
 
         // null -> returns false
-        assertFalse(addAllStudent1Command.equals(null));
+        assertFalse(addAllStudent1Command == null);
 
         // different training -> returns false
         assertFalse(addAllStudent1Command.equals(addAllStudent2Command));
