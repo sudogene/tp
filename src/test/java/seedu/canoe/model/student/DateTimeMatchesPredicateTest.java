@@ -1,7 +1,7 @@
 package seedu.canoe.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
@@ -34,7 +34,7 @@ public class DateTimeMatchesPredicateTest {
         assertFalse(firstPredicate.equals(1));
 
         // null -> returns false
-        assertNull(firstPredicate);
+        assertNotNull(firstPredicate);
 
         // different idValue -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
