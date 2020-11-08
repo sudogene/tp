@@ -21,7 +21,9 @@ Given below are my contributions to the project.
   * What it does: Allows the user to add and delete Training Sessions at a user specified date and time.
   * Justification: This is a core feature in the CanoE-Coach application that allows users to schedule training sessions.
   * Highlights: This additional feature adds on to existing commands and is made extensible to commands in the future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: The other team members gave valuable input on how this feature should be implemented, and their input were taken into consideration when implementing this feature.
+  * Credits: The other team members gave input on how this feature should be implemented, and their input were taken into consideration during implementation.
+  
+<div style="page-break-after: always;"></div>
 
 * **New Feature**: Added the command to add Student to Training Sessions.
   * What it does: Allows the user to add existing Students to the user specified Training Session.
