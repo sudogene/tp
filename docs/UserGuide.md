@@ -204,7 +204,7 @@ Examples:
 - `find d2/1500 ay/2` returns all Academic Year 2 students with Tuesday dismissal time equal to or before 1500
 
 ### Common Time : `common-time`
-Returns the latest dismissal times on all days for all of the students in the specified subgroup. This would be the earliest time to schedule a training for all students in the sub group.
+Returns the latest dismissal times on each day for all of the students in the specified subgroup. This would display the earliest time possible to schedule a training for all students in the sub group.
 
 Format: `common-time [n/KEYWORDS] [ay/ACADEMIC_YEAR]`
 
@@ -225,9 +225,9 @@ Format: `common-time [n/KEYWORDS] [ay/ACADEMIC_YEAR]`
 - If no student matches the search criteria, an error message will display. 
 
 Examples:
-- `common-time n/alex ay/1` returns the latest dismissal times for any student with names containing the whole word `alex`, **OR** who are in Academic Year 1.
+- `common-time n/alex ay/1` returns the latest dismissal times for all students with names containing the whole word `alex`, **OR** who are in Academic Year 1.
 - `common-time ay/1` returns the latest dismissal times for all the students in the student list who are in Academic Year 1.
-- `common-time n/Alex Jane Mary` returns the latest dismissal times for any student with names Alex, Jane or Mary. Take note the rules above for matching applies.
+- `common-time n/Alex Jane Mary` returns the latest dismissal times for all students with names Alex, Jane or Mary. Take note the rules above for matching applies.
 
 ### Create Training : `training`
 Creates a new training at the specified date and time.
