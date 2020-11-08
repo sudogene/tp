@@ -55,7 +55,7 @@ public class AddAllStudentToTrainingCommandTest {
     }
 
     @Test
-    public void execute_trainingInvalidIndex_throwsCommandException() throws Exception {
+    public void executeTrainingInvalidIndexThrowsCommandException() throws Exception {
         AddAllStudentToTrainingCommand addAllStudentToTrainingCommand =
                 new AddAllStudentToTrainingCommand(INDEX_FIFTH_TRAINING);
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_TRAINING_DISPLAYED_INDEX, () ->
@@ -63,7 +63,7 @@ public class AddAllStudentToTrainingCommandTest {
     }
 
     @Test
-    public void execute_emptyStudentList_throwsCommandException() throws Exception {
+    public void executeEmptyStudentListThrowsCommandException() throws Exception {
         AddAllStudentToTrainingCommand addAllStudentToTrainingCommand =
                 new AddAllStudentToTrainingCommand(INDEX_FIRST_TRAINING);
         getModel().addTraining(TypicalTraining.VALID_TRAINING);
@@ -73,7 +73,7 @@ public class AddAllStudentToTrainingCommandTest {
     }
 
     @Test
-    public void execute_studentAddToPastTraining_addFail() throws Exception {
+    public void executeStudentAddToPastTrainingAddFail() throws Exception {
         AddAllStudentToTrainingCommand addAllStudentToTrainingCommand =
                 new AddAllStudentToTrainingCommand(INDEX_SECOND_TRAINING);
         getModel().addTraining(TypicalTraining.VALID_PAST_TRAINING);
@@ -84,7 +84,7 @@ public class AddAllStudentToTrainingCommandTest {
     }
 
     @Test
-    public void execute_studentsAcceptedByModel_addSuccessful() throws Exception {
+    public void executeStudentsAcceptedByModelAddSuccessful() throws Exception {
         AddAllStudentToTrainingCommand addAllStudentToTrainingCommand =
                 new AddAllStudentToTrainingCommand(INDEX_SECOND_TRAINING);
         getModel().addTraining(new TrainingBuilder().withDateTime(VALID_LOCAL_DATE_TIME_3).build());
@@ -143,6 +143,7 @@ public class AddAllStudentToTrainingCommandTest {
     }
 
     void resetModel() {
+        getModel().updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         List<Student> studentList = getModel().getFilteredStudentList();
         List<Id> idList = studentList.stream()
                 .map(Student::getId)
