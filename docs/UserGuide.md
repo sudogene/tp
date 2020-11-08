@@ -43,34 +43,11 @@ CanoE-COACH is a **desktop app for managing training schedules for secondary sch
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Glossary
-
-* Dismissal Time: The time when a student is dismissed from his classes. He would be able to attend training after the dismissal time.
-
-* Training: A training session organised by the coach (the user), and attended by the students.
-
-* Available Student: A student who is available to attend the training. A student is available to attend a training if his dismissal time 
-is equal to or before training start time, and if he is not already attending a training on the same day.
-
-* Attendance: Indicates the training session that a particular student is going to attend.
-
-* "Mark" Attendance: A marked attendance indicates that a particular student had attended the training session, and it is only possible to mark attendance for a training that has already passed. A marked attendance can be 
-unmarked to indicate absence/ yet to attend.
-
-* "Bad" student: A bad student is a student who has many unmarked attendances for trainings that have already passed. 
-(However, this is only in the context of this application. In the real world, even if you do miss many trainings, you could be a perfectly fine and good student.)
-
-
---------------------------------------------------------------------------------------------------------------------
-
 
 ### Adding a student: `add`
 Adds a student to the student list. The student will be auto-assigned a unique `id`.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL ay/ACADEMIC_YEAR [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [t/TAG]`
-
-<center>
-
 
 
 ## Features
@@ -114,7 +91,6 @@ Prefix | Representation
 **d4/** | `Thursday's Dismissal Time`
 **d5/** | `Friday's Dismissal Time`
 
-</center>
 * Academic year ranges from `1` to `5` and represents Secondary 1 to 5.
 * `d1/ d2/ d3/ d4/ d5/` corresponds to the dismissal times on different days. They are optional fields.
 * The default dismissal time is 1500. If the user inputs `d1/1700 d5/1200`, then the record will be equivalent to `d1/1700 d2/1500 d3/1500 d4/1500 d5/1200`
@@ -390,3 +366,24 @@ Action | Format, Examples
 **find-bad-students** | `find-bad-students`
 **List** | `list`
 **Help** | `help`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* Dismissal Time: The time when a student is dismissed from his classes. He would be able to attend training after the dismissal time.
+
+* Training: A training session organised by the coach (the user), and attended by the students.
+
+* Available Student: A student who is available to attend the training. A student is available to attend a training if his dismissal time 
+is equal to or before training start time, and if he is not already attending a training on the same day.
+
+* Attendance: Indicates the training session that a particular student is going to attend.
+
+* "Mark" Attendance: A marked attendance indicates that a particular student had attended the training session, and it is only possible to mark attendance for a training that has already passed. A marked attendance can be 
+unmarked to indicate absence/ yet to attend.
+
+* "Bad" student: A bad student is a student who has many unmarked attendances for trainings that have already passed. 
+(However, this is only in the context of this application. In the real world, even if you do miss many trainings, you could be a perfectly fine and good student.)
+
+
