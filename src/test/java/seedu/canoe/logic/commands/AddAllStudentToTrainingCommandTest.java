@@ -142,7 +142,7 @@ public class AddAllStudentToTrainingCommandTest {
         assertFalse(addAllStudent1Command.equals(addAllStudent2Command));
     }
 
-    void resetModel() {
+    private void resetModel() {
         getModel().updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         List<Student> studentList = getModel().getFilteredStudentList();
         List<Id> idList = studentList.stream()
