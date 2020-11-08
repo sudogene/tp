@@ -1,6 +1,7 @@
 package seedu.canoe.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.canoe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.canoe.testutil.Assert.assertThrows;
@@ -75,8 +76,8 @@ public class FindStudentTrainingCommandTest {
         assertFalse(findStudentTrainingFourthCommand.equals(1));
 
         // null -> returns false
-        assertFalse(findStudentTrainingFirstCommand.equals(null));
-        assertFalse(findStudentTrainingThirdCommand.equals(null));
+        assertNotNull(findStudentTrainingFirstCommand);
+        assertNotNull(findStudentTrainingThirdCommand);
 
         // different student -> returns false
         assertFalse(findStudentTrainingSecondCommand.equals(findStudentTrainingThirdCommand));
