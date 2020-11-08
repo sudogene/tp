@@ -114,6 +114,7 @@ Prefix | Representation
 **d4/** | `Thursday's Dismissal Time`
 **d5/** | `Friday's Dismissal Time`
 
+</center>
 * Academic year ranges from `1` to `5` and represents Secondary 1 to 5.
 * `d1/ d2/ d3/ d4/ d5/` corresponds to the dismissal times on different days. They are optional fields.
 * The default dismissal time is 1500. If the user inputs `d1/1700 d5/1200`, then the record will be equivalent to `d1/1700 d2/1500 d3/1500 d4/1500 d5/1200`
