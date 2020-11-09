@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Predicate <<Rectangle>> {
+Interface Predicate <<Interface>>
+Class AnyMatchPredicateList
+Class AllMatchPredicateList
+Class Id
+Class Email
+Class Name
+Class AcademicYear
+Class Phone
+
+AnyMatchPredicateList .up.|> Predicate
+AllMatchPredicateList .up.|> Predicate

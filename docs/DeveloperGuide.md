@@ -136,22 +136,32 @@ Classes used by multiple components are in the `seedu.canoe.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### AnyMatchPredicateList
+### AnyMatchPredicateList/AllMatchPredicateList
 
 ### Implementation
 
-The AnyMatchPredicateList class implements the Predicate interface provided by the Java util library.
+The `AnyMatchPredicateList` class implements the `Predicate` interface provided by the Java util library.
 
-The AnyMatchPredicateList class has only one field which is a list of predicates passed to it when the constructor is called.
+The `AnyMatchPredicateList` class has only one field which is a list of predicates passed to it when the constructor is called.
 
-The list of predicates can consist of any predicate relating to a field inside of the Student class.
+The list of predicates can consist of any predicate relating to a field inside of the `Student` class.
 
-The AnyMatchPredicateList class has a test method with a Student object as a parameter. This method will return true if the passed Student matches any of the predicates in the predicate list.
+The `AnyMatchPredicateList` class has a `AnyMatchPredicateList#test()` method with a `Student` object as a parameter. This method will return true if the passed `Student` matches any of the predicates in the predicate list.
 
-The usage of the AnyMatchPredicateList class is for filtering of the Student ObservableList inside of the Model class.
+The usage of the `AnyMatchPredicateList` class is for filtering of the `Student` `ObservableList` inside of the `Model` interface.
 
-Below is a sequence diagram of the execution of CommonTimeCommand which uses the AnyMatchPredicateList class to filter students:
+Below is a sequence diagram of the execution of `CommonTimeCommand` which uses the `AnyMatchPredicateList` class to filter students:
 
+![CommonTimeCommandSequenceDiagram](images/CommonTimeCommandSequenceDiagram.png)
+
+In the diagram above, the `CommonTimeCommandParser` will parse the arguments and add any necessary `Predicates` into the `AnyMatchPredicateList` which is passed as an argument during the creation of the `CommonTimeCommand`.
+
+This `AnyMatchPredicateList` is then used to filter the student list in the method `Model#updateFilteredStudentList()` which takes in the predicate list as an argument.
+
+The `AllMatchPredicateList` has a similar implementation to the `AnyMatchPredicateList`. The only difference is that the `AllMatchPredicateList#test()` method returns true only if the passed `Student` matches **ALL** of the predicates in the predicate list.
+
+The following class diagram shows the relationship between AnyMatchPredicateList and AllMatchPredicateList and the fields inside of the Student class:
+ 
 
 ### Training Class
 

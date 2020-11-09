@@ -1,4 +1,4 @@
-t@startuml
+@startuml
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
@@ -25,6 +25,7 @@ Class Phone
 Class Day
 Class LocalDateTime
 Class UniqueStudentList
+Class Attendance
 }
 
 Package Training {
@@ -56,7 +57,7 @@ Student *--> Name
 Student *--> Phone
 Student *--> Email
 Student *--> AcademicYear
-Student *-> "*" LocalDateTime
+Student *-> "*" Attendance
 Student *--> "            5" Day
 Student *--> "*" Tag
 
