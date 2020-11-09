@@ -824,6 +824,30 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   
+### Find common dismissal time among Students
+
+1. Finding the latest dismissal times among all specified Students for all days of the week.
+
+    1. No prerequisites need to be fulfilled.
+    
+    1. Test case: `common-time id/` <br>
+       Expected: Empty field detected. Error details shown in the status message.
+       
+    1. Test case: `common-time ay/` <br>
+       Expected: Same as previous.       
+           
+    1. Test case: `common-time id/1,2,2,3,4` <br>
+       Expected: Duplicate Ids detected. Error details shown in the status message.
+    
+    1. Test case: `common-time id/1,2,3,4` <br>
+       Expected: The latest dismissal times for Students with id 1, 2, 3, and 4 are shown in the results message.
+       
+    1. Test case: `common-time ay/6` <br>
+       Expected: Academic year does not exist. Error details shown in the status message.
+       
+    1. Test case: `common-time ay/2` <br>
+       Expected: The latest dismissal times for Students in the academic year 2 are shown in the results message.
 
 ### Creating a new Training Session
 
@@ -945,3 +969,12 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
     1. Other incorrect commands to try: `ts-addall x`, where x are all non-numeric, or corresponds to a Training Session with all Students in the Student List already inside.
+    
+### Find all Students with a Bad Attendance Record
+
+1. Finding all students who have missed more than three prior training sessions
+
+    1. No prerequisites need to be fulfilled.
+
+    1. Test case: `find-bad-students` <br>
+       Expected: A list of Students with a bad attendance record (missed more than three prior training sessions) will be shown in the results message.
