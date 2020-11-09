@@ -187,27 +187,27 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String id} into an {@code Id}.
+     * Parses {@code String id} value.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code id} is invalid.
      */
-    public static Id parseId(String id) throws ParseException {
+    public static String parseIdValue(String id) throws ParseException {
         requireNonNull(id);
         String trimmedId = id.trim();
         if (!Id.isValidId(trimmedId)) {
             throw new ParseException(Id.MESSAGE_CONSTRAINTS);
         }
-        return new Id(trimmedId);
+        return trimmedId;
     }
 
     /**
-     * Parses a {@code String[] id} array into a list of {@code Id}.
+     * Parses a {@code String[] id} array into a list of {@code String Id} values.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given array contains invalid {@code id}.
      */
-    public static List<Id> parseMultipleIds(String[] ids) throws ParseException {
+    public static List<String> parseMultipleIds(String[] ids) throws ParseException {
         requireNonNull(ids);
 
         if (ids.length == 0) {
@@ -218,11 +218,11 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_REPEATED_ID);
         }
 
-        List<Id> idList = new ArrayList<>();
+        List<String> idList = new ArrayList<>();
 
         for (String id : ids) {
-            Id parsedId = parseId(id);
-            idList.add(parsedId);
+            String parsedIdValue = parseIdValue(id);
+            idList.add(parsedIdValue);
         }
 
         return idList;
