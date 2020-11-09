@@ -1,6 +1,7 @@
 @startuml
 
-class TrainingMatchesIdPredicate {
+hide circle
+Class TrainingMatchesIdPredicate {
 idValue: Id
 test(Training)
 }

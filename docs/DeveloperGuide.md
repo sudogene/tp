@@ -136,6 +136,38 @@ Classes used by multiple components are in the `seedu.canoe.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### AnyMatchPredicateList / AllMatchPredicateList
+
+### AnyMatchPredicateList
+
+### Implementation
+
+The `AnyMatchPredicateList` class implements the `Predicate` interface provided by the Java util library.
+
+The `AnyMatchPredicateList` class has only one field which is a list of predicates passed to it when the constructor is called.
+
+The list of predicates can consist of any predicate relating to a field inside of the `Student` class.
+
+The `AnyMatchPredicateList` class has a `AnyMatchPredicateList#test()` method with a `Student` object as a parameter. This method will return true if the passed `Student` matches any of the predicates in the predicate list.
+
+The usage of the `AnyMatchPredicateList` class is for filtering of the `Student` `ObservableList` inside of the `Model` interface.
+
+Below is a sequence diagram of the execution of `CommonTimeCommand` which uses the `AnyMatchPredicateList` class to filter students:
+
+![CommonTimeCommandSequenceDiagram](images/CommonTimeCommandSequenceDiagram.png)
+
+In the diagram above, the `CommonTimeCommandParser` will parse the arguments and add any necessary `Predicates` into the `AnyMatchPredicateList` which is passed as an argument during the creation of the `CommonTimeCommand`.
+
+This `AnyMatchPredicateList` is then used to filter the student list in the method `Model#updateFilteredStudentList()` which takes in the predicate list as an argument.
+
+### AllMatchPredicateList
+
+The `AllMatchPredicateList` has a similar implementation to the `AnyMatchPredicateList`. The only difference is that the `AllMatchPredicateList#test()` method returns true only if the passed `Student` matches **ALL** of the predicates in the predicate list.
+
+The following class diagram shows the relationship between AnyMatchPredicateList and AllMatchPredicateList and the fields inside of the Student class:
+
+![PredicateListClassDiagram](images/PredicateListClassDiagram.png)
+
 ### Training Class
 
 #### Implementation
@@ -795,6 +827,30 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
+### Find common dismissal time among Students
+
+1. Finding the latest dismissal times among all specified Students for all days of the week.
+
+    1. No prerequisites need to be fulfilled.
+
+    1. Test case: `common-time id/` <br>
+       Expected: Empty field detected. Error details shown in the status message.
+
+    1. Test case: `common-time ay/` <br>
+       Expected: Same as previous.
+
+    1. Test case: `common-time id/1,2,2,3,4` <br>
+       Expected: Duplicate Ids detected. Error details shown in the status message.
+
+    1. Test case: `common-time id/1,2,3,4` <br>
+       Expected: The latest dismissal times for Students with id 1, 2, 3, and 4 are shown in the results message.
+
+    1. Test case: `common-time ay/6` <br>
+       Expected: Academic year does not exist. Error details shown in the status message.
+
+    1. Test case: `common-time ay/2` <br>
+       Expected: The latest dismissal times for Students in the academic year 2 are shown in the results message.
+
 ### Creating a new Training Session
 
 1. Creating a new Training Session while all students are being shown.
@@ -915,7 +971,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
     1. Other incorrect commands to try: `ts-addall x`, where x are all non-numeric, or corresponds to a Training Session with all Students in the Student List already inside.
-
+    
 ### Marking the Attendance of a Student
 
 1. Marking the Attendance of a Student.
@@ -940,3 +996,12 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `mark-attendance 1 id/1,2,3` <br>
        Expected: Assuming that students with id 1, 2 and 3 and all valid students, the Students' Attendances for Training will be successfully marked.
+
+### Find all Students with a Bad Attendance Record
+
+1. Finding all students who have missed more than three prior training sessions
+
+    1. No prerequisites need to be fulfilled.
+
+    1. Test case: `find-bad-students` <br>
+       Expected: A list of Students with a bad attendance record (missed more than three prior training sessions) will be shown in the results message.

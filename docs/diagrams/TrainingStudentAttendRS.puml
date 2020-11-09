@@ -1,0 +1,19 @@
+@startuml
+hide circle
+
+Class Training {
+}
+
+Class Student {
+}
+
+Class Attend {
+trainingTime
+hasAttended
+attendsTraining()
+}
+
+Training o-- "*" Student
+Student o-- "*" Attend
+
+@enduml

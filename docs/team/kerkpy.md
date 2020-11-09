@@ -25,8 +25,7 @@ Responsible for the test cases and improvements in Code Quality.
 * **New Feature**: Added the Attendance class and associated functions.
   * What it does: Creates an Attendance class that records the training session a student is attending.
   * Justification: This class is necessary to prevent any forms of cyclic dependency between Training and Student.
-  * Highlights: In implementing this class, there were several design considerations. The ease of implementation in the relative short time,
-  need to prevent cyclic dependency and the extendability of the Attendance class was being considered.
+  * Highlights: In implementing this class, there were several design considerations. The ease of implementation in the relative short time, need to prevent cyclic dependency and the extendability of the Attendance class was being considered.
 
 * **Bug Fixes**: Fixed some bugs regarding Training, Mark/Unmark attendance. Below are the bugs fixed:
   * When creating a Training, it was possible to create a Training for a date that has already passed. ([#81](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/81))

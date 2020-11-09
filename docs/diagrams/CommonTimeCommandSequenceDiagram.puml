@@ -1,0 +1,86 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CanoeCoachParser" as CanoeCoachParser LOGIC_COLOR
+participant "u:CommonTimeCommandParser" as CommonTimeCommandParser LOGIC_COLOR
+participant "u:CommonTimeCommand" as CommonTimeCommand LOGIC_COLOR
+participant "u:CommonTimeFinder" as CommonTimeFinder LOGIC_COLOR
+participant "u:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(userInput)
+activate LogicManager
+
+LogicManager -> CanoeCoachParser : parseCommand(userInput)
+activate CanoeCoachParser
+
+create CommonTimeCommandParser
+CanoeCoachParser -> CommonTimeCommandParser
+activate CommonTimeCommandParser
+
+CommonTimeCommandParser --> CanoeCoachParser
+deactivate CommonTimeCommandParser
+
+CanoeCoachParser -> CommonTimeCommandParser : parse(arguments)
+activate CommonTimeCommandParser
+
+create CommonTimeCommand
+CommonTimeCommandParser -> CommonTimeCommand : CommonTimeCommand(predicates)
+activate CommonTimeCommand
+
+CommonTimeCommand --> CommonTimeCommandParser
+deactivate CommonTimeCommand
+
+CommonTimeCommandParser --> CanoeCoachParser : u
+deactivate CommonTimeCommandParser
+CommonTimeCommandParser -[hidden]-> CanoeCoachParser
+destroy CommonTimeCommandParser
+
+CanoeCoachParser --> LogicManager : u
+deactivate CanoeCoachParser
+
+LogicManager -> CommonTimeCommand : execute(model)
+activate CommonTimeCommand
+
+CommonTimeCommand -> Model : updateFilteredStudentList(predicates)
+activate Model
+Model --> CommonTimeCommand
+deactivate Model
+
+CommonTimeCommand -> Model : getFilteredStudentList()
+activate Model
+Model --> CommonTimeCommand
+deactivate Model
+
+create CommonTimeFinder
+CommonTimeCommand -> CommonTimeFinder
+activate CommonTimeFinder
+CommonTimeFinder --> CommonTimeCommand
+deactivate CommonTimeFinder
+
+CommonTimeCommand -> CommonTimeFinder : getCommonDismissalTimes()
+activate CommonTimeFinder
+CommonTimeFinder --> CommonTimeCommand
+deactivate CommonTimeFinder
+CommonTimeFinder -[hidden]-> CommonTimeCommand
+destroy CommonTimeFinder
+
+create CommandResult
+CommonTimeCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CommonTimeCommand
+deactivate CommandResult
+
+CommonTimeCommand --> LogicManager : result
+deactivate CommonTimeCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
