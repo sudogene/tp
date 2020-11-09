@@ -1,7 +1,7 @@
 package seedu.canoe.logic.commands;
 
 import static seedu.canoe.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.canoe.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.canoe.testutil.TypicalStudents.getTypicalCanoeCoach;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +22,8 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalCanoeCoach(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalCanoeCoach(), new UserPrefs());
         expectedModel.setCanoeCoach(new CanoeCoach());
 
         //Checks that new Canoe Coach has no students.

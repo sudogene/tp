@@ -1,0 +1,24 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Interface Predicate <<Interface>>
+Class AnyMatchPredicateList
+Class AllMatchPredicateList
+Class Id
+Class Email
+Class Name
+Class AcademicYear
+Class Phone
+
+Predicate .up.|> AnyMatchPredicateList
+Predicate .up.|> AllMatchPredicateList
+Predicate -down-> Name
+Predicate -down-> Id
+Predicate -down-> Email
+Predicate -down-> Phone
+Predicate -down-> AcademicYear
+
+@enduml

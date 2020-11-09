@@ -33,7 +33,7 @@ import seedu.canoe.testutil.TypicalTraining;
 
 public class AddAllStudentToTrainingCommandTest {
 
-    private Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalStudents.getTypicalCanoeCoach(), new UserPrefs());
 
     public Model getModel() {
         return model;

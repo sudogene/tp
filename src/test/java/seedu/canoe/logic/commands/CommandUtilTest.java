@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.canoe.testutil.Assert.assertThrows;
 import static seedu.canoe.testutil.TypicalStudents.ALICE;
 import static seedu.canoe.testutil.TypicalStudents.BOB;
-import static seedu.canoe.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.canoe.testutil.TypicalStudents.getTypicalCanoeCoach;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class CommandUtilTest {
 
     private static final String ID_ALICE = "1";
     private static final String ID_NOT_EXISTS = "50";
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalCanoeCoach(), new UserPrefs());
 
     @Test
     public void getStudentFromIdNullThrowsNullPointerException() {

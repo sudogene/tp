@@ -1,11 +1,8 @@
 @startuml
-
 hide circle
 skinparam classAttributeIconSize 0
-Class TrainingMatchesIdPredicate {
+class TrainingMatchesIdPredicate {
 -idValue: String
-+test(Training: Training) : boolean
++test(training: Training) : boolean
 }
-
-
 @enduml

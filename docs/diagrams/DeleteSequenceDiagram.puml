@@ -7,6 +7,7 @@ participant ":CanoeCoachParser" as CanoeCoachParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "editedTraining:Training" as Training LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -48,7 +49,32 @@ deactivate CanoeCoachParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deleteStudent(1)
+create Training
+DeleteCommand -> Training
+activate Training
+
+Training --> DeleteCommand
+deactivate Training
+
+DeleteCommand -> Training : removeStudent(studentToDelete)
+activate Training
+
+Training --> DeleteCommand
+deactivate Training
+
+DeleteCommand -> Model : setTraining(training, editedTraining)
+activate Model
+
+Model --> DeleteCommand
+deactivate Model
+
+DeleteCommand -> Model : deleteStudent(studentToDelete)
+activate Model
+
+Model --> DeleteCommand
+deactivate Model
+
+DeleteCommand -> Model : updateFilteredTrainingList()
 activate Model
 
 Model --> DeleteCommand

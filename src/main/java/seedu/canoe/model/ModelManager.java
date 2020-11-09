@@ -33,7 +33,6 @@ public class ModelManager implements Model {
         requireAllNonNull(canoeCoach, userPrefs);
 
         logger.fine("Initializing with canoe book: " + canoeCoach + " and user prefs " + userPrefs);
-
         this.canoeCoach = new CanoeCoach(canoeCoach);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.canoeCoach.getStudentList());

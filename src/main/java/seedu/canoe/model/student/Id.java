@@ -11,7 +11,7 @@ import seedu.canoe.commons.util.StringUtil;
  * Represents a Student's id in the canoe coach book.
  */
 public class Id {
-    public static final String MESSAGE_CONSTRAINTS = "Id must be a non-zero unsigned integer!";
+    public static final String MESSAGE_CONSTRAINTS = "Id must be a non-zero positive integer!";
 
     /** validates if the string is numeric */
     public static final String VALIDATION_REGEX = "^[1-9][0-9]*$";
@@ -72,8 +72,16 @@ public class Id {
         return lastUsedId;
     }
 
-    public Set<String> getUsedIds() {
+    public static Set<String> getUsedIds() {
         return usedIds;
+    }
+
+    /**
+     * Resets the last used id value and clears all used id records.
+     */
+    public static void resetId() {
+        Id.usedIds.clear();
+        Id.lastUsedId = 0;
     }
 
     @Override

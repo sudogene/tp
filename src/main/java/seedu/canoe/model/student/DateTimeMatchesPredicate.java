@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Student}'s training schedules contain thet raining with the specific date time.
+ * Tests that a {@code Student}'s training schedules contain the training with the specific date time.
  */
 public class DateTimeMatchesPredicate implements Predicate<Student> {
     private final LocalDateTime dateTime;

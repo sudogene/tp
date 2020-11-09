@@ -32,7 +32,8 @@ public class CanoeCoach implements ReadOnlyCanoeCoach {
         trainings = new UniqueTrainingList();
     }
 
-    public CanoeCoach() {}
+    public CanoeCoach() {
+    }
 
     /**
      * Creates an CanoeCoach using the Students in the {@code toBeCopied}

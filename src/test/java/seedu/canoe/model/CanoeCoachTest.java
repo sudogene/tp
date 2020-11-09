@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.canoe.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.canoe.testutil.Assert.assertThrows;
 import static seedu.canoe.testutil.TypicalStudents.ALICE;
-import static seedu.canoe.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.canoe.testutil.TypicalStudents.getTypicalCanoeCoach;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -38,7 +38,7 @@ public class CanoeCoachTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        CanoeCoach newData = getTypicalAddressBook();
+        CanoeCoach newData = getTypicalCanoeCoach();
         canoeCoach.resetData(newData);
         assertEquals(newData, canoeCoach);
     }
