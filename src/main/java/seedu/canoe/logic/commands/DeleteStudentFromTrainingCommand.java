@@ -41,13 +41,13 @@ public class DeleteStudentFromTrainingCommand extends Command {
     public static final String MESSAGE_REPEATED_STUDENT = "One of the Ids is repeated!";
 
     private final Index index;
-    private final List<Id> studentsToDelete;
+    private final List<String> studentsToDelete;
 
     /**
      * @param index of the training in the filtered training list to delete
      * @param studentsToDelete corresponding Id of Students to delete
      */
-    public DeleteStudentFromTrainingCommand(Index index, List<Id> studentsToDelete) {
+    public DeleteStudentFromTrainingCommand(Index index, List<String> studentsToDelete) {
         requireNonNull(index);
         requireNonNull(studentsToDelete);
 
@@ -75,7 +75,7 @@ public class DeleteStudentFromTrainingCommand extends Command {
         List<Student> targetStudentList = new ArrayList<>();
         List<Student> editedStudentList = new ArrayList<>();
 
-        for (Id id : studentsToDelete) {
+        for (String id : studentsToDelete) {
 
             Student studentToEdit = CommandUtil.getStudentFromId(model, id);
             Student editedStudent = createEditedStudent(studentToEdit, editedTraining);
