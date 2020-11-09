@@ -5,7 +5,7 @@ title: Andy Wu's Project Portfolio Page
 
 ## Project: CanoE-Coach
 
-CanoE-COACH is a desktop app for managing training schedules for secondary school canoe teams, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical Interface (GUI). 
+CanoE-COACH is a desktop app for managing training schedules for secondary school canoe teams, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical Interface (GUI).
 If you can type fast, CanoE-COACH can get your training scheduling done faster than traditional GUI apps.
 
 Given below are my contributions to the project.
@@ -51,12 +51,12 @@ Given below are my contributions to the project.
   * Replaced long loops with concise and easy to understand streams.
   * Abstracted re-implemented and re-used methods from multiple Command classes into a new `CommandUtil` class.
   * Abstracted common parsing methods from multiple Parser classes into `ParserUtil` methods.
-  
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=sudogene&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=sudogene&tabRepo=AY2021S1-CS2103-F10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code)
 
 * **Project management**:
   * Managed 18 issues ranging from user stories for implementation to bug fixes and code quality. [Link to issues](https://github.com/AY2021S1-CS2103-F10-1/tp/issues?q=is%3Aissue+is%3Aclosed+assignee%3Asudogene).
-  
+
 * **Enhancements to existing features**:
   * Enhanced the Find command to find Students by Name, Phone, Email, Academic Year, Dismissal Time, Id. ([#26](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/26), [#32](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/32), [#38](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/38), [#52](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/52), [#68](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/68))
 

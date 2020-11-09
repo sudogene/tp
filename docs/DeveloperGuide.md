@@ -142,7 +142,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The Training Class represents a Training Session that Students can attend.
 
-Training Class has 2 fields, a LocalDateTime that stores the date and time of the Training Session, and a HashSet of Students that stores the unique Students attending the Training Session. 
+Training Class has 2 fields, a LocalDateTime that stores the date and time of the Training Session, and a HashSet of Students that stores the unique Students attending the Training Session.
 
 A Training Session is initialised with no Students in the HashSet by default.
 
@@ -815,7 +815,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `training` <br>
        Expected: Similar to previous.
-   
+
     1. Other incorrect commands to try: `training x`, where x are alphabets, or do not follow the date time formatting.
 
 ### Deleting a Training Session
@@ -826,22 +826,22 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `delete-training 1` <br>
        Expected: The first Training Session is deleted. The details of the deleted Training shown in the status message.
-  
+
     1. Test case: `delete-training -1` <br>
        Expected: No Training Session is created. Error details shown in the status message.
-   
+
     1. Test case: `delete-training a` <br>
        Expected: Similar to previous.
 
     1. Test case: `delete-training` <br>
        Expected: Similar to previous.
-  
+
     1. Other incorrect commands to try: `delete-training x`, where x are all non-numeric, or is a number greater than the number of Training Sessions in the Training list.
 
 ### Adding Student to Training Session
 
 1. Adding a student while all students are being shown
- 
+
     1. Prerequisites: List all students and trainings using the `list` command. Multiple students in the list. Multiple Training sessions in the list.
 
     1. Test case: `ts-add 1 id/1` <br>
@@ -884,16 +884,16 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `ts-delete 1 id/-1,1` <br>
        Expected: Similar to previous.
- 
+
     1. Test case: `ts-delete 1 id/` <br>
        Expected: Similar to previous.
-  
+
     1. Test case: `ts-delete 1` <br>
        Expected: Similar to previous.
- 
+
     1. Test case: `ts-delete` <br>
        Expected: Similar to previous.
-    
+
     1. Other incorrect commands to try: `ts-delete x id/y,y,y`, where x is greater than the number of Training Sessions, and y is not the Id of any Student.
 
 ### Adding all Students to a Training Session
@@ -920,7 +920,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Marking the Attendance of a Student.
 
-    1. Prerequisites: There is at least one Training Session in the Training list that has passed, and at least 1 student who is attending that training. In the test cases, assume that the 
+    1. Prerequisites: There is at least one Training Session in the Training list that has passed, and at least 1 student who is attending that training. In the test cases, assume that the
     student has id 1.
 
     1. Test case: `mark-attendance 1 id/1` <br>
@@ -928,10 +928,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `mark-attendance 1 id/-1` <br>
        Expected: Invalid id. Error details shown in the status message.
-       
+
     1. Test case: `mark-attendance 1 id/5` <br>
        Expected: Assuming that student with id 5 is not attending the training, error details shown in the status message.
-    
+
     1. Test case: `mark-attendance 3 id/1` <br>
            Expected: Assuming that training does exist but has not passed, Attendance will not be marked. error details shown in the status message.
 
@@ -940,4 +940,3 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `mark-attendance 1 id/1,2,3` <br>
        Expected: Assuming that students with id 1, 2 and 3 and all valid students, the Students' Attendances for Training will be successfully marked.
-    
