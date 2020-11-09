@@ -59,4 +59,11 @@ public class IdTest {
         Id.getPlaceHolderId();
         assertEquals(Id.getLastUsedId(), 302);
     }
+
+    @Test
+    public void resetId() {
+        Id.resetId();
+        assertEquals(0, Id.getLastUsedId());
+        assertTrue(Id.getUsedIds().isEmpty());
+    }
 }
