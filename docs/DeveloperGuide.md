@@ -136,6 +136,20 @@ Classes used by multiple components are in the `seedu.canoe.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Training Class
+
+#### Implementation
+
+The Training Class represents a Training Session that Students can attend.
+
+Training Class has 2 fields, a LocalDateTime that stores the date and time of the Training Session, and a HashSet of Students that stores the unique Students attending the Training Session. 
+
+A Training Session is initialised with no Students in the HashSet by default.
+
+The following shows the relationship between Student, Training and Attendance.
+
+![Relationship of Attend, Training, Student](images/TrainingStudentAttendRS.png)
+
 ### Find-training feature
 
 #### Implementation
@@ -285,9 +299,9 @@ The following activity diagram summarizes what happens when a user executes the 
 
 #### Implementation
 
-The Attendance class represents a Student attending a Training. A list of Attendance is stored in the Student, and represents all the trainings that the Student would be attending. 
+The Attendance class represents a Student attending a Training. A list of Attendance is stored in the Student, and represents all the trainings that the Student would be attending.
 
-The Attendance class is initialised with the LocalDateTime of a Training. Currently, it also stores information about whether the Student had attended the Training or not. By default, the Attendance is marked as unattended. 
+The Attendance class is initialised with the LocalDateTime of a Training. Currently, it also stores information about whether the Student had attended the Training or not. By default, the Attendance is marked as unattended.
 
 The following shows the relationship between Student, Training and Attendance.
 
@@ -301,7 +315,7 @@ The following shows the relationship between Student, Training and Attendance.
 	* Pros: Easier implementation in the short run.
 	* Cons: This causes cyclic-dependency and is undesirable.
 
-* **Alternative 2 (Previous iteration):** Store a list of LocalDateTime in the Student, each representing the time of a Training that the Student is attending. 
+* **Alternative 2 (Previous iteration):** Store a list of LocalDateTime in the Student, each representing the time of a Training that the Student is attending.
 	* Pros: Relatively easy to implement
 	* Cons: It is difficult to extend features related to Attendance, and it is inflexible.
 
@@ -310,7 +324,7 @@ The following shows the relationship between Student, Training and Attendance.
 	* Cons: It is more complex to implement. Much harder to display the attendance of a Student in the StudentCard in this current iteration.
 
 * **Alternative 4 (Current iteration):**  Store a list of Attendance in the Student.
-	* Pros: Difficulty of implementation is lower than Alternative 3. Able to support other functions easily compared to Alternative 2. 
+	* Pros: Difficulty of implementation is lower than Alternative 3. Able to support other functions easily compared to Alternative 2.
 	* Cons: Potentially prone to bugs.
 
 ### Mark-attendance feature
@@ -434,10 +448,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command is correct.
 
-_{more aspects and alternatives to be added}_
-
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -496,9 +506,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user     | add students to a training session | view who are the students to expect for a training |
 | `* * *`  | user     | delete students from a training session | remove students who are unable to come for training |
 | `* * `   | user     | view the trainings that a student will be attending | determine the number of sessions he has attended |
-
-
-*{More to be added}*
 
 ### Use cases
 
@@ -606,7 +613,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. There are no parameters specified in the commonTime command.
   * 1a1. CanoE-COACH shows an error message.
-      Use case resumes at step 1.
+    Use case resumes at step 1.
 
 **UC07: Add a Training**
 
@@ -614,18 +621,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to add a Training to the training list.
 2. CanoE-COACH adds the training.
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-*   1a. Date or time is missing.
+* 1a. Date or time is missing.
+  * 1a1. CanoE-COACH displays an error message.
+    Use case resumes at step 1.
 
-    *  1a1. CanoE-COACH displays an error message.
-        Use case resumes at step 1.
+* 1b. Training with the same date and time already exists.
+   * 1b1. CanoE-COACH displays an error message.
+     Use case resumes at step 1.
 
-*   1b. Training with the same date and time already exists.
-    *   1b1. CanoE-COACH displays an error message.
-        Use case resumes at step 1.
+* 1c. The Date and Time provided is not valid.
+   * 1c1. CanoE-Coach displays an error message.
+     Use case resumes at step 1.
 
 **UC08: Delete a training**
 
@@ -654,11 +664,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The student's dismissal time is later than the time the training is scheduled for.
   * 2a1. CanoE-COACH shows an error message.
-        Use case resumes at step 1.
+    Use case resumes at step 1.
 
 * 2b. The student or training does not exist.
-    * 2b1. CanoE-COACH shows an error message.
-      Use case resumes at step 1.
+  * 2b1. CanoE-COACH shows an error message.
+    Use case resumes at step 1.
+
+* 2c. There are repeated student Id values.
+  * 2c1. CanoE-COACH shows an error message.
+    Use case resumes at step 1.
 
 **UC10: Delete student from training**
 
@@ -673,18 +687,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. Student was not attending the training
   * 2a1. CanoE-COACH shows an error message.
-        Use case resumes at step 1.
+    Use case resumes at step 1.
 
 * 2b. The student or training does not exist.
-    * 2b1. CanoE-COACH shows an error message.
-      Use case resumes at step 1.
+  * 2b1. CanoE-COACH shows an error message.
+    Use case resumes at step 1.
+
+* 2c. There are repeated student Id values.
+  * 2c1. CanoE-COACH shows an error message.
+    Use case resumes at step 1.
 
 **UC11: Add all students to the training**
 
 **MSS**
 
 1.  User requests to add all students to training.
-2.  CanoE-COACH adds all students to the training. 
+2.  CanoE-COACH adds all students to the training.
     Use case ends.
 
 **Extensions**
@@ -711,19 +729,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. CanoE-COACH shows an error message.
     Use case ends.
 
-* 1a. Specified student cannot be found.
-  * 1a1. CanoE-COACH shows an error message.
-    Use case ends.
-
 * 2a. The student list is empty.
   * 2a1. CanoE-COACH shows an error message.
     Use case resumes at step 1.
-
-* 2a. Specified student does not have specified training scheduled.
-  * 2a1. CanoE-COACH shows an error message.
-    Use case resumes at step 1.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -733,8 +741,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. CanoE-COACH is optimised for a single-user, rather than multiple users.
 5. Any data must be stored locally in a human editable text-file, rather than in a database.
 6. The system should respond to commands within 1 second.
-
-*{More to be added}*
 
 ### Glossary
 
@@ -766,8 +772,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a student
 
 1. Deleting a student while all students are being shown
@@ -783,12 +787,129 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+### Creating a new Training Session
+
+1. Creating a new Training Session while all students are being shown.
+
+    1. Prerequisites: List all students and trainings using the `list` command.
+
+    1. Test case: `training 2021-10-20 1900` <br>
+       Expected: New Training Session at date `2021-10-20` and time `1900` will be created. Date and Time of Training Session created is shown in the status message.
+
+    1. Test case: `training 2021-20-20 1900` <br>
+       Expected: No Training Session is created. Error details shown in the status message.
+
+    1. Test case: `training 2021-10-20 2500` <br>
+       Expected: Similar to previous.
+
+    1. Test case: `training 2021-10-10` <br>
+       Expected: Similar to previous.
+
+    1. Test case: `training` <br>
+       Expected: Similar to previous.
+   
+    1. Other incorrect commands to try: `training x`, where x are alphabets, or do not follow the date time formatting.
+
+### Deleting a Training Session
+
+1. Deleting a Training Session while all students are being shown.
+
+    1. Prerequisites: List all students and trainings using the `list` command. There is at least one Training Session in the list.
+
+    1. Test case: `delete-training 1` <br>
+       Expected: The first Training Session is deleted. The details of the deleted Training shown in the status message.
+  
+    1. Test case: `delete-training -1` <br>
+       Expected: No Training Session is created. Error details shown in the status message.
+   
+    1. Test case: `delete-training a` <br>
+       Expected: Similar to previous.
+
+    1. Test case: `delete-training` <br>
+       Expected: Similar to previous.
+  
+    1. Other incorrect commands to try: `delete-training x`, where x are all non-numeric, or is a number greater than the number of Training Sessions in the Training list.
+
+### Adding Student to Training Session
+
+1. Adding a student while all students are being shown
+ 
+    1. Prerequisites: List all students and trainings using the `list` command. Multiple students in the list. Multiple Training sessions in the list.
+
+    1. Test case: `ts-add 1 id/1` <br>
+       Expected: Student with the unique Id of 1 is added to the first Training Session. Id of added student and Training Session added to is shown in the status message.
+
+    1. Test case: `ts-add 1 id/1,1,1` <br>
+       Expected: No student is added to any Training Session. Error details shown in the status message.
+
+    1. Test case: `ts-add -1 id/1` <br>
+       Expected: Similar to previous.
+
+    1. Test case: `ts-add 1 id/-1,1` <br>
+       Expected: Similar to previous.
+
+    1. Test case: `ts-add 1 id/` <br>
+       Expected: Similar to previous.
+
+    1. Test case: `ts-add 1` <br>
+       Expected: Similar to previous.
+
+    1. Test case: `ts-add` <br>
+       Expected: Similar to previous.
+
+    1. Other incorrect commands to try: `ts-add x id/y,y,y`, where x is greater than the number of Training Sessions, and y is not the Id of any Student.
+
+### Deleting Student from Training Session
+
+1. Deleting a student while all students are being shown
+
+    1. Prerequisites: List all students and trainings using the `list` command. Multiple students in the list. Multiple Training sessions in the list. Training Sessions already contain Students inside.
+
+    1. Test case: `ts-delete 1 id/1` <br>
+       Expected: Student with the unique Id of 1 is deleted from the first Training Session. Id of deleted student and Training Session added to is shown in the status message.
+
+    1. Test case: `ts-delete 1 id/1,1,1` <br>
+       Expected: No student is deleted from any Training Session. Error details shown in the status message.
+
+    1. Test case: `ts-delete -1 id/1` <br>
+       Expected: Similar to previous.
+
+    1. Test case: `ts-delete 1 id/-1,1` <br>
+       Expected: Similar to previous.
+ 
+    1. Test case: `ts-delete 1 id/` <br>
+       Expected: Similar to previous.
+  
+    1. Test case: `ts-delete 1` <br>
+       Expected: Similar to previous.
+ 
+    1. Test case: `ts-delete` <br>
+       Expected: Similar to previous.
+    
+    1. Other incorrect commands to try: `ts-delete x id/y,y,y`, where x is greater than the number of Training Sessions, and y is not the Id of any Student.
+
+### Adding all Students to a Training Session
+
+1. Adding all Students to a Training Session while all students are being shown.
+
+    1. Prerequisites: List all students and trainings using the `list` command. There is at least one Training Session in the Training list, and at least 1 student in the Student List.
+
+    1. Test case: `ts-addall 1` <br>
+       Expected: All Students in the Student list are added to the first Training Session. Ids of added students shown in the status message.
+
+    1. Test case: `ts-addall -1` <br>
+       Expected: No Students are added to any Training Session. Error details shown in the status message.
+
+    1. Test case: `ts-addall a` <br>
+       Expected: Similar to previous.
+
+    1. Test case: `ts-addall` <br>
+       Expected: Similar to previous.
+
+    1. Other incorrect commands to try: `ts-addall x`, where x are all non-numeric, or corresponds to a Training Session with all Students in the Student List already inside.

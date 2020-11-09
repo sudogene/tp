@@ -16,13 +16,12 @@ import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.ModelManager;
 import seedu.canoe.model.UserPrefs;
-import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Student;
 
 public class CommandUtilTest {
 
-    private static final Id ID_ALICE = new Id("1");
-    private static final Id ID_NOT_EXISTS = new Id("50");
+    private static final String ID_ALICE = "1";
+    private static final String ID_NOT_EXISTS = "50";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
