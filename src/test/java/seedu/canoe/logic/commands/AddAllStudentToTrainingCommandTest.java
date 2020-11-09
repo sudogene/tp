@@ -145,8 +145,9 @@ public class AddAllStudentToTrainingCommandTest {
     private void resetModel() {
         getModel().updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         List<Student> studentList = getModel().getFilteredStudentList();
-        List<Id> idList = studentList.stream()
+        List<String> idList = studentList.stream()
                 .map(Student::getId)
+                .map(Id::getValue)
                 .collect(Collectors.toList());
         new DeleteStudentFromTrainingCommand(INDEX_SECOND_TRAINING, idList);
     }

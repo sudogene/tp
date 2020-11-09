@@ -9,7 +9,6 @@ import java.util.List;
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.AddStudentToTrainingCommand;
 import seedu.canoe.logic.parser.exceptions.ParseException;
-import seedu.canoe.model.student.Id;
 
 /**
  * Parses input arguments and creates a new AddStudentToTrainingCommand object
@@ -49,7 +48,7 @@ public class AddStudentCommandParser implements Parser<AddStudentToTrainingComma
             throw new ParseException(ParserUtil.MESSAGE_NO_ID_PROVIDED);
         }
 
-        List<Id> studentIds = ParserUtil.parseMultipleIds(studentIndexes);
+        List<String> studentIds = ParserUtil.parseMultipleIds(studentIndexes);
 
         return new AddStudentToTrainingCommand(index, studentIds);
     }

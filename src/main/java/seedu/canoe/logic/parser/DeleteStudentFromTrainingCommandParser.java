@@ -9,7 +9,6 @@ import java.util.List;
 import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.DeleteStudentFromTrainingCommand;
 import seedu.canoe.logic.parser.exceptions.ParseException;
-import seedu.canoe.model.student.Id;
 
 /**
  * Parses input arguments and creates a new DeleteStudentFromTrainingCommand object.
@@ -51,7 +50,7 @@ public class DeleteStudentFromTrainingCommandParser implements Parser<DeleteStud
             throw new ParseException(ParserUtil.MESSAGE_NO_ID_PROVIDED);
         }
 
-        List<Id> studentIds = ParserUtil.parseMultipleIds(studentIndexes);
+        List<String> studentIds = ParserUtil.parseMultipleIds(studentIndexes);
 
         return new DeleteStudentFromTrainingCommand(index, studentIds);
 

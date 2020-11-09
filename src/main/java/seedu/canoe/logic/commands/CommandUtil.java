@@ -22,12 +22,12 @@ public class CommandUtil {
      * Gets the Student from the Model using the input Student Id.
      * @throws CommandException if the Student does not exist.
      */
-    public static Student getStudentFromId(Model model, Id id) throws CommandException {
+    public static Student getStudentFromId(Model model, String id) throws CommandException {
         requireNonNull(model);
         requireNonNull(id);
 
         for (Student student : model.getFilteredStudentList()) {
-            if (student.getId().equals(id)) {
+            if (student.getId().getValue().equals(id)) {
                 return student;
             }
         }
