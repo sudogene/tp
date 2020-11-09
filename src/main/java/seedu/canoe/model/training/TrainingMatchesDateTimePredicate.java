@@ -15,7 +15,7 @@ public class TrainingMatchesDateTimePredicate implements Predicate<Training> {
 
     @Override
     public boolean test(Training training) {
-        assert(!(training == null));
+        assert(training != null);
         return training.getDateTime().isEqual(dateTime);
     }
 
