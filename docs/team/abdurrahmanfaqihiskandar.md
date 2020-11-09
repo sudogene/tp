@@ -5,7 +5,7 @@ title: Abdurrahman Faqih's Project Portfolio Page
 
 ## Project: CanoE-Coach
 
-CanoE-COACH is a desktop app for managing training schedules for secondary school canoe teams, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical Interface (GUI). 
+CanoE-COACH is a desktop app for managing training schedules for secondary school canoe teams, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical Interface (GUI).
 If you can type fast, CanoE-COACH can get your training scheduling done faster than traditional GUI apps.
 
 Given below are my contributions to the project.
@@ -37,7 +37,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Managed 16 issues ranging from adding new features to bug fixes and updating documentation. [Link to issues](https://github.com/AY2021S1-CS2103-F10-1/tp/issues?q=is%3Aissue+is%3Aclosed+assignee%3Aabdurrahmanfaqihiskandar).
-  
+
 * **Enhancements to existing features**:
   * Refactored the code base and changed every instance of AddressBook in code and comments to CanoE-COACH. ([#95](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/95))
 
