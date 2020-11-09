@@ -13,7 +13,7 @@ You can reach us at the email `e0406790@comp.nus.edu.sg`
 
 <img src="images/abdurrahmanfaqihiskandar.png" width="200px">
 
-[[github](https://github.com/abdurrahmanfaqihiskandar)]
+[[github](https://github.com/abdurrahmanfaqihiskandar)][[portfolio](team/abdurrahmanfaqihiskandar.md)]
 
 * Role: Team Lead
 
@@ -21,7 +21,7 @@ You can reach us at the email `e0406790@comp.nus.edu.sg`
 
 <img src="images/yejiadong.png" width="200px">
 
-[[github](https://github.com/yejiadong)]
+[[github](https://github.com/yejiadong)][[portfolio](team/yejiadong.md)]
 
 * Role: Developer
 * Responsibilities: Testing, Documentation
@@ -39,7 +39,7 @@ You can reach us at the email `e0406790@comp.nus.edu.sg`
 
 <img src="images/kerkpy.png" width="200px">
 
-[[github](https://github.com/kerkpy)]
+[[github](https://github.com/kerkpy)][[portfolio](team/kerkpy.md)]
 
 * Role: Developer
 * Responsibilities: Testing, Documentation
