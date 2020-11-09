@@ -61,7 +61,7 @@ CanoE-COACH is a **desktop app for managing training schedules for secondary sch
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-  
+
 * Take note of the difference between `STUDENT_INDEX` and `STUDENT_ID`
 	* `STUDENT_INDEX` refers to the index displayed on the GUI (this will change depending on how the GUI is filtered)
 	* `STUDENT_ID` refers to the unique index given to each student, as reflected in the GUI by **Id: 1** (This will not change even if the GUI is filtered.)
@@ -396,8 +396,7 @@ Action | Format, Examples
 
 * Attendance: Indicates the training session that a particular student is going to attend.
 
-* "Mark" Attendance: A marked attendance indicates that a particular student had attended the training session, and it is only possible to mark attendance for a training that has already passed. A marked attendance can be
-unmarked to indicate absence / yet to attend.
+* "Mark" Attendance: A marked attendance indicates that a particular student had attended the training session, and it is only possible to mark attendance for a training that has already passed. A marked attendance can be unmarked to indicate absence / yet to attend.
 
 * "Bad" student: A bad student is a student who has more than 3 unmarked attendances for trainings that have already passed.  (However, this is only in the context of this application. In the real world, even if you do miss many trainings, you could be a perfectly fine and good student.)
 

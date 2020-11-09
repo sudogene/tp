@@ -166,7 +166,7 @@ The `AllMatchPredicateList` has a similar implementation to the `AnyMatchPredica
 
 The following class diagram shows the relationship between AnyMatchPredicateList and AllMatchPredicateList and the fields inside of the Student class:
 
-![PredicateListClassDiagram](images/PredicateListClassDiagram.png) 
+![PredicateListClassDiagram](images/PredicateListClassDiagram.png)
 
 ### Training Class
 
@@ -826,28 +826,28 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-   
+
 ### Find common dismissal time among Students
 
 1. Finding the latest dismissal times among all specified Students for all days of the week.
 
     1. No prerequisites need to be fulfilled.
-    
+
     1. Test case: `common-time id/` <br>
        Expected: Empty field detected. Error details shown in the status message.
-       
+
     1. Test case: `common-time ay/` <br>
-       Expected: Same as previous.       
-           
+       Expected: Same as previous.
+
     1. Test case: `common-time id/1,2,2,3,4` <br>
        Expected: Duplicate Ids detected. Error details shown in the status message.
-    
+
     1. Test case: `common-time id/1,2,3,4` <br>
        Expected: The latest dismissal times for Students with id 1, 2, 3, and 4 are shown in the results message.
-       
+
     1. Test case: `common-time ay/6` <br>
        Expected: Academic year does not exist. Error details shown in the status message.
-       
+
     1. Test case: `common-time ay/2` <br>
        Expected: The latest dismissal times for Students in the academic year 2 are shown in the results message.
 

@@ -32,7 +32,7 @@ Given below are my contributions to the project.
   * Changing one dismissal time to affect Student's availability for scheduled Training will remove Student from the Training Session. ([#91](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/91))
   * Deleting a Student does not delete the Student from Training. ([#91](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/91))
   * Common Time Command was not matching all specified Students. Hence, a new PredicateList was created to match all predicates passed to it. ([#84](https://github.com/AY2021S1-CS2103-F10-1/tp/pull/84))
-  
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=abdurrahmanfaqihiskandar&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=abdurrahmanfaqihiskandar&tabRepo=AY2021S1-CS2103-F10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other)
 
 * **Project management**:
