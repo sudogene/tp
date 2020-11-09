@@ -6,6 +6,11 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## **Introduction**
+
+This document is the developer guide for CanoE-COACH, a training scheduling app for secondary school canoeing coaches.
+
+This developer guide serves to provide developers with an understanding on how CanoE-COACH is designed.
 
 ## **Setting up, getting started**
 
@@ -23,7 +28,7 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2021S1-CS2103-F10-1/tp/tree/master/docs/diagrams) folder.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2021S1-CS2103-F10-1/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_  at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit PlantUML diagrams.
 
 </div>
 
@@ -67,7 +72,7 @@ The sections below give more details of each component.
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel
 `,  `TrainingListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/canoe/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103-F10-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -188,9 +193,25 @@ The following shows the relationship between Student, Training and Attendance.
 
 The find-training mechanism extends `Command` with the ability to view all training history (past and present) of a single student. This command is supported by methods in the `Model` interface, namely `Model#updateFilteredStudentList()`,  and`Model#updateFilteredTrainingList()`.
 
-![TrainingMatchesIdPredicate](images/TrainingMatchesIdPredicate.png)
+![TrainingMatchesIdPredicateDiagram](images/TrainingMatchesIdPredicateDiagram.png)
 
-This command is supported by the `TrainingMatchesIdPredicate`, which assists to check if a particular student ID is present in a particular training. From the above class diagram, the `TrainingMatchesIdPredicate#test()` method is used to achieve this.
+This command is supported by `TrainingMatchesIdPredicate#test()`, which assists to check if a particular student ID is present in a particular training. 
+
+![TrainingMatchesDateTimePredicateDiagram](images/TrainingMatchesDateTimePredicateDiagram.png)
+
+This command is supported by `TrainingMatchesDateTimePredicate#test()`, which assists to check if a particular date-time matches that of a particular training's date-time. 
+
+![IdMatchesPredicateDiagram](images/IdMatchesPredicateDiagram.png)
+
+This command is supported by `IdMatchesPredicate#test()`, which assists to check if a particular Id matches that of a particular student's Id. 
+
+![DateTimeMatchesPredicateDiagram](images/DateTimeMatchesPredicateDiagram.png)
+
+Lastly, this command is supported by `DateTimeMatchesPredicate#test()`, which assists to check if a particular student's training schedules contain a training with a particular date-time. 
+
+![FindTrainingPredicatesDiagram](images/FindTrainingPredicatesDiagram.png)
+
+From the diagram above, all four of the above-mentioned predicates implements the Predicate interface. Depending on input parameters specified, different predicates are used as input arguments to the `Model#updateFilteredStudentList()` and `Model#updateFilteredTrainingList()` methods.
 
 Given below is an example usage scenario and how the find-training mechanism behaves at each step.
 
@@ -532,6 +553,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user     | find students by their Phone Numbers          | easily retrieve the details of a particular student by their contact details |
 | `* * *`  | user     | find students by their dismissal time        | easily find students whose dismissal times are before a given dismissal time  |
 | `* *`    | user     | find students by their Id             | easily retrieve the details of a particular student without having to go through the entire list  |
+| `* *`    | user     | find trainings by date-time             | easily retrieve the students scheduled for the training without going through the entire training list  |
+| `* *`    | user     | view all trainings that students are scheduled for              | easily retrieve the training schedules of respective students  |
 | `* *`    | user     | determine the earliest time to conduct training given a subgroup of students | schedule training at the earliest possible time for these students |
 | `* * *`  | user     | create new Training sessions | schedule training at a given date and time |
 | `* * *`  | user     | delete a Training session that was already created | make changes to the schedule |
@@ -766,6 +789,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The student list is empty.
   * 2a1. CanoE-COACH shows an error message.
     Use case resumes at step 1.
+    
+**UC13: Find a training by date-time**
+
+**MSS**
+
+1.  User requests to find a training by its date-time.
+2.  CanoE-COACH shows the training which matches the date-time specified and the list of students who are scheduled for the matching training.
+    Use case ends.
+
+**Extensions**
+* 1a. There are no parameters specified in the find-training command.
+  * 1a1. CanoE-COACH shows an error message.
+      Use case resumes at step 1.
+      
+* 1b. Date-time specified in the find-training command is of the wrong format.
+  * 1b1. CanoE-COACH shows an error message.
+      Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
@@ -797,14 +837,39 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file.  Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   1. Re-launch the app by double-clicking the jar file.<br> Expected: The most recent window size and location is retained.
+
+### Adding a student
+
+1. Adding a student while all students are being shown
+
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+   1. Test case: `add n/John Doe p/83392849 e/john@gmail.com ay/3`<br> Expected: A student named `John Doe` is added to the displayed student list. Details of the added student is shown in the status message in the display panel. 
+
+   1. Test case: `add n/`, `add p/`, ... (where any of the prefixes `n/`, `p/`, `e/` or `ay/` is not present or empty) <br> Expected: No student is added. Error details shown in the status message. 
+
+   1. Other incorrect add commands to try: `add n/John Doe p/88 e/John@gmail.com`, `add n/John Doe p/82049395 e/jj`<br> Expected: Similar to previous.
+
+### Editing a student
+
+1. Editing a student while all students are being shown
+
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+   1. Test case: `edit 1 n/Jacob Lim`<br> Expected: The name of the first student in the displayed student list will be edited to `Jacob Lim`  Details of the edited student is shown in the status message in the display panel. 
+
+   1. Test case: `edit 1 d2/1600`<br> Expected: The Tuesday dismissal time of the first student in the displayed student list will be edited to `1600`  Details of the edited student is shown in the status message in the display panel. If the student has any upcoming trainings that fall on a Tuesday, with a date-time that falls before the edited dismissal time, he will be removed from the trainings.
+
+   1. Test case: `edit n/`, `edit p/`, ... (where any of the prefixes `n/`, `p/`, `e/` or `ay/` is empty) <br> Expected: No student is edited. Error details shown in the status message. 
+
+   1. Other incorrect add commands to try: `edit`, `edit p/8`<br> Expected: Similar to previous.
 
 ### Deleting a student
 
@@ -812,20 +877,11 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First student is deleted from the list. Details of the deleted student is shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete 1`<br> Expected: First student shown in the displayed student list is deleted from the list. Details of the deleted student is shown in the status message in the display panel. The student will be removed from all of his trainings as well.
 
-   1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete 0`<br> Expected: No student is deleted. Error details shown in the status message. 
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br> Expected: Similar to previous.
 
 ### Find common dismissal time among Students
 
@@ -958,19 +1014,31 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all students and trainings using the `list` command. There is at least one Training Session in the Training list, and at least 1 student in the Student List.
 
-    1. Test case: `ts-addall 1` <br>
+    2. Test case: `ts-addall 1` <br>
        Expected: All Students in the Student list are added to the first Training Session. Ids of added students shown in the status message.
 
-    1. Test case: `ts-addall -1` <br>
+    3. Test case: `ts-addall -1` <br>
        Expected: No Students are added to any Training Session. Error details shown in the status message.
 
-    1. Test case: `ts-addall a` <br>
+    4. Test case: `ts-addall a` <br>
        Expected: Similar to previous.
 
-    1. Test case: `ts-addall` <br>
+    5. Test case: `ts-addall` <br>
        Expected: Similar to previous.
 
-    1. Other incorrect commands to try: `ts-addall x`, where x are all non-numeric, or corresponds to a Training Session with all Students in the Student List already inside.
+    6. Other incorrect commands to try: `ts-addall x`, where x are all non-numeric, or corresponds to a Training Session with all Students in the Student List already inside.
+
+### Finding a Training by date-time
+1. Finding a training by date-time while all trainings are shown
+
+   1. Prerequisites: List all trainings using the `list` command. Multiple trainings in the list.
+   2. Create a training on the `2021-08-26 1500` using the `training 2021-08-26 1500` command. Take note of the training index as displayed on the training panel.
+   3. Add some students to the created training using the ts-add command and the training index noted above. Make sure that the students are successfully added.
+   4. Test case: `find-training dt/2021-08-26 1500`<br> Expected: Trainings with a date-time that matches the date-time inputted will be displayed in the training panel. The students that are scheduled for the matching training will be displayed in the student panel. Details of the number of matching trainings and students is shown in the status message in the display panel. 
+
+   5. Test case: `find-training dt/`<br> Expected: No training will be matched. Error details shown in the status message. 
+
+   6. Other incorrect delete commands to try: `find-training dt/2021-26-08 1500`, `find-training dt/2021-08-26`<br> Expected: Similar to previous.
     
 ### Marking the Attendance of a Student
 
@@ -989,7 +1057,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Assuming that student with id 5 is not attending the training, error details shown in the status message.
 
     1. Test case: `mark-attendance 3 id/1` <br>
-           Expected: Assuming that training does exist but has not passed, Attendance will not be marked. error details shown in the status message.
+       Expected: Assuming that training does exist but has not passed, Attendance will not be marked. error details shown in the status message.
 
     1. Test case: `mark-attendance -1 id/1` <br>
        Expected: Invalid training index. Error details shown in the status message.
@@ -1005,3 +1073,4 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `find-bad-students` <br>
        Expected: A list of Students with a bad attendance record (missed more than three prior training sessions) will be shown in the results message.
+

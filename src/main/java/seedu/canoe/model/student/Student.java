@@ -300,8 +300,6 @@ public class Student {
                 .append(getAcademicYear())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append(" Training Schedules: ");
-        getTrainingAttendances().forEach(builder::append);
         return builder.toString();
     }
 

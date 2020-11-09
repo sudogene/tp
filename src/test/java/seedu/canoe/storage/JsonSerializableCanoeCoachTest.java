@@ -25,7 +25,7 @@ public class JsonSerializableCanoeCoachTest {
         JsonSerializableCanoeCoach dataFromFile = JsonUtil.readJsonFile(TYPICAL_STUDENTS_FILE,
                 JsonSerializableCanoeCoach.class).get();
         CanoeCoach canoeCoachFromFile = dataFromFile.toModelType();
-        CanoeCoach typicalStudentsCanoeCoach = TypicalStudents.getTypicalAddressBook();
+        CanoeCoach typicalStudentsCanoeCoach = TypicalStudents.getTypicalCanoeCoach();
         assertEquals(canoeCoachFromFile, typicalStudentsCanoeCoach);
     }
 

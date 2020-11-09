@@ -5,6 +5,7 @@ import static seedu.canoe.commons.core.Messages.MESSAGE_DUPLICATE_STUDENTS_IN_TR
 import static seedu.canoe.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,6 +135,7 @@ public class AddStudentToTrainingCommand extends Command {
 
         model.setTraining(trainingToEdit, editedTraining);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        model.updateFilteredTrainingList(PREDICATE_SHOW_ALL_TRAININGS);
 
         Optional<String> result = CommandUtil.getStudentsMessage(editedStudentList);
         assert (!result.isEmpty());

@@ -7,7 +7,7 @@ import static seedu.canoe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.canoe.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.canoe.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.canoe.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.canoe.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.canoe.testutil.TypicalStudents.getTypicalCanoeCoach;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ import seedu.canoe.model.student.Student;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalCanoeCoach(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {

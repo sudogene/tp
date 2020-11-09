@@ -24,8 +24,8 @@ import seedu.canoe.testutil.TypicalStudents;
 import seedu.canoe.testutil.TypicalTraining;
 
 class MarkAttendanceCommandTest {
-    private Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalStudents.getTypicalCanoeCoach(), new UserPrefs());
+    private Model expectedModel = new ModelManager(TypicalStudents.getTypicalCanoeCoach(), new UserPrefs());
 
     @Test
     void execute_trainingIndexOutOfRange_commandFailure() {

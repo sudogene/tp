@@ -10,7 +10,7 @@ import static seedu.canoe.testutil.LocalDateTimeUtil.DATE_TIME_NOW_PLUS_TWO_DAYS
 import static seedu.canoe.testutil.TypicalStudents.ALICE;
 import static seedu.canoe.testutil.TypicalStudents.CARL;
 import static seedu.canoe.testutil.TypicalStudents.FIONA;
-import static seedu.canoe.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.canoe.testutil.TypicalStudents.getTypicalCanoeCoach;
 
 import java.util.Arrays;
 
@@ -23,8 +23,8 @@ import seedu.canoe.model.student.Attendance;
 
 class FindBadStudentsCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalCanoeCoach(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalCanoeCoach(), new UserPrefs());
 
     @Test
     void execute_onlyFutureTrainings_noBadStudents() {

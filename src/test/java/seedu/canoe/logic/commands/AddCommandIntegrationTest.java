@@ -2,7 +2,7 @@ package seedu.canoe.logic.commands;
 
 import static seedu.canoe.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.canoe.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.canoe.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.canoe.testutil.TypicalStudents.getTypicalCanoeCoach;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalCanoeCoach(), new UserPrefs());
     }
 
     @Test

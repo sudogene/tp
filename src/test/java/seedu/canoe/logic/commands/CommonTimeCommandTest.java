@@ -7,7 +7,7 @@ import static seedu.canoe.testutil.TypicalStudents.BENSON;
 import static seedu.canoe.testutil.TypicalStudents.DANIEL;
 import static seedu.canoe.testutil.TypicalStudents.FIONA;
 import static seedu.canoe.testutil.TypicalStudents.GEORGE;
-import static seedu.canoe.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.canoe.testutil.TypicalStudents.getTypicalCanoeCoach;
 
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -28,8 +28,8 @@ import seedu.canoe.model.student.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code CommonTimeCommand}.
  */
 class CommonTimeCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalCanoeCoach(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalCanoeCoach(), new UserPrefs());
 
     @Test
     public void execute_zeroKeywords_defaultDismissalTimes() {
