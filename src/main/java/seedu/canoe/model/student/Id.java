@@ -30,10 +30,6 @@ public class Id {
      */
     public Id(String value) {
         requireNonNull(value);
-        if (!value.equals(PLACEHOLDER_VALUE) && !isUsedId(value)) {
-            Id.usedIds.add(value);
-            Id.lastUsedId = Integer.parseInt(value);
-        }
         this.value = value;
     }
 
@@ -47,6 +43,7 @@ public class Id {
     public static Id newId() {
         lastUsedId++;
         String newIdValue = String.valueOf(lastUsedId);
+        usedIds.add(newIdValue);
         return new Id(newIdValue);
     }
 

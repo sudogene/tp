@@ -2,6 +2,7 @@ package seedu.canoe.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.canoe.testutil.Assert.assertThrows;
 
@@ -37,9 +38,6 @@ public class IdTest {
         // NOTE: Tests on uniqueness of Id values will be trickier due to mutability
         new Id("210");
         assertFalse(Id.isUsedId("300"));
-
-        // non-unique values
-        assertTrue(Id.isUsedId("210"));
     }
 
     @Test
@@ -49,14 +47,9 @@ public class IdTest {
 
     @Test
     public void getLastUsedId() {
-        new Id("300");
-        assertEquals(Id.getLastUsedId(), 300);
-
-        new Id("301");
-        new Id("302");
-        assertEquals(Id.getLastUsedId(), 302);
-
-        Id.getPlaceHolderId();
-        assertEquals(Id.getLastUsedId(), 302);
+        // Last used Id is based on last successfully created Student, not query Id.
+        int queryId = 300;
+        new Id(String.valueOf(queryId)); // Query Id
+        assertNotEquals(queryId, Id.getLastUsedId());
     }
 }
