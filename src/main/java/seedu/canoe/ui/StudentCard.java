@@ -78,7 +78,7 @@ public class StudentCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         studentId.setText("Id: " + student.getId());
         name.setText(student.getName().fullName);
-        phone.setText("Phone number:" + student.getPhone().value);
+        phone.setText("Phone: " + student.getPhone().value);
         email.setText("Email: " + student.getEmail().value);
         academicYear.setText("Academic Year: " + student.getAcademicYear().value);
         dismissalTime.setText("Dismissal Times: ");
