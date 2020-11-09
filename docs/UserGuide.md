@@ -3,6 +3,8 @@ layout: page
 title: User Guide
 ---
 
+![Logo](images/canoe-coach-logo.png)
+
 CanoE-COACH is a **desktop app for managing training schedules for secondary school canoe teams, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical Interface (GUI). If you can type fast, CanoE-COACH can get your training scheduling done faster than traditional GUI apps.
 
 * Table of Contents
@@ -18,9 +20,11 @@ CanoE-COACH is a **desktop app for managing training schedules for secondary sch
 
 1. Copy the file to the folder you want to use as the _home folder_ for your CanoE-COACH.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
+   
+   ![GeneralStructure](images/GeneralStructure.png)
 
+<br>
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -40,7 +44,6 @@ CanoE-COACH is a **desktop app for managing training schedules for secondary sch
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -67,10 +70,14 @@ CanoE-COACH is a **desktop app for managing training schedules for secondary sch
 ### Viewing help: `help`
 Shows a summarised list of available commands.
 
+  ![Help](images/Help.png)
+
 Format: `help`
 
 ### Adding a student: `add`
 Adds a student to the student list. The student will be auto-assigned a unique `id`.
+
+  ![AddStudent](images/AddStudent.png)
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL ay/ACADEMIC_YEAR [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [t/TAG]`
 
@@ -97,6 +104,8 @@ Examples:
 
 Edits an existing student in the student list.
 
+  ![EditStudent](images/EditStudent.png)
+
 Format: `edit STUDENT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [ay/ACADEMIC_YEAR] [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [t/TAG]…​`
 
 * Edits the student at the specified `STUDENT_INDEX`. The student index refers to the index number shown in the displayed student list. The student index **must be a positive integer** 1, 2, 3, …​
@@ -114,6 +123,8 @@ Examples:
 ### Delete student: `delete`
 Deletes the specified student from the student list.
 
+  ![DeleteStudent](images/DeleteStudent.png)
+
 Format: `delete STUDENT_INDEX`
 - Deletes the student at the specified `STUDENT_INDEX`.
 - The student index refers to the index number shown in the displayed student list. (This is different from the unique ID of each student.)
@@ -125,6 +136,8 @@ Examples:
 
 ### Find : `find`
 Find students based on specified fields.
+
+  ![Find](images/Find.png)
 
 Format: `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [id/STUDENT_ID]`
 
@@ -174,7 +187,9 @@ Examples:
 - `find d2/1500 ay/2` returns all Academic Year 2 students with Tuesday dismissal time equal to or before 1500
 
 ### Common Time : `common-time`
-Returns the latest dismissal times on all days for all of the students in the specified subgroup. This would be the earliest time to schedule a training for all students in the sub group.
+Returns the latest dismissal times on each day for all of the students in the specified subgroup. This would display the earliest time possible to schedule a training for all students in the sub group.
+
+  ![CommonTime](images/CommonTime.png)
 
 Format: `common-time [n/KEYWORDS] [ay/ACADEMIC_YEAR]`
 
@@ -195,12 +210,15 @@ Format: `common-time [n/KEYWORDS] [ay/ACADEMIC_YEAR]`
 - If no student matches the search criteria, an error message will display. 
 
 Examples:
-- `common-time n/alex ay/1` returns the latest dismissal times for any student with names containing the whole word `alex`, **OR** who are in Academic Year 1.
+- `common-time n/alex ay/1` returns the latest dismissal times for all students with names containing the whole word `alex`, **OR** who are in Academic Year 1.
 - `common-time ay/1` returns the latest dismissal times for all the students in the student list who are in Academic Year 1.
-- `common-time n/Alex Jane Mary` returns the latest dismissal times for any student with names Alex, Jane or Mary. Take note the rules above for matching applies.
+- `common-time n/Alex Jane Mary` returns the latest dismissal times for all students with names Alex, Jane or Mary. Take note the rules above for matching applies.
 
 ### Create Training : `training`
 Creates a new training at the specified date and time.
+
+  ![AddTraining](images/Training.png)
+
 
 Format: `training yyyy-MM-dd HHmm`
 
@@ -225,6 +243,8 @@ Examples:
 
 ### Add Student to Training : `ts-add`
 Adds students to a training.
+
+  ![AddStudentToTraining](images/Ts-Add.png)
 
 Format: `ts-add TRAINING_INDEX id/STUDENT_ID...`
 
@@ -275,21 +295,27 @@ Examples:
 ### Find trainings : `find-training`
 Finds trainings based on specified fields.
 
+  ![FindTraining](images/FindTraining.png)
+
 Format: `find-training [id/STUDENT_ID] [dt/DATETIME]`
 
 * At least one field must be specified.
 * Only ONE student id can be specified in the same command
-* Only ONE date time can be specified in the same command
-* If only the student id is specified, the command will return all of the trainings (past, present and future) of the matching student.
-* If only the datetime is specified, the command will return all of the students scheduled for that matching training on the student panel.
+* Only ONE date-time can be specified in the same command
+* Date-time must be in the form `yyyy-MM-dd HHmm` (i.e. 2021-08-26 1800)
+* Date-time specified will be matched with the date-time (start time) of trainings in order to return matched trainings. 
+* If only the student id is specified, the command will return all of the scheduled trainings (past, ongoing and upcoming) of the matching student.
+* If only the date-time is specified, the command will return all of the students scheduled for that matching training on the student panel.
 * If both parameters are specified, the command will return only the single matching training on the training panel and the matching student on the student panel.
 
 Examples:
-- `find-training id/1` filters the student and training panel to show only the student with id value 1 and all of his past and present trainings on the training panel.
+- `find-training id/1` filters the student and training panel to show only the student with id value 1 and all of his past, present and future trainings on the training panel.
 - `find-training dt/2021-08-26 1800` filters the student and training panel to show only any matching training that falls on  `2021-08-26 1800` and all of the students scheduled for the training on the student panel
 
 ### Mark/Unmark a student's attendance for a training : `mark-attendance`, `unmark-attendance`
 Marks/Unmarks a student's attendance for a training.
+
+  ![MarkAttendance](images/MarkAttendance.png)
 
 Format: `mark-attendance TRAINING_INDEX id/STUDENT_ID...`
 * You will only be able to mark/unmark the attendance of a training that has already passed.
@@ -328,7 +354,7 @@ Format: `exit`
 
 ## FAQ
 
-**Q**: When does a training get classified as "past" ?<br>
+**Q**: When does a training get classified as "past"?<br>
 **A**: A training will be classified as "past" once the time tagged to it (start time) has passed.
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -357,3 +383,22 @@ Action | Format, Examples
 **find-bad-students** | `find-bad-students`
 **List** | `list`
 **Help** | `help`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* Dismissal Time: The time when a student is dismissed from his classes. He would be able to attend training only on or after his dismissal time.
+
+* Training: A training session organised by the coach (the user), and attended by the students.
+
+* Available Student: A student who is available to attend the training. A student is available to attend a training if his dismissal time is equal to or before training start time, and if he is not already attending a training on the same day.
+
+* Attendance: Indicates the training session that a particular student is going to attend.
+
+* "Mark" Attendance: A marked attendance indicates that a particular student had attended the training session, and it is only possible to mark attendance for a training that has already passed. A marked attendance can be 
+unmarked to indicate absence / yet to attend.
+
+* "Bad" student: A bad student is a student who has more than 3 unmarked attendances for trainings that have already passed.  (However, this is only in the context of this application. In the real world, even if you do miss many trainings, you could be a perfectly fine and good student.)
+
+

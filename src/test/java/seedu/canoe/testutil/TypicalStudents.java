@@ -107,6 +107,7 @@ public class TypicalStudents {
     public static CanoeCoach getTypicalAddressBook() {
         CanoeCoach ab = new CanoeCoach();
         for (Student student : getTypicalStudents()) {
+            student.removeAllAttendances();
             ab.addStudent(student);
         }
         return ab;

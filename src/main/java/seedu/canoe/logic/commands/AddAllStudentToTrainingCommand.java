@@ -88,6 +88,13 @@ public class AddAllStudentToTrainingCommand extends Command {
                 addedStudentsMessage.get()));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddAllStudentToTrainingCommand // instanceof handles nulls
+                && index.equals(((AddAllStudentToTrainingCommand) other).index)); // state check
+    }
+
     /**
      * Checks if the {@code Training} is able to add the {@code Student}
      */
