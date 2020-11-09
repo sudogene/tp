@@ -3,6 +3,7 @@ package seedu.canoe.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.canoe.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static seedu.canoe.model.Model.PREDICATE_SHOW_ALL_TRAININGS;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -98,7 +99,7 @@ public class DeleteStudentFromTrainingCommand extends Command {
 
         // Updates the model's training list
         model.setTraining(trainingToEdit, editedTraining);
-
+        model.updateFilteredTrainingList(PREDICATE_SHOW_ALL_TRAININGS);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         Optional<String> result = CommandUtil.getStudentsMessage(editedStudentList);
         if (result.isEmpty()) {
