@@ -130,8 +130,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             String idValue = argMultimap.getValue(PREFIX_ID).get();
             if (!idValue.isEmpty()) {
                 checkEmptyString = false;
-                ParserUtil.parseId(idValue);
-                predicates.add(new IdMatchesPredicate(idValue));
+                String parsedIdValue = ParserUtil.parseIdValue(idValue);
+                predicates.add(new IdMatchesPredicate(parsedIdValue));
             }
         }
 

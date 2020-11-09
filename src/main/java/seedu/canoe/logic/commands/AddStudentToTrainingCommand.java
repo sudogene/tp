@@ -17,7 +17,6 @@ import seedu.canoe.commons.core.index.Index;
 import seedu.canoe.logic.commands.exceptions.CommandException;
 import seedu.canoe.model.Model;
 import seedu.canoe.model.student.Attendance;
-import seedu.canoe.model.student.Id;
 import seedu.canoe.model.student.Student;
 import seedu.canoe.model.training.Training;
 
@@ -46,13 +45,13 @@ public class AddStudentToTrainingCommand extends Command {
             + "either his dismissal time on the specified day falls after the training's start time or he has a "
             + "training scheduled on the same date already!";
     private final Index index;
-    private final List<Id> studentsToAdd;
+    private final List<String> studentsToAdd;
 
     /**
      * @param index of the Training Session to add Students to.
      * @param studentsToAdd corresponding Id of Students to add.
      */
-    public AddStudentToTrainingCommand(Index index, List<Id> studentsToAdd) {
+    public AddStudentToTrainingCommand(Index index, List<String> studentsToAdd) {
         requireNonNull(index);
         requireNonNull(studentsToAdd);
 
@@ -104,7 +103,7 @@ public class AddStudentToTrainingCommand extends Command {
         //Student ID Checks - not invalid index, numbered index and exists in student list and not duplicated
         List<Student> targetStudentList = new ArrayList<>();
         List<Student> editedStudentList = new ArrayList<>();
-        for (Id id : studentsToAdd) {
+        for (String id : studentsToAdd) {
 
             Student studentToEdit = CommandUtil.getStudentFromId(model, id);
             Student editedStudent = createEditedStudent(studentToEdit, editedTraining);
