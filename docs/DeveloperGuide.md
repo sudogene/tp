@@ -247,7 +247,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Add Student to Training feature
 
-### Implementation
+#### Implementation
 
 The mechanism to add Students to Training Sessions works by taking in the user inputs of the Index of the Training Session to be edited,
 as well as the Ids of the Students to be added, and adds the corresponding Students to the Training Session at the
@@ -287,9 +287,9 @@ The activity diagram below shows what happens when a new `ts-add` command is exe
 
 </div>
 
-### Design Consideration:
+#### Design Consideration:
 
-### Aspect: How Student is added to the Training Session
+#### Aspect: How Student is added to the Training Session
 
 * **Alternative 1:** Create a key-value pair with Student ID as the key and Student object as the value.
     * Pros : Eliminates the possibility of repeat students as each Student object only corresponds to one Student ID.
