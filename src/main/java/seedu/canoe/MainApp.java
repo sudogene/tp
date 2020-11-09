@@ -21,6 +21,7 @@ import seedu.canoe.model.ModelManager;
 import seedu.canoe.model.ReadOnlyCanoeCoach;
 import seedu.canoe.model.ReadOnlyUserPrefs;
 import seedu.canoe.model.UserPrefs;
+import seedu.canoe.model.student.Id;
 import seedu.canoe.model.util.SampleDataUtil;
 import seedu.canoe.storage.CanoeCoachStorage;
 import seedu.canoe.storage.JsonCanoeCoachStorage;
@@ -83,14 +84,17 @@ public class MainApp extends Application {
             canoeCoachOptional = storage.readCanoeCoach();
             if (!canoeCoachOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample CanoeCoach");
+                Id.resetId();
             }
             initialData = canoeCoachOptional.orElseGet(SampleDataUtil::getCanoeCoachBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty CanoeCoach");
             initialData = new CanoeCoach();
+            Id.resetId();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty CanoeCoach");
             initialData = new CanoeCoach();
+            Id.resetId();
         }
 
         return new ModelManager(initialData, userPrefs);

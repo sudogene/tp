@@ -189,6 +189,9 @@ class JsonAdaptedStudent {
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
 
+        if (id == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName()));
+        }
         final Id studentId = new Id(id);
 
         Student student = new Student(modelName, modelPhone, modelEmail, modelAcademicYear,

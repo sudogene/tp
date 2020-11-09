@@ -21,8 +21,8 @@ CanoE-COACH is a **desktop app for managing training schedules for secondary sch
 1. Copy the file to the folder you want to use as the _home folder_ for your CanoE-COACH.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
-   
-   ![GeneralStructure](images/GeneralStructure.png)
+
+![GeneralStructure](images/GeneralStructure.png)
 
 <br>
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -61,7 +61,7 @@ CanoE-COACH is a **desktop app for managing training schedules for secondary sch
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-  
+
 * Take note of the difference between `STUDENT_INDEX` and `STUDENT_ID`
 	* `STUDENT_INDEX` refers to the index displayed on the GUI (this will change depending on how the GUI is filtered)
 	* `STUDENT_ID` refers to the unique index given to each student, as reflected in the GUI by **Id: 1** (This will not change even if the GUI is filtered.)
@@ -81,7 +81,7 @@ Adds a student to the student list. The student will be auto-assigned a unique `
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL ay/ACADEMIC_YEAR [d1/HHmm d2/HHmm d3/HHmm d4/HHmm d5/HHmm] [t/TAG]`
 
-Prefix | Representation      
+Prefix | Representation
 ----------|-------------
 **d1/** | `Monday's Dismissal Time`
 **d2/** | `Tuesday's Dismissal Time`
@@ -165,7 +165,7 @@ Format: `find [n/KEYWORDS] [p/PHONE_VALUE] [ay/ACADEMIC_YEAR] [e/EMAIL] [d1/HHmm
     - Students with dismissal times equal OR before the query time will be matched
 
       e.g. `d1/1500` will match `1500` and `1200`, but not `1530` on Monday
-    
+
     - The dismissal time value query must be a valid dismissal time
 
 - Id
@@ -207,7 +207,7 @@ Format: `common-time [n/KEYWORDS] [ay/ACADEMIC_YEAR]`
 - **Searching by more than one field**
     - Common Time command will return student(s) that matches any of the fields provided.
 
-- If no student matches the search criteria, an error message will display. 
+- If no student matches the search criteria, an error message will display.
 
 Examples:
 - `common-time n/alex ay/1` returns the latest dismissal times for all students with names containing the whole word `alex`, **OR** who are in Academic Year 1.
@@ -303,7 +303,7 @@ Format: `find-training [id/STUDENT_ID] [dt/DATETIME]`
 * Only ONE student id can be specified in the same command
 * Only ONE date-time can be specified in the same command
 * Date-time must be in the form `yyyy-MM-dd HHmm` (i.e. 2021-08-26 1800)
-* Date-time specified will be matched with the date-time (start time) of trainings in order to return matched trainings. 
+* Date-time specified will be matched with the date-time (start time) of trainings in order to return matched trainings.
 * If only the student id is specified, the command will return all of the scheduled trainings (past, ongoing and upcoming) of the matching student.
 * If only the date-time is specified, the command will return all of the students scheduled for that matching training on the student panel.
 * If both parameters are specified, the command will return only the single matching training on the training panel and the matching student on the student panel.
@@ -320,7 +320,7 @@ Marks/Unmarks a student's attendance for a training.
 Format: `mark-attendance TRAINING_INDEX id/STUDENT_ID...`
 * You will only be able to mark/unmark the attendance of a training that has already passed.
 * Training index refers to the index of the training in the **displayed** training list.
-* Only ONE training index can be specified in the same command. 
+* Only ONE training index can be specified in the same command.
 * Multiple student ids can be specified in the same command.
 * If the student's attendance has already been marked, `mark-attendance` would still execute successfully, but there will be no changes reflected. The converse is true as well for `unmark-attendance`.
 * Student card will reflect the specified attendance as marked (tick) should the `mark-attendance` command be successfully executed.
@@ -339,7 +339,7 @@ Finds all students that have missed more than 3 training sessions.
 * Displays a list of students that have missed more than 3 prior training sessions.
 
 Format: `find-bad-students`
- 
+
 ### Clearing all entries: `clear`
 Clears the student and training list of all existing students and trainings.
 
@@ -396,8 +396,7 @@ Action | Format, Examples
 
 * Attendance: Indicates the training session that a particular student is going to attend.
 
-* "Mark" Attendance: A marked attendance indicates that a particular student had attended the training session, and it is only possible to mark attendance for a training that has already passed. A marked attendance can be 
-unmarked to indicate absence / yet to attend.
+* "Mark" Attendance: A marked attendance indicates that a particular student had attended the training session, and it is only possible to mark attendance for a training that has already passed. A marked attendance can be unmarked to indicate absence / yet to attend.
 
 * "Bad" student: A bad student is a student who has more than 3 unmarked attendances for trainings that have already passed.  (However, this is only in the context of this application. In the real world, even if you do miss many trainings, you could be a perfectly fine and good student.)
 
