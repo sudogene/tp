@@ -136,6 +136,23 @@ Classes used by multiple components are in the `seedu.canoe.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### AnyMatchPredicateList
+
+### Implementation
+
+The AnyMatchPredicateList class implements the Predicate interface provided by the Java util library.
+
+The AnyMatchPredicateList class has only one field which is a list of predicates passed to it when the constructor is called.
+
+The list of predicates can consist of any predicate relating to a field inside of the Student class.
+
+The AnyMatchPredicateList class has a test method with a Student object as a parameter. This method will return true if the passed Student matches any of the predicates in the predicate list.
+
+The usage of the AnyMatchPredicateList class is for filtering of the Student ObservableList inside of the Model class.
+
+Below is a sequence diagram of the execution of CommonTimeCommand which uses the AnyMatchPredicateList class to filter students:
+
+
 ### Training Class
 
 #### Implementation
