@@ -505,7 +505,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user     | delete a Training session that was already created | make changes to the schedule |
 | `* * *`  | user     | add students to a training session | view who are the students to expect for a training |
 | `* * *`  | user     | delete students from a training session | remove students who are unable to come for training |
-| `* * `   | user     | view the trainings that a student will be attending | determine the number of sessions he has attended |
+| `* * `   | user     | view the trainings that a student will be attending | determine the number of sessions he will be attending |
+| `* * `   | user     | mark the student as having attended the training | determine the number of sessions he has attended |
+| `* * `   | user     | view the students who have poor attendance | determine who are the students whom I need to monitor |
 
 ### Use cases
 
@@ -913,3 +915,29 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
     1. Other incorrect commands to try: `ts-addall x`, where x are all non-numeric, or corresponds to a Training Session with all Students in the Student List already inside.
+
+### Marking the Attendance of a Student
+
+1. Marking the Attendance of a Student.
+
+    1. Prerequisites: There is at least one Training Session in the Training list that has passed, and at least 1 student who is attending that training. In the test cases, assume that the 
+    student has id 1.
+
+    1. Test case: `mark-attendance 1 id/1` <br>
+       Expected: Student's Attendance for Training will be successfully marked.
+
+    1. Test case: `mark-attendance 1 id/-1` <br>
+       Expected: Invalid id. Error details shown in the status message.
+       
+    1. Test case: `mark-attendance 1 id/5` <br>
+       Expected: Assuming that student with id 5 is not attending the training, error details shown in the status message.
+    
+    1. Test case: `mark-attendance 3 id/1` <br>
+           Expected: Assuming that training does exist but has not passed, Attendance will not be marked. error details shown in the status message.
+
+    1. Test case: `mark-attendance -1 id/1` <br>
+       Expected: Invalid training index. Error details shown in the status message.
+
+    1. Test case: `mark-attendance 1 id/1,2,3` <br>
+       Expected: Assuming that students with id 1, 2 and 3 and all valid students, the Students' Attendances for Training will be successfully marked.
+    
