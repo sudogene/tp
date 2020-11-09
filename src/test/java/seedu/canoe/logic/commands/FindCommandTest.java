@@ -9,7 +9,7 @@ import static seedu.canoe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.canoe.testutil.TypicalStudents.CARL;
 import static seedu.canoe.testutil.TypicalStudents.ELLE;
 import static seedu.canoe.testutil.TypicalStudents.FIONA;
-import static seedu.canoe.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.canoe.testutil.TypicalStudents.getTypicalCanoeCoach;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,8 +28,8 @@ import seedu.canoe.model.student.PhoneMatchesPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalCanoeCoach(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalCanoeCoach(), new UserPrefs());
 
     @Test
     public void equals() {

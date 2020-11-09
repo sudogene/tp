@@ -2,7 +2,7 @@ package seedu.canoe.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.canoe.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.canoe.testutil.TypicalStudents.getTypicalCanoeCoach;
 
 import java.nio.file.Path;
 
@@ -54,7 +54,7 @@ public class StorageManagerTest {
          * {@link JsonCanoeCoachStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonCanoeCoachStorageTest} class.
          */
-        CanoeCoach original = getTypicalAddressBook();
+        CanoeCoach original = getTypicalCanoeCoach();
         storageManager.saveCanoeCoach(original);
         ReadOnlyCanoeCoach retrieved = storageManager.readCanoeCoach().get();
         assertEquals(original, new CanoeCoach(retrieved));
