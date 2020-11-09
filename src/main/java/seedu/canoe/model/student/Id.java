@@ -72,7 +72,7 @@ public class Id {
         return lastUsedId;
     }
 
-    public Set<String> getUsedIds() {
+    public static Set<String> getUsedIds() {
         return usedIds;
     }
 
