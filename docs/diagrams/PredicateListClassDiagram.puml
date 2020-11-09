@@ -4,7 +4,6 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Predicate <<Rectangle>> {
 Interface Predicate <<Interface>>
 Class AnyMatchPredicateList
 Class AllMatchPredicateList
@@ -14,5 +13,12 @@ Class Name
 Class AcademicYear
 Class Phone
 
-AnyMatchPredicateList .up.|> Predicate
-AllMatchPredicateList .up.|> Predicate
+Predicate .up.|> AnyMatchPredicateList
+Predicate .up.|> AllMatchPredicateList
+Predicate -down-> Name
+Predicate -down-> Id
+Predicate -down-> Email
+Predicate -down-> Phone
+Predicate -down-> AcademicYear
+
+@enduml

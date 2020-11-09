@@ -136,7 +136,9 @@ Classes used by multiple components are in the `seedu.canoe.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### AnyMatchPredicateList/AllMatchPredicateList
+### AnyMatchPredicateList / AllMatchPredicateList
+
+### AnyMatchPredicateList
 
 ### Implementation
 
@@ -158,10 +160,13 @@ In the diagram above, the `CommonTimeCommandParser` will parse the arguments and
 
 This `AnyMatchPredicateList` is then used to filter the student list in the method `Model#updateFilteredStudentList()` which takes in the predicate list as an argument.
 
+### AllMatchPredicateList
+
 The `AllMatchPredicateList` has a similar implementation to the `AnyMatchPredicateList`. The only difference is that the `AllMatchPredicateList#test()` method returns true only if the passed `Student` matches **ALL** of the predicates in the predicate list.
 
 The following class diagram shows the relationship between AnyMatchPredicateList and AllMatchPredicateList and the fields inside of the Student class:
- 
+
+![PredicateListClassDiagram](images/PredicateListClassDiagram.png) 
 
 ### Training Class
 
