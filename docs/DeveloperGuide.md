@@ -112,10 +112,10 @@ The `Model`,
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP
 ) model is given below. It has a `Tag` list in the `CanoeCoach`, which `Student` references. This allows `CanoeCoach` to
  only require one `Tag` object per unique `Tag`, instead of each `Student` needing their own `Tag` object. At the same time, each student contains references to 5 day objects, each storing the dismissal time of Monday, Tuesday, Wednesday, Thursday and Friday. <br>
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
 
 </div>
 
+![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
 
 ### Storage component
 
