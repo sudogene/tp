@@ -5,9 +5,21 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([valid student index])
-    :updateFilteredStudentList;
-    :updateFilteredTrainingList;
+if () then ([valid input])
+    if () then ([student Id provided])
+        if () then ([date-time provided])
+            :Filter training panel with matching training;
+            :Filter student panel with matching student;
+        else ([student Id provided only])
+            :Filter training panel with all of the scheduled trainings
+            (past, ongoing and upcoming) of the matching student;
+            :Filter student panel with matching student;
+        endif
+    else ([date-time provided only])
+        :Filter training panel with matching training;
+        :Filter student panel with all of the students scheduled
+                                        for the matching training;
+    endif
 else ([else])
     :prompt for valid input;
 endif

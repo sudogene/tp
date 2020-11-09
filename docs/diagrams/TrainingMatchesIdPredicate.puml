@@ -1,9 +1,0 @@
-@startuml
-
-class TrainingMatchesIdPredicate {
-idValue: Id
-test(Training)
-}
-
-
-@enduml
